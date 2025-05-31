@@ -1,0 +1,19 @@
+title: 看见眨眼的熊猫
+email: your@email.com
+description: >- 
+  一个热爱技术的开发者的个人博客
+baseurl: ""
+url: "https://kanfu-panda.github.io"
+github_username: kanfu-panda
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# 导航菜单
+header_pages:
+  - about.md
+  - projects.md
