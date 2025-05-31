@@ -6,6 +6,17 @@ baseurl: ""
 url: "https://kanfu-panda.github.io"
 github_username: kanfu-panda
 
+# Gitalk 评论系统配置
+gitalk:
+  enable: true
+  clientID: Ov23liYIrEDkxKIEN9Pv # 从 GitHub Application 获取
+  clientSecret: 526132a651442e75c59ae87db4ed4469e92bf001 # 从 GitHub Application 获取
+  repo: kanfu-panda.github.io    # 存储评论的 repo
+  owner: kanfu-panda             # 您的 GitHub ID
+  admin: ['kanfu-panda']         # 管理员名单
+  id: location.pathname          # 页面唯一标识
+  language: zh-CN               # 语言设置
+
 # Build settings
 markdown: kramdown
 theme: minima
