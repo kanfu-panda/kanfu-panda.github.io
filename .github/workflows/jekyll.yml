@@ -19,11 +19,12 @@ jobs:
       with:
         ruby-version: '3.0'
         bundler-cache: true
-    
-    - name: 安装依赖
+      - name: 安装依赖
       run: |
         bundle install
-      - name: 构建站点      env:
+
+    - name: 构建站点
+      env:
         JEKYLL_ENV: production
       run: |
         mkdir -p _data
