@@ -20,8 +20,9 @@ gitalk:
 # Build settings
 markdown: kramdown
 
-# Analytics settings
-google_analytics: GOOGLE_ANALYTICS_ID # 将从环境变量获取
+# Environment variables
+env:
+  GOOGLE_ANALYTICS_ID: <%= ENV['GOOGLE_ANALYTICS_ID'] %>
 baidu_analytics: xxxxxxxxxx # 替换为你的百度统计 ID
 
 theme: minima
