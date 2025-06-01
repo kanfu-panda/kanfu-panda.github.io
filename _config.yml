@@ -17,9 +17,8 @@ gitalk:
   id: location.pathname          # 页面唯一标识
   language: zh-CN               # 语言设置
 
-# Environment variables support
-env:
-  GOOGLE_ANALYTICS_ID: <%= ENV['GOOGLE_ANALYTICS_ID'] %>
+# Analytics settings
+google_analytics: "" # Will be set by GitHub Actions in production
 
 # Build settings
 markdown: kramdown
