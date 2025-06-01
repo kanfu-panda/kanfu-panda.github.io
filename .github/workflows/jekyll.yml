@@ -23,11 +23,11 @@ jobs:
     - name: 安装依赖
       run: |
         bundle install
-      - name: 构建站点
-      env:
+      - name: 构建站点      env:
         JEKYLL_ENV: production
       run: |
-        echo "google_analytics: ${{ secrets.GOOGLE_ANALYTICS_ID }}" >> _config.yml
+        mkdir -p _data
+        echo "google_analytics: ${{ secrets.GOOGLE_ANALYTICS_ID }}" > _data/site_config.yml
         bundle exec jekyll build
     
     - name: 部署到 GitHub Pages

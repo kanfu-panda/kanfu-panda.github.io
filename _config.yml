@@ -20,8 +20,7 @@ gitalk:
 # Build settings
 markdown: kramdown
 
-# Analytics settings
-google_analytics: {{ site.env.GOOGLE_ANALYTICS_ID }}
+# Build settings
 baidu_analytics: xxxxxxxxxx # 替换为你的百度统计 ID
 
 theme: minima
