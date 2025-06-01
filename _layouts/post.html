@@ -1,0 +1,45 @@
+---
+layout: default
+---
+
+<article class="post">
+    <header class="post-header">
+        <h1 class="post-title">{{ page.title }}</h1>
+        <p class="post-meta">
+            发布于 {{ page.date | date: "%Y-%m-%d" }}
+            {% if page.author %}
+            • {{ page.author }}
+            {% endif %}
+        </p>
+    </header>
+
+    <div class="post-content">
+        <div class="post-toc">
+            <h2>目录</h2>
+            <div id="toc"></div>
+        </div>
+        
+        {{ content }}
+    </div>
+</article>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 生成目录
+    var headings = document.querySelectorAll('.post-content h2, .post-content h3');
+    var toc = document.getElementById('toc');
+    var tocHTML = '';
+
+    headings.forEach(function(heading, index) {
+        // 为每个标题添加ID
+        heading.id = 'heading-' + index;
+        
+        // 创建目录项
+        var level = heading.tagName === 'H2' ? '' : '    ';
+        tocHTML += level + '- [' + heading.textContent + '](#' + heading.id + ')\n';
+    });
+
+    // 将目录转换为HTML
+    toc.innerHTML = marked.parse(tocHTML);
+});
+</script>
