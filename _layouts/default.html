@@ -1,16 +1,56 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>    <meta charset="UTF-8">
+<head>    
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>    <!-- Google Analytics -->
+    {% if jekyll.environment == "production" and site.google_analytics %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ site.google_analytics }}');
+    </script>
+    {% endif %}
+
+    <!-- 百度统计 -->
+    {% if site.baidu_analytics %}
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?{{ site.baidu_analytics }}";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    {% endif %}
+    
+    <!-- 百度统计 -->
+    {% if site.baidu_analytics %}
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?{{ site.baidu_analytics }}";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    {% endif %}
+    
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     {% seo %}
 </head>
-<body>    <header class="site-header">
+<body>    
+    <header class="site-header">
         <div class="wrapper">
-            <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>            <nav class="site-nav">
+            <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>            
+            <nav class="site-nav">
                 <button class="menu-icon" aria-label="Toggle Menu">
                     <span></span>
                     <span></span>
@@ -33,7 +73,8 @@
         <div class="wrapper">
             {{ content }}
         </div>
-    </main>    <footer class="site-footer">
+    </main>    
+    <footer class="site-footer">
         <div class="wrapper">
             <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. Built with Jekyll.</p>
         </div>
@@ -53,7 +94,9 @@
             language: '{{ site.gitalk.language }}'
         });
         gitalk.render('gitalk-container');
-    </script>    {% endif %}    <script>
+    </script>    
+    {% endif %}    
+    <script>
         // 菜单切换
         document.querySelector('.menu-icon').addEventListener('click', function() {
             document.querySelector('.nav-links').classList.toggle('active');
