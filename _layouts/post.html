@@ -17,15 +17,19 @@ layout: default
             </span>
             {% endif %}
         </p>
-    </header>
-
-    <div class="post-content">
+    </header>    <div class="post-content">
+        {% if page.toc != false %}
         <div class="post-toc">
-            <h2>目录</h2>
-            <div id="toc"></div>
+            <details>
+                <summary>目录</summary>
+                <div id="toc"></div>
+            </details>
         </div>
+        {% endif %}
         
-        {{ content }}
+        <div class="post-text">
+            {{ content }}
+        </div>
     </div>
 </article>
 
