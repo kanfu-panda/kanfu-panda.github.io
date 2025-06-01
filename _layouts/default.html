@@ -89,7 +89,7 @@
             clientSecret: '{{ site.gitalk.clientSecret }}',
             repo: '{{ site.gitalk.repo }}',
             owner: '{{ site.gitalk.owner }}',
-            admin: {{ site.gitalk.admin | jsonify }},
+            admin: '{{ site.gitalk.admin | jsonify }}',
             id: window.location.pathname,
             language: '{{ site.gitalk.language }}'
         });
