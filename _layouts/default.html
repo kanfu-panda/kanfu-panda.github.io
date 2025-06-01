@@ -2,41 +2,14 @@
 <html lang="zh-CN">
 <head>    
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>    <!-- Google Analytics -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>    <!-- Google Analytics -->
     {% if jekyll.environment == "production" %}
-    <script async src="https://www.googletagmanager.com/gtag/js?id={% raw %}{{ site.data.site_config.google_analytics }}{% endraw %}"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.env.GOOGLE_ANALYTICS_ID }}"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', '{% raw %}{{ site.data.site_config.google_analytics }}{% endraw %}');
-    </script>
-    {% endif %}
-
-    <!-- 百度统计 -->
-    {% if site.baidu_analytics %}
-    <script>
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js?{{ site.baidu_analytics }}";
-            var s = document.getElementsByTagName("script")[0]; 
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
-    {% endif %}
-    
-    <!-- 百度统计 -->
-    {% if site.baidu_analytics %}
-    <script>
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js?{{ site.baidu_analytics }}";
-            var s = document.getElementsByTagName("script")[0]; 
-            s.parentNode.insertBefore(hm, s);
-        })();
+        gtag('config', '{{ site.env.GOOGLE_ANALYTICS_ID }}');
     </script>
     {% endif %}
     

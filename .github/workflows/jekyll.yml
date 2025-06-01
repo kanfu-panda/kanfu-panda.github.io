@@ -13,22 +13,20 @@ jobs:
       GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
     steps:
     - uses: actions/checkout@v3
-    
-    - name: 设置 Ruby
+      - name: 设置 Ruby
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: '3.0'
         bundler-cache: true
-      - name: 安装依赖
+    
+    - name: 安装依赖
       run: |
         bundle install
-
-    - name: 构建站点
+      - name: 构建站点
       env:
         JEKYLL_ENV: production
+        GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
       run: |
-        mkdir -p _data
-        echo "google_analytics: ${{ secrets.GOOGLE_ANALYTICS_ID }}" > _data/site_config.yml
         bundle exec jekyll build
     
     - name: 部署到 GitHub Pages
