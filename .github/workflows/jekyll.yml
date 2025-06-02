@@ -41,6 +41,24 @@ jobs:
     
     - name: 安装依赖
       run: bundle install
+    
+    - name: 验证 Secrets
+      run: |
+        if [ -n "${{ secrets.GOOGLE_ANALYTICS_ID }}" ]; then
+          echo "✓ GOOGLE_ANALYTICS_ID is set"
+        else
+          echo "✗ GOOGLE_ANALYTICS_ID is not set"
+        fi
+        if [ -n "${{ secrets.GITALK_CLIENT_ID }}" ]; then
+          echo "✓ GITALK_CLIENT_ID is set"
+        else
+          echo "✗ GITALK_CLIENT_ID is not set"
+        fi
+        if [ -n "${{ secrets.GITALK_CLIENT_SECRET }}" ]; then
+          echo "✓ GITALK_CLIENT_SECRET is set"
+        else
+          echo "✗ GITALK_CLIENT_SECRET is not set"
+        fi
 
     - name: 创建密钥配置
       env:
@@ -51,12 +69,22 @@ jobs:
         echo "gitalk:" >> _config_secrets.yml
         echo "  clientID: '${{ secrets.GITALK_CLIENT_ID }}'" >> _config_secrets.yml
         echo "  clientSecret: '${{ secrets.GITALK_CLIENT_SECRET }}'" >> _config_secrets.yml
+        
+        # 验证配置文件是否正确生成（不显示实际值）
+        echo "Verifying _config_secrets.yml structure:"
+        cat _config_secrets.yml | grep -v "clientID\|clientSecret\|google_analytics"
 
     - name: 构建站点
       env:
         JEKYLL_ENV: production
       run: |
-        bundle exec jekyll build --config _config.yml,_config_secrets.yml    
+        # 验证配置是否被正确合并
+        echo "Verifying Jekyll configuration..."
+        bundle exec jekyll build --config _config.yml,_config_secrets.yml --trace || {
+          echo "构建失败，检查合并后的配置（不显示敏感值）"
+          bundle exec jekyll build --config _config.yml,_config_secrets.yml --trace --verbose | grep -v "clientID\|clientSecret\|google_analytics"
+          exit 1
+        }
     
     - name: 上传构建产物
       uses: actions/upload-pages-artifact@v3
