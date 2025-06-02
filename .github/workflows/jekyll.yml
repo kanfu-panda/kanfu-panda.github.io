@@ -15,7 +15,7 @@ jobs:
     - name: 设置 Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '3.0'
+        ruby-version: '3.1'
         bundler-cache: true
 
     - name: 安装依赖
