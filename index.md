@@ -5,7 +5,7 @@ title: 首页
 
 <div class="hero-section">
     <div class="hero-content">
-        <h1>👋 你好，我是看见眨眼的熊猫</h1>
+        <h1>👋 你好，我是不太会武功的功夫熊猫</h1>
         <p>一个热爱技术的开发者，专注于分享编程经验和学习心得</p>
         <div class="hero-links">
             <a href="/about" class="cta-button">了解更多 →</a>
