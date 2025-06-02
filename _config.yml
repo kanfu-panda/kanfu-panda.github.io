@@ -9,8 +9,8 @@ github_username: kanfu-panda
 # Gitalk 评论系统配置
 gitalk:
   enable: true
-  clientID: GITALK_CLIENT_ID     # 将从环境变量获取
-  clientSecret: GITALK_CLIENT_SECRET # 将从环境变量获取
+  clientID: "" # 将从 GitHub Actions 注入
+  clientSecret: "" # 将从 GitHub Actions 注入
   repo: kanfu-panda.github.io    # 存储评论的 repo
   owner: kanfu-panda             # 您的 GitHub ID
   admin: ['kanfu-panda']         # 管理员名单
@@ -18,7 +18,7 @@ gitalk:
   language: zh-CN               # 语言设置
 
 # Analytics settings
-google_analytics: GOOGLE_ANALYTICS_ID # Will be set by GitHub Actions in production
+google_analytics: "" # Will be set by GitHub Actions in production
 
 # Build settings
 markdown: kramdown
