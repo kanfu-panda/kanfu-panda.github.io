@@ -8,7 +8,7 @@ permalink: /about/
 
 ## 个人简介
 
-大家好，我是看见眨眼的熊猫，一个热爱技术的开发者。我热衷于学习新技术，解决问题，并与他人分享知识。
+大家好，我是喜欢技术的不太会武功的功夫熊猫，一个热爱技术的开发者。我热衷于学习新技术，解决问题，并与他人分享知识。
 
 ## 专业技能
 
@@ -32,6 +32,6 @@ permalink: /about/
 ## 联系方式
 
 - GitHub: [kanfu-panda](https://github.com/kanfu-panda)
-- Email: [your@email.com](mailto:your@email.com)
+- Email: [slbluefox@gmail.com](mailto:slbluefox@gmail.com)
 
 欢迎与我交流技术话题！
