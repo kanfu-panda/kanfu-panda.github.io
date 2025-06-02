@@ -22,13 +22,18 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
     # 添加并发限制，防止同时运行多个相同的工作流
     concurrency:
       group: pages-${{ github.workflow }}
       cancel-in-progress: true
     
+    # 设置全局环境变量
     env:
       JEKYLL_ENV: production
+      GA_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
+      GITALK_ID: ${{ secrets.GITALK_CLIENT_ID }}
+      GITALK_SECRET: ${{ secrets.GITALK_CLIENT_SECRET }}
       
     steps:
     - uses: actions/checkout@v4
@@ -43,13 +48,10 @@ jobs:
       uses: actions/configure-pages@v3
     
     - name: 安装依赖
-      run: bundle install
+      run: |
+        bundle install
 
     - name: 验证 Secrets
-      env:
-        GA_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
-        GITALK_ID: ${{ secrets.GITALK_CLIENT_ID }}
-        GITALK_SECRET: ${{ secrets.GITALK_CLIENT_SECRET }}
       run: |
         echo "检查必需的 Secrets 配置："
         echo "----------------------------------------"
@@ -80,37 +82,41 @@ jobs:
         done
 
         if [ -z "$GA_ID" ] || [ -z "$GITALK_ID" ] || [ -z "$GITALK_SECRET" ]; then
-          echo "❌ 警告：一个或多个必需的 secrets 未配置或为空"
-          exit 1
+          echo "❌ 警告：一个或多个必需的 secrets 未配置或为空"          exit 1
         else
           echo "✓ 所有必需的 secrets 已配置且有效"
-        fi
-
-    - name: 创建密钥配置
-      # env:
-      #   JEKYLL_ENV: production
+        fi    - name: 创建密钥配置
       run: |
-        echo "# Auto-generated secrets configuration" > _config_secrets.yml
-        echo "google_analytics: '${{ secrets.GOOGLE_ANALYTICS_ID }}'" >> _config_secrets.yml
-        echo "gitalk:" >> _config_secrets.yml
-        echo "  clientID: '${{ secrets.GITALK_CLIENT_ID }}'" >> _config_secrets.yml
-        echo "  clientSecret: '${{ secrets.GITALK_CLIENT_SECRET }}'" >> _config_secrets.yml
+        # 删除现有的配置文件（如果存在）
+        rm -f _config_secrets.yml
         
-        # 验证配置文件是否正确生成（不显示实际值）
+        # 创建新的配置文件
+        cat > _config_secrets.yml << EOL
+        # Auto-generated secrets configuration
+        google_analytics: "${GA_ID}"
+        gitalk:
+          clientID: "${GITALK_ID}"
+          clientSecret: "${GITALK_SECRET}"
+        EOL
+        
+        # 验证配置文件是否正确生成
         echo "验证 _config_secrets.yml 文件结构:"
         if [ -f _config_secrets.yml ]; then
           echo "✓ 配置文件创建成功"
           echo "----------------------------------------"
           echo "文件结构:"
           cat _config_secrets.yml | grep -v "clientID\|clientSecret\|google_analytics"
+          # 完整性检查
+          if grep -q "google_analytics: \"${GA_ID}\"" _config_secrets.yml; then
+            echo "✓ Google Analytics ID 已正确写入"
+          else
+            echo "✗ Google Analytics ID 写入失败"
+            exit 1
+          fi
         else
           echo "✗ 配置文件创建失败"
           exit 1
-        fi
-
-    - name: 构建站点
-      # env:
-      #   JEKYLL_ENV: production
+        fi    - name: 构建站点
       run: |
         echo "验证 Jekyll 配置..."
         echo "----------------------------------------"
@@ -122,7 +128,7 @@ jobs:
         echo " - _config_secrets.yml"
         echo "----------------------------------------"
         # 尝试构建
-        if bundle exec jekyll build --config _config.yml,_config_secrets.yml --trace; then
+        if bundle exec jekyll build --config _config.yml,_config_secrets.yml --verbose --trace; then
           echo "✓ 构建成功"
           echo "----------------------------------------"
           echo "验证生成的文件..."
