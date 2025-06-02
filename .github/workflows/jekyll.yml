@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     # 添加并发限制，防止同时运行多个相同的工作流
     concurrency:
-      group: pages-${{ github.ref }}
+      group: pages-${{ github.workflow }}
     steps:
     - uses: actions/checkout@v3
 
@@ -32,7 +32,10 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: '3.2'
-        bundler-cache: true    
+        bundler-cache: true
+
+    - name: 设置页面缓存
+      uses: actions/configure-pages@v3
     
     - name: 安装依赖
       run: bundle install
@@ -50,7 +53,10 @@ jobs:
     - name: 构建站点
       env:
         JEKYLL_ENV: production
-      run: bundle exec jekyll build --config _config.yml,_config_secrets.yml    - name: 上传构建产物
+      run: |
+        bundle exec jekyll build --config _config.yml,_config_secrets.yml    
+    
+    - name: 上传构建产物
       uses: actions/upload-pages-artifact@v1
       with:
         path: ./_site
@@ -61,3 +67,4 @@ jobs:
       uses: actions/deploy-pages@v2
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
+        timeout: 600000  # 10分钟超时
