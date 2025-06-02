@@ -20,16 +20,19 @@ jobs:
 
     - name: 安装依赖
       run: |
-        bundle install
-
-    - name: 构建站点
+        bundle install    - name: 构建站点
       env:
         JEKYLL_ENV: production
       run: |
-        # 创建临时配置文件包含 Google Analytics ID
-        echo "google_analytics: ${{ secrets.GOOGLE_ANALYTICS_ID }}" > _config_ga.yml
+        # 创建临时配置文件包含所有 secrets
+        cat > _config_secrets.yml << EOL
+        google_analytics: "${{ secrets.GOOGLE_ANALYTICS_ID }}"
+        gitalk:
+          clientID: "${{ secrets.GITALK_CLIENT_ID }}"
+          clientSecret: "${{ secrets.GITALK_CLIENT_SECRET }}"
+        EOL
         # 使用合并的配置文件构建站点
-        bundle exec jekyll build --config _config.yml,_config_ga.yml
+        bundle exec jekyll build --config _config.yml,_config_secrets.yml
 
     - name: 部署到 GitHub Pages
       if: github.ref == 'refs/heads/main'
