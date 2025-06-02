@@ -3,6 +3,10 @@ _site/
 .sass-cache/
 .jekyll-cache/
 .jekyll-metadata
+.jekyll-metadata-cache
+_config_*.yml
+*.gem
+.jekyll-cache
 
 # Ruby 依赖相关
 .bundle/
@@ -17,6 +21,15 @@ Thumbs.db
 .vscode/
 *.swp
 *.swo
+*.sublime-workspace
+*.sublime-project
+.project
+.settings/
+*.tmproj
+*.esproj
+nbproject/
+*.iml
+*.iws
 
 # 环境变量和敏感信息
 .env
