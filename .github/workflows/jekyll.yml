@@ -85,7 +85,9 @@ jobs:
           echo "❌ 警告：一个或多个必需的 secrets 未配置或为空"          exit 1
         else
           echo "✓ 所有必需的 secrets 已配置且有效"
-        fi    - name: 创建密钥配置
+        fi
+
+    - name: 创建密钥配置
       run: |
         # 删除现有的配置文件（如果存在）
         rm -f _config_secrets.yml
@@ -116,7 +118,9 @@ jobs:
         else
           echo "✗ 配置文件创建失败"
           exit 1
-        fi    - name: 构建站点
+        fi
+
+    - name: 构建站点
       run: |
         echo "验证 Jekyll 配置..."
         echo "----------------------------------------"
