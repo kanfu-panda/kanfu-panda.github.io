@@ -18,7 +18,7 @@ gitalk:
   language: zh-CN               # 语言设置
 
 # Analytics settings
-google_analytics: "" # Will be set by GitHub Actions in production
+google_analytics: GOOGLE_ANALYTICS_ID # Will be set by GitHub Actions in production
 
 # Build settings
 markdown: kramdown
