@@ -2,27 +2,29 @@
 <html lang="zh-CN">
 <head>    
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
-      <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+    
+    {% if site.gitalk.enable and page.layout == 'post' and jekyll.environment == 'production' %}
     <!-- Gitalk -->
-    {% if site.gitalk.enable and page.layout == 'post' %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
     <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
     {% endif %}
+    
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     {% seo %}
-    
-    <!-- Google Analytics -->
-    {% if site.google_analytics and jekyll.environment == 'production' %}
+      <!-- Google Analytics -->
+    {% if site.google_analytics != "" and site.google_analytics != nil and jekyll.environment == 'production' %}
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+        function gtag(){dataLayer.push(arguments);}        gtag('js', new Date());
         gtag('config', '{{ site.google_analytics }}');
     </script>
     {% endif %}
+    <!-- End Google Analytics -->
 </head>
 <body>    
     <header class="site-header">
@@ -55,26 +57,27 @@
     <footer class="site-footer">
         <div class="wrapper">
             <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. Built with Jekyll.</p>
-        </div>
-    </footer>    {% if site.gitalk.enable and page.layout == 'post' %}
+        </div>    
+    </footer>
+
+    {% if site.gitalk.enable and page.layout == 'post' and jekyll.environment == 'production' %}
     <div id="gitalk-container"></div>
     <script>
-        var gitalkConfig = {
-            clientID: "{{ site.gitalk.clientID }}",
-            clientSecret: "{{ site.gitalk.clientSecret }}",
-            repo: "{{ site.gitalk.repo }}",
-            owner: "{{ site.gitalk.owner }}",
-            admin: ["{{ site.gitalk.owner }}"],
-            id: "{{ page.path | split: '/' | last | truncate: 50, '' | replace: '.md', '' }}",
-            language: "{{ site.gitalk.language }}"
-        };
-
-        document.addEventListener('DOMContentLoaded', function() {
-            var gitalk = new Gitalk(gitalkConfig);
-            gitalk.render('gitalk-container');
+      document.addEventListener('DOMContentLoaded', function() {
+        var gitalk = new Gitalk({
+          clientID: '{{ site.gitalk.clientID }}',
+          clientSecret: '{{ site.gitalk.clientSecret }}',
+          repo: '{{ site.gitalk.repo }}',
+          owner: '{{ site.gitalk.owner }}',
+          admin: ['{{ site.gitalk.owner }}'],
+          id: location.pathname.substr(0, 50),
+          language: '{{ site.gitalk.language }}'
         });
-    </script>    
+        gitalk.render('gitalk-container');
+      });
+    </script>
     {% endif %}
+    
     <script>
         // 菜单切换
         document.querySelector('.menu-icon').addEventListener('click', function() {
