@@ -44,21 +44,24 @@ jobs:
     
     - name: 验证 Secrets
       run: |
+        echo "检查必需的 Secrets 配置："
+        echo "----------------------------------------"
         if [ -n "${{ secrets.GOOGLE_ANALYTICS_ID }}" ]; then
-          echo "✓ GOOGLE_ANALYTICS_ID is set"
+          echo "✓ GOOGLE_ANALYTICS_ID    : 已配置 (长度: ${#GOOGLE_ANALYTICS_ID})"
         else
-          echo "✗ GOOGLE_ANALYTICS_ID is not set"
+          echo "✗ GOOGLE_ANALYTICS_ID    : 未配置"
         fi
         if [ -n "${{ secrets.GITALK_CLIENT_ID }}" ]; then
-          echo "✓ GITALK_CLIENT_ID is set"
+          echo "✓ GITALK_CLIENT_ID      : 已配置 (长度: ${#GITALK_CLIENT_ID})"
         else
-          echo "✗ GITALK_CLIENT_ID is not set"
+          echo "✗ GITALK_CLIENT_ID      : 未配置"
         fi
         if [ -n "${{ secrets.GITALK_CLIENT_SECRET }}" ]; then
-          echo "✓ GITALK_CLIENT_SECRET is set"
+          echo "✓ GITALK_CLIENT_SECRET  : 已配置 (长度: ${#GITALK_CLIENT_SECRET})"
         else
-          echo "✗ GITALK_CLIENT_SECRET is not set"
+          echo "✗ GITALK_CLIENT_SECRET  : 未配置"
         fi
+        echo "----------------------------------------"
 
     - name: 创建密钥配置
       env:
@@ -72,19 +75,36 @@ jobs:
         
         # 验证配置文件是否正确生成（不显示实际值）
         echo "Verifying _config_secrets.yml structure:"
-        cat _config_secrets.yml | grep -v "clientID\|clientSecret\|google_analytics"
-
-    - name: 构建站点
+        cat _config_secrets.yml | grep -v "clientID\|clientSecret\|google_analytics"    - name: 构建站点
       env:
         JEKYLL_ENV: production
       run: |
-        # 验证配置是否被正确合并
-        echo "Verifying Jekyll configuration..."
-        bundle exec jekyll build --config _config.yml,_config_secrets.yml --trace || {
-          echo "构建失败，检查合并后的配置（不显示敏感值）"
+        echo "验证 Jekyll 配置..."
+        echo "----------------------------------------"
+        echo "环境变量:"
+        echo "JEKYLL_ENV: $JEKYLL_ENV"
+        echo "----------------------------------------"
+        echo "合并配置文件:"
+        echo " - _config.yml"
+        echo " - _config_secrets.yml"
+        echo "----------------------------------------"
+          # 尝试构建
+        if bundle exec jekyll build --config _config.yml,_config_secrets.yml --trace; then
+          echo "✓ 构建成功"
+          echo "----------------------------------------"
+          echo "验证生成的文件..."
+          if grep -r "gtag('config'" _site/ >/dev/null && grep -r "gitalk.render" _site/ >/dev/null; then
+            echo "✓ GA 和 Gitalk 代码已正确注入"
+          else
+            echo "✗ 配置可能未正确注入"
+          fi
+          echo "----------------------------------------"
+        else
+          echo "✗ 构建失败"
+          echo "检查合并后的配置（已隐藏敏感值）:"
           bundle exec jekyll build --config _config.yml,_config_secrets.yml --trace --verbose | grep -v "clientID\|clientSecret\|google_analytics"
           exit 1
-        }
+        fi
     
     - name: 上传构建产物
       uses: actions/upload-pages-artifact@v3
