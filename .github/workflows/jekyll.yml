@@ -59,12 +59,12 @@ jobs:
           echo "✓ GITALK_CLIENT_ID      : 已配置 (长度: ${#GITALK_ID})"
         else
           echo "✗ GITALK_CLIENT_ID      : 未配置"
-        fi
-        if [ -n "$GITALK_SECRET" ]; then
+        fi        if [ -n "$GITALK_SECRET" ]; then
           echo "✓ GITALK_CLIENT_SECRET  : 已配置 (长度: ${#GITALK_SECRET})"
         else
           echo "✗ GITALK_CLIENT_SECRET  : 未配置"
-        fi        echo "----------------------------------------"
+        fi
+        echo "----------------------------------------"
         
         # 额外验证
         echo "验证 Secrets 的有效性..."
