@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://kanfu-panda.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://kanfu-panda.github.io/" rel="alternate" type="text/html" /><updated>2025-06-02T02:17:22+00:00</updated><id>https://kanfu-panda.github.io/feed.xml</id><title type="html">功夫熊猫的博客</title><subtitle>一个热爱技术的开发者的个人博客</subtitle><entry><title type="html">欢迎来到我的技术博客</title><link href="https://kanfu-panda.github.io/blog/2025/05/31/welcome.html" rel="alternate" type="text/html" title="欢迎来到我的技术博客" /><published>2025-05-31T00:00:00+00:00</published><updated>2025-05-31T00:00:00+00:00</updated><id>https://kanfu-panda.github.io/blog/2025/05/31/welcome</id><content type="html" xml:base="https://kanfu-panda.github.io/blog/2025/05/31/welcome.html"><![CDATA[<h2 id="博客的诞生">博客的诞生</h2>
+
+<p>很高兴与大家见面！作为一名热爱技术的开发者，我一直希望能有一个属于自己的空间来记录学习历程、分享技术心得。这个博客就是为此而生的。</p>
+
+<h2 id="博客内容">博客内容</h2>
+
+<p>在这里，我将主要关注以下几个方向：</p>
+
+<ol>
+  <li><strong>技术探索</strong>
+    <ul>
+      <li>编程语言学习笔记</li>
+      <li>框架与工具使用心得</li>
+      <li>项目开发经验分享</li>
+    </ul>
+  </li>
+  <li><strong>解决方案</strong>
+    <ul>
+      <li>问题解决思路</li>
+      <li>最佳实践总结</li>
+      <li>踩坑记录与解决方案</li>
+    </ul>
+  </li>
+  <li><strong>个人成长</strong>
+    <ul>
+      <li>技术学习方法</li>
+      <li>职业发展感悟</li>
+      <li>效率工具推荐</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="期待与你的交流">期待与你的交流</h2>
+
+<p>博客的目的不仅是记录，更重要的是与大家交流。我期待：</p>
+
+<ul>
+  <li>与志同道合的朋友交流技术</li>
+  <li>分享经验，共同进步</li>
+  <li>收到您的建议和反馈</li>
+</ul>
+
+<h2 id="订阅方式">订阅方式</h2>
+
+<p>您可以通过以下方式持续关注我的更新：</p>
+
+<ul>
+  <li>RSS订阅</li>
+  <li>GitHub关注</li>
+  <li>评论区互动</li>
+</ul>
+
+<p>感谢您的访问，希望我们能一起在技术的道路上不断前进！</p>]]></content><author><name></name></author><category term="blog" /><category term="介绍" /><category term="技术博客" /><category term="个人成长" /><summary type="html"><![CDATA[这是我的个人技术博客的第一篇文章，在这里我将分享技术学习心得、编程经验和个人成长历程。]]></summary></entry></feed>

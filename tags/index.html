@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>标签 - 功夫熊猫的博客</title>
+    
+    <!-- Google Analytics -->
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q31GJNT0TG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-Q31GJNT0TG');
+    </script>
+    
+    
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>标签 | 功夫熊猫的博客</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="标签" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="一个热爱技术的开发者的个人博客" />
+<meta property="og:description" content="一个热爱技术的开发者的个人博客" />
+<link rel="canonical" href="https://kanfu-panda.github.io/tags/" />
+<meta property="og:url" content="https://kanfu-panda.github.io/tags/" />
+<meta property="og:site_name" content="功夫熊猫的博客" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="标签" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"一个热爱技术的开发者的个人博客","headline":"标签","url":"https://kanfu-panda.github.io/tags/"}</script>
+<!-- End Jekyll SEO tag -->
+
+</head>
+<body>    
+    <header class="site-header">
+        <div class="wrapper">
+            <a class="site-title" href="/">功夫熊猫的博客</a>            
+            <nav class="site-nav">
+                <button class="menu-icon" aria-label="Toggle Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="nav-links">
+                    <a href="/about/">关于</a>
+                    <a href="/projects/">项目</a>
+                    <a href="/tags/">标签</a>
+                    <a href="/search/">搜索</a>
+                </div>
+                <button class="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page-content">
+        <div class="wrapper">
+            <div class="tags-page">
+    <h1>标签云</h1>
+    
+    <div class="tag-cloud">
+        
+        
+            <a href="#个人成长" class="tag-link" style="font-size: 84%">
+                个人成长 <span>(1)</span>
+            </a>
+        
+            <a href="#介绍" class="tag-link" style="font-size: 84%">
+                介绍 <span>(1)</span>
+            </a>
+        
+            <a href="#技术博客" class="tag-link" style="font-size: 84%">
+                技术博客 <span>(1)</span>
+            </a>
+        
+    </div>
+
+    <div class="tag-list">
+        
+        <div class="tag-section" id="个人成长">
+            <h2>个人成长</h2>
+            <ul>
+                
+                <li>
+                    <span class="post-date">2025-05-31</span>
+                    <a href="/blog/2025/05/31/welcome.html">欢迎来到我的技术博客</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+        <div class="tag-section" id="介绍">
+            <h2>介绍</h2>
+            <ul>
+                
+                <li>
+                    <span class="post-date">2025-05-31</span>
+                    <a href="/blog/2025/05/31/welcome.html">欢迎来到我的技术博客</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+        <div class="tag-section" id="技术博客">
+            <h2>技术博客</h2>
+            <ul>
+                
+                <li>
+                    <span class="post-date">2025-05-31</span>
+                    <a href="/blog/2025/05/31/welcome.html">欢迎来到我的技术博客</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</div>
+
+        </div>
+    </main>    
+    <footer class="site-footer">
+        <div class="wrapper">
+            <p>&copy; 2025 功夫熊猫的博客. Built with Jekyll.</p>
+        </div>
+    </footer>
+
+    
+    <div id="gitalk-container"></div>
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: 'GITALK_CLIENT_ID',
+            clientSecret: 'GITALK_CLIENT_SECRET',
+            repo: 'kanfu-panda.github.io',
+            owner: 'kanfu-panda',
+            admin: '["kanfu-panda"]',
+            id: window.location.pathname,
+            language: 'zh-CN'
+        });
+        gitalk.render('gitalk-container');
+    </script>    
+        
+    <script>
+        // 菜单切换
+        document.querySelector('.menu-icon').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // 主题切换
+        const themeToggle = document.querySelector('.theme-toggle');
+        const icon = themeToggle.querySelector('i');
+        
+        // 检查本地存储的主题
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        updateThemeIcon(currentTheme);
+        
+        themeToggle.addEventListener('click', function() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+        
+        function updateThemeIcon(theme) {
+            icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+    </script>
+</body>
+</html>
