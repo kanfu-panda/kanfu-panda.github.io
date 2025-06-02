@@ -92,14 +92,15 @@ jobs:
         # 删除现有的配置文件（如果存在）
         rm -f _config_secrets.yml
         
-        # 创建新的配置文件
-        cat > _config_secrets.yml << EOL
-        # Auto-generated secrets configuration
-        google_analytics: "${GA_ID}"
-        gitalk:
-          clientID: "${GITALK_ID}"
-          clientSecret: "${GITALK_SECRET}"
-        EOL
+        # 使用 echo 创建新的配置文件
+        echo "# Auto-generated secrets configuration" > _config_secrets.yml
+        echo "google_analytics: $GA_ID" >> _config_secrets.yml
+        echo "gitalk:" >> _config_secrets.yml
+        echo "  clientID: $GITALK_ID" >> _config_secrets.yml
+        echo "  clientSecret: $GITALK_SECRET" >> _config_secrets.yml
+        # 验证生成的文件内容
+        echo "生成的配置文件内容:"
+        cat _config_secrets.yml
         
         # 验证配置文件是否正确生成
         echo "验证 _config_secrets.yml 文件结构:"
@@ -107,12 +108,29 @@ jobs:
           echo "✓ 配置文件创建成功"
           echo "----------------------------------------"
           echo "文件结构:"
-          cat _config_secrets.yml | grep -v "clientID\|clientSecret\|google_analytics"
-          # 完整性检查
-          if grep -q "google_analytics: \"${GA_ID}\"" _config_secrets.yml; then
+          cat _config_secrets.yml | grep -v "clientID\|clientSecret\|google_analytics"          # 完整性检查          # 验证所有配置
+          echo "验证配置文件内容:"
+          echo "----------------------------------------"
+          echo "Google Analytics 配置:"          GA_LINE=$(grep "^google_analytics:" _config_secrets.yml)
+          if [[ "$GA_LINE" == "google_analytics: $GA_ID" ]]; then
             echo "✓ Google Analytics ID 已正确写入"
           else
             echo "✗ Google Analytics ID 写入失败"
+            echo "预期值: google_analytics: $GA_ID"
+            echo "当前值: $GA_LINE"
+            exit 1
+          fi
+
+          echo "----------------------------------------"
+          echo "Gitalk 配置:"
+          if grep -q "^gitalk:$" _config_secrets.yml && 
+             grep -q "^  clientID: $GITALK_ID$" _config_secrets.yml &&
+             grep -q "^  clientSecret: $GITALK_SECRET$" _config_secrets.yml; then
+            echo "✓ Gitalk 配置已正确写入"
+          else
+            echo "✗ Gitalk 配置写入失败"
+            echo "当前 Gitalk 配置内容:"
+            sed -n '/^gitalk:/,/^[^ ]/p' _config_secrets.yml
             exit 1
           fi
         else
