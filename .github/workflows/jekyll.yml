@@ -1,14 +1,30 @@
 name: Jekyll site CI
 
+# 触发条件
 on:
   push:
     branches: [ main ]
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+      - '.gitignore'
   pull_request:
     branches: [ main ]
+  # 允许手动触发
+  workflow_dispatch:
+
+# 设置权限
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    # 添加并发限制，防止同时运行多个相同的工作流
+    concurrency:
+      group: pages-${{ github.ref }}
     steps:
     - uses: actions/checkout@v3
 
@@ -16,27 +32,32 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: '3.2'
-        bundler-cache: true
-
+        bundler-cache: true    
+    
     - name: 安装依赖
-      run: |
-        bundle install    - name: 构建站点
+      run: bundle install
+
+    - name: 创建密钥配置
       env:
         JEKYLL_ENV: production
       run: |
-        # 创建临时配置文件包含所有 secrets
-        cat > _config_secrets.yml << EOL
-        google_analytics: "${{ secrets.GOOGLE_ANALYTICS_ID }}"
-        gitalk:
-          clientID: "${{ secrets.GITALK_CLIENT_ID }}"
-          clientSecret: "${{ secrets.GITALK_CLIENT_SECRET }}"
-        EOL
-        # 使用合并的配置文件构建站点
-        bundle exec jekyll build --config _config.yml,_config_secrets.yml
+        echo "# Auto-generated secrets configuration" > _config_secrets.yml
+        echo "google_analytics: '${{ secrets.GOOGLE_ANALYTICS_ID }}'" >> _config_secrets.yml
+        echo "gitalk:" >> _config_secrets.yml
+        echo "  clientID: '${{ secrets.GITALK_CLIENT_ID }}'" >> _config_secrets.yml
+        echo "  clientSecret: '${{ secrets.GITALK_CLIENT_SECRET }}'" >> _config_secrets.yml
 
+    - name: 构建站点
+      env:
+        JEKYLL_ENV: production
+      run: bundle exec jekyll build --config _config.yml,_config_secrets.yml    - name: 上传构建产物
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: ./_site
+
+    # 部署到 GitHub Pages
     - name: 部署到 GitHub Pages
       if: github.ref == 'refs/heads/main'
-      uses: peaceiris/actions-gh-pages@v3
+      uses: actions/deploy-pages@v2
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./_site
+        token: ${{ secrets.GITHUB_TOKEN }}
