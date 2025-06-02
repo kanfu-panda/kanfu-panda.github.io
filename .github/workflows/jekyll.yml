@@ -75,7 +75,9 @@ jobs:
         
         # 验证配置文件是否正确生成（不显示实际值）
         echo "Verifying _config_secrets.yml structure:"
-        cat _config_secrets.yml | grep -v "clientID\|clientSecret\|google_analytics"    - name: 构建站点
+        cat _config_secrets.yml | grep -v "clientID\|clientSecret\|google_analytics"
+
+    - name: 构建站点
       env:
         JEKYLL_ENV: production
       run: |
