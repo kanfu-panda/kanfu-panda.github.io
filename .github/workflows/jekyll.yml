@@ -26,6 +26,9 @@ jobs:
     concurrency:
       group: pages-${{ github.workflow }}
       cancel-in-progress: true
+    
+    env:
+      JEKYLL_ENV: production
       
     steps:
     - uses: actions/checkout@v4
@@ -84,8 +87,8 @@ jobs:
         fi
 
     - name: 创建密钥配置
-      env:
-        JEKYLL_ENV: production
+      # env:
+      #   JEKYLL_ENV: production
       run: |
         echo "# Auto-generated secrets configuration" > _config_secrets.yml
         echo "google_analytics: '${{ secrets.GOOGLE_ANALYTICS_ID }}'" >> _config_secrets.yml
@@ -106,8 +109,8 @@ jobs:
         fi
 
     - name: 构建站点
-      env:
-        JEKYLL_ENV: production
+      # env:
+      #   JEKYLL_ENV: production
       run: |
         echo "验证 Jekyll 配置..."
         echo "----------------------------------------"
