@@ -30,6 +30,8 @@ Thumbs.db
 nbproject/
 *.iml
 *.iws
+.idx
+
 
 # 环境变量和敏感信息
 .env
