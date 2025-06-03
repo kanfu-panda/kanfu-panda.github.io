@@ -143,13 +143,6 @@ jobs:
           exit 1
         fi
 
-    - name: Debug GA ID
-      run: |
-        echo "GA_ID value: $GA_ID"
-        echo "Content of _config_secrets.yml:"
-        cat _config_secrets.yml
-
-
     - name: 构建站点
       run: |
         echo "验证 Jekyll 配置..."
