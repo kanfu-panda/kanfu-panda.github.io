@@ -38,7 +38,7 @@ jobs:
     - name: 设置 Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '3.2'
+        ruby-version-file: .ruby-version
         bundler-cache: true
 
     - name: 设置页面缓存
