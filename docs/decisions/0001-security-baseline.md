@@ -23,7 +23,8 @@
 ### 1. 前端供应链安全
 
 - **锁定**所有 CDN 资产到具体版本，禁止 `@latest` / 主版本通配
-- **强制 SRI**：所有 `<script>` 和 `<link rel="stylesheet">` 均带 `integrity` + `crossorigin`
+- **强制 SRI**：所有**可版本锁定的第三方 CDN JS/CSS 资产**均带 `integrity` + `crossorigin`
+- **明确例外**：内联 `<script>` 不适用 SRI；类似 GA 的第三方动态脚本若无法稳定锁定内容，不承诺 SRI，改由 CSP 中显式白名单来源进行约束
 - **CSP**：通过 `<meta http-equiv>` 注入，限制：
   - `default-src 'self'`
   - 显式列举可信 CDN 域名
