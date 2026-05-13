@@ -1,21 +1,36 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>    
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; font-src 'self' data: https://cdnjs.cloudflare.com; img-src 'self' data: https://www.google-analytics.com https://*.githubusercontent.com https://*.gravatar.com; connect-src 'self' https://api.github.com https://www.google-analytics.com https://*.analytics.google.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://github.com">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
     <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
-    
-    {% if site.gitalk.enable and page.layout == 'post' and jekyll.environment == 'production' %}
-    <!-- Gitalk -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+    {% if site.gitalk.enable and site.gitalk.clientID != empty and site.gitalk.clientSecret != empty and page.layout == 'post' and jekyll.environment == 'production' %}
+    <!-- Gitalk (锁版本 + SRI；升级时需重新生成 integrity，方法见 SECURITY.md) -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.css"
+          integrity="sha384-X7z7PUv2B67D8sPJyzDyGZSco1ADwmdI7ed4eCGtTKkClfyDFpPL9WgAn9XVr/Io"
+          crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.js"
+            integrity="sha384-kspnZUWBoSWwoJHa0hBCXYbHGbhvU/lcEH5O8eVbSDhbPwsiVUTp/aGX/z/5EuMA"
+            crossorigin="anonymous"></script>
     {% endif %}
-    
+
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>    {% seo %}
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+          integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+          crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"
+            integrity="sha384-/TQbtLCAerC3jgaim+N78RZSDYV7ryeoBCVqTuzRrFec2akfBkHS7ACQ3PQhvMVi"
+            crossorigin="anonymous"></script>
+    {% seo %}
       <!-- Google Analytics -->
-    {% if jekyll.environment == 'production' and site.google_analytics %}
+    {% if jekyll.environment == 'production' and site.google_analytics != empty %}
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
     <script>
@@ -61,7 +76,7 @@
         </div>    
     </footer>
 
-    {% if site.gitalk.enable and page.layout == 'post' and jekyll.environment == 'production' %}
+    {% if site.gitalk.enable and site.gitalk.clientID != empty and site.gitalk.clientSecret != empty and page.layout == 'post' and jekyll.environment == 'production' %}
     <div id="gitalk-container"></div>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
