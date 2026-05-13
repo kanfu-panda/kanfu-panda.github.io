@@ -12,6 +12,14 @@
 set -u
 set -o pipefail
 
+# 检查依赖命令
+for cmd in git file; do
+  if ! command -v "$cmd" &>/dev/null; then
+    echo "[scan-secrets] 错误: 未找到命令 '$cmd'，请先安装" >&2
+    exit 2
+  fi
+done
+
 MODE="${1:-full}"
 case "$MODE" in
   --staged) MODE="staged" ;;
