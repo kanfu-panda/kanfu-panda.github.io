@@ -1,6 +1,5 @@
 name: Jekyll site CI
 
-# 触发条件
 on:
   push:
     branches: [ main ]
@@ -10,31 +9,26 @@ on:
       - '.gitignore'
   pull_request:
     branches: [ main ]
-  # 允许手动触发
   workflow_dispatch:
 
-# 设置权限
 permissions:
   contents: read
   pages: write
   id-token: write
 
+concurrency:
+  group: pages-${{ github.workflow }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    
-    # 添加并发限制，防止同时运行多个相同的工作流
-    concurrency:
-      group: pages-${{ github.workflow }}
-      cancel-in-progress: true
-    
-    # 设置全局环境变量
     env:
       JEKYLL_ENV: production
       GA_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
       GITALK_ID: ${{ secrets.GITALK_CLIENT_ID }}
       GITALK_SECRET: ${{ secrets.GITALK_CLIENT_SECRET }}
-      
+
     steps:
     - uses: actions/checkout@v4
 
@@ -51,26 +45,25 @@ jobs:
       uses: actions/configure-pages@v3
 
     - name: 安装依赖
-      run: |
-        bundle install
+      run: bundle install
 
     - name: 检查 Secrets（缺失则降级，不再硬失败）
       id: secrets_check
       run: |
         # fork PR 拿不到 secrets，正常 push 才有。
-        # 缺失时跳过 GA / Gitalk 注入，让构建仍然成功。
+        # 缺失时跳过相关组件注入，让构建仍然成功。
         SECRETS_OK=true
         if [ -z "$GA_ID" ]; then
-          echo "::warning::GOOGLE_ANALYTICS_ID 未配置，将跳过 GA 注入"
+          echo "::warning::GOOGLE_ANALYTICS_ID 未配置，将跳过统计脚本注入"
           SECRETS_OK=false
         else
           echo "✓ GOOGLE_ANALYTICS_ID 已配置 (长度: ${#GA_ID})"
         fi
         if [ -z "$GITALK_ID" ] || [ -z "$GITALK_SECRET" ]; then
-          echo "::warning::GITALK_CLIENT_ID 或 GITALK_CLIENT_SECRET 未配置，将跳过 Gitalk 注入"
+          echo "::warning::评论组件凭证未配置，将跳过其注入"
           SECRETS_OK=false
         else
-          echo "✓ GITALK 凭证已配置 (ID 长度: ${#GITALK_ID}, SECRET 长度: ${#GITALK_SECRET})"
+          echo "✓ 评论组件凭证已配置 (ID 长度: ${#GITALK_ID}, SECRET 长度: ${#GITALK_SECRET})"
         fi
         echo "secrets_ok=$SECRETS_OK" >> "$GITHUB_OUTPUT"
 
@@ -88,7 +81,6 @@ jobs:
             echo "  clientSecret: $GITALK_SECRET"
           fi
         } > _config_secrets.yml
-        # 仅打印结构（隐去敏感值），避免日志泄露
         echo "_config_secrets.yml 结构（敏感值已隐去）:"
         sed -E 's/(clientID|clientSecret|google_analytics):.*/\1: ***REDACTED***/' _config_secrets.yml
 
@@ -119,37 +111,40 @@ jobs:
         else
           echo "✓ 未发现 @latest"
         fi
-        # 4. 条件注入：仅在 secrets 完备时验证 GA / Gitalk
+        # 4. 条件注入：仅在 secrets 完备时验证组件已注入
         if [ "${{ steps.secrets_check.outputs.secrets_ok }}" = "true" ]; then
           grep -rq "gtag('config'" _site/ \
-            && echo "✓ GA 已注入" \
-            || { echo "::error::GA 未注入但 secrets 完备"; FAIL=1; }
+            && echo "✓ 统计脚本已注入" \
+            || { echo "::error::统计脚本未注入但 secrets 完备"; FAIL=1; }
           grep -rq "gitalk.render" _site/ \
-            && echo "✓ Gitalk 已注入" \
-            || { echo "::error::Gitalk 未注入但 secrets 完备"; FAIL=1; }
+            && echo "✓ 评论组件已注入" \
+            || { echo "::error::评论组件未注入但 secrets 完备"; FAIL=1; }
         else
-          echo "（secrets 不完整，跳过 GA / Gitalk 注入验证）"
+          echo "（secrets 不完整，跳过组件注入验证）"
         fi
         [ $FAIL -eq 0 ] || exit 1
-    
+
     - name: 上传构建产物
       uses: actions/upload-pages-artifact@v3
       with:
         path: ./_site
 
     - name: 清理缓存
+      if: always()
       run: bundle clean --force
-      if: always()  # 即使前面步骤失败也执行
 
-    # 部署到 GitHub Pages
-    - name: 部署到 GitHub Pages
-      id: deployment  # 添加 id 以便引用输出
-      if: github.ref == 'refs/heads/main'
-      uses: actions/deploy-pages@v4
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        timeout: 600000  # 10分钟超时
-    
+  # 部署仅在 main 分支触发，独立 job 携带 environment（避免 PR 触发时被环境保护规则拒绝）
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+    - name: 部署到 GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        timeout: 600000
