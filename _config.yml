@@ -32,3 +32,17 @@ plugins:
 header_pages:
   - about.md
   - projects.md
+
+# 不参与构建（仓库元文件 / 内部脚本 / 内部文档）
+exclude:
+  - CLAUDE.md
+  - SECURITY.md
+  - README.md
+  - LICENSE
+  - Gemfile
+  - Gemfile.lock
+  - docs/
+  - scripts/
+  - .ruby-version
+  - .env.local.example
+  - vendor/
