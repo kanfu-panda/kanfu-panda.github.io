@@ -1,12 +1,13 @@
 ---
 layout: default
-title: 标签
 permalink: /tags/
 ---
+{%- assign lang = page.lang | default: site.active_lang | default: site.default_lang -%}
+{%- assign t = site.data.i18n[lang] -%}
 
 <div class="tags-page">
-    <h1>标签云</h1>
-    
+    <h1>{{ t.tags.heading }}</h1>
+
     <div class="tag-cloud">
         {% assign tags = site.tags | sort %}
         {% for tag in tags %}
@@ -25,6 +26,7 @@ permalink: /tags/
                 <li>
                     <span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
                     <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                    {% if post.lang %}<span class="post-lang-badge">{{ post.lang | upcase }}</span>{% endif %}
                 </li>
                 {% endfor %}
             </ul>
