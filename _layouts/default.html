@@ -54,7 +54,12 @@
                 </button>
                 <div class="nav-links">
                     <a href="{{ '/about/' | relative_url }}">关于</a>
-                    <a href="{{ '/projects/' | relative_url }}">项目</a>
+                    <div class="nav-dropdown">
+                        <a href="{{ '/projects/' | relative_url }}" class="nav-dropdown-toggle" aria-haspopup="true">项目<span class="caret" aria-hidden="true">▾</span></a>
+                        <div class="nav-dropdown-menu" role="menu">
+                            <a href="{{ '/aitm/' | relative_url }}" role="menuitem">aitm</a>
+                        </div>
+                    </div>
                     <a href="{{ '/tags/' | relative_url }}">标签</a>
                     <a href="{{ '/search/' | relative_url }}">搜索</a>
                 </div>

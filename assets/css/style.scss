@@ -102,6 +102,70 @@ body {
     color: var(--main-color);
 }
 
+/* 下拉子菜单 */
+.nav-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.nav-dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.nav-dropdown .caret {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    transition: transform 0.2s ease;
+}
+
+.nav-dropdown:hover .caret,
+.nav-dropdown:focus-within .caret,
+.nav-dropdown.open .caret {
+    transform: rotate(180deg);
+}
+
+.nav-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 1.5rem; /* 对齐父项 margin-left */
+    background: var(--bg-color);
+    border: 1px solid rgba(127, 127, 127, 0.2);
+    border-radius: 6px;
+    padding: 0.4rem 0;
+    min-width: 140px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    z-index: 100;
+}
+
+[data-theme="dark"] .nav-dropdown-menu {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu,
+.nav-dropdown.open .nav-dropdown-menu {
+    display: block;
+}
+
+.nav-dropdown-menu a {
+    display: block;
+    margin: 0 !important;
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+}
+
+.nav-dropdown-menu a:hover {
+    background: rgba(33, 150, 243, 0.08);
+}
+
+[data-theme="dark"] .nav-dropdown-menu a:hover {
+    background: rgba(88, 166, 255, 0.12);
+}
+
 @media screen and (max-width: 600px) {
     .menu-icon {
         display: block;
@@ -126,6 +190,27 @@ body {
             margin: 1rem 0;
             text-align: center;
         }
+    }
+
+    /* 移动端：下拉项展平为缩进列表，去掉 hover 弹层 */
+    .nav-dropdown {
+        display: block;
+    }
+    .nav-dropdown .caret {
+        display: none;
+    }
+    .nav-dropdown-menu {
+        display: block;
+        position: static;
+        border: none;
+        box-shadow: none;
+        background: transparent;
+        padding: 0;
+        min-width: 0;
+    }
+    .nav-dropdown-menu a {
+        font-size: 0.95rem;
+        opacity: 0.85;
     }
 }
 
