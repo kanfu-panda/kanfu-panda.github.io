@@ -1,14 +1,18 @@
 ---
 layout: default
-title: 搜索
 permalink: /search/
+title_key: search.heading
 ---
+{%- assign lang = page.lang | default: site.active_lang | default: site.default_lang -%}
+{%- assign t = site.data.i18n[lang] -%}
+{%- comment -%} search.json 是跨语言聚合（不参与本地化路径），3 套 search 页都指向同一份 {%- endcomment -%}
+{%- assign search_json_path = '/search.json' -%}
 
 <div class="search-page">
-    <h1>搜索文章</h1>
-    
+    <h1>{{ t.search.heading }}</h1>
+
     <div class="search-container">
-        <input type="text" id="search-input" placeholder="输入关键词搜索...">
+        <input type="text" id="search-input" placeholder="{{ t.search.placeholder }}">
         <div id="search-results"></div>
     </div>
 </div>
@@ -20,9 +24,9 @@ permalink: /search/
 SimpleJekyllSearch({
     searchInput: document.getElementById('search-input'),
     resultsContainer: document.getElementById('search-results'),
-    json: '/search.json',
+    json: '{{ search_json_path }}',
     searchResultTemplate: '<div class="search-result"><a href="{url}"><h3>{title}</h3></a><p>{date}</p><p>{excerpt}</p></div>',
-    noResultsText: '没有找到相关文章',
+    noResultsText: '{{ t.search.no_results }}',
     limit: 10,
     fuzzy: false
 });

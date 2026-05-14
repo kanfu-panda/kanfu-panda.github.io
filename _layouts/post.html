@@ -1,32 +1,89 @@
 ---
 layout: default
 ---
+{%- assign post_lang = page.lang | default: site.default_lang -%}
+{%- assign ui_lang = page.lang | default: site.active_lang | default: site.default_lang -%}
+{%- assign t = site.data.i18n[ui_lang] -%}
 
 <article class="post">
     <header class="post-header">
-        <h1 class="post-title">{{ page.title }}</h1>        <p class="post-meta">
-            发布于 {{ page.date | date: "%Y-%m-%d" }}
+        <h1 class="post-title">{{ page.title }}</h1>
+        <p class="post-meta">
+            {{ t.post.published_on }} {{ page.date | date: "%Y-%m-%d" }}
             {% if page.author %}
             • {{ page.author }}
             {% endif %}
             {% if page.tags %}
             <span class="post-tags">
                 {% for tag in page.tags %}
-                <a href="/tags/#{{ tag | slugify }}" class="post-tag">{{ tag }}</a>
+                <a href="{% if ui_lang == site.default_lang %}/tags/#{% else %}/{{ ui_lang }}/tags/#{% endif %}{{ tag | slugify }}" class="post-tag">{{ tag }}</a>
                 {% endfor %}
             </span>
             {% endif %}
         </p>
-    </header>    <div class="post-content">
+    </header>
+
+    <!-- 语言不匹配横幅：默认 hidden，JS 检测后视情况显示 -->
+    {% if page.lang %}
+    <div id="lang-mismatch-banner" class="lang-banner" hidden>
+        <button class="lang-banner-close" aria-label="dismiss" type="button">×</button>
+        <span class="banner-text"></span>
+    </div>
+    <script>
+        // 把 3 套 i18n.post 字典注入到客户端，banner 文案用用户偏好语言显示
+        window.__I18N_POST__ = {
+            en: {{ site.data.i18n.en.post | jsonify }},
+            zh: {{ site.data.i18n.zh.post | jsonify }},
+            ja: {{ site.data.i18n.ja.post | jsonify }}
+        };
+        (function () {
+            var postLang = {{ page.lang | jsonify }};
+            // 决定用户偏好语言：localStorage > navigator.language > default_lang
+            var userLang = (function () {
+                try {
+                    var stored = localStorage.getItem('lang_choice');
+                    if (stored) return stored;
+                } catch (e) {}
+                var raw = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+                if (raw.indexOf('zh') === 0) return 'zh';
+                if (raw.indexOf('ja') === 0) return 'ja';
+                return 'en';
+            })();
+            if (userLang === postLang) return;
+            // 用户已主动关闭过本文章的提示
+            try {
+                if (sessionStorage.getItem('lang_banner_dismissed_' + location.pathname)) return;
+            } catch (e) {}
+            var dict = window.__I18N_POST__[userLang] || window.__I18N_POST__.en;
+            var langLabel = dict['lang_label_' + postLang] || postLang;
+            var altLangLabel = dict['lang_label_' + userLang] || userLang;
+            var msg = (dict.lang_banner || '')
+                .replace('{lang}', langLabel)
+                .replace('{alt_lang}', altLangLabel);
+            var banner = document.getElementById('lang-mismatch-banner');
+            if (!banner) return;
+            banner.querySelector('.banner-text').textContent = msg;
+            banner.removeAttribute('hidden');
+            banner.querySelector('.lang-banner-close').addEventListener('click', function () {
+                banner.setAttribute('hidden', '');
+                try {
+                    sessionStorage.setItem('lang_banner_dismissed_' + location.pathname, '1');
+                } catch (e) {}
+            });
+        })();
+    </script>
+    {% endif %}
+
+    <div class="post-content">
         {% if page.toc != false %}
         <div class="post-toc">
             <details>
-                <summary>目录</summary>
+                <summary>{{ t.post.toc }}</summary>
                 <div id="toc"></div>
             </details>
         </div>
         {% endif %}
-        
+
         <div class="post-text">
             {{ content }}
         </div>
@@ -38,18 +95,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // 生成目录
     var headings = document.querySelectorAll('.post-content h2, .post-content h3');
     var toc = document.getElementById('toc');
+    if (!toc) return;
     var tocHTML = '';
 
     headings.forEach(function(heading, index) {
-        // 为每个标题添加ID
         heading.id = 'heading-' + index;
-        
-        // 创建目录项
         var level = heading.tagName === 'H2' ? '' : '    ';
         tocHTML += level + '- [' + heading.textContent + '](#' + heading.id + ')\n';
     });
 
-    // 将目录转换为HTML
     toc.innerHTML = marked.parse(tocHTML);
 });
 </script>

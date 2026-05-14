@@ -1,10 +1,23 @@
 title: 功夫熊猫的博客
-email: your@email.com
-description: >- 
+description: >-
   一个热爱技术的开发者的个人博客
 baseurl: ""
 url: "https://kanfu-panda.github.io"
 github_username: kanfu-panda
+
+# 多语言（jekyll-polyglot）
+# default_lang 是英文：根路径 / 是英文版，/zh/ 是中文版，/ja/ 是日文版
+languages: ["en", "zh", "ja"]
+default_lang: "en"
+# 这些路径所有语言共用，不参与本地化复制
+exclude_from_localization:
+  - "assets/"
+  - "feed.xml"
+  - "search.json"
+  - "robots.txt"
+  - "404.html"
+# 并行构建加速
+parallel_localization: true
 
 # Gitalk 评论系统配置
 gitalk:
@@ -27,6 +40,7 @@ theme: minima
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-polyglot
 
 # 导航菜单
 header_pages:
