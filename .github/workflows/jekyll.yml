@@ -125,6 +125,35 @@ jobs:
         else
           echo "（secrets 不完整，跳过组件注入验证）"
         fi
+        # 5. aitm 产品页与下载资源齐全
+        if [ -f _site/aitm/index.html ] && grep -q "aitm" _site/aitm/index.html; then
+          echo "✓ aitm 产品页已渲染"
+        else
+          echo "::error::aitm 产品页缺失或内容不完整"; FAIL=1
+        fi
+        DMG=$(ls _site/assets/downloads/aitm_*_aarch64.dmg 2>/dev/null | head -1)
+        if [ -n "$DMG" ] && [ -s "$DMG" ]; then
+          echo "✓ aitm dmg 已部署: $(basename "$DMG") ($(stat -c%s "$DMG" 2>/dev/null || stat -f%z "$DMG") 字节)"
+        else
+          echo "::error::aitm dmg 缺失或为空"; FAIL=1
+        fi
+        SHA_FILE=$(ls _site/assets/downloads/aitm_*_aarch64.dmg.sha256 2>/dev/null | head -1)
+        if [ -n "$SHA_FILE" ] && [ -n "$DMG" ]; then
+          EXPECTED=$(awk '{print $1}' "$SHA_FILE")
+          ACTUAL=$(sha256sum "$DMG" 2>/dev/null | awk '{print $1}' || shasum -a 256 "$DMG" | awk '{print $1}')
+          if [ "$EXPECTED" = "$ACTUAL" ]; then
+            echo "✓ dmg SHA256 与公开校验和一致"
+          else
+            echo "::error::dmg SHA256 不匹配（公开: $EXPECTED / 实际: $ACTUAL）"; FAIL=1
+          fi
+        else
+          echo "::error::SHA256 文件或 dmg 文件缺失"; FAIL=1
+        fi
+        if [ -f _site/assets/downloads/install-aitm.sh ]; then
+          echo "✓ install-aitm.sh 已部署"
+        else
+          echo "::error::install-aitm.sh 缺失"; FAIL=1
+        fi
         [ $FAIL -eq 0 ] || exit 1
 
     - name: 上传构建产物
