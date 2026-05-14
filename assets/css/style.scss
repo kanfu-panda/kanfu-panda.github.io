@@ -37,12 +37,14 @@ body {
     background: var(--secondary-bg);
     border-bottom: 1px solid var(--border-color);
     padding: 1rem 0;
+    position: relative;  /* 让 .nav-links 的 absolute 定位有锚点；否则 hamburger 展开的面板会定位到 viewport 之外 */
 }
 
 .site-header .wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .site-title {
@@ -100,6 +102,135 @@ body {
 
 .site-nav a:hover {
     color: var(--main-color);
+}
+
+/* 语言切换器 */
+.lang-switcher {
+    position: relative;
+    margin-left: 1rem;
+}
+
+.lang-switcher-toggle {
+    background: none;
+    border: 1px solid rgba(127, 127, 127, 0.25);
+    border-radius: 4px;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.85rem;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease;
+
+    &:hover, &:focus {
+        color: var(--main-color);
+        border-color: var(--main-color);
+        outline: none;
+    }
+}
+
+.lang-switcher-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    background: var(--bg-color);
+    border: 1px solid rgba(127, 127, 127, 0.2);
+    border-radius: 6px;
+    padding: 0.4rem 0;
+    min-width: 130px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    z-index: 100;
+}
+
+[data-theme="dark"] .lang-switcher-menu {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.lang-switcher.open .lang-switcher-menu {
+    display: block;
+}
+
+.lang-switcher-menu a {
+    display: block;
+    margin: 0 !important;
+    padding: 0.45rem 1rem;
+    font-size: 0.92rem;
+    white-space: nowrap;
+}
+
+.lang-switcher-menu a:hover {
+    background: rgba(33, 150, 243, 0.08);
+}
+
+[data-theme="dark"] .lang-switcher-menu a:hover {
+    background: rgba(88, 166, 255, 0.12);
+}
+
+.lang-switcher-menu a.current {
+    color: var(--main-color);
+    font-weight: 600;
+}
+
+@media screen and (max-width: 600px) {
+    .lang-switcher-menu {
+        right: auto;
+        left: 0;
+    }
+}
+
+/* 文章语言不匹配横幅 */
+.lang-banner {
+    background: rgba(33, 150, 243, 0.08);
+    border-left: 3px solid var(--main-color);
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0 4px 4px 0;
+    font-size: 0.9rem;
+    color: var(--text-color);
+
+    a {
+        color: var(--main-color);
+        text-decoration: underline;
+        margin-left: 0.5rem;
+    }
+
+    button.lang-banner-close {
+        float: right;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.1rem;
+        opacity: 0.6;
+        color: var(--text-color);
+        padding: 0 0.25rem;
+
+        &:hover { opacity: 1; }
+    }
+}
+
+[data-theme="dark"] .lang-banner {
+    background: rgba(88, 166, 255, 0.08);
+}
+
+/* 文章语言徽章（用在列表里） */
+.post-lang-badge {
+    display: inline-block;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    background: rgba(127, 127, 127, 0.15);
+    color: var(--text-color);
+    margin-left: 0.4rem;
+    opacity: 0.8;
+}
+
+/* CJK 字体回退：日 / 中文页面优先用系统 CJK 字体 */
+html[lang^="ja"] body {
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+}
+
+html[lang^="zh"] body {
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
 }
 
 /* 下拉子菜单 */
@@ -794,11 +925,14 @@ a:hover {
 
         .hero-links {
             flex-direction: column;
-            align-items: stretch;
-            gap: 1rem;
+            align-items: center;
+            gap: 0.75rem;
 
             .cta-button, .github-link {
-                width: 100%;
+                width: auto;
+                max-width: 100%;
+                padding: 0.7rem 1.4rem;
+                min-width: 200px;
             }
         }
     }

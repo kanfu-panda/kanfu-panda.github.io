@@ -1,0 +1,5 @@
+{
+  "version": "0.5.3",
+  "download_url": "https://kanfu-panda.github.io/assets/downloads/aitm_0.5.3_aarch64.dmg",
+  "notes": "FileTree 跟随终端 cwd + 多种文件预览（markdown / 代码语法高亮 / 图片 / 二进制 fallback）"
+}

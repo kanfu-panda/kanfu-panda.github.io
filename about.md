@@ -1,80 +1,81 @@
 ---
 layout: default
-title: 关于我
+title: About
 permalink: /about/
+lang: en
 ---
 
-# 关于我
+# About
 
-## 你好
+## Hi there
 
-我是不太会武功的**功夫熊猫** —— 一个长期写代码、偶尔琢磨工具的开发者。
+I'm **Kungfu Panda** — only without the actual kungfu. A developer who's been writing code for a while, and occasionally building small tools on the side.
 
-写程序对我来说既是工作也是兴趣。喜欢把"差不多能用"做成"用起来挺顺"，所以这几年常常一边写应用，一边顺手做小工具。
+Programming is both my work and my hobby. I have a soft spot for turning "kind of works" into "actually pleasant to use", which is why I tend to ship apps alongside the tools that help me ship them.
 
-这个博客是我整理技术心得、记录学习历程、分享踩坑经验的地方。
+This blog is where I collect technical notes, learning logs, and the occasional rabbit hole.
 
-## 现在在做的事
+## What I'm working on
 
-### 🪟 [aitm](/aitm/) — 让 AI 进入终端
+### 🪟 [aitm](/aitm/) — AI in the terminal
 
-一个把 AI 能力做进 macOS 终端的桌面应用。多 tab 终端 + AI 侧栏 + AI 工具调用闭环：AI 可以读文件、查命令历史、按需执行命令，所有高危动作都要用户点头确认。
+A macOS desktop terminal app that puts AI capabilities directly into your terminal workflow. Multi-tab PTY terminal + AI sidebar + AI tool-calling loop: the AI can read files, search command history, and propose commands — but every high-risk action requires your explicit confirmation.
 
-技术栈：Tauri 2 + Rust + React 19 + TypeScript。完整介绍在 [aitm 产品页](/aitm/)。
+Stack: Tauri 2 + Rust + React 19 + TypeScript. Full details on the [aitm product page](/aitm/).
 
-### 📝 这个博客
+### 📝 This blog
 
-基于 Jekyll 的纯静态站点，托管在 GitHub Pages。仓库 [在 GitHub 公开](https://github.com/kanfu-panda/kanfu-panda.github.io)，从主题、CI、安全策略到内容都可以参考。
+A pure static site built with Jekyll, hosted on GitHub Pages. The [repo is public](https://github.com/kanfu-panda/kanfu-panda.github.io) — theme, CI, security posture, and content are all there to reference.
 
-## 技术栈
+## Tech stack
 
-- **主力语言**：Python、TypeScript / JavaScript、Rust
-- **前端**：React、Tailwind、xterm.js 这类生态
-- **桌面 / 系统层**：Tauri 2、PTY 与终端协议、IPC 设计
-- **AI 工程**：与多家 LLM API 打交道、工具调用 / Agent 流程
-- **基础设施**：Git、Docker、GitHub Actions、Jekyll、静态站点工程化
+- **Primary languages**: Python, TypeScript / JavaScript, Rust
+- **Frontend**: React, Tailwind, the xterm.js ecosystem
+- **Desktop / systems**: Tauri 2, PTY and terminal protocols, IPC design
+- **AI engineering**: Working daily with multiple LLM APIs, tool calling, agent loops
+- **Infra**: Git, Docker, GitHub Actions, Jekyll, static-site engineering
 
-日常工具：VS Code 主力、偶尔 IntelliJ；命令行用 zsh；终端 —— 当然是 aitm（边吃自己的狗粮边迭代）。
+Daily tools: VS Code mostly, occasionally IntelliJ; zsh on the command line; and the terminal — well, that's aitm, dogfooding while iterating.
 
-## 最近在琢磨
+## Currently learning
 
-- 让 AI 工具调用更可靠：从"看起来能用"到"真的好用"
-- Rust 异步生态、Tauri 内部机制
-- 终端协议家族（ANSI / OSC / PTY）
-- 怎么把内容工作流和发布流程做得舒服一些
+- Making AI tool-calling reliable: from "kinda works in demo" to "actually useful day-to-day"
+- Rust async ecosystem, Tauri internals
+- The terminal protocol family (ANSI / OSC / PTY)
+- Smoother content workflows and publishing pipelines
 
-## 这个博客你能看到什么
+## What you'll find on this blog
 
-- **技术探索**：编程语言、框架、工具的学习笔记
-- **解决方案**：问题排查思路、最佳实践、踩坑实录
-- **项目复盘**：从想法到上线的真实过程
-- **偶尔随笔**：不限技术
+- **Tech notes** — learning logs on languages, frameworks, tools
+- **How-tos** — debugging approaches, best practices, lessons learned
+- **Project retrospectives** — the real path from idea to ship
+- **The occasional essay** — not strictly technical
 
-更新频率不一定，但争取写的每一篇都对读者有点用。
+Posting cadence is irregular, but I try to make every piece useful to read.
 
-## 兴趣
+## Interests
 
-代码之外：
-- 阅读（技术 & 非技术都有）
-- 折腾终端、命令行、工具链
-- 关注与偶尔参与开源协作
+Outside of code:
+- Reading (technical and otherwise)
+- Tinkering with terminals, command lines, toolchains
+- Following and occasionally contributing to open source
 
-## 一起聊聊
+## Let's talk
 
-如果你也在做以下方向之一，欢迎找我交流：
+If you're working on any of these — I'd love to hear from you:
 
-- 桌面 / 终端工具开发
-- AI 工程落地，特别是怎么把"看起来很 AI"做成"真的好用"
-- Rust + Tauri 项目
-- 静态站点 / 个人内容平台折腾
+- Desktop / terminal tool development
+- AI engineering, especially turning flashy demos into actually-useful workflows
+- Rust + Tauri projects
+- Static sites and personal publishing setups
 
-## 联系方式
+## Contact
 
 - GitHub: [kanfu-panda](https://github.com/kanfu-panda)
-- 邮箱：<a id="contact-link" href="#" rel="nofollow">联系我</a>
+- Email: <a id="contact-link" href="#" rel="nofollow">Contact me</a>
 
 <script>
-// 邮箱通过 JS 在客户端拼装，避免在 HTML 源码中以连续字符串出现，降低被自动爬取的概率
+// Email is assembled client-side to avoid appearing as a continuous string in HTML source
 (function () {
     var el = document.getElementById('contact-link');
     if (!el) return;
