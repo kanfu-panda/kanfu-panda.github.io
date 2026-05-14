@@ -131,6 +131,32 @@ jobs:
         else
           echo "::error::aitm 产品页缺失或内容不完整"; FAIL=1
         fi
+        # 5.1 多语言（i18n）3 套页面齐全
+        for lang_path in "" "zh/" "ja/"; do
+          for page in "" "about/" "aitm/" "projects/" "search/" "tags/"; do
+            file="_site/${lang_path}${page}index.html"
+            if [ -f "$file" ]; then
+              echo "✓ /${lang_path}${page}"
+            else
+              echo "::error::缺失多语言页面 /${lang_path}${page}"; FAIL=1
+            fi
+          done
+        done
+        # 5.2 hreflang 注入校验：每个产品页都应含 4 条 alternate（en/zh/ja/x-default）
+        for lang_path in "" "zh/" "ja/"; do
+          count=$(grep -oE 'rel="alternate" hreflang="[^"]+"' "_site/${lang_path}aitm/index.html" 2>/dev/null | wc -l | tr -d ' ')
+          if [ "$count" -ge 4 ]; then
+            echo "✓ /${lang_path}aitm/ 含 $count 条 hreflang"
+          else
+            echo "::error::/${lang_path}aitm/ hreflang 数量不足: $count（应 ≥4）"; FAIL=1
+          fi
+        done
+        # 5.3 邮箱不应作为连续字符串出现在任何 HTML 产物中
+        if grep -rln "slbluefox@gmail.com" _site/ 2>/dev/null; then
+          echo "::error::邮箱明文出现在产物中"; FAIL=1
+        else
+          echo "✓ 邮箱明文未泄露"
+        fi
         DMG=$(ls _site/assets/downloads/aitm_*_aarch64.dmg 2>/dev/null | head -1)
         if [ -n "$DMG" ] && [ -s "$DMG" ]; then
           echo "✓ aitm dmg 已部署: $(basename "$DMG") ($(stat -c%s "$DMG" 2>/dev/null || stat -f%z "$DMG") 字节)"
@@ -153,6 +179,25 @@ jobs:
           echo "✓ install-aitm.sh 已部署"
         else
           echo "::error::install-aitm.sh 缺失"; FAIL=1
+        fi
+        # aitm 自动更新清单（latest.json）：version 字段必须与实际 dmg 版本号匹配
+        if [ -f _site/assets/aitm/latest.json ]; then
+          DMG_NAME=$(basename "$DMG")
+          DMG_VERSION=$(echo "$DMG_NAME" | sed -E 's/^aitm_([0-9]+\.[0-9]+\.[0-9]+).*/\1/')
+          JSON_VERSION=$(grep -oE '"version"[[:space:]]*:[[:space:]]*"[^"]+"' _site/assets/aitm/latest.json | sed -E 's/.*"([^"]+)"$/\1/')
+          if [ "$DMG_VERSION" = "$JSON_VERSION" ]; then
+            echo "✓ latest.json 版本 ($JSON_VERSION) 与 dmg 一致"
+          else
+            echo "::error::latest.json version=$JSON_VERSION 与 dmg version=$DMG_VERSION 不一致"; FAIL=1
+          fi
+          # download_url 字段也要包含正确的 dmg 文件名
+          if grep -q "$DMG_NAME" _site/assets/aitm/latest.json; then
+            echo "✓ latest.json download_url 指向 $DMG_NAME"
+          else
+            echo "::error::latest.json download_url 未指向当前 dmg ($DMG_NAME)"; FAIL=1
+          fi
+        else
+          echo "::error::assets/aitm/latest.json 缺失（aitm 自动更新依赖）"; FAIL=1
         fi
         [ $FAIL -eq 0 ] || exit 1
 

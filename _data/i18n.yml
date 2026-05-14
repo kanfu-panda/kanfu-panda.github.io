@@ -1,0 +1,93 @@
+# i18n 字符串总表：UI 框架共用文案
+# 用法：{{ site.data.i18n[page.lang].nav.about }}
+# 新增语言时同步补齐 3 个语言键。
+
+en:
+  site_description: A developer who loves technology — notes, tools, and the occasional rabbit hole.
+  nav:
+    about: About
+    projects: Projects
+    tags: Tags
+    search: Search
+    menu_toggle_aria: Toggle Menu
+    theme_toggle_aria: Toggle Dark Mode
+    lang_switcher_aria: Switch language
+  footer:
+    built_with: Built with Jekyll.
+  search:
+    heading: Search Posts
+    placeholder: Type keywords...
+    no_results: No matching posts.
+  post:
+    published_on: Published on
+    toc: Table of Contents
+    lang_banner: "This post is written in {lang}. Switch to {alt_lang} version of the site or use your browser's translate feature."
+    lang_label_zh: Chinese
+    lang_label_en: English
+    lang_label_ja: Japanese
+  tags:
+    heading: Tag Cloud
+  not_found:
+    title: Page Not Found
+    body: The page you're looking for doesn't exist.
+    home: Back to home
+
+zh:
+  site_description: 一个热爱技术的开发者的个人博客。
+  nav:
+    about: 关于
+    projects: 项目
+    tags: 标签
+    search: 搜索
+    menu_toggle_aria: 切换菜单
+    theme_toggle_aria: 切换主题
+    lang_switcher_aria: 切换语言
+  footer:
+    built_with: Built with Jekyll.
+  search:
+    heading: 搜索文章
+    placeholder: 输入关键词搜索…
+    no_results: 没有找到相关文章。
+  post:
+    published_on: 发布于
+    toc: 目录
+    lang_banner: "本文为 {lang} 撰写。可切换到 {alt_lang} 站点，或使用浏览器自带的翻译功能。"
+    lang_label_zh: 中文
+    lang_label_en: 英文
+    lang_label_ja: 日文
+  tags:
+    heading: 标签云
+  not_found:
+    title: 页面不存在
+    body: 你访问的页面不在。
+    home: 回到首页
+
+ja:
+  site_description: テクノロジー好き開発者の個人ブログ。
+  nav:
+    about: プロフィール
+    projects: プロジェクト
+    tags: タグ
+    search: 検索
+    menu_toggle_aria: メニュー切替
+    theme_toggle_aria: ダークモード切替
+    lang_switcher_aria: 言語切替
+  footer:
+    built_with: Built with Jekyll.
+  search:
+    heading: 記事を検索
+    placeholder: キーワードを入力…
+    no_results: 該当する記事はありません。
+  post:
+    published_on: 公開日
+    toc: 目次
+    lang_banner: "この記事は{lang}で書かれています。{alt_lang}版サイトに切り替えるか、ブラウザの翻訳機能をご利用ください。"
+    lang_label_zh: 中国語
+    lang_label_en: 英語
+    lang_label_ja: 日本語
+  tags:
+    heading: タグクラウド
+  not_found:
+    title: ページが見つかりません
+    body: お探しのページは存在しません。
+    home: ホームへ戻る

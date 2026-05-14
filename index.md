@@ -1,14 +1,16 @@
 ---
 layout: default
-title: 首页
+title: Home
+lang: en
+permalink: /
 ---
 
 <div class="hero-section">
     <div class="hero-content">
-        <h1>👋 你好，我是不太会武功的功夫熊猫</h1>
-        <p>一个热爱技术的开发者，专注于分享编程经验和学习心得</p>
+        <h1>👋 Hi, I'm Kungfu Panda — only without the kungfu.</h1>
+        <p>A developer who loves technology. I write about programming, tools, and the rabbit holes in between.</p>
         <div class="hero-links">
-            <a href="/about" class="cta-button">了解更多 →</a>
+            <a href="/about/" class="cta-button">Learn more →</a>
             <a href="https://github.com/kanfu-panda" class="github-link">
                 <i class="fab fa-github"></i> GitHub
             </a>
@@ -18,12 +20,13 @@ title: 首页
 
 <div class="content-section">
     <div class="recent-posts">
-        <h2>📝 最新文章</h2>
+        <h2>📝 Recent Posts</h2>
         <div class="post-grid">
-            {% for post in site.posts limit:6 %}
+            {% assign all_posts = site.posts_all | default: site.posts %}
+            {% for post in all_posts limit:6 %}
             <div class="post-card">
                 <div class="post-content">
-                    <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+                    <h3><a href="{{ post.url }}">{{ post.title }}</a>{% if post.lang and post.lang != page.lang %}<span class="post-lang-badge">{{ post.lang | upcase }}</span>{% endif %}</h3>
                     <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 100 }}</p>
                     <div class="post-meta">
                         <span class="post-date">{{ post.date | date: "%Y-%m-%d" }}</span>
@@ -41,38 +44,24 @@ title: 首页
         </div>
     </div>
 
-    <div class="categories-section">
-        <h2>🏷️ 文章分类</h2>
-        <div class="categories-grid">
-            {% assign categories = site.categories | sort %}
-            {% for category in categories %}
-            <div class="category-card">
-                <h3>{{ category[0] }}</h3>
-                <p>{{ category[1].size }} 篇文章</p>
-                <a href="/tags/#{{ category[0] | slugify }}" class="category-link">浏览全部 →</a>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-
     <div class="about-section">
-        <h2>👨‍💻 关于我</h2>
+        <h2>👨‍💻 About me</h2>
         <div class="about-grid">
             <div class="about-card">
-                <h3>🔭 研究方向</h3>
-                <p>Web开发、人工智能、云原生技术</p>
+                <h3>🔭 Focus</h3>
+                <p>Web development, AI engineering, cloud-native tooling.</p>
             </div>
             <div class="about-card">
-                <h3>🌱 正在学习</h3>
-                <p>TypeScript、React、DevOps</p>
+                <h3>🌱 Currently learning</h3>
+                <p>Rust + Tauri internals, terminal protocols, reliable AI tool-calling.</p>
             </div>
             <div class="about-card">
-                <h3>👯 期待合作</h3>
-                <p>开源项目、技术交流、知识分享</p>
+                <h3>👯 Open to collaborate on</h3>
+                <p>Open-source projects, terminal/AI tooling, technical writing.</p>
             </div>
             <div class="about-card">
-                <h3>💬 专业领域</h3>
-                <p>Python、JavaScript、微服务架构</p>
+                <h3>💬 Tech stack</h3>
+                <p>Python, TypeScript / JavaScript, Rust, React, Tauri 2.</p>
             </div>
         </div>
     </div>

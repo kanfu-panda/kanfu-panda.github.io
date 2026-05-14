@@ -1,11 +1,14 @@
 ---
 layout: null
+permalink: /search.json
 ---
+{%- assign all_posts = site.posts_all | default: site.posts -%}
 [
-  {% for post in site.posts %}
+  {% for post in all_posts %}
     {
       "title"    : "{{ post.title | escape }}",
       "url"      : "{{ site.baseurl }}{{ post.url }}",
+      "lang"     : "{{ post.lang | default: '' }}",
       "category" : "{{ post.category }}",
       "tags"     : "{{ post.tags | join: ', ' }}",
       "date"     : "{{ post.date | date: '%Y-%m-%d' }}",
