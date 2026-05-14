@@ -1,0 +1,24 @@
+---
+layout: default
+title: Projects
+permalink: /projects/
+lang: en
+---
+
+# Projects
+
+A selection of personal projects and open-source contributions. Each one is part of an ongoing exploration.
+
+## aitm
+- **Stack**: Tauri 2 + React 19 + Rust + TypeScript
+- **Summary**: A macOS desktop terminal app that puts AI capabilities directly into the terminal — multi-tab PTY + AI sidebar + tool-calling loop. The AI can read files, search command history, and run commands on demand, with explicit confirmation for any high-risk action.
+- **Learn more**: [aitm product page](/aitm/)
+
+## This blog
+- **Stack**: Jekyll, GitHub Pages
+- **Summary**: This very site. Pure static, built with Jekyll, hosted on GitHub Pages.
+- **Source**: [GitHub](https://github.com/kanfu-panda/kanfu-panda.github.io)
+
+## More to come...
+
+If any of these projects spark a thought, feel free to reach out.

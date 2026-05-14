@@ -2,6 +2,7 @@
 layout: default
 title: 关于我
 permalink: /about/
+lang: zh
 ---
 
 # 关于我

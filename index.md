@@ -1,16 +1,16 @@
 ---
 layout: default
-title: 首页
-lang: zh
+title: Home
+lang: en
 permalink: /
 ---
 
 <div class="hero-section">
     <div class="hero-content">
-        <h1>👋 你好，我是不太会武功的功夫熊猫</h1>
-        <p>一个热爱技术的开发者，专注于分享编程经验和学习心得</p>
+        <h1>👋 Hi, I'm Kungfu Panda — only without the kungfu.</h1>
+        <p>A developer who loves technology. I write about programming, tools, and the rabbit holes in between.</p>
         <div class="hero-links">
-            <a href="/zh/about/" class="cta-button">了解更多 →</a>
+            <a href="/about/" class="cta-button">Learn more →</a>
             <a href="https://github.com/kanfu-panda" class="github-link">
                 <i class="fab fa-github"></i> GitHub
             </a>
@@ -20,7 +20,7 @@ permalink: /
 
 <div class="content-section">
     <div class="recent-posts">
-        <h2>📝 最新文章</h2>
+        <h2>📝 Recent Posts</h2>
         <div class="post-grid">
             {% assign all_posts = site.posts_all | default: site.posts %}
             {% for post in all_posts limit:6 %}
@@ -33,7 +33,7 @@ permalink: /
                         {% if post.tags %}
                         <span class="post-tags">
                             {% for tag in post.tags limit:2 %}
-                            <a href="/zh/tags/#{{ tag | slugify }}" class="tag">{{ tag }}</a>
+                            <a href="/tags/#{{ tag | slugify }}" class="tag">{{ tag }}</a>
                             {% endfor %}
                         </span>
                         {% endif %}
@@ -45,23 +45,23 @@ permalink: /
     </div>
 
     <div class="about-section">
-        <h2>👨‍💻 关于我</h2>
+        <h2>👨‍💻 About me</h2>
         <div class="about-grid">
             <div class="about-card">
-                <h3>🔭 研究方向</h3>
-                <p>Web 开发、AI 工程、云原生工具链。</p>
+                <h3>🔭 Focus</h3>
+                <p>Web development, AI engineering, cloud-native tooling.</p>
             </div>
             <div class="about-card">
-                <h3>🌱 正在学习</h3>
-                <p>Rust + Tauri 内部机制、终端协议、可靠的 AI 工具调用。</p>
+                <h3>🌱 Currently learning</h3>
+                <p>Rust + Tauri internals, terminal protocols, reliable AI tool-calling.</p>
             </div>
             <div class="about-card">
-                <h3>👯 期待合作</h3>
-                <p>开源项目、终端 / AI 工具、技术写作。</p>
+                <h3>👯 Open to collaborate on</h3>
+                <p>Open-source projects, terminal/AI tooling, technical writing.</p>
             </div>
             <div class="about-card">
-                <h3>💬 技术栈</h3>
-                <p>Python、TypeScript / JavaScript、Rust、React、Tauri 2。</p>
+                <h3>💬 Tech stack</h3>
+                <p>Python, TypeScript / JavaScript, Rust, React, Tauri 2.</p>
             </div>
         </div>
     </div>

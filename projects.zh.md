@@ -2,6 +2,7 @@
 layout: default
 title: 项目展示
 permalink: /projects/
+lang: zh
 ---
 
 # 项目展示
