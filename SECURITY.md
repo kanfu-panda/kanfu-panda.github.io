@@ -27,15 +27,15 @@
 
 ## 第三方资产清单
 
-每条记录：URL（带版本）+ SRI 哈希 + 用途 + 升级时机。
+清单中的 URL 与 SRI 必须与 `_layouts/default.html` 和 `search.md` 中的实际引用**完全一致**。审计或升级时请直接比对。
 
-| 资产 | 版本 | SRI sha384 | 用途 |
-|---|---|---|---|
-| `cdn.jsdelivr.net/npm/gitalk/dist/gitalk.css` | 1.8.0 | `X7z7PUv2B67D8sPJyzDyGZSco1ADwmdI7ed4eCGtTKkClfyDFpPL9WgAn9XVr/Io` | 评论组件样式 |
-| `cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js` | 1.8.0 | `kspnZUWBoSWwoJHa0hBCXYbHGbhvU/lcEH5O8eVbSDhbPwsiVUTp/aGX/z/5EuMA` | 评论组件 |
-| `cdnjs.cloudflare.com/.../font-awesome/css/all.min.css` | 5.15.4 | `DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm` | 图标字体 |
-| `cdn.jsdelivr.net/npm/marked/marked.min.js` | 12.0.2 | `/TQbtLCAerC3jgaim+N78RZSDYV7ryeoBCVqTuzRrFec2akfBkHS7ACQ3PQhvMVi` | 文章页生成 TOC |
-| `cdn.jsdelivr.net/npm/simple-jekyll-search/.../simple-jekyll-search.min.js` | 1.10.0 | `UN+lyciv8Ta643YxZ9sY2tdTSmk3KE61Qq84ZIXG9NRTbD9+NFXy38m9h6Exxx3n` | 客户端搜索 |
+| 完整 URL | SRI sha384 | 用途 |
+|---|---|---|
+| `https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.css` | `X7z7PUv2B67D8sPJyzDyGZSco1ADwmdI7ed4eCGtTKkClfyDFpPL9WgAn9XVr/Io` | 评论组件样式 |
+| `https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.js` | `kspnZUWBoSWwoJHa0hBCXYbHGbhvU/lcEH5O8eVbSDhbPwsiVUTp/aGX/z/5EuMA` | 评论组件 |
+| `https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css` | `DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm` | 图标字体 |
+| `https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js` | `/TQbtLCAerC3jgaim+N78RZSDYV7ryeoBCVqTuzRrFec2akfBkHS7ACQ3PQhvMVi` | 文章页生成 TOC |
+| `https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js` | `UN+lyciv8Ta643YxZ9sY2tdTSmk3KE61Qq84ZIXG9NRTbD9+NFXy38m9h6Exxx3n` | 客户端搜索 |
 
 ### 升级第三方资产的步骤
 
