@@ -1,6 +1,5 @@
 name: Jekyll site CI
 
-# 触发条件
 on:
   push:
     branches: [ main ]
@@ -10,203 +9,145 @@ on:
       - '.gitignore'
   pull_request:
     branches: [ main ]
-  # 允许手动触发
   workflow_dispatch:
 
-# 设置权限
 permissions:
   contents: read
   pages: write
   id-token: write
 
+concurrency:
+  group: pages-${{ github.workflow }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    
-    # 添加并发限制，防止同时运行多个相同的工作流
-    concurrency:
-      group: pages-${{ github.workflow }}
-      cancel-in-progress: true
-    
-    # 设置全局环境变量
     env:
       JEKYLL_ENV: production
       GA_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
       GITALK_ID: ${{ secrets.GITALK_CLIENT_ID }}
       GITALK_SECRET: ${{ secrets.GITALK_CLIENT_SECRET }}
-      
+
     steps:
     - uses: actions/checkout@v4
+
+    - name: 密钥扫描规则自检（防止规则本身回归）
+      run: bash scripts/scan-secrets.sh --self-test
+
+    - name: 密钥扫描（防止误提交）
+      run: bash scripts/scan-secrets.sh
 
     - name: 设置 Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '3.2'
+        ruby-version-file: .ruby-version
         bundler-cache: true
 
     - name: 设置页面缓存
       uses: actions/configure-pages@v3
-    
+
     - name: 安装依赖
-      run: |
-        bundle install
+      run: bundle install
 
-    - name: 验证 Secrets
+    - name: 检查 Secrets（缺失则降级，不再硬失败）
+      id: secrets_check
       run: |
-        echo "检查必需的 Secrets 配置："
-        echo "----------------------------------------"
-        if [ -n "$GA_ID" ]; then
-          echo "✓ GOOGLE_ANALYTICS_ID    : 已配置 (长度: ${#GA_ID})"
+        # fork PR 拿不到 secrets，正常 push 才有。
+        # 缺失时跳过相关组件注入，让构建仍然成功。
+        SECRETS_OK=true
+        if [ -z "$GA_ID" ]; then
+          echo "::warning::GOOGLE_ANALYTICS_ID 未配置，将跳过统计脚本注入"
+          SECRETS_OK=false
         else
-          echo "✗ GOOGLE_ANALYTICS_ID    : 未配置"
+          echo "✓ GOOGLE_ANALYTICS_ID 已配置 (长度: ${#GA_ID})"
         fi
-        if [ -n "$GITALK_ID" ]; then
-          echo "✓ GITALK_CLIENT_ID      : 已配置 (长度: ${#GITALK_ID})"
+        if [ -z "$GITALK_ID" ] || [ -z "$GITALK_SECRET" ]; then
+          echo "::warning::评论组件凭证未配置，将跳过其注入"
+          SECRETS_OK=false
         else
-          echo "✗ GITALK_CLIENT_ID      : 未配置"
+          echo "✓ 评论组件凭证已配置 (ID 长度: ${#GITALK_ID}, SECRET 长度: ${#GITALK_SECRET})"
         fi
-        if [ -n "$GITALK_SECRET" ]; then
-          echo "✓ GITALK_CLIENT_SECRET  : 已配置 (长度: ${#GITALK_SECRET})"
-        else
-          echo "✗ GITALK_CLIENT_SECRET  : 未配置"
-        fi
-        echo "----------------------------------------"
-        
-        # 额外验证
-        echo "验证 Secrets 的有效性..."
-        for var in "$GA_ID" "$GITALK_ID" "$GITALK_SECRET"; do
-          if [ ${#var} -lt 5 ]; then
-            echo "❌ 警告：发现无效的 Secret (长度小于 5)"
-            exit 1
-          fi
-        done
+        echo "secrets_ok=$SECRETS_OK" >> "$GITHUB_OUTPUT"
 
-        if [ -z "$GA_ID" ] || [ -z "$GITALK_ID" ] || [ -z "$GITALK_SECRET" ]; then
-          echo "❌ 警告：一个或多个必需的 secrets 未配置或为空"          exit 1
-        else
-          echo "✓ 所有必需的 secrets 已配置且有效"
-        fi
-
-    - name: 创建密钥配置
+    - name: 创建密钥配置（只写已配置的字段，避免空值进 HTML）
       run: |
-        # 删除现有的配置文件（如果存在）
         rm -f _config_secrets.yml
-        
-        # 创建新的配置文件
-        cat > _config_secrets.yml << EOF
-        # Auto-generated secrets configuration
-        google_analytics: $GA_ID
-        gitalk:
-          clientID: $GITALK_ID
-          clientSecret: $GITALK_SECRET
-        EOF
-        # 验证生成的文件内容
-        echo "生成的配置文件内容:"
-        cat _config_secrets.yml
-        
-        # 验证配置文件是否正确生成
-        echo "验证 _config_secrets.yml 文件结构:"
-        if [ -f _config_secrets.yml ]; then
-          echo "✓ 配置文件创建成功"
-          echo "----------------------------------------"
-          echo "文件结构:"
-          cat _config_secrets.yml | grep -v "clientID\|clientSecret\|google_analytics"
-          # 完整性检查
-          # 验证所有配置
-          echo "验证配置文件内容:"
-          echo "----------------------------------------"
-          echo "Google Analytics 配置:"
-          GA_LINE=$(grep "^google_analytics:" _config_secrets.yml)
-          if [[ "$GA_LINE" == "google_analytics: $GA_ID" ]]; then
-            echo "✓ Google Analytics ID 已正确写入"
-          else
-            echo "✗ Google Analytics ID 写入失败"
-            echo "预期值: google_analytics: $GA_ID"
-            echo "当前值: $GA_LINE"
-            exit 1
+        {
+          echo "# Auto-generated secrets configuration (DO NOT COMMIT)"
+          if [ -n "$GA_ID" ]; then
+            echo "google_analytics: $GA_ID"
           fi
-
-          echo "----------------------------------------"
-          echo "Gitalk 配置:"
-          if grep -q "^gitalk:$" _config_secrets.yml && 
-             grep -q "^  clientID: $GITALK_ID$" _config_secrets.yml &&
-             grep -q "^  clientSecret: $GITALK_SECRET$" _config_secrets.yml; then
-            echo "✓ Gitalk 配置已正确写入"
-          else
-            echo "✗ Gitalk 配置写入失败"
-            echo "当前 Gitalk 配置内容:"
-            sed -n '/^gitalk:/,/^[^ ]/p' _config_secrets.yml
-            exit 1
+          if [ -n "$GITALK_ID" ] && [ -n "$GITALK_SECRET" ]; then
+            echo "gitalk:"
+            echo "  clientID: $GITALK_ID"
+            echo "  clientSecret: $GITALK_SECRET"
           fi
-        else
-          echo "✗ 配置文件创建失败"
-          exit 1
-        fi
+        } > _config_secrets.yml
+        echo "_config_secrets.yml 结构（敏感值已隐去）:"
+        sed -E 's/(clientID|clientSecret|google_analytics):.*/\1: ***REDACTED***/' _config_secrets.yml
 
     - name: 构建站点
       run: |
-        echo "验证 Jekyll 配置..."
-        echo "----------------------------------------"
-        echo "环境变量:"
         echo "JEKYLL_ENV: $JEKYLL_ENV"
-        echo "----------------------------------------"
-        echo "合并配置文件:"
-        echo " - _config.yml"
-        echo " - _config_secrets.yml"
-        echo "----------------------------------------"
-        # 尝试构建
-        if bundle exec jekyll build --config _config.yml,_config_secrets.yml --verbose --trace; then
-          echo "✓ 构建成功"
-          echo "----------------------------------------"
-          echo "验证生成的文件..."
-          if grep -r "gtag('config'" _site/ >/dev/null; then
-            echo "✓ Google Analytics 代码已正确注入"
-            GA_FOUND=true
-          else
-            echo "✗ 未找到 Google Analytics 代码"
-            GA_FOUND=false
-          fi
+        bundle exec jekyll build --config _config.yml,_config_secrets.yml --trace
 
-          if grep -r "gitalk.render" _site/ >/dev/null; then
-            echo "✓ Gitalk 代码已正确注入"
-            GITALK_FOUND=true
-          else
-            echo "✗ 未找到 Gitalk 代码"
-            GITALK_FOUND=false
-          fi
-          
-          if [ "$GA_FOUND" = true ] && [ "$GITALK_FOUND" = true ]; then
-            echo "✓ 所有配置已正确注入"
-          else
-            echo "✗ 部分配置可能未正确注入"
-            exit 1
-          fi
-          echo "----------------------------------------"
+    - name: 验证构建产物（CSP / SRI / 条件注入）
+      run: |
+        FAIL=0
+        # 1. CSP 必须存在
+        if grep -q "Content-Security-Policy" _site/index.html; then
+          echo "✓ CSP meta 已注入"
         else
-          echo "✗ 构建失败"
-          echo "检查构建错误（已隐藏敏感值）:"
-          bundle exec jekyll build --config _config.yml,_config_secrets.yml --trace --verbose | grep -v "clientID\|clientSecret\|google_analytics"
-          exit 1
+          echo "::error::CSP meta 缺失"; FAIL=1
         fi
-    
+        # 2. SRI 必须存在（任一 integrity 即可）
+        if grep -q 'integrity="sha384-' _site/index.html; then
+          echo "✓ SRI integrity 已注入"
+        else
+          echo "::error::SRI integrity 缺失"; FAIL=1
+        fi
+        # 3. 不允许出现 @latest（防回归）；仅扫描产物中的 HTML / JS / CSS
+        if grep -rln --include='*.html' --include='*.js' --include='*.css' \
+             'cdn.jsdelivr.net/npm/[^"]*@latest' _site/ ; then
+          echo "::error::发现 @latest 引用，必须锁定具体版本"; FAIL=1
+        else
+          echo "✓ 未发现 @latest"
+        fi
+        # 4. 条件注入：仅在 secrets 完备时验证组件已注入
+        if [ "${{ steps.secrets_check.outputs.secrets_ok }}" = "true" ]; then
+          grep -rq "gtag('config'" _site/ \
+            && echo "✓ 统计脚本已注入" \
+            || { echo "::error::统计脚本未注入但 secrets 完备"; FAIL=1; }
+          grep -rq "gitalk.render" _site/ \
+            && echo "✓ 评论组件已注入" \
+            || { echo "::error::评论组件未注入但 secrets 完备"; FAIL=1; }
+        else
+          echo "（secrets 不完整，跳过组件注入验证）"
+        fi
+        [ $FAIL -eq 0 ] || exit 1
+
     - name: 上传构建产物
       uses: actions/upload-pages-artifact@v3
       with:
         path: ./_site
 
     - name: 清理缓存
+      if: always()
       run: bundle clean --force
-      if: always()  # 即使前面步骤失败也执行
 
-    # 部署到 GitHub Pages
-    - name: 部署到 GitHub Pages
-      id: deployment  # 添加 id 以便引用输出
-      if: github.ref == 'refs/heads/main'
-      uses: actions/deploy-pages@v4
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        timeout: 600000  # 10分钟超时
-    
+  # 部署仅在 main 分支触发，独立 job 携带 environment（避免 PR 触发时被环境保护规则拒绝）
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+    - name: 部署到 GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        timeout: 600000

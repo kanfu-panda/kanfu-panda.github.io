@@ -13,7 +13,9 @@ permalink: /search/
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@latest/dest/simple-jekyll-search.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js"
+        integrity="sha384-UN+lyciv8Ta643YxZ9sY2tdTSmk3KE61Qq84ZIXG9NRTbD9+NFXy38m9h6Exxx3n"
+        crossorigin="anonymous"></script>
 <script>
 SimpleJekyllSearch({
     searchInput: document.getElementById('search-input'),
