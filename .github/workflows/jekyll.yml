@@ -32,6 +32,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: 密钥扫描规则自检（防止规则本身回归）
+      run: bash scripts/scan-secrets.sh --self-test
+
     - name: 密钥扫描（防止误提交）
       run: bash scripts/scan-secrets.sh
 
