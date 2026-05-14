@@ -82,4 +82,4 @@ curl -sL "https://cdn.jsdelivr.net/npm/${PKG}@${VER}/dist/${PKG}.min.js" \
 
 ## 报告漏洞
 
-发现安全问题请发送到 `slbluefox@gmail.com`，标题前缀 `[SECURITY]`。请勿在 GitHub Issues 中公开披露。
+发现安全问题请通过站点 [关于页面](https://kanfu-panda.github.io/about/) 中的"联系我"渠道私下告知，标题前缀建议带 `[SECURITY]`。请勿在 GitHub Issues 中公开披露。
