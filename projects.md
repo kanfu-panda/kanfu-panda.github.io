@@ -14,6 +14,11 @@ A selection of personal projects and open-source contributions. Each one is part
 - **Summary**: A macOS desktop terminal app that puts AI capabilities directly into the terminal — multi-tab PTY + AI sidebar + tool-calling loop. The AI can read files, search command history, and run commands on demand, with explicit confirmation for any high-risk action.
 - **Learn more**: [aitm product page](/aitm/)
 
+## PDLC
+- **Stack**: Claude Code plugin (Bash + Markdown templates), MIT license
+- **Summary**: A Claude Code plugin that turns AI-assisted development from soft conventions into hard contracts — 31 standardized stages exposed as slash commands, persisted artifacts under `docs/`, per-feature state machine, mandatory tests-before-code, one-shot auto-repair.
+- **Learn more**: [PDLC product page](/pdlc/) · [GitHub](https://github.com/kanfu-panda/pdlc-skills)
+
 ## This blog
 - **Stack**: Jekyll, GitHub Pages
 - **Summary**: This very site. Pure static, built with Jekyll, hosted on GitHub Pages.
