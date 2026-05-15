@@ -86,6 +86,7 @@
                         <a href="{% if lang == site.default_lang %}/projects/{% else %}/{{ lang }}/projects/{% endif %}" class="nav-dropdown-toggle" aria-haspopup="true">{{ t.nav.projects }}<span class="caret" aria-hidden="true">▾</span></a>
                         <div class="nav-dropdown-menu" role="menu">
                             <a href="{% if lang == site.default_lang %}/aitm/{% else %}/{{ lang }}/aitm/{% endif %}" role="menuitem">aitm</a>
+                            <a href="{% if lang == site.default_lang %}/pdlc/{% else %}/{{ lang }}/pdlc/{% endif %}" role="menuitem">PDLC</a>
                         </div>
                     </div>
                     <a href="{% if lang == site.default_lang %}/tags/{% else %}/{{ lang }}/tags/{% endif %}">{{ t.nav.tags }}</a>

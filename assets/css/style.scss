@@ -898,11 +898,38 @@ a:hover {
         }
 
         p {
-            margin: 0;
+            margin: 0 0 0.5rem;
             color: var(--text-color);
             opacity: 0.8;
             font-size: 0.9rem;
             line-height: 1.6;
+        }
+
+        /* 卡片内代码块：长命令允许横向滚动，不撑破相邻卡片 */
+        pre {
+            max-width: 100%;
+            overflow-x: auto;
+            background: var(--secondary-bg);
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.82rem;
+            line-height: 1.5;
+            margin: 0.5rem 0 0;
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+            white-space: pre;
+            word-break: normal;
+        }
+
+        /* 卡片内联代码 */
+        code {
+            background: var(--secondary-bg);
+            padding: 0.1rem 0.35rem;
+            border-radius: 3px;
+            font-size: 0.85em;
         }
     }
 }
