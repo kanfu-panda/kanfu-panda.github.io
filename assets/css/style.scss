@@ -308,9 +308,12 @@ html[lang^="zh"] body {
         top: 100%;
         left: 0;
         right: 0;
-        background: var(--bg-color);
+        /* 显式 background-color + var fallback，避免在某些浏览器或 cache 状态下背景透明，导致菜单字与下方内容叠加看不清 */
+        background-color: var(--bg-color, #ffffff);
         padding: 1rem;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        /* 确保展开面板压在 hero / 内容之上 */
+        z-index: 1000;
 
         &.active {
             display: block;
@@ -321,6 +324,11 @@ html[lang^="zh"] body {
             margin: 1rem 0;
             text-align: center;
         }
+    }
+
+    /* 暗色模式下显式覆盖，更稳 */
+    [data-theme="dark"] .nav-links {
+        background-color: var(--bg-color, #0d1117);
     }
 
     /* 移动端：下拉项展平为缩进列表，去掉 hover 弹层 */
