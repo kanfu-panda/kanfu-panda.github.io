@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./joystick.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="robots" content="index,follow" />
+
+    <!--
+      内容安全策略（CSP）：本应用与博客主站完全分离，独立 CSP。
+
+      关于 'unsafe-eval'：EmulatorJS 内部的 cores（RetroArch 移植，Emscripten 老版本编译）
+      使用 eval() / new Function()，没有 'unsafe-eval' 模拟器无法启动。
+      额外风险评估：本应用无后端、无 cookie/session、不接收用户数据外传，
+      'unsafe-eval' 实际能允许的只是 cdn.emulatorjs.org 与 blob: 来源的代码执行，
+      与"不加 CSP"相比仍有显著收敛，可接受。
+
+      frame-ancestors 只能通过 HTTP header 生效，meta 里浏览器忽略 —— 不再设置。
+      GitHub Pages 不支持自定义 header，被 iframe 套壳的风险通过 JS 自检兜底。
+    -->
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-eval' 'wasm-unsafe-eval' https://cdn.emulatorjs.org blob:;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.emulatorjs.org;
+      font-src 'self' https://fonts.gstatic.com data:;
+      img-src 'self' data: blob:;
+      media-src 'self' blob:;
+      connect-src 'self' https://cdn.emulatorjs.org blob: data:;
+      worker-src 'self' blob:;
+      child-src blob:;
+      base-uri 'self';
+      form-action 'none';
+      object-src 'none';
+    " />
+
+    <title>街机模拟器</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="/arcade/play/assets/index-Wg0S3G0W.js"></script>
+    <link rel="stylesheet" crossorigin href="/arcade/play/assets/index-8YUu97cm.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
