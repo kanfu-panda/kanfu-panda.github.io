@@ -22,8 +22,10 @@ permalink: /
     <div class="recent-posts">
         <h2>📝 最新文章</h2>
         <div class="post-grid">
+            {% assign current_lang = page.lang | default: site.default_lang %}
             {% assign all_posts = site.posts_all | default: site.posts %}
-            {% for post in all_posts limit:6 %}
+            {% assign filtered_posts = all_posts | where_exp: "p", "p.lang == current_lang" %}
+            {% for post in filtered_posts limit:6 %}
             <div class="post-card">
                 <div class="post-content">
                     <h3><a href="{{ post.url }}">{{ post.title }}</a>{% if post.lang and post.lang != page.lang %}<span class="post-lang-badge">{{ post.lang | upcase }}</span>{% endif %}</h3>
