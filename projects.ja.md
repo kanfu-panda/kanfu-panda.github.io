@@ -22,7 +22,7 @@ lang: ja
 ## arcade
 - **技術スタック**：React + Vite + EmulatorJS（WASM）
 - **概要**：ブラウザで動くアーケードエミュレータ。ローカルファイルをご自身で読み込む方式で、すべてブラウザの WASM サンドボックス内で実行されます — サーバーへは何もアップロードされません。⚠️ 個人的な娯楽、合法な用途に限ります。
-- **試遊**：[arcade を起動](/arcade/){:target="_blank"}
+- **詳細**：[arcade 製品ページ](/ja/arcade/)
 
 ## このブログ
 - **技術スタック**：Jekyll、GitHub Pages

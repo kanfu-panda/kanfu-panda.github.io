@@ -22,7 +22,7 @@ A selection of personal projects and open-source contributions. Each one is part
 ## arcade
 - **Stack**: React + Vite + EmulatorJS (WASM)
 - **Summary**: A browser-based arcade emulator. Bring your own local files; everything runs inside the browser's WASM sandbox — nothing is uploaded to the server. ⚠️ For personal entertainment, lawful use only.
-- **Try it**: [launch arcade](/arcade/){:target="_blank"}
+- **Learn more**: [arcade page](/arcade/)
 
 ## This blog
 - **Stack**: Jekyll, GitHub Pages

@@ -21,7 +21,7 @@ set -euo pipefail
 # 配置
 ARCADE_SRC="${ARCADE_SRC:-$HOME/projects/arcade_emulator}"
 BLOG_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-ARCADE_DEST="$BLOG_ROOT/arcade"
+ARCADE_DEST="$BLOG_ROOT/arcade/play"
 
 # 颜色
 RED='\033[31m'; GREEN='\033[32m'; YELLOW='\033[33m'; NC='\033[0m'
@@ -99,5 +99,5 @@ echo "   文件："
 find "$ARCADE_DEST" -type f | sed "s|$ARCADE_DEST/|     |"
 echo
 echo "下一步："
-echo "   1. 浏览器测试 http://localhost:4173/arcade/（先跑 bundle exec jekyll serve）"
+echo "   1. 浏览器测试 http://127.0.0.1:4000/arcade/play/（先跑 bundle exec jekyll serve）"
 echo "   2. git add arcade/ && git commit -m 'feat(arcade): 同步 arcade vX.Y.Z'"
