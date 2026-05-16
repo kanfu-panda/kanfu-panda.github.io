@@ -22,7 +22,7 @@ lang: zh
 ## arcade
 - **技术栈**：React + Vite + EmulatorJS（WASM）
 - **描述**：浏览器里跑的街机模拟器。本地文件自传，全程在浏览器的 WASM 沙箱里运行，不上传任何东西到服务器。⚠️ 仅供个人娱乐，合法用途。
-- **试玩**：[启动 arcade](/arcade/){:target="_blank"}
+- **了解更多**：[arcade 产品页](/arcade/)
 
 ## 个人博客
 - **技术栈**：Jekyll, GitHub Pages

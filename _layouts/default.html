@@ -87,7 +87,7 @@
                         <div class="nav-dropdown-menu" role="menu">
                             <a href="{% if lang == site.default_lang %}/aitm/{% else %}/{{ lang }}/aitm/{% endif %}" role="menuitem">aitm</a>
                             <a href="{% if lang == site.default_lang %}/pdlc/{% else %}/{{ lang }}/pdlc/{% endif %}" role="menuitem">PDLC</a>
-                            <a {% static_href %}href="/arcade/"{% endstatic_href %} role="menuitem">arcade</a>
+                            <a href="{% if lang == site.default_lang %}/arcade/{% else %}/{{ lang }}/arcade/{% endif %}" role="menuitem">arcade</a>
                         </div>
                     </div>
                     <a href="{% if lang == site.default_lang %}/tags/{% else %}/{{ lang }}/tags/{% endif %}">{{ t.nav.tags }}</a>
