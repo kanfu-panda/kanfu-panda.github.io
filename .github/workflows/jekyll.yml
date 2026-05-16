@@ -133,7 +133,7 @@ jobs:
         fi
         # 5.1 多语言（i18n）3 套页面齐全
         for lang_path in "" "zh/" "ja/"; do
-          for page in "" "about/" "aitm/" "projects/" "search/" "tags/"; do
+          for page in "" "about/" "aitm/" "arcade/" "projects/" "search/" "tags/"; do
             file="_site/${lang_path}${page}index.html"
             if [ -f "$file" ]; then
               echo "✓ /${lang_path}${page}"
@@ -179,6 +179,43 @@ jobs:
           echo "✓ install-aitm.sh 已部署"
         else
           echo "::error::install-aitm.sh 缺失"; FAIL=1
+        fi
+        # arcade 产品介绍页（Jekyll 渲染）
+        if [ -f _site/arcade/index.html ]; then
+          echo "✓ arcade 产品介绍页已渲染"
+        else
+          echo "::error::arcade 介绍页缺失（_site/arcade/index.html）"; FAIL=1
+        fi
+        # arcade 工具 SPA：/arcade/play/，必须存在、体积合理、绝对无 BIOS / ROM 残留
+        if [ -f _site/arcade/play/index.html ]; then
+          echo "✓ arcade 工具 SPA 已部署"
+          ARCADE_KB=$(du -sk _site/arcade/play | awk '{print $1}')
+          if [ "$ARCADE_KB" -gt 5120 ]; then
+            echo "::error::arcade/play/ 体积异常: ${ARCADE_KB} KB（应 < 5 MB；可能误带二进制核心）"; FAIL=1
+          else
+            echo "✓ arcade/play/ 体积合理: ${ARCADE_KB} KB"
+          fi
+          # 红线：禁止任何 BIOS / ROM 类二进制
+          ARCADE_BANNED=$(find _site/arcade/play -type f \( \
+            -name '*.zip' -o \
+            -name '*.bios' -o \
+            -name 'neogeo*' -o \
+            -name 'scph*.bin' -o \
+            -name 'gba_bios*' \
+          \) 2>/dev/null || true)
+          if [ -n "$ARCADE_BANNED" ]; then
+            echo "::error::arcade/play/ 检测到禁止的 BIOS / ROM 类文件："; echo "$ARCADE_BANNED"; FAIL=1
+          else
+            echo "✓ arcade/play/ 无 BIOS / ROM 残留"
+          fi
+          # arcade 工具自带独立 CSP
+          if grep -q "Content-Security-Policy" _site/arcade/play/index.html; then
+            echo "✓ arcade 工具独立 CSP 已注入"
+          else
+            echo "::error::arcade/play/index.html 缺独立 CSP"; FAIL=1
+          fi
+        else
+          echo "::error::arcade 工具 SPA 缺失（_site/arcade/play/index.html）"; FAIL=1
         fi
         # aitm 自动更新清单（latest.json）：version 字段必须与实际 dmg 版本号匹配
         if [ -f _site/assets/aitm/latest.json ]; then

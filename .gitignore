@@ -38,6 +38,9 @@ nbproject/
 .env.local
 .env.*.local
 
+# 私有设计稿、威胁模型、未公开方案、BIOS 备份等（绝不入仓）
+.private/
+
 # 安装文件
 rubyinstaller.exe
 *.exe

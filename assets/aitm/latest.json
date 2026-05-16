@@ -1,5 +1,5 @@
 {
-  "version": "0.5.4",
-  "download_url": "https://kanfu-panda.github.io/assets/downloads/aitm_0.5.4_aarch64.dmg",
-  "notes": "Tab 跨重启持久化：关闭后重启可一键恢复多 tab 工作上下文"
+  "version": "0.5.10",
+  "download_url": "https://kanfu-panda.github.io/assets/downloads/aitm_0.5.10_aarch64.dmg",
+  "notes": "v0.5.9 真机后续 2 个体验修补。"
 }

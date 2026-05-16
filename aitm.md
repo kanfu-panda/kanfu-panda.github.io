@@ -117,16 +117,16 @@ description: aitm — a macOS desktop terminal app with AI built in. Let the AI 
 <div class="about-grid">
     <div class="about-card">
         <h3>Current version</h3>
-        <p><strong>v0.5.4</strong> · macOS Apple Silicon (aarch64) · 6.3 MB</p>
+        <p><strong>v0.5.10</strong> · macOS Apple Silicon (aarch64) · 6.4 MB</p>
         <p style="margin-top: 1rem;">
-            <a href="/assets/downloads/aitm_0.5.4_aarch64.dmg" class="cta-button" download>Download dmg →</a>
+            <a href="/assets/downloads/aitm_0.5.10_aarch64.dmg" class="cta-button" download>Download dmg →</a>
         </p>
     </div>
     <div class="about-card">
         <h3>Verify integrity (recommended)</h3>
         <p>After downloading, check the SHA256:</p>
-        <pre><code>shasum -a 256 ~/Downloads/aitm_0.5.4_aarch64.dmg</code></pre>
-        <p>It should match the <a href="/assets/downloads/aitm_0.5.4_aarch64.dmg.sha256">official checksum</a> exactly.</p>
+        <pre><code>shasum -a 256 ~/Downloads/aitm_0.5.10_aarch64.dmg</code></pre>
+        <p>It should match the <a href="/assets/downloads/aitm_0.5.10_aarch64.dmg.sha256">official checksum</a> exactly.</p>
     </div>
 </div>
 

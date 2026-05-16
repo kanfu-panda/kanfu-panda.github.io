@@ -19,6 +19,11 @@ lang: zh
 - **描述**：把 AI 辅助开发从"软规范"升级为"硬契约"的 Claude Code 插件。31 个标准化阶段作为斜杠命令暴露、产物落盘到 `docs/`、每功能一份状态机、测试先行（TDD 红灯门禁）、自动修复仅一轮。
 - **了解更多**：[PDLC 产品页](/pdlc/) · [GitHub](https://github.com/kanfu-panda/pdlc-skills)
 
+## arcade
+- **技术栈**：React + Vite + EmulatorJS（WASM）
+- **描述**：浏览器里跑的街机模拟器。本地文件自传，全程在浏览器的 WASM 沙箱里运行，不上传任何东西到服务器。⚠️ 仅供个人娱乐，合法用途。
+- **了解更多**：[arcade 产品页](/arcade/)
+
 ## 个人博客
 - **技术栈**：Jekyll, GitHub Pages
 - **描述**：这个就是当前的个人博客站点，使用 Jekyll 构建，托管在 GitHub Pages 上。
