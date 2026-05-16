@@ -12,6 +12,7 @@ default_lang: "en"
 # 这些路径所有语言共用，不参与本地化复制
 exclude_from_localization:
   - "assets/"
+  - "arcade/"      # arcade 模拟器 SPA，自带独立 CSP，三语共用同一份
   - "feed.xml"
   - "search.json"
   - "robots.txt"
