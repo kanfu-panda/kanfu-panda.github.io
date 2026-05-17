@@ -1,5 +1,5 @@
 {
-  "version": "0.6.0",
-  "download_url": "https://kanfu-panda.github.io/assets/downloads/aitm_0.6.0_aarch64.dmg",
-  "notes": "Panel 可拖拽缩放，文件预览改为浮动弹窗。"
+  "version": "0.7.0",
+  "download_url": "https://kanfu-panda.github.io/assets/downloads/aitm_0.7.0_aarch64.dmg",
+  "notes": "接入匿名使用统计（Aptabase，开源、零个人信息），用于排定后续功能优先级。"
 }

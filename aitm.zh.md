@@ -117,16 +117,16 @@ description: aitm — 一个把 AI 能力做进终端的 macOS 桌面应用。�
 <div class="about-grid">
     <div class="about-card">
         <h3>当前版本</h3>
-        <p><strong>v0.6.0</strong> · macOS Apple Silicon (aarch64) · 6.4 MB</p>
+        <p><strong>v0.7.0</strong> · macOS Apple Silicon (aarch64) · 6.6 MB</p>
         <p style="margin-top: 1rem;">
-            <a href="/assets/downloads/aitm_0.6.0_aarch64.dmg" class="cta-button" download>下载 dmg →</a>
+            <a href="/assets/downloads/aitm_0.7.0_aarch64.dmg" class="cta-button" download>下载 dmg →</a>
         </p>
     </div>
     <div class="about-card">
         <h3>校验完整性（推荐）</h3>
         <p>下载完后，请校验文件 SHA256：</p>
-        <pre><code>shasum -a 256 ~/Downloads/aitm_0.6.0_aarch64.dmg</code></pre>
-        <p>结果应与 <a href="/assets/downloads/aitm_0.6.0_aarch64.dmg.sha256">官方校验和</a> 完全一致。</p>
+        <pre><code>shasum -a 256 ~/Downloads/aitm_0.7.0_aarch64.dmg</code></pre>
+        <p>结果应与 <a href="/assets/downloads/aitm_0.7.0_aarch64.dmg.sha256">官方校验和</a> 完全一致。</p>
     </div>
 </div>
 
