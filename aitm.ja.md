@@ -117,16 +117,16 @@ description: aitm — AI を組み込んだ macOS デスクトップ向けター
 <div class="about-grid">
     <div class="about-card">
         <h3>現在のバージョン</h3>
-        <p><strong>v0.6.0</strong> · macOS Apple Silicon (aarch64) · 6.4 MB</p>
+        <p><strong>v0.7.0</strong> · macOS Apple Silicon (aarch64) · 6.6 MB</p>
         <p style="margin-top: 1rem;">
-            <a href="/assets/downloads/aitm_0.6.0_aarch64.dmg" class="cta-button" download>dmg をダウンロード →</a>
+            <a href="/assets/downloads/aitm_0.7.0_aarch64.dmg" class="cta-button" download>dmg をダウンロード →</a>
         </p>
     </div>
     <div class="about-card">
         <h3>整合性の検証（推奨）</h3>
         <p>ダウンロード後、SHA256 を確認してください：</p>
-        <pre><code>shasum -a 256 ~/Downloads/aitm_0.6.0_aarch64.dmg</code></pre>
-        <p>結果は <a href="/assets/downloads/aitm_0.6.0_aarch64.dmg.sha256">公式チェックサム</a> と完全に一致するはずです。</p>
+        <pre><code>shasum -a 256 ~/Downloads/aitm_0.7.0_aarch64.dmg</code></pre>
+        <p>結果は <a href="/assets/downloads/aitm_0.7.0_aarch64.dmg.sha256">公式チェックサム</a> と完全に一致するはずです。</p>
     </div>
 </div>
 
