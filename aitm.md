@@ -3,13 +3,13 @@ layout: default
 title: aitm
 permalink: /aitm/
 lang: en
-description: aitm — a macOS desktop terminal app with AI built in. Let the AI read your files, search command history, and run commands on demand. Every high-risk action requires your explicit confirmation.
+description: aitm — a desktop terminal app with AI built in, available for macOS and Windows. Let the AI read your files, search command history, and run commands on demand. Every high-risk action requires your explicit confirmation.
 ---
 
 <div class="hero-section">
     <div class="hero-content">
         <h1>aitm</h1>
-        <p>A macOS desktop terminal app with AI built in.</p>
+        <p>A desktop terminal app with AI built in — for macOS and Windows.</p>
         <p>Work with AI inside the terminal you already know — the AI can read files, search command history, and run commands when you ask. Every high-risk action waits for your explicit OK.</p>
         <div class="hero-links">
             <a href="#download" class="cta-button">Download now →</a>
@@ -114,23 +114,44 @@ description: aitm — a macOS desktop terminal app with AI built in. Let the AI 
 
 <h2 id="download">⬇️ Download</h2>
 
+**Current version: v0.8.2**
+
 <div class="about-grid">
     <div class="about-card">
-        <h3>Current version</h3>
-        <p><strong>v0.7.0</strong> · macOS Apple Silicon (aarch64) · 6.6 MB</p>
+        <h3>🍎 macOS Apple Silicon</h3>
+        <p>dmg · 7.4 MB · aarch64 (M1/M2/M3/M4)</p>
         <p style="margin-top: 1rem;">
-            <a href="/assets/downloads/aitm_0.7.0_aarch64.dmg" class="cta-button" download>Download dmg →</a>
+            <a href="/assets/downloads/aitm_0.8.2_aarch64.dmg" class="cta-button" download>Download .dmg →</a>
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.85em;">
+            <a href="/assets/downloads/aitm_0.8.2_aarch64.dmg.sha256">SHA256</a>
         </p>
     </div>
     <div class="about-card">
-        <h3>Verify integrity (recommended)</h3>
-        <p>After downloading, check the SHA256:</p>
-        <pre><code>shasum -a 256 ~/Downloads/aitm_0.7.0_aarch64.dmg</code></pre>
-        <p>It should match the <a href="/assets/downloads/aitm_0.7.0_aarch64.dmg.sha256">official checksum</a> exactly.</p>
+        <h3>🪟 Windows x86_64</h3>
+        <p>Intel / AMD 64-bit</p>
+        <p style="margin-top: 1rem;">
+            <a href="/assets/downloads/aitm_0.8.2_x64_en-US.msi" class="cta-button" download>Download .msi · 7.1 MB →</a>
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.85em;">
+            or <a href="/assets/downloads/aitm_0.8.2_x64-setup.exe" download>NSIS .exe · 5.3 MB</a> ·
+            <a href="/assets/downloads/aitm_0.8.2_x64_en-US.msi.sha256">SHA256 (msi)</a>
+        </p>
+    </div>
+    <div class="about-card">
+        <h3>🪟 Windows ARM64</h3>
+        <p>Surface Pro X / Snapdragon</p>
+        <p style="margin-top: 1rem;">
+            <a href="/assets/downloads/aitm_0.8.2_arm64_en-US.msi" class="cta-button" download>Download .msi · 6.7 MB →</a>
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.85em;">
+            or <a href="/assets/downloads/aitm_0.8.2_arm64-setup.exe" download>NSIS .exe · 4.7 MB</a> ·
+            <a href="/assets/downloads/aitm_0.8.2_arm64_en-US.msi.sha256">SHA256 (msi)</a>
+        </p>
     </div>
 </div>
 
-### Install steps
+### Install steps — macOS
 
 > ⚠️ aitm doesn't yet ship with an Apple Developer signature. macOS automatically attaches a quarantine attribute to any unsigned .app downloaded via browser — double-clicking will show **"aitm is damaged and can't be opened"**. That's a misleading Gatekeeper message; the file is fine. The dmg includes a one-click install script to handle this for you.
 
@@ -151,6 +172,38 @@ bash ~/Downloads/install-aitm.sh
 ```
 
 The script doesn't require `sudo` and only touches `/Applications/aitm.app` and the dmg you point it at.
+
+### Install steps — Windows
+
+> ⚠️ aitm isn't code-signed yet, so Windows SmartScreen / Defender may show a "Windows protected your PC" warning on first run. Click **More info → Run anyway**. The binary is fine.
+
+**MSI installer (recommended):**
+
+1. Double-click the downloaded `.msi`
+2. Follow the wizard — installs per-user by default, no admin needed
+3. Launch from Start menu: type "aitm"
+
+**NSIS `.exe` installer (alternative, smaller):**
+
+1. Double-click the downloaded `-setup.exe`
+2. Pick install location → next → install
+3. Launch from Start menu: type "aitm"
+
+Pick MSI for org / IT deployment friendliness; pick NSIS if you want a leaner installer with a familiar wizard UI.
+
+### Verify integrity (any platform)
+
+Each installer ships with a `.sha256` file. Compare yours against it:
+
+```bash
+# macOS / Linux / Git Bash on Windows
+shasum -a 256 path/to/aitm_0.8.2_<arch>.<ext>
+```
+
+```powershell
+# Windows PowerShell
+(Get-FileHash path\to\aitm_0.8.2_<arch>.<ext> -Algorithm SHA256).Hash.ToLower()
+```
 
 <h2 id="first-use">🚀 First-time use</h2>
 
@@ -176,11 +229,17 @@ The script doesn't require `sudo` and only touches `/Applications/aitm.app` and 
 
 ## ❓ FAQ
 
-**Q: Double-clicking `aitm.app` says "damaged, can't open"?**
-That's a Gatekeeper false alarm. Run `install-aitm.command` / `install-aitm.sh` per the [install steps](#download).
+**Q: Double-clicking `aitm.app` (macOS) says "damaged, can't open"?**
+That's a Gatekeeper false alarm because aitm isn't yet code-signed. Run `install-aitm.command` / `install-aitm.sh` per the [install steps](#download).
 
-**Q: Is it Apple Silicon only for now?**
-Yes. The current build targets Apple Silicon (M1/M2/M3/M4 series). Intel Mac and Linux support are on the roadmap.
+**Q: Windows shows a "Windows protected your PC" SmartScreen warning?**
+Same root cause as the macOS one — aitm isn't code-signed yet. Click **More info → Run anyway**. We're tracking signing certificates for a future release.
+
+**Q: Which platforms are supported?**
+macOS Apple Silicon (M1/M2/M3/M4) and Windows on both x86_64 and ARM64 (Surface Pro X, Snapdragon laptops). Intel Mac and Linux are still on the roadmap.
+
+**Q: MSI or NSIS — which one should I use on Windows?**
+Either works. **MSI** is friendlier for org / IT deployment (Group Policy, auto-update tooling). **NSIS** (`.exe`) is smaller and uses a familiar wizard UI. For most personal users either is fine.
 
 **Q: How is the API key managed?**
 The API key is stored in your local aitm config directory only — never uploaded anywhere. We recommend creating a dedicated, scope-restricted key with a usage cap for aitm, and rotating it per your usual security practice.
