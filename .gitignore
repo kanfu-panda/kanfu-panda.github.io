@@ -44,6 +44,8 @@ nbproject/
 # 安装文件
 rubyinstaller.exe
 *.exe
+# 例外：aitm Windows NSIS 安装包必须入仓（发布产物）
+!assets/downloads/aitm_*_*-setup.exe
 
 # 临时文件
 *.log

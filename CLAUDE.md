@@ -107,38 +107,47 @@ aitm 桌面端会拉 `https://kanfu-panda.github.io/assets/aitm/latest.json` 做
 
 ### 文件涉及范围
 
+自 v0.8.2 起 aitm 跨平台（macOS + Windows），每次发布要处理 **5 个安装包**：
+
 | 文件 | 改什么 |
 |---|---|
-| `assets/downloads/aitm_X.Y.Z_aarch64.dmg` | 新 dmg（旧的删除） |
-| `assets/downloads/aitm_X.Y.Z_aarch64.dmg.sha256` | 新 SHA256 文件（旧的删除） |
-| `assets/aitm/latest.json` | `version` + `download_url` + `notes` 三处更新 |
-| `aitm.md` / `aitm.zh.md` / `aitm.ja.md` | 三语产品页：版本号、dmg 文件名、SHA256 命令、SHA256 链接、体积（如变化） |
+| `assets/downloads/aitm_X.Y.Z_aarch64.dmg` + `.sha256` | macOS Apple Silicon 安装包 + 校验和 |
+| `assets/downloads/aitm_X.Y.Z_x64_en-US.msi` + `.sha256` | Windows x86_64 MSI 安装包 + 校验和 |
+| `assets/downloads/aitm_X.Y.Z_x64-setup.exe` + `.sha256` | Windows x86_64 NSIS 安装包 + 校验和 |
+| `assets/downloads/aitm_X.Y.Z_arm64_en-US.msi` + `.sha256` | Windows ARM64 MSI 安装包 + 校验和 |
+| `assets/downloads/aitm_X.Y.Z_arm64-setup.exe` + `.sha256` | Windows ARM64 NSIS 安装包 + 校验和 |
+| `assets/aitm/latest.json` | `version` + `download_url`（仍指向 dmg）+ `notes` |
+| `aitm.md` / `aitm.zh.md` / `aitm.ja.md` | 三语产品页：5 张下载卡的版本号 + 文件名 + 体积 |
 | `_posts/2026-05-14-aitm-introduction.md` | excerpt 里如果有版本号也同步 |
 
 ### 命令模板（替换 `OLD` 与 `NEW`）
 
 ```bash
-# 0. 假设新 dmg 已经在 ~/Downloads/aitm_NEW_aarch64.dmg
-OLD="0.5.2"
-NEW="0.5.3"
-DMG_SRC="$HOME/Downloads/aitm_${NEW}_aarch64.dmg"
+# 0. aitm 仓库会在 releases/v<NEW>/ 下产出 5 个安装包 + latest.json
+OLD="0.7.0"
+NEW="0.8.2"
+SRC="$HOME/projects/aitm/releases/v${NEW}"
 
-# 1. 替换 dmg 与 SHA256
-rm -f assets/downloads/aitm_${OLD}_aarch64.dmg assets/downloads/aitm_${OLD}_aarch64.dmg.sha256
-cp "$DMG_SRC" assets/downloads/
-HASH=$(shasum -a 256 "$DMG_SRC" | awk '{print $1}')
-echo "${HASH}  aitm_${NEW}_aarch64.dmg" > assets/downloads/aitm_${NEW}_aarch64.dmg.sha256
+# 1. 删旧版（5 个安装包 + 各自 .sha256）
+for arch in aarch64.dmg x64_en-US.msi x64-setup.exe arm64_en-US.msi arm64-setup.exe; do
+  rm -f assets/downloads/aitm_${OLD}_${arch}{,.sha256}
+done
 
-# 2. 更新 latest.json（手动改 notes，version 与 url 直接 sed）
-#    或者直接用编辑器改三处字段
-sed -i '' "s/${OLD}/${NEW}/g" assets/aitm/latest.json
-# 然后手动更新 notes 字段为本次发布的关键变化（一句话即可）
+# 2. 拷新版 5 个安装包 + 各自生成 SHA256
+for f in aitm_${NEW}_aarch64.dmg aitm_${NEW}_x64_en-US.msi aitm_${NEW}_x64-setup.exe \
+         aitm_${NEW}_arm64_en-US.msi aitm_${NEW}_arm64-setup.exe; do
+  cp "$SRC/$f" assets/downloads/
+  H=$(shasum -a 256 "assets/downloads/$f" | awk '{print $1}')
+  echo "${H}  ${f}" > "assets/downloads/${f}.sha256"
+done
 
-# 3. 三语产品页 + 博客文章 excerpt 全文替换版本号
+# 3. latest.json 直接拷源 + 手动改 notes 去内部信息
+cp "$SRC/latest.json" assets/aitm/latest.json
+# 编辑器打开 latest.json，把 notes 字段重写为对外精简版（不含路线图 / 内部模块名）
+
+# 4. 三语产品页 + 博客文章 excerpt 全文替换版本号 + 各平台体积（按需）
 sed -i '' "s/${OLD}/${NEW}/g" aitm.md aitm.zh.md aitm.ja.md _posts/*.md
-
-# 4. 校验（CI 也会跑）
-cd assets/downloads && shasum -a 256 -c aitm_${NEW}_aarch64.dmg.sha256 && cd -
+# 然后手动核对 5 个平台体积说明（aitm.md 三语下载卡里的 MB 数字）
 
 # 5. 本地 build 自检
 JEKYLL_ENV=production bundle exec jekyll build
@@ -149,10 +158,12 @@ JEKYLL_ENV=production bundle exec jekyll build
 ### 易踩的坑
 
 - **`latest.json` 的 `version` 字段必须与 dmg 文件名严格相等**。CI 会比对，不一致直接 fail
-- **`download_url` 必须包含正确的 dmg 文件名**。CI 会 grep 校验
-- **dmg 体积**：sed 不会改 `<p><strong>v0.X.Y</strong> ... · 6.X MB</p>` 里的 MB 数字。**手动看 `stat -f %z dmg` 算一下，必要时改三个 .md 的体积说明**
-- **`notes` 字段不能含敏感内部信息**（路线图、未发布功能、内部模块名等）。按用户视角一句话写本次主要变化
-- **不要忘记删旧 dmg**。否则 git 历史里会越积越多 6MB 二进制文件
+- **`download_url` 必须包含正确的 dmg 文件名**（自动更新仍以 macOS 为锚点）
+- **5 个安装包都要换全**——少换一个，旧版会以"幽灵文件"形式残留在 site 里
+- **5 个 `.sha256` 都要生成**——CI 红线之一（缺一个就 fail）
+- **各平台体积**：sed 不会改下载卡里的 `· X.X MB` 数字。手动核对 5 个平台体积（macOS dmg / x64 msi / x64 exe / arm64 msi / arm64 exe）
+- **`notes` 字段不能含敏感内部信息**（路线图、未发布功能、内部模块名、CI workflow 细节等）。一句话写本次最主要的对外变化
+- **不要忘记删旧版安装包**。否则 git 历史里会越积越多大文件
 - **assets/aitm/ 与 assets/downloads/ 共享所有语言**。polyglot 配置里已 exclude，三语用户共用同一份资源
 
 ### 关于 `latest.json` 的格式约定

@@ -3,13 +3,13 @@ layout: default
 title: aitm
 permalink: /aitm/
 lang: ja
-description: aitm — AI を組み込んだ macOS デスクトップ向けターミナルアプリ。AI がファイル読み込み、コマンド履歴検索、コマンド実行を行えます。すべての高リスク操作には明示的な確認が必要です。
+description: aitm — AI を組み込んだデスクトップ向けターミナルアプリ。macOS と Windows に対応。AI がファイル読み込み、コマンド履歴検索、コマンド実行を行えます。すべての高リスク操作には明示的な確認が必要です。
 ---
 
 <div class="hero-section">
     <div class="hero-content">
         <h1>aitm</h1>
-        <p>AI を組み込んだ macOS デスクトップ向けターミナルアプリ。</p>
+        <p>AI を組み込んだデスクトップ向けターミナルアプリ —— macOS と Windows に対応。</p>
         <p>慣れ親しんだターミナル内で AI と直接協働 —— AI はファイルを読み、コマンド履歴を検索し、必要に応じてコマンドを実行できます。高リスクな操作はすべて、あなたの明示的な許可が必要です。</p>
         <div class="hero-links">
             <a href="#download" class="cta-button">今すぐダウンロード →</a>
@@ -114,23 +114,44 @@ description: aitm — AI を組み込んだ macOS デスクトップ向けター
 
 <h2 id="download">⬇️ ダウンロード</h2>
 
+**現在のバージョン：v0.8.2**
+
 <div class="about-grid">
     <div class="about-card">
-        <h3>現在のバージョン</h3>
-        <p><strong>v0.7.0</strong> · macOS Apple Silicon (aarch64) · 6.6 MB</p>
+        <h3>🍎 macOS Apple Silicon</h3>
+        <p>dmg · 7.4 MB · aarch64（M1/M2/M3/M4）</p>
         <p style="margin-top: 1rem;">
-            <a href="/assets/downloads/aitm_0.7.0_aarch64.dmg" class="cta-button" download>dmg をダウンロード →</a>
+            <a href="/assets/downloads/aitm_0.8.2_aarch64.dmg" class="cta-button" download>.dmg をダウンロード →</a>
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.85em;">
+            <a href="/assets/downloads/aitm_0.8.2_aarch64.dmg.sha256">SHA256</a>
         </p>
     </div>
     <div class="about-card">
-        <h3>整合性の検証（推奨）</h3>
-        <p>ダウンロード後、SHA256 を確認してください：</p>
-        <pre><code>shasum -a 256 ~/Downloads/aitm_0.7.0_aarch64.dmg</code></pre>
-        <p>結果は <a href="/assets/downloads/aitm_0.7.0_aarch64.dmg.sha256">公式チェックサム</a> と完全に一致するはずです。</p>
+        <h3>🪟 Windows x86_64</h3>
+        <p>Intel / AMD 64 bit</p>
+        <p style="margin-top: 1rem;">
+            <a href="/assets/downloads/aitm_0.8.2_x64_en-US.msi" class="cta-button" download>.msi をダウンロード · 7.1 MB →</a>
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.85em;">
+            または <a href="/assets/downloads/aitm_0.8.2_x64-setup.exe" download>NSIS .exe · 5.3 MB</a> ·
+            <a href="/assets/downloads/aitm_0.8.2_x64_en-US.msi.sha256">SHA256 (msi)</a>
+        </p>
+    </div>
+    <div class="about-card">
+        <h3>🪟 Windows ARM64</h3>
+        <p>Surface Pro X / Snapdragon ノート</p>
+        <p style="margin-top: 1rem;">
+            <a href="/assets/downloads/aitm_0.8.2_arm64_en-US.msi" class="cta-button" download>.msi をダウンロード · 6.7 MB →</a>
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.85em;">
+            または <a href="/assets/downloads/aitm_0.8.2_arm64-setup.exe" download>NSIS .exe · 4.7 MB</a> ·
+            <a href="/assets/downloads/aitm_0.8.2_arm64_en-US.msi.sha256">SHA256 (msi)</a>
+        </p>
     </div>
 </div>
 
-### インストール手順
+### インストール手順 — macOS
 
 > ⚠️ aitm は現時点で Apple Developer 署名を持っていません。macOS はブラウザでダウンロードした未署名の .app に自動的に quarantine 属性を付与するため、ダブルクリック起動で **「aitm は壊れているため開けません」** と表示されます。これは Gatekeeper の誤解を招く文言で、ファイル自体は問題ありません。dmg にはこの処理を行う一括インストールスクリプトが同梱されています。
 
@@ -151,6 +172,38 @@ bash ~/Downloads/install-aitm.sh
 ```
 
 このスクリプトは `sudo` を必要とせず、`/Applications/aitm.app` と指定された dmg のみを操作します。
+
+### インストール手順 — Windows
+
+> ⚠️ aitm の Windows インストーラーは現時点でコード署名されていないため、初回実行時に SmartScreen / Defender が「Windows によって PC が保護されました」を表示することがあります。**詳細情報 → 実行** をクリックしてください。ファイル自体は問題ありません。
+
+**MSI インストーラー（推奨）：**
+
+1. ダウンロードした `.msi` をダブルクリック
+2. ウィザードに従って進めてください — デフォルトでユーザー領域にインストールされ、管理者権限は不要です
+3. スタートメニューで「aitm」を検索して起動
+
+**NSIS `.exe` インストーラー（小さめの代替）：**
+
+1. ダウンロードした `-setup.exe` をダブルクリック
+2. インストール先を選択 → 次へ → インストール
+3. スタートメニューで「aitm」を検索して起動
+
+企業 / IT 配布の場合は MSI 推奨（Group Policy などとの相性が良い）。個人利用ならどちらでも OK、NSIS のほうがサイズは小さいです。
+
+### 整合性の検証（全プラットフォーム共通）
+
+各インストーラーには対応する `.sha256` ファイルが付属しています。検証コマンド：
+
+```bash
+# macOS / Linux / Windows 上の Git Bash
+shasum -a 256 path/to/aitm_0.8.2_<arch>.<ext>
+```
+
+```powershell
+# Windows PowerShell
+(Get-FileHash path\to\aitm_0.8.2_<arch>.<ext> -Algorithm SHA256).Hash.ToLower()
+```
 
 <h2 id="first-use">🚀 初めて使うとき</h2>
 
@@ -176,11 +229,17 @@ bash ~/Downloads/install-aitm.sh
 
 ## ❓ よくある質問
 
-**Q: `aitm.app` をダブルクリックすると「壊れているため開けません」と出ます。**
-Gatekeeper の誤検出です。[インストール手順](#download) の `install-aitm.command` / `install-aitm.sh` を実行してください。
+**Q: macOS で `aitm.app` をダブルクリックすると「壊れているため開けません」と出ます。**
+aitm は現時点でコード署名されていないため Gatekeeper が誤検出します。[インストール手順](#download) の `install-aitm.command` / `install-aitm.sh` を実行してください。
 
-**Q: 当面は macOS Apple Silicon のみですか？**
-はい。現バージョンは Apple Silicon（M1/M2/M3/M4 シリーズ）向けにのみビルドされています。Intel Mac と Linux 対応は今後検討します。
+**Q: Windows で「Windows によって PC が保護されました」SmartScreen 警告が出ます。**
+macOS と同根：aitm の Windows インストーラーは現時点で未署名です。**詳細情報 → 実行** をクリックしてください。署名証明書は今後の対応予定です。
+
+**Q: 対応プラットフォームは？**
+macOS Apple Silicon（M1/M2/M3/M4）と Windows の両アーキテクチャ（x86_64 と ARM64、Surface Pro X や Snapdragon ノートも対応）。Intel Mac と Linux はロードマップ上の課題です。
+
+**Q: Windows で MSI と NSIS、どちらを選べばいい？**
+どちらでも OK です。**MSI** は企業 / IT 配布向き（Group Policy・自動更新ツールとの相性）。**NSIS** (`.exe`) はサイズが小さく、馴染みのあるウィザード UI です。個人利用ならどちらでも問題ありません。
 
 **Q: API Key の管理は？**
 API Key はあなたのマシン上の aitm ユーザー設定ディレクトリにのみ保存され、外部サーバーには一切アップロードされません。aitm 専用に権限を最小化し利用上限を設けた Key を用意し、通常のセキュリティ運用に沿って定期的にローテーションすることをお勧めします。
