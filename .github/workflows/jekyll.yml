@@ -157,24 +157,42 @@ jobs:
         else
           echo "✓ 邮箱明文未泄露"
         fi
+        # aitm 跨平台安装包（自 v0.8.2 起：macOS dmg + 4 个 Windows 安装器）
         DMG=$(ls _site/assets/downloads/aitm_*_aarch64.dmg 2>/dev/null | head -1)
         if [ -n "$DMG" ] && [ -s "$DMG" ]; then
           echo "✓ aitm dmg 已部署: $(basename "$DMG") ($(stat -c%s "$DMG" 2>/dev/null || stat -f%z "$DMG") 字节)"
         else
           echo "::error::aitm dmg 缺失或为空"; FAIL=1
         fi
-        SHA_FILE=$(ls _site/assets/downloads/aitm_*_aarch64.dmg.sha256 2>/dev/null | head -1)
-        if [ -n "$SHA_FILE" ] && [ -n "$DMG" ]; then
-          EXPECTED=$(awk '{print $1}' "$SHA_FILE")
-          ACTUAL=$(sha256sum "$DMG" 2>/dev/null | awk '{print $1}' || shasum -a 256 "$DMG" | awk '{print $1}')
-          if [ "$EXPECTED" = "$ACTUAL" ]; then
-            echo "✓ dmg SHA256 与公开校验和一致"
+        # 4 个 Windows 安装器：x64_msi / x64_nsis / arm64_msi / arm64_nsis
+        for SUFFIX in "x64_en-US.msi" "x64-setup.exe" "arm64_en-US.msi" "arm64-setup.exe"; do
+          F=$(ls _site/assets/downloads/aitm_*_${SUFFIX} 2>/dev/null | head -1)
+          if [ -n "$F" ] && [ -s "$F" ]; then
+            echo "✓ Windows installer: $(basename "$F") ($(stat -c%s "$F" 2>/dev/null || stat -f%z "$F") 字节)"
           else
-            echo "::error::dmg SHA256 不匹配（公开: $EXPECTED / 实际: $ACTUAL）"; FAIL=1
+            echo "::error::Windows installer (${SUFFIX}) 缺失或为空"; FAIL=1
           fi
-        else
-          echo "::error::SHA256 文件或 dmg 文件缺失"; FAIL=1
-        fi
+        done
+        # 所有 5 个安装包都必须有 SHA256 + 与本体一致
+        for ASSET in "$DMG" \
+          $(ls _site/assets/downloads/aitm_*_x64_en-US.msi 2>/dev/null | head -1) \
+          $(ls _site/assets/downloads/aitm_*_x64-setup.exe 2>/dev/null | head -1) \
+          $(ls _site/assets/downloads/aitm_*_arm64_en-US.msi 2>/dev/null | head -1) \
+          $(ls _site/assets/downloads/aitm_*_arm64-setup.exe 2>/dev/null | head -1); do
+          [ -z "$ASSET" ] && continue
+          SHA_FILE="${ASSET}.sha256"
+          if [ ! -f "$SHA_FILE" ]; then
+            echo "::error::SHA256 文件缺失: $(basename "$SHA_FILE")"; FAIL=1
+            continue
+          fi
+          EXPECTED=$(awk '{print $1}' "$SHA_FILE")
+          ACTUAL=$(sha256sum "$ASSET" 2>/dev/null | awk '{print $1}' || shasum -a 256 "$ASSET" | awk '{print $1}')
+          if [ "$EXPECTED" = "$ACTUAL" ]; then
+            echo "✓ $(basename "$ASSET") SHA256 一致"
+          else
+            echo "::error::$(basename "$ASSET") SHA256 不匹配（公开: $EXPECTED / 实际: $ACTUAL）"; FAIL=1
+          fi
+        done
         if [ -f _site/assets/downloads/install-aitm.sh ]; then
           echo "✓ install-aitm.sh 已部署"
         else
