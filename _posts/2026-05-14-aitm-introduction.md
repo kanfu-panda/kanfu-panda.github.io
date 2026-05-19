@@ -1,70 +1,70 @@
 ---
 layout: post
-title: "aitm 首发：把 AI 装进终端"
+title: "aitm launch: AI inside the terminal"
 date: 2026-05-14
-lang: zh
+lang: en
 categories: [blog]
-tags: [aitm, 终端, AI, macOS, 工具]
-excerpt: "一个把 AI 能力做进终端的桌面应用，支持 macOS 与 Windows。AI 能读文件、看命令历史、按需帮你跑命令，所有高危操作都要你点头。最新版 v0.9.0。"
+tags: [aitm, terminal, AI, macOS, Windows, tool]
+excerpt: "A desktop terminal app with AI built in, for macOS and Windows. The AI can read files, search command history, and run commands on demand — every high-risk action waits for your explicit OK. Latest version: v0.9.0."
 ---
 
-## 简介
+## What it is
 
-[aitm](/aitm/) 是一个 macOS 桌面终端应用，把 AI 能力直接做进了终端体验里。
+[aitm](/aitm/) is a desktop terminal app that bakes AI capabilities right into the terminal experience.
 
-- **平常的终端**：你输命令、看输出、自己想下一步。
-- **aitm**：你可以直接和 AI 对话；AI 能自动查文件、读命令历史、提议要执行的命令——但所有执行动作都需要你**显式点头**才会发生。
+- **Regular terminal**: you type a command, watch the output, figure out the next move yourself.
+- **aitm**: you can talk to the AI directly; it can read files, search command history, and propose commands to run — but every actual execution waits for your **explicit approval**.
 
-简单说：**让 AI 进入你的工作流，但不接管你的工作流**。
+In short: **let the AI join your workflow without taking it over**.
 
-## 为什么做这个
+## Why I built this
 
-打开终端之后再去开浏览器、复制粘贴去问 AI、再把答案贴回来——这种来回切换效率太低。市面上的 "AI 终端" 要么把对话框塞进终端但只能聊天没工具，要么变成一个完全 AI 主导、你看不见执行过程的 agent。
+The usual loop — open terminal, then open a browser, copy-paste a question to an AI, paste the answer back — has too much context-switching. Existing "AI terminals" tend to fall into one of two extremes: a chat window glued onto a terminal but no tool execution, or a fully AI-driven agent where you can't see what's happening.
 
-aitm 想要的中间态是：
+aitm aims at the middle:
 
-> AI 能看见你的环境（文件 / 命令历史 / 终端输出），也能动手做事（执行命令、读取文件），但最终决定权始终在你这里。AI 提建议，你按按钮。
+> The AI can see your environment (files / command history / terminal output) and can act on it (run commands, read files), but you stay in charge. The AI proposes; you click the button.
 
-## 这一版主要带来什么
+## What this release brings
 
-### 1. AI 工具调用闭环
+### 1. Closed AI tool-calling loop
 
-AI 不只是给指令——它能调用一组受控工具直接做事：
+The AI doesn't just suggest things — it calls a controlled set of tools directly:
 
-- 浏览目录、读取文件
-- 查看终端命令历史、按关键词搜索
-- 提议要执行的命令并等你确认放行
+- Browse directories, read files
+- Read terminal command history, search by keyword
+- Propose commands to run and wait for your green light
 
-执行类操作都会先弹确认框，你能看到完整命令再决定。
+Every execution shows a confirm dialog with the full command first.
 
-### 2. AI 自动带"当前在哪"上下文
+### 2. AI knows "where you are"
 
-当 AI 调用"读取终端历史"这类工具时，aitm 会自动在结果前 prepend 当前 git 分支、工作目录、监听端口等元信息。等于 AI 一进对话就知道你在做什么项目、当前分支干不干净、起了什么服务，不用你再描述一遍。
+When the AI calls a tool like "read terminal history", aitm automatically prepends the current git branch, working directory, and listening ports as context. The AI knows what project you're in, whether the working tree is dirty, what services are up — without you re-explaining.
 
-### 3. Tab 元信息可视化
+### 3. Tab-level metadata at a glance
 
-每个 tab 现在右侧会显示当前 git 分支、dirty 状态、未推送 commits、监听端口。多 tab 并行跑时，扫一眼 tab 栏就知道每个项目当前状态。
+Each tab now shows current git branch, dirty state, unpushed commits, and listening ports on the right. With multiple tabs running, you can tell each project's status at a glance.
 
-### 4. 系统级通知
+### 4. System notifications
 
-长任务跑完了、AI 等待你审批某个动作、AI 这一轮自主对话结束——这些时刻 aitm 会主动发 macOS 系统通知，不需要你盯着窗口。
+Long task finished, AI waiting for your approval, AI completed its current turn — aitm sends a macOS / Windows system notification proactively so you don't have to watch the window.
 
-tab 栏每个 tab 带状态环（琥珀脉动 = 等审批 / 玫红 = 出错 / 天蓝 = 运行中 / 翠绿 = 完成）。<kbd>⌘</kbd> + <kbd>⇧</kbd> + <kbd>U</kbd> 全局快捷键直接跳到最近有未读消息的 tab 并展开 AI 侧栏定位消息。
+Each tab has a status ring (amber pulsing = approval pending / pink = error / blue = running / green = done). <kbd>⌘</kbd> + <kbd>⇧</kbd> + <kbd>U</kbd> globally jumps to the tab with the most recent unread and opens the AI sidebar.
 
-### 5. 兼容主流终端通知协议
+### 5. Compatible with standard terminal notification protocols
 
-后端解析 OSC 9 / OSC 99 / OSC 777 等终端通知协议——大多数能发"我做完了"通知的命令行工具，在 aitm 里都能被识别成通知事件。
+The backend parses OSC 9 / OSC 99 / OSC 777 and similar protocols — most CLI tools that emit "I'm done" notifications work out of the box in aitm.
 
-### 6. 布局可换
+### 6. Flexible layout
 
-设置面板里 AI 侧栏与文件树左右位置可对调，适应不同主屏 / 副屏的工作姿势。
+Move the AI sidebar and file tree to whichever side suits your screen setup.
 
-## 下载与使用
+## Download
 
-- 直接到 [aitm 产品页](/aitm/) 下载当前版本
-- 平台覆盖：macOS Apple Silicon、Windows x86_64、Windows ARM64
-- 完整的安装步骤、第一次使用、安全模型、FAQ，都在产品页里
+- Get the latest from the [aitm product page](/aitm/)
+- Platforms: macOS Apple Silicon, Windows x86_64, Windows ARM64
+- Install steps, first-use, security model, FAQ — all on the product page
 
-如果你也觉得 AI 应该在你身边、而不是另一个 tab，欢迎试一下。
+If you think AI should sit next to you in the terminal, not in another tab, give it a try.
 
-有反馈或想交流，[关于页面](/about/) 里有联系方式。
+For feedback or to chat, the contact link is on the [about page](/about/).
