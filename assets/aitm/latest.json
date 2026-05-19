@@ -1,5 +1,5 @@
 {
-  "version": "0.8.2",
-  "download_url": "https://kanfu-panda.github.io/assets/downloads/aitm_0.8.2_aarch64.dmg",
-  "notes": "新增 Windows 平台支持：x86_64 / ARM64 双架构，提供 MSI 与 NSIS 两种安装器。"
+  "version": "0.9.0",
+  "download_url": "https://kanfu-panda.github.io/assets/downloads/aitm_0.9.0_aarch64.dmg",
+  "notes": "新增内置文件编辑器（CodeMirror），多项交互细节打磨。"
 }
