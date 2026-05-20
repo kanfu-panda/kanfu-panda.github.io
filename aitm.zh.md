@@ -118,39 +118,39 @@ description: aitm — 一个把 AI 能力做进终端的桌面应用，支持 ma
 
 <h2 id="download">⬇️ 下载</h2>
 
-**当前版本：v0.9.0**
+**当前版本：v0.9.1**
 
 <div class="about-grid">
     <div class="about-card">
         <h3>🍎 macOS Apple Silicon</h3>
         <p>dmg · 6.8 MB · aarch64（M1/M2/M3/M4）</p>
         <p style="margin-top: 1rem;">
-            <a href="/assets/downloads/aitm_0.9.0_aarch64.dmg" class="cta-button" download>下载 .dmg →</a>
+            <a href="/assets/downloads/aitm_0.9.1_aarch64.dmg" class="cta-button" download>下载 .dmg →</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            <a href="/assets/downloads/aitm_0.9.0_aarch64.dmg.sha256">SHA256</a>
+            <a href="/assets/downloads/aitm_0.9.1_aarch64.dmg.sha256">SHA256</a>
         </p>
     </div>
     <div class="about-card">
         <h3>🪟 Windows x86_64</h3>
         <p>Intel / AMD 64 位</p>
         <p style="margin-top: 1rem;">
-            <a href="/assets/downloads/aitm_0.9.0_x64_en-US.msi" class="cta-button" download>下载 .msi · 7.2 MB →</a>
+            <a href="/assets/downloads/aitm_0.9.1_x64_en-US.msi" class="cta-button" download>下载 .msi · 7.2 MB →</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            或 <a href="/assets/downloads/aitm_0.9.0_x64-setup.exe" download>NSIS .exe · 5.5 MB</a> ·
-            <a href="/assets/downloads/aitm_0.9.0_x64_en-US.msi.sha256">SHA256 (msi)</a>
+            或 <a href="/assets/downloads/aitm_0.9.1_x64-setup.exe" download>NSIS .exe · 5.5 MB</a> ·
+            <a href="/assets/downloads/aitm_0.9.1_x64_en-US.msi.sha256">SHA256 (msi)</a>
         </p>
     </div>
     <div class="about-card">
         <h3>🪟 Windows ARM64</h3>
         <p>Surface Pro X / 骁龙笔记本</p>
         <p style="margin-top: 1rem;">
-            <a href="/assets/downloads/aitm_0.9.0_arm64_en-US.msi" class="cta-button" download>下载 .msi · 6.8 MB →</a>
+            <a href="/assets/downloads/aitm_0.9.1_arm64_en-US.msi" class="cta-button" download>下载 .msi · 6.8 MB →</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            或 <a href="/assets/downloads/aitm_0.9.0_arm64-setup.exe" download>NSIS .exe · 4.9 MB</a> ·
-            <a href="/assets/downloads/aitm_0.9.0_arm64_en-US.msi.sha256">SHA256 (msi)</a>
+            或 <a href="/assets/downloads/aitm_0.9.1_arm64-setup.exe" download>NSIS .exe · 4.9 MB</a> ·
+            <a href="/assets/downloads/aitm_0.9.1_arm64_en-US.msi.sha256">SHA256 (msi)</a>
         </p>
     </div>
 </div>
@@ -201,12 +201,12 @@ bash ~/Downloads/install-aitm.sh
 
 ```bash
 # macOS / Linux / Windows 上的 Git Bash
-shasum -a 256 path/to/aitm_0.9.0_<arch>.<ext>
+shasum -a 256 path/to/aitm_0.9.1_<arch>.<ext>
 ```
 
 ```powershell
 # Windows PowerShell
-(Get-FileHash path\to\aitm_0.9.0_<arch>.<ext> -Algorithm SHA256).Hash.ToLower()
+(Get-FileHash path\to\aitm_0.9.1_<arch>.<ext> -Algorithm SHA256).Hash.ToLower()
 ```
 
 <h2 id="first-use">🚀 第一次使用</h2>
