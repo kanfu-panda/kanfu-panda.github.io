@@ -14,6 +14,16 @@
 
     <title>{% if page.title %}{{ page.title }} - {% endif %}{{ localized_site_title }}</title>
 
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+
+    <!-- og:image（社交分享缩略图） -->
+    <meta property="og:image" content="{{ site.url }}/assets/images/og-image.png">
+    <meta name="twitter:image" content="{{ site.url }}/assets/images/og-image.png">
+
     {% if site.gitalk.enable and site.gitalk.clientID != empty and site.gitalk.clientSecret != empty and page.layout == 'post' and jekyll.environment == 'production' %}
     <!-- Gitalk (锁版本 + SRI；升级时需重新生成 integrity，方法见 SECURITY.md) -->
     <link rel="stylesheet"
