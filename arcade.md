@@ -3,6 +3,7 @@ layout: default
 title: arcade
 permalink: /arcade/
 lang: en
+description: A browser-based arcade emulator. Bring your own local game files; everything runs inside the browser's WASM sandbox — nothing is uploaded. For personal entertainment, lawful use only.
 ---
 
 <div class="hero-section">

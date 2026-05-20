@@ -3,6 +3,7 @@ layout: default
 title: プロジェクト
 permalink: /projects/
 lang: ja
+description: 個人プロジェクトとオープンソース貢献 —— aitm デスクトップターミナル、PDLC Claude Code プラグイン、ブラウザ用アーケードエミュレータ、そしてこのブログ本体。
 ---
 
 # プロジェクト
