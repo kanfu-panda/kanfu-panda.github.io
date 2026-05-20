@@ -1,5 +1,5 @@
 {
-  "version": "0.9.0",
-  "download_url": "https://kanfu-panda.github.io/assets/downloads/aitm_0.9.0_aarch64.dmg",
-  "notes": "新增内置文件编辑器（CodeMirror），多项交互细节打磨。"
+  "version": "0.9.1",
+  "download_url": "https://kanfu-panda.github.io/assets/downloads/aitm_0.9.1_aarch64.dmg",
+  "notes": "终端会话工作目录可完整恢复；编辑器配色与状态栏信息体验升级。"
 }
