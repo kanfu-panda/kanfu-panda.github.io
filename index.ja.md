@@ -3,6 +3,7 @@ layout: default
 title: ホーム
 lang: ja
 permalink: /
+description: テクノロジー好き開発者の個人ブログ —— コーディングのメモ、使ったツール、いじり続けているプロジェクトを記録しています。
 ---
 
 <div class="hero-section">

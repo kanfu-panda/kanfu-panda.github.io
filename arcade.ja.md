@@ -3,6 +3,7 @@ layout: default
 title: arcade
 permalink: /arcade/
 lang: ja
+description: ブラウザで動くアーケードエミュレータ。ローカルゲームファイルをご自身で読み込む方式で、すべてブラウザの WASM サンドボックス内で実行。サーバーへのアップロードはありません。個人的な娯楽、合法な用途に限ります。
 ---
 
 <div class="hero-section">
