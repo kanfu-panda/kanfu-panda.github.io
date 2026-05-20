@@ -99,6 +99,90 @@ bash scripts/install-hooks.sh
 
 ---
 
+## 多语言（i18n）并行修改约束 ⭐
+
+**本博客是 jekyll-polyglot 三语站**（en / zh / ja）。任何改动若涉及"内容 / 文案 / 路径 / 元数据"，**必须三语同步**，否则会出现：
+- 默认语言（en）显示中文 description → 谷歌相关性降分
+- 某个语言缺导航项 → 用户体验割裂
+- 某语言版本 excerpt / 版本号过时 → 信息不一致
+
+### 内容文件清单（每组必须三语齐全）
+
+| 组别 | 文件 |
+|---|---|
+| 首页 | `index.md` / `index.zh.md` / `index.ja.md` |
+| About | `about.md` / `about.zh.md` / `about.ja.md` |
+| Projects | `projects.md` / `projects.zh.md` / `projects.ja.md` |
+| aitm 产品页 | `aitm.md` / `aitm.zh.md` / `aitm.ja.md` |
+| PDLC 产品页 | `pdlc.md` / `pdlc.zh.md` / `pdlc.ja.md` |
+| arcade 产品页 | `arcade.md` / `arcade.zh.md` / `arcade.ja.md` |
+| 博客文章 | `_posts/YYYY-MM-DD-slug.md` (en) / `.zh.md` / `.ja.md` |
+
+> ⚠️ `_posts/*.md` 默认语言（en）**无后缀**，其他语言用 `.zh.md` / `.ja.md`。早期违规（无后缀但 lang: zh）已在 PR #14 规整。**新建文章必须遵守该命名**。
+
+### Frontmatter 必填字段（三语都要）
+
+| 字段 | 三语都要？ | 例 |
+|---|---|---|
+| `lang` | ✅ 必填，单字符代码 `en` / `zh` / `ja` | `lang: zh` |
+| `title` | ✅ 各语言写各语言的标题 | EN: "PDLC: turn..." / ZH: "PDLC：把..." |
+| `description` | ✅ 各语言写各语言版本（不许跨语言重用！） | 中文文件不写英文 description |
+| `excerpt`（_posts） | ✅ 各语言对等翻译 | — |
+| `permalink` | ✅ 三语共用同一个（polyglot 自动加前缀） | `/aitm/` 在三个文件里都写 |
+
+### 共用资源清单（**不**分语言，三语共用一份）
+
+| 路径 | 说明 |
+|---|---|
+| `assets/`（图片 / 下载文件 / 静态 JSON） | 已在 `_config.yml` `exclude_from_localization` |
+| `arcade/`（工具 SPA dist） | 同上 |
+| `_data/i18n.yml` | UI 框架文案库（nav / footer / search / post / tags / not_found / site_title / site_description）按语言键分组 |
+
+**新增需要"全语言文案"的字符串时**，加进 `_data/i18n.yml` 而不是写死在 layout 里。
+
+### 跨语言修改检查清单（每次提交三语相关改动时跑一遍）
+
+- [ ] 三语文件都已修改？（用 `git status` 验证有 3 个 .md 变更）
+- [ ] 三语 `description` 都用对应语言写了？没有出现"英文文件含中文描述"？
+- [ ] 如果新建一组三语文件，`_data/i18n.yml` 里有没有需要补的字符串？
+- [ ] _posts 文件名是否符合规范（默认 lang 无后缀，其他 lang 加 `.zh.md` / `.ja.md`）？
+- [ ] hreflang 链接是否能从一种语言切到另外两种？（看 `_layouts/default.html` 的 hreflang 生成逻辑，对博客文章会自动加 `.lang.html` 后缀）
+
+---
+
+## SEO 红线 ⭐
+
+### 必守约束
+
+1. **`sitemap.xml`**：由 `jekyll-sitemap` 插件自动生成；**不要手动改**。已知问题：当前 sitemap 只列默认 lang URL，缺多语言副本——靠 hreflang 链让 Google 自己发现，目前可接受。完整覆盖待后续手写 sitemap.xml.liquid。
+2. **`robots.txt`**：手维护文件（在仓库根）。当前禁止抓 `/arcade/play/`（SPA 空壳）。新加任何"低质量页面 / 工具页"也要在这里 Disallow。
+3. **arcade 工具 SPA**：必须保持 `<meta name="robots" content="noindex,follow">`（在 arcade_emulator 源码 `index.html`）。每次重 build + sync 不要丢这条。
+4. **canonical**：当前由 `jekyll-seo-tag` 自动生成。**已知问题**：非默认 lang 页面的 canonical 会错误指向 `/`（polyglot + seo-tag 兼容性）。临时容忍，因为 hreflang 提供了正确的语言关联。**未来修复**：在所有 `.zh.md` / `.ja.md` 加 frontmatter `canonical_url:` 字段显式声明。
+5. **hreflang**：在 `_layouts/default.html` 自动生成，能正确处理 `.lang.html` 后缀（PR #16）。**新增页面 / 新文章不需要手动设 hreflang**，layout 自动加。
+6. **三语 description 严格分语言写**（见上节多语言约束）。
+7. **每个页面只有 1 个 `<h1>`**。多 `<h1>` 会拖累 SEO 评分。
+8. **CSP 不可以拦截 GA / sitemap 爬虫**（当前白名单已含 googletagmanager + google-analytics）。改 CSP 时确认这一点。
+
+### 新增页面时的 SEO checklist
+
+- [ ] `title` 三语都写了？
+- [ ] `description` 三语都写了？
+- [ ] 是否会被 `jekyll-sitemap` 列入？（permalink 在 `_config.yml` `exclude_from_localization` 内的资源不会被列入）
+- [ ] 内容是否会拖低站点平均质量？（SPA 空壳、占位页等应加 `noindex`）
+- [ ] hreflang 在 layout 中生成正确吗？（curl `_site/<path>` 看 `<link rel="alternate" hreflang=...>`）
+
+### 已知遗留 SEO 项（按优先级）
+
+| 项 | 优先级 | 说明 |
+|---|---|---|
+| polyglot + jekyll-seo-tag canonical 错误 | P1 | 非默认 lang 页 canonical 指 `/`。临时容忍 |
+| sitemap 缺多语言副本 | P2 | 靠 hreflang 链发现，但官方 sitemap 应完整 |
+| og:image 缺失 | P2 | 社交分享无缩略图 |
+| 自定义 404 页 | P3 | 当前 GitHub Pages 默认 |
+| og:locale 用 `en` 而非 `en_US` | P3 | 小问题 |
+
+---
+
 ## aitm 安装包升级流程（重要）
 
 aitm 桌面端会拉 `https://kanfu-panda.github.io/assets/aitm/latest.json` 做 update_check。

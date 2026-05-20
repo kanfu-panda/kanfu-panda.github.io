@@ -42,6 +42,7 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-polyglot
+  - jekyll-sitemap
 
 # 导航菜单
 header_pages:
