@@ -123,7 +123,7 @@ description: aitm — 一个把 AI 能力做进终端的桌面应用，支持 ma
 <div class="about-grid">
     <div class="about-card">
         <h3>🍎 macOS Apple Silicon</h3>
-        <p>dmg · 6.5 MB · aarch64（M1/M2/M3/M4）</p>
+        <p>dmg · 6.8 MB · aarch64（M1/M2/M3/M4）</p>
         <p style="margin-top: 1rem;">
             <a href="/assets/downloads/aitm_0.9.0_aarch64.dmg" class="cta-button" download>下载 .dmg →</a>
         </p>
