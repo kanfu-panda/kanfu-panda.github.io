@@ -3,6 +3,7 @@ layout: default
 title: arcade
 permalink: /arcade/
 lang: zh
+description: 一个跑在浏览器里的街机模拟器。本地文件自传，全程在浏览器的 WASM 沙箱里完成，零上传。仅供个人娱乐，合法用途。
 ---
 
 <div class="hero-section">

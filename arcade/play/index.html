@@ -5,7 +5,10 @@
     <link rel="icon" type="image/svg+xml" href="./joystick.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="referrer" content="no-referrer" />
-    <meta name="robots" content="index,follow" />
+    <!-- 这是个 React SPA 空壳（HTML 内容由 JS 运行时渲染），对搜索引擎
+         几乎没有可索引信息。索引它会被算成"低质量页面"，拖低站点权重。
+         入口介绍页在博客侧 /arcade/，那个才是给爬虫看的。 -->
+    <meta name="robots" content="noindex,follow" />
 
     <!--
       内容安全策略（CSP）：本应用与博客主站完全分离，独立 CSP。

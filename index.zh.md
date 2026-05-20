@@ -3,6 +3,7 @@ layout: default
 title: 首页
 lang: zh
 permalink: /
+description: 一个热爱技术的开发者的个人博客 —— 记录写代码的心得、用过的工具、和我一直在折腾的项目。
 ---
 
 <div class="hero-section">

@@ -1,0 +1,12 @@
+---
+permalink: /robots.txt
+layout: null
+---
+User-agent: *
+Allow: /
+
+# arcade 工具页是 SPA 空壳（实际内容由 JS 运行时渲染），HTML 几乎为空
+# 让搜索引擎跳过这里，避免被打成"低质量页面"拖低站点权重
+Disallow: /arcade/play/
+
+Sitemap: {{ site.url }}/sitemap.xml

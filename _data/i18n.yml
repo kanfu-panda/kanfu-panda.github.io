@@ -3,6 +3,7 @@
 # 新增语言时同步补齐 3 个语言键。
 
 en:
+  site_title: Kanfu Panda's Blog
   site_description: A developer who loves technology — notes, tools, and the occasional rabbit hole.
   nav:
     about: About
@@ -33,6 +34,7 @@ en:
     home: Back to home
 
 zh:
+  site_title: 功夫熊猫的博客
   site_description: 一个热爱技术的开发者的个人博客。
   nav:
     about: 关于
@@ -63,6 +65,7 @@ zh:
     home: 回到首页
 
 ja:
+  site_title: カンフーパンダのブログ
   site_description: テクノロジー好き開発者の個人ブログ。
   nav:
     about: プロフィール

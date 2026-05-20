@@ -3,6 +3,7 @@ layout: default
 title: 项目展示
 permalink: /projects/
 lang: zh
+description: 个人项目与开源贡献清单 —— aitm 桌面终端、PDLC Claude Code 插件、浏览器街机模拟器，以及这个博客本身。
 ---
 
 # 项目展示

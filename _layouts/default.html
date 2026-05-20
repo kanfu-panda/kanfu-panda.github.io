@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 {%- assign lang = page.lang | default: site.active_lang | default: site.default_lang -%}
 {%- assign t = site.data.i18n[lang] -%}
+{%- assign localized_site_title = t.site_title | default: site.title -%}
+{%- assign localized_site_description = t.site_description | default: site.description -%}
 {%- assign html_lang_attr = lang | replace: "zh", "zh-CN" | replace: "ja", "ja-JP" | replace: "en", "en-US" -%}
 <html lang="{{ html_lang_attr }}">
 <head>
@@ -10,7 +12,7 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; font-src 'self' data: https://cdnjs.cloudflare.com; img-src 'self' data: https://www.google-analytics.com https://*.githubusercontent.com https://*.gravatar.com; connect-src 'self' https://api.github.com https://www.google-analytics.com https://*.analytics.google.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://github.com">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
-    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ localized_site_title }}</title>
 
     {% if site.gitalk.enable and site.gitalk.clientID != empty and site.gitalk.clientSecret != empty and page.layout == 'post' and jekyll.environment == 'production' %}
     <!-- Gitalk (锁版本 + SRI；升级时需重新生成 integrity，方法见 SECURITY.md) -->
@@ -33,29 +35,43 @@
             crossorigin="anonymous"></script>
     {% seo %}
 
-    {%- comment -%} canonical_path：去掉 /<lang>/ 前缀后的"裸"路径，供 hreflang 与语言切换器使用 {%- endcomment -%}
-    {%- assign canonical_path = page.url -%}
+    {%- comment -%}
+      naked_path：去掉 /<lang>/ 前缀 与 .<lang>.html 后缀后的"裸"路径。
+      用于生成各语言版本的 hreflang URL：
+        - default_lang：naked_path 本身
+        - 其他 lang：/<lang> + naked_path 改后缀为 .<lang>.html（若为 .html 结尾）
+      博客文章 URL 形如 /blog/.../slug.zh.html、/zh/blog/.../slug.zh.html，
+      产品页形如 /aitm/、/zh/aitm/。两种结构都正确处理。
+    {%- endcomment -%}
+    {%- assign naked_path = page.url -%}
     {%- if lang != site.default_lang -%}
       {%- assign lang_prefix = "/" | append: lang -%}
       {%- assign lang_prefix_slash = lang_prefix | append: "/" -%}
-      {%- if canonical_path == lang_prefix_slash -%}
-        {%- assign canonical_path = "/" -%}
-      {%- elsif canonical_path == lang_prefix -%}
-        {%- assign canonical_path = "/" -%}
+      {%- if naked_path == lang_prefix_slash or naked_path == lang_prefix -%}
+        {%- assign naked_path = "/" -%}
       {%- else -%}
-        {%- assign canonical_path = canonical_path | remove_first: lang_prefix -%}
+        {%- assign naked_path = naked_path | remove_first: lang_prefix -%}
+      {%- endif -%}
+      {%- assign lang_suffix = "." | append: lang | append: ".html" -%}
+      {%- if naked_path contains lang_suffix -%}
+        {%- assign naked_path = naked_path | replace: lang_suffix, ".html" -%}
       {%- endif -%}
     {%- endif -%}
     <!-- hreflang：全部用 static_href 包裹，让 polyglot 的 URL relativize 跳过 -->
     {%- for l in site.languages -%}
       {%- if l == site.default_lang -%}
-        {%- assign alt_path = canonical_path -%}
+        {%- assign alt_path = naked_path -%}
       {%- else -%}
-        {%- assign alt_path = "/" | append: l | append: canonical_path -%}
+        {%- assign target_suffix = "." | append: l | append: ".html" -%}
+        {%- if naked_path contains ".html" -%}
+          {%- assign alt_path = "/" | append: l | append: naked_path | replace_first: ".html", target_suffix -%}
+        {%- else -%}
+          {%- assign alt_path = "/" | append: l | append: naked_path -%}
+        {%- endif -%}
       {%- endif -%}
       <link rel="alternate" hreflang="{{ l }}" {% static_href %}href="{{ site.url }}{{ alt_path }}"{% endstatic_href %}>
     {%- endfor -%}
-    <link rel="alternate" hreflang="x-default" {% static_href %}href="{{ site.url }}{{ canonical_path }}"{% endstatic_href %}>
+    <link rel="alternate" hreflang="x-default" {% static_href %}href="{{ site.url }}{{ naked_path }}"{% endstatic_href %}>
 
       <!-- Google Analytics -->
     {% if jekyll.environment == 'production' and site.google_analytics != empty %}
@@ -73,7 +89,7 @@
 <body>
     <header class="site-header">
         <div class="wrapper">
-            <a class="site-title" href="{% if lang == site.default_lang %}{{ '/' | relative_url }}{% else %}{{ '/' | append: lang | append: '/' | relative_url }}{% endif %}">{{ site.title }}</a>
+            <a class="site-title" href="{% if lang == site.default_lang %}{{ '/' | relative_url }}{% else %}{{ '/' | append: lang | append: '/' | relative_url }}{% endif %}">{{ localized_site_title }}</a>
             <nav class="site-nav">
                 <button class="menu-icon" aria-label="{{ t.nav.menu_toggle_aria }}">
                     <span></span>
@@ -102,9 +118,14 @@
                     <div class="lang-switcher-menu" role="menu">
                         {% for l in site.languages %}
                           {%- if l == site.default_lang -%}
-                            {%- assign target_url = canonical_path -%}
+                            {%- assign target_url = naked_path -%}
                           {%- else -%}
-                            {%- assign target_url = "/" | append: l | append: canonical_path -%}
+                            {%- assign sw_target_suffix = "." | append: l | append: ".html" -%}
+                            {%- if naked_path contains ".html" -%}
+                              {%- assign target_url = "/" | append: l | append: naked_path | replace_first: ".html", sw_target_suffix -%}
+                            {%- else -%}
+                              {%- assign target_url = "/" | append: l | append: naked_path -%}
+                            {%- endif -%}
                           {%- endif -%}
                           <a {% static_href %}href="{{ target_url }}"{% endstatic_href %} role="menuitem" data-lang="{{ l }}" {% if l == lang %}class="current"{% endif %}>
                             {% if l == 'en' %}English{% elsif l == 'zh' %}中文{% elsif l == 'ja' %}日本語{% endif %}
@@ -127,7 +148,7 @@
     </main>
     <footer class="site-footer">
         <div class="wrapper">
-            <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}. {{ t.footer.built_with }}</p>
+            <p>&copy; {{ site.time | date: '%Y' }} {{ localized_site_title }}. {{ t.footer.built_with }}</p>
         </div>
     </footer>
 

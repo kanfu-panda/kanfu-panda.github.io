@@ -3,6 +3,7 @@ layout: default
 title: Projects
 permalink: /projects/
 lang: en
+description: Personal projects and open-source contributions — aitm desktop terminal, PDLC Claude Code plugin, browser-based arcade emulator, and this blog itself.
 ---
 
 # Projects
