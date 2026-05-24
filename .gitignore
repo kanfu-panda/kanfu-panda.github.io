@@ -52,3 +52,6 @@ rubyinstaller.exe
 *.bak
 *.tmp
 changes.patch
+
+# codegraph index (auto-added by ~/.claude/hooks/auto-codegraph-init.sh)
+.codegraph/
