@@ -5,7 +5,7 @@ date: 2026-05-14
 lang: en
 categories: [blog]
 tags: [aitm, terminal, AI, macOS, Windows, tool]
-excerpt: "A desktop terminal app with AI built in, for macOS and Windows. The AI can read files, search command history, and run commands on demand — every high-risk action waits for your explicit OK. Latest version: v0.9.1."
+excerpt: "A desktop terminal app with AI built in, for macOS and Windows. The AI can read files, search command history, and run commands on demand — every high-risk action waits for your explicit OK. Latest version: v0.10.6."
 ---
 
 ## What it is
