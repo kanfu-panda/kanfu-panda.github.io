@@ -1,5 +1,5 @@
 {
-  "version": "0.9.1",
-  "download_url": "https://kanfu-panda.github.io/assets/downloads/aitm_0.9.1_aarch64.dmg",
-  "notes": "终端会话工作目录可完整恢复；编辑器配色与状态栏信息体验升级。"
+  "version": "0.10.6",
+  "download_url": "https://kanfu-panda.github.io/assets/downloads/aitm_0.10.6_aarch64.dmg",
+  "notes": "macOS 菜单栏完整 i18n；终端 / 编辑器支持 ⌘± / ⌘0 字号缩放；终端 tab 右键菜单与跨 group 拖拽；文件预览双击放大修复。"
 }
