@@ -135,14 +135,22 @@ description: aitm — a desktop terminal app with AI built in, available for mac
         <h3>🪟 Windows x86_64</h3>
         <p>Intel / AMD 64-bit</p>
         <p style="margin-top: 1rem;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0" class="cta-button">Coming soon (see Releases →)</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.0.0/aitm_1.0.0_x64_en-US.msi" class="cta-button">Download .msi · x64 →</a>
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.85em;">
+            or <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.0.0/aitm_1.0.0_x64-setup.exe">NSIS .exe</a> ·
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0">Release page</a>
         </p>
     </div>
     <div class="about-card">
         <h3>🪟 Windows ARM64</h3>
         <p>Surface Pro X / Snapdragon</p>
         <p style="margin-top: 1rem;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0" class="cta-button">Coming soon (see Releases →)</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.0.0/aitm_1.0.0_arm64_en-US.msi" class="cta-button">Download .msi · ARM64 →</a>
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.85em;">
+            or <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.0.0/aitm_1.0.0_arm64-setup.exe">NSIS .exe</a> ·
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0">Release page</a>
         </p>
     </div>
 </div>
