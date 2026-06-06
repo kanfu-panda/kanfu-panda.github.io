@@ -135,14 +135,22 @@ description: aitm — 一个把 AI 能力做进终端的桌面应用，支持 ma
         <h3>🪟 Windows x86_64</h3>
         <p>Intel / AMD 64 位</p>
         <p style="margin-top: 1rem;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0" class="cta-button">即将推出（查看 Releases →）</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.0.0/aitm_1.0.0_x64_en-US.msi" class="cta-button">下载 .msi · x64 →</a>
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.85em;">
+            或 <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.0.0/aitm_1.0.0_x64-setup.exe">NSIS .exe</a> ·
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0">Release 页面</a>
         </p>
     </div>
     <div class="about-card">
         <h3>🪟 Windows ARM64</h3>
         <p>Surface Pro X / 骁龙笔记本</p>
         <p style="margin-top: 1rem;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0" class="cta-button">即将推出（查看 Releases →）</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.0.0/aitm_1.0.0_arm64_en-US.msi" class="cta-button">下载 .msi · ARM64 →</a>
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.85em;">
+            或 <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.0.0/aitm_1.0.0_arm64-setup.exe">NSIS .exe</a> ·
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0">Release 页面</a>
         </p>
     </div>
 </div>
