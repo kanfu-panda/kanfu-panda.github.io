@@ -118,64 +118,42 @@ description: aitm — 一个把 AI 能力做进终端的桌面应用，支持 ma
 
 <h2 id="download">⬇️ 下载</h2>
 
-**当前版本：v0.10.6**
+**当前版本：v1.0.0**
 
 <div class="about-grid">
     <div class="about-card">
         <h3>🍎 macOS Apple Silicon</h3>
-        <p>dmg · 6.8 MB · aarch64（M1/M2/M3/M4）</p>
+        <p>dmg · 6.5 MB · aarch64（M1/M2/M3/M4）</p>
         <p style="margin-top: 1rem;">
-            <a href="/assets/downloads/aitm_0.10.6_aarch64.dmg" class="cta-button" download>下载 .dmg →</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.0.0/aitm_1.0.0_aarch64.dmg" class="cta-button">下载 .dmg →</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            <a href="/assets/downloads/aitm_0.10.6_aarch64.dmg.sha256">SHA256</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0">Release 页面</a>
         </p>
     </div>
     <div class="about-card">
         <h3>🪟 Windows x86_64</h3>
         <p>Intel / AMD 64 位</p>
         <p style="margin-top: 1rem;">
-            <a href="/assets/downloads/aitm_0.10.6_x64_en-US.msi" class="cta-button" download>下载 .msi · 7.3 MB →</a>
-        </p>
-        <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            或 <a href="/assets/downloads/aitm_0.10.6_x64-setup.exe" download>NSIS .exe · 5.6 MB</a> ·
-            <a href="/assets/downloads/aitm_0.10.6_x64_en-US.msi.sha256">SHA256 (msi)</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0" class="cta-button">即将推出（查看 Releases →）</a>
         </p>
     </div>
     <div class="about-card">
         <h3>🪟 Windows ARM64</h3>
         <p>Surface Pro X / 骁龙笔记本</p>
         <p style="margin-top: 1rem;">
-            <a href="/assets/downloads/aitm_0.10.6_arm64_en-US.msi" class="cta-button" download>下载 .msi · 6.9 MB →</a>
-        </p>
-        <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            或 <a href="/assets/downloads/aitm_0.10.6_arm64-setup.exe" download>NSIS .exe · 5.0 MB</a> ·
-            <a href="/assets/downloads/aitm_0.10.6_arm64_en-US.msi.sha256">SHA256 (msi)</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0" class="cta-button">即将推出（查看 Releases →）</a>
         </p>
     </div>
 </div>
 
 ### 安装步骤 — macOS
 
-> ⚠️ aitm 当前阶段尚未带 Apple Developer 签名。macOS 会给通过浏览器下载的未签名 .app 自动加 quarantine 标记，双击启动会报 **"aitm 已损坏，无法打开"** —— 这是 Gatekeeper 的误导文案，文件本身没问题。dmg 内已附带一键安装脚本帮你处理。
+aitm 已经过 Apple Developer ID 签名和公证，Gatekeeper 会自动放行。
 
-1. 下载并打开上面的 dmg，Finder 会显示三个图标：
-   - `aitm.app`
-   - `Applications`（指向 /Applications 的符号链接）
-   - `install-aitm.command`
-2. **双击 `install-aitm.command`**（macOS 会自动用终端执行）
-   - 它会把 `aitm.app` 拷到 `/Applications/`
-   - 同时清掉 quarantine 标记
-3. 看到 `✅ 安装完成` 后按任意键关掉终端窗口
-4. 通过 Launchpad 或 Spotlight 搜 "aitm" 启动
-
-如果 dmg 内的 `install-aitm.command` 没法运行，可以单独下载 <a href="/assets/downloads/install-aitm.sh">install-aitm.sh</a> 作为后备方案：
-
-```bash
-bash ~/Downloads/install-aitm.sh
-```
-
-脚本无需 `sudo`，只会操作 `/Applications/aitm.app` 和你指定的 dmg。
+1. 下载并打开 dmg
+2. 把 aitm.app 拖到 Applications 文件夹
+3. 通过 Launchpad 或 Spotlight 启动（搜索 "aitm"）
 
 ### 安装步骤 — Windows
 
@@ -201,12 +179,12 @@ bash ~/Downloads/install-aitm.sh
 
 ```bash
 # macOS / Linux / Windows 上的 Git Bash
-shasum -a 256 path/to/aitm_0.10.6_<arch>.<ext>
+shasum -a 256 path/to/aitm_1.0.0_<arch>.<ext>
 ```
 
 ```powershell
 # Windows PowerShell
-(Get-FileHash path\to\aitm_0.10.6_<arch>.<ext> -Algorithm SHA256).Hash.ToLower()
+(Get-FileHash path\to\aitm_1.0.0_<arch>.<ext> -Algorithm SHA256).Hash.ToLower()
 ```
 
 <h2 id="first-use">🚀 第一次使用</h2>
@@ -234,10 +212,10 @@ shasum -a 256 path/to/aitm_0.10.6_<arch>.<ext>
 ## ❓ 常见问题
 
 **Q：macOS 双击 `aitm.app` 提示 "已损坏，无法打开"？**
-是 Gatekeeper 误报，因为 aitm 暂时还没做代码签名。按 [安装步骤](#download) 里的 `install-aitm.command` / `install-aitm.sh` 跑一遍即可。
+aitm v1.0.0 已通过 Apple Developer ID 签名和公证，正常下载安装不会出现此提示。如果你在使用旧版本，请升级到 v1.0.0。
 
 **Q：Windows 弹 "Windows 已保护你的电脑" SmartScreen 提示？**
-和 macOS 那条同根：aitm 暂时未对 Windows 安装包做代码签名。点 **更多信息 → 仍要运行** 即可。后续会跟进签名证书。
+和 macOS 那条同根：aitm v1.0.0 的 Windows 安装包暂时还未做代码签名。点 **更多信息 → 仍要运行** 即可。后续会跟进签名证书。
 
 **Q：现在支持哪些平台？**
 macOS Apple Silicon（M1/M2/M3/M4）+ Windows 双架构（x86_64 与 ARM64，覆盖 Surface Pro X 与骁龙笔记本）。Intel Mac 与 Linux 仍在路线图上。
