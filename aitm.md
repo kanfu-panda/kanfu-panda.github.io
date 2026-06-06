@@ -118,64 +118,42 @@ description: aitm — a desktop terminal app with AI built in, available for mac
 
 <h2 id="download">⬇️ Download</h2>
 
-**Current version: v0.10.6**
+**Current version: v1.0.0**
 
 <div class="about-grid">
     <div class="about-card">
         <h3>🍎 macOS Apple Silicon</h3>
-        <p>dmg · 6.8 MB · aarch64 (M1/M2/M3/M4)</p>
+        <p>dmg · 6.5 MB · aarch64 (M1/M2/M3/M4)</p>
         <p style="margin-top: 1rem;">
-            <a href="/assets/downloads/aitm_0.10.6_aarch64.dmg" class="cta-button" download>Download .dmg →</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.0.0/aitm_1.0.0_aarch64.dmg" class="cta-button">Download .dmg →</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            <a href="/assets/downloads/aitm_0.10.6_aarch64.dmg.sha256">SHA256</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0">Release page</a>
         </p>
     </div>
     <div class="about-card">
         <h3>🪟 Windows x86_64</h3>
         <p>Intel / AMD 64-bit</p>
         <p style="margin-top: 1rem;">
-            <a href="/assets/downloads/aitm_0.10.6_x64_en-US.msi" class="cta-button" download>Download .msi · 7.3 MB →</a>
-        </p>
-        <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            or <a href="/assets/downloads/aitm_0.10.6_x64-setup.exe" download>NSIS .exe · 5.6 MB</a> ·
-            <a href="/assets/downloads/aitm_0.10.6_x64_en-US.msi.sha256">SHA256 (msi)</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0" class="cta-button">Coming soon (see Releases →)</a>
         </p>
     </div>
     <div class="about-card">
         <h3>🪟 Windows ARM64</h3>
         <p>Surface Pro X / Snapdragon</p>
         <p style="margin-top: 1rem;">
-            <a href="/assets/downloads/aitm_0.10.6_arm64_en-US.msi" class="cta-button" download>Download .msi · 6.9 MB →</a>
-        </p>
-        <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            or <a href="/assets/downloads/aitm_0.10.6_arm64-setup.exe" download>NSIS .exe · 5.0 MB</a> ·
-            <a href="/assets/downloads/aitm_0.10.6_arm64_en-US.msi.sha256">SHA256 (msi)</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0" class="cta-button">Coming soon (see Releases →)</a>
         </p>
     </div>
 </div>
 
 ### Install steps — macOS
 
-> ⚠️ aitm doesn't yet ship with an Apple Developer signature. macOS automatically attaches a quarantine attribute to any unsigned .app downloaded via browser — double-clicking will show **"aitm is damaged and can't be opened"**. That's a misleading Gatekeeper message; the file is fine. The dmg includes a one-click install script to handle this for you.
+aitm is signed with an Apple Developer ID and notarized — Gatekeeper will let it through automatically.
 
-1. Download and open the dmg above. Finder will show three icons:
-   - `aitm.app`
-   - `Applications` (symlink to /Applications)
-   - `install-aitm.command`
-2. **Double-click `install-aitm.command`** (macOS opens it in Terminal automatically)
-   - It copies `aitm.app` to `/Applications/`
-   - And clears the quarantine attribute
-3. When you see `✅ Install complete`, press any key to close the Terminal window
-4. Launch via Launchpad or Spotlight: search "aitm"
-
-If the bundled `install-aitm.command` fails for any reason, you can download <a href="/assets/downloads/install-aitm.sh">install-aitm.sh</a> separately as a fallback:
-
-```bash
-bash ~/Downloads/install-aitm.sh
-```
-
-The script doesn't require `sudo` and only touches `/Applications/aitm.app` and the dmg you point it at.
+1. Download and open the dmg above
+2. Drag `aitm.app` to the `Applications` folder
+3. Launch via Launchpad or Spotlight: search "aitm"
 
 ### Install steps — Windows
 
@@ -201,12 +179,12 @@ Each installer ships with a `.sha256` file. Compare yours against it:
 
 ```bash
 # macOS / Linux / Git Bash on Windows
-shasum -a 256 path/to/aitm_0.10.6_<arch>.<ext>
+shasum -a 256 path/to/aitm_1.0.0_<arch>.<ext>
 ```
 
 ```powershell
 # Windows PowerShell
-(Get-FileHash path\to\aitm_0.10.6_<arch>.<ext> -Algorithm SHA256).Hash.ToLower()
+(Get-FileHash path\to\aitm_1.0.0_<arch>.<ext> -Algorithm SHA256).Hash.ToLower()
 ```
 
 <h2 id="first-use">🚀 First-time use</h2>
@@ -234,10 +212,10 @@ shasum -a 256 path/to/aitm_0.10.6_<arch>.<ext>
 ## ❓ FAQ
 
 **Q: Double-clicking `aitm.app` (macOS) says "damaged, can't open"?**
-That's a Gatekeeper false alarm because aitm isn't yet code-signed. Run `install-aitm.command` / `install-aitm.sh` per the [install steps](#download).
+aitm is signed and notarized with an Apple Developer ID — Gatekeeper should let it through automatically. If you see this error, make sure you downloaded the dmg from the [official release page](https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0) and that the file wasn't corrupted in transit (verify the SHA256 checksum).
 
 **Q: Windows shows a "Windows protected your PC" SmartScreen warning?**
-Same root cause as the macOS one — aitm isn't code-signed yet. Click **More info → Run anyway**. We're tracking signing certificates for a future release.
+aitm for Windows isn't code-signed yet. Click **More info → Run anyway**. We're tracking signing certificates for a future release.
 
 **Q: Which platforms are supported?**
 macOS Apple Silicon (M1/M2/M3/M4) and Windows on both x86_64 and ARM64 (Surface Pro X, Snapdragon laptops). Intel Mac and Linux are still on the roadmap.

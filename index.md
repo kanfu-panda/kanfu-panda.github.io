@@ -69,3 +69,26 @@ description: A developer who loves technology — notes on coding, tools, and th
         </div>
     </div>
 </div>
+
+<div class="content-section">
+    <div class="featured-projects">
+        <h2>🚀 Projects</h2>
+        <div class="about-grid">
+            <div class="about-card">
+                <h3><a href="/aitm/">aitm</a></h3>
+                <p>AI-native desktop terminal — multi-tab PTY + AI sidebar + tool-calling. Tauri 2 + React 19 + Rust. 5.3 MB, 3-5ms cold start.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.85em;">
+                    <a href="/aitm/">Product page</a> · <a href="https://github.com/kanfu-panda/aitm">GitHub</a> · <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0">v1.0.0 ↓</a>
+                </p>
+            </div>
+            <div class="about-card">
+                <h3><a href="/pdlc/">PDLC</a></h3>
+                <p>Claude Code plugin — 33 standardized dev lifecycle stages as slash commands. Hard contracts, state machine, TDD-first.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.85em;">
+                    <a href="/pdlc/">Product page</a> · <a href="https://github.com/kanfu-panda/pdlc-skills">GitHub</a>
+                </p>
+            </div>
+        </div>
+        <p style="margin-top: 1rem;"><a href="/projects/">All projects →</a></p>
+    </div>
+</div>

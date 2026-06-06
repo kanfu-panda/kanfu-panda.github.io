@@ -14,10 +14,11 @@ A selection of personal projects and open-source contributions. Each one is part
 - **Stack**: Tauri 2 + React 19 + Rust + TypeScript
 - **Summary**: A macOS desktop terminal app that puts AI capabilities directly into the terminal — multi-tab PTY + AI sidebar + tool-calling loop. The AI can read files, search command history, and run commands on demand, with explicit confirmation for any high-risk action.
 - **Learn more**: [aitm product page](/aitm/)
+- **GitHub**: [kanfu-panda/aitm](https://github.com/kanfu-panda/aitm) · [v1.0.0 Release](https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0)
 
 ## PDLC
 - **Stack**: Claude Code plugin (Bash + Markdown templates), MIT license
-- **Summary**: A Claude Code plugin that turns AI-assisted development from soft conventions into hard contracts — 31 standardized stages exposed as slash commands, persisted artifacts under `docs/`, per-feature state machine, mandatory tests-before-code, one-shot auto-repair.
+- **Summary**: A Claude Code plugin that turns AI-assisted development from soft conventions into hard contracts — 33 standardized stages exposed as slash commands, persisted artifacts under `docs/`, per-feature state machine, mandatory tests-before-code, one-shot auto-repair.
 - **Learn more**: [PDLC product page](/pdlc/) · [GitHub](https://github.com/kanfu-panda/pdlc-skills)
 
 ## arcade
