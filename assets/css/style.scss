@@ -52,6 +52,8 @@ body {
     font-weight: bold;
     color: var(--main-color);
     text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .site-nav {
@@ -94,10 +96,12 @@ body {
 }
 
 .site-nav a {
-    margin-left: 1.5rem;
+    margin-left: 1.2rem;
     color: var(--text-color);
     text-decoration: none;
     transition: color 0.3s ease;
+    white-space: nowrap;
+    font-size: 0.95rem;
 }
 
 .site-nav a:hover {
