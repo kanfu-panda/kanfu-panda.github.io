@@ -108,7 +108,6 @@
                 </button>
                 <div class="nav-links">
                     <a href="{% if lang == site.default_lang %}/blog/{% else %}/{{ lang }}/blog/{% endif %}">{{ t.nav.blog }}</a>
-                    <a href="{% if lang == site.default_lang %}/about/{% else %}/{{ lang }}/about/{% endif %}">{{ t.nav.about }}</a>
                     <div class="nav-dropdown">
                         <a href="{% if lang == site.default_lang %}/projects/{% else %}/{{ lang }}/projects/{% endif %}" class="nav-dropdown-toggle" aria-haspopup="true">{{ t.nav.projects }}<span class="caret" aria-hidden="true">▾</span></a>
                         <div class="nav-dropdown-menu" role="menu">
@@ -119,6 +118,7 @@
                     </div>
                     <a href="{% if lang == site.default_lang %}/tags/{% else %}/{{ lang }}/tags/{% endif %}">{{ t.nav.tags }}</a>
                     <a href="{% if lang == site.default_lang %}/search/{% else %}/{{ lang }}/search/{% endif %}">{{ t.nav.search }}</a>
+                    <a href="{% if lang == site.default_lang %}/about/{% else %}/{{ lang }}/about/{% endif %}">{{ t.nav.about }}</a>
                 </div>
 
                 <!-- 语言切换器（全部用 static_href 包裹，防 polyglot 把跨语言链接 rewrite 到当前语言） -->
