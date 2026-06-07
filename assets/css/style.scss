@@ -708,6 +708,36 @@ a:hover {
     }
 }
 
+/* 文章底部署名 */
+.post-author {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+
+    .post-author-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+        color: var(--text-color-secondary, #666);
+        font-size: 0.9rem;
+        transition: color 0.2s;
+
+        &:hover {
+            color: var(--main-color);
+        }
+    }
+
+    .post-author-label {
+        opacity: 0.7;
+    }
+
+    .post-author-name {
+        font-weight: 600;
+        color: var(--main-color);
+    }
+}
+
 /* Post Grid */
 .post-grid {
     display: grid;
