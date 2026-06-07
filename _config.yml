@@ -20,16 +20,9 @@ exclude_from_localization:
 # 并行构建加速
 parallel_localization: true
 
-# Gitalk 评论系统配置
+# Gitalk 评论系统（暂时关闭：clientID/Secret 未配置会显示 Bad credentials）
 gitalk:
-  enable: true
-  clientID: "" # 将从 GitHub Actions 注入
-  clientSecret: "" # 将从 GitHub Actions 注入
-  repo: kanfu-panda.github.io    # 存储评论的 repo
-  owner: kanfu-panda             # 您的 GitHub ID
-  admin: ['kanfu-panda']         # 管理员名单
-  id: location.pathname          # 页面唯一标识
-  language: zh-CN               # 语言设置
+  enable: false
 
 # Analytics settings
 google_analytics: "" # Will be set by GitHub Actions in production
@@ -46,6 +39,7 @@ plugins:
 
 # 导航菜单
 header_pages:
+  - blog.md
   - about.md
   - projects.md
 
