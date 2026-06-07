@@ -120,6 +120,8 @@ description: aitm — a desktop terminal app with AI built in, available for mac
 
 **Current version: v1.0.0**
 
+> Windows binaries are signed using a certificate provided by the [SignPath Foundation](https://signpath.org), a non-profit supporting open-source code signing. macOS binaries are signed and notarized with an Apple Developer ID. See the [Code Signing Policy](https://github.com/kanfu-panda/aitm/blob/main/docs/CODE_SIGNING.md) for details.
+
 <div class="about-grid">
     <div class="about-card">
         <h3>🍎 macOS Apple Silicon</h3>

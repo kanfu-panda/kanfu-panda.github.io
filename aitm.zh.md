@@ -120,6 +120,8 @@ description: aitm — 一个把 AI 能力做进终端的桌面应用，支持 ma
 
 **当前版本：v1.0.0**
 
+> Windows 安装包由 [SignPath Foundation](https://signpath.org)（一家支持开源项目代码签名的非营利组织）提供证书签名。macOS 安装包经 Apple Developer ID 签名和公证。详见 [代码签名政策](https://github.com/kanfu-panda/aitm/blob/main/docs/CODE_SIGNING.md)。
+
 <div class="about-grid">
     <div class="about-card">
         <h3>🍎 macOS Apple Silicon</h3>
