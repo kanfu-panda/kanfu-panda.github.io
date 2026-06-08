@@ -613,6 +613,34 @@ a:hover {
     strong {
         color: var(--main-color);
     }
+
+    /* 表格：minima 默认无边框，列糊在一起；这里补边框/表头底/内边距 */
+    table {
+        width: 100%;
+        margin: 1.5rem 0;
+        border-collapse: collapse;
+        font-size: 0.95rem;
+        /* 窄屏内容超宽时横向滚动，不撑破布局 */
+        display: block;
+        overflow-x: auto;
+    }
+
+    thead th {
+        background: var(--secondary-bg);
+        border-bottom: 2px solid var(--border-color);
+    }
+
+    th,
+    td {
+        padding: 0.5rem 0.85rem;
+        border: 1px solid var(--border-color);
+        text-align: left;
+        vertical-align: top;
+    }
+
+    tbody tr:nth-child(even) {
+        background: var(--secondary-bg);
+    }
 }
 
 /* Hero Section */
