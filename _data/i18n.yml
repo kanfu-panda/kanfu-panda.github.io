@@ -24,6 +24,7 @@ en:
     published_on: Published on
     toc: Table of Contents
     written_by: Written by
+    comments: Comments
     lang_banner: "This post is written in {lang}. Switch to {alt_lang} version of the site or use your browser's translate feature."
     lang_label_zh: Chinese
     lang_label_en: English
@@ -57,6 +58,7 @@ zh:
     published_on: 发布于
     toc: 目录
     written_by: 作者
+    comments: 评论
     lang_banner: "本文为 {lang} 撰写。可切换到 {alt_lang} 站点，或使用浏览器自带的翻译功能。"
     lang_label_zh: 中文
     lang_label_en: 英文
@@ -90,6 +92,7 @@ ja:
     published_on: 公開日
     toc: 目次
     written_by: 著者
+    comments: コメント
     lang_banner: "この記事は{lang}で書かれています。{alt_lang}版サイトに切り替えるか、ブラウザの翻訳機能をご利用ください。"
     lang_label_zh: 中国語
     lang_label_en: 英語
