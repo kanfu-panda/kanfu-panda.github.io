@@ -148,7 +148,7 @@
     </main>
     <footer class="site-footer">
         <div class="wrapper">
-            <p>&copy; {{ site.time | date: '%Y' }} {{ localized_site_title }}. {{ t.footer.built_with }}</p>
+            <p>&copy; {{ site.time | date: '%Y' }} {{ localized_site_title }}</p>
             <p class="site-footer-updated">{{ t.footer.last_updated | default: 'Last updated' }}: {{ site.time | date: '%Y-%m-%d' }}</p>
         </div>
     </footer>
@@ -190,11 +190,14 @@
             );
         }
 
-        // giscus 加载完成（收到 discussion 就绪消息）后，主动推送当前页面主题，
-        // 消除初始主题竞态导致评论框明暗与页面不一致的问题
+        // giscus iframe 一就绪（收到任意 giscus 消息即说明可接收 postMessage）就推送当前主题。
+        // 不能只在带 discussion 的消息上触发——0 评论的页面尚未创建 discussion，那样永不补推，
+        // 会留下初始主题竞态导致的明暗不一致（黑框）。只补推一次即可，后续切换由 toggle 处理。
+        var giscusThemeSynced = false;
         window.addEventListener('message', function (e) {
             if (e.origin !== 'https://giscus.app') return;
-            if (!(e.data && e.data.giscus && e.data.giscus.discussion)) return;
+            if (!(e.data && e.data.giscus) || giscusThemeSynced) return;
+            giscusThemeSynced = true;
             syncGiscusTheme(document.documentElement.getAttribute('data-theme') || 'light');
         });
 
