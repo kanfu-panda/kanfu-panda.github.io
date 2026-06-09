@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; font-src 'self' data: https://cdnjs.cloudflare.com; img-src 'self' data: https://www.google-analytics.com https://*.githubusercontent.com https://*.gravatar.com; connect-src 'self' https://api.github.com https://www.google-analytics.com https://*.analytics.google.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://github.com">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://giscus.app; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; font-src 'self' data: https://cdnjs.cloudflare.com; img-src 'self' data: https://www.google-analytics.com https://*.githubusercontent.com https://*.gravatar.com; connect-src 'self' https://api.github.com https://www.google-analytics.com https://*.analytics.google.com; frame-src https://giscus.app; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://github.com">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <title>{% if page.title %}{{ page.title }} - {% endif %}{{ localized_site_title }}</title>
@@ -23,17 +23,6 @@
     <!-- og:image（社交分享缩略图） -->
     <meta property="og:image" content="{{ site.url }}/assets/images/og-image.png">
     <meta name="twitter:image" content="{{ site.url }}/assets/images/og-image.png">
-
-    {% if site.gitalk.enable and site.gitalk.clientID != empty and site.gitalk.clientSecret != empty and page.layout == 'post' and jekyll.environment == 'production' %}
-    <!-- Gitalk (锁版本 + SRI；升级时需重新生成 integrity，方法见 SECURITY.md) -->
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.css"
-          integrity="sha384-X7z7PUv2B67D8sPJyzDyGZSco1ADwmdI7ed4eCGtTKkClfyDFpPL9WgAn9XVr/Io"
-          crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/gitalk@1.8.0/dist/gitalk.min.js"
-            integrity="sha384-kspnZUWBoSWwoJHa0hBCXYbHGbhvU/lcEH5O8eVbSDhbPwsiVUTp/aGX/z/5EuMA"
-            crossorigin="anonymous"></script>
-    {% endif %}
 
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     <link rel="stylesheet"
@@ -163,24 +152,6 @@
         </div>
     </footer>
 
-    {% if site.gitalk.enable and site.gitalk.clientID != empty and site.gitalk.clientSecret != empty and page.layout == 'post' and jekyll.environment == 'production' %}
-    <div id="gitalk-container"></div>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        var gitalk = new Gitalk({
-          clientID: '{{ site.gitalk.clientID }}',
-          clientSecret: '{{ site.gitalk.clientSecret }}',
-          repo: '{{ site.gitalk.repo }}',
-          owner: '{{ site.gitalk.owner }}',
-          admin: ['{{ site.gitalk.owner }}'],
-          id: location.pathname.substr(0, 50),
-          language: '{{ lang }}' === 'zh' ? 'zh-CN' : ('{{ lang }}' === 'ja' ? 'ja' : 'en')
-        });
-        gitalk.render('gitalk-container');
-      });
-    </script>
-    {% endif %}
-
     <script>
         // === 菜单切换 ===
         document.querySelector('.menu-icon').addEventListener('click', function() {
@@ -200,10 +171,22 @@
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             updateThemeIcon(newTheme);
+            syncGiscusTheme(newTheme);
         });
 
         function updateThemeIcon(theme) {
             icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        // === Giscus 评论框主题联动 ===
+        // 主题切换时通过 postMessage 通知 giscus iframe 同步明暗（iframe 不存在则静默跳过）
+        function syncGiscusTheme(theme) {
+            const frame = document.querySelector('iframe.giscus-frame');
+            if (!frame) return;
+            frame.contentWindow.postMessage(
+                { giscus: { setConfig: { theme: theme === 'dark' ? 'dark' : 'light' } } },
+                'https://giscus.app'
+            );
         }
 
         // === 语言切换器：toggle 菜单 ===
