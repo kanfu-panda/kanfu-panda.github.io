@@ -120,6 +120,7 @@ layout: default
     s.setAttribute('data-reactions-enabled', {{ site.giscus.reactions_enabled | default: '1' | jsonify }});
     s.setAttribute('data-emit-metadata', '0');
     s.setAttribute('data-input-position', {{ site.giscus.input_position | default: 'bottom' | jsonify }});
+    s.setAttribute('data-loading', {{ site.giscus.loading | default: 'lazy' | jsonify }});
     s.setAttribute('data-theme', theme);
     s.setAttribute('data-lang', giscusLang);
     s.setAttribute('crossorigin', 'anonymous');
