@@ -97,6 +97,38 @@ layout: default
     </footer>
 </article>
 
+{%- comment -%} Giscus 评论（基于 GitHub Discussions）。repo_id 配好前不渲染。 {%- endcomment -%}
+{% if site.giscus.enable and site.giscus.repo_id != empty %}
+<section class="post-comments" aria-label="{{ t.post.comments | default: 'Comments' }}">
+    <h2 class="post-comments-title">{{ t.post.comments | default: 'Comments' }}</h2>
+    <div id="giscus-comments"></div>
+</section>
+<script>
+(function () {
+    // 用 JS 动态插入 giscus，以便读取当前明暗主题作为初始 data-theme（主题存在 localStorage，纯客户端）
+    var theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    var uiLang = {{ ui_lang | jsonify }};
+    var giscusLang = uiLang === 'zh' ? 'zh-CN' : (uiLang === 'ja' ? 'ja' : 'en');
+    var s = document.createElement('script');
+    s.src = 'https://giscus.app/client.js';
+    s.setAttribute('data-repo', {{ site.giscus.repo | jsonify }});
+    s.setAttribute('data-repo-id', {{ site.giscus.repo_id | jsonify }});
+    s.setAttribute('data-category', {{ site.giscus.category | jsonify }});
+    s.setAttribute('data-category-id', {{ site.giscus.category_id | jsonify }});
+    s.setAttribute('data-mapping', {{ site.giscus.mapping | default: 'pathname' | jsonify }});
+    s.setAttribute('data-strict', '0');
+    s.setAttribute('data-reactions-enabled', {{ site.giscus.reactions_enabled | default: '1' | jsonify }});
+    s.setAttribute('data-emit-metadata', '0');
+    s.setAttribute('data-input-position', {{ site.giscus.input_position | default: 'bottom' | jsonify }});
+    s.setAttribute('data-theme', theme);
+    s.setAttribute('data-lang', giscusLang);
+    s.setAttribute('crossorigin', 'anonymous');
+    s.async = true;
+    document.getElementById('giscus-comments').appendChild(s);
+})();
+</script>
+{% endif %}
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // 生成目录

@@ -615,6 +615,18 @@ a:hover {
     }
 }
 
+/* 文章评论区（Giscus） */
+.post-comments {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.post-comments-title {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+}
+
 /* Hero Section */
 .hero-section {
     background: var(--secondary-bg);
