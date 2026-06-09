@@ -172,34 +172,14 @@
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             updateThemeIcon(newTheme);
-            syncGiscusTheme(newTheme);
+            // 主题切换时整体重建评论组件（见 post.html 的 renderGiscus），
+            // 避免 giscus setConfig 半切换导致反应区不跟随、输入框跟随的明暗割裂
+            if (window.renderGiscus) window.renderGiscus(newTheme);
         });
 
         function updateThemeIcon(theme) {
             icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
         }
-
-        // === Giscus 评论框主题联动 ===
-        // 主题切换时通过 postMessage 通知 giscus iframe 同步明暗（iframe 不存在则静默跳过）
-        function syncGiscusTheme(theme) {
-            const frame = document.querySelector('iframe.giscus-frame');
-            if (!frame) return;
-            frame.contentWindow.postMessage(
-                { giscus: { setConfig: { theme: theme === 'dark' ? 'dark' : 'light' } } },
-                'https://giscus.app'
-            );
-        }
-
-        // giscus iframe 一就绪（收到任意 giscus 消息即说明可接收 postMessage）就推送当前主题。
-        // 不能只在带 discussion 的消息上触发——0 评论的页面尚未创建 discussion，那样永不补推，
-        // 会留下初始主题竞态导致的明暗不一致（黑框）。只补推一次即可，后续切换由 toggle 处理。
-        var giscusThemeSynced = false;
-        window.addEventListener('message', function (e) {
-            if (e.origin !== 'https://giscus.app') return;
-            if (!(e.data && e.data.giscus) || giscusThemeSynced) return;
-            giscusThemeSynced = true;
-            syncGiscusTheme(document.documentElement.getAttribute('data-theme') || 'light');
-        });
 
         // === 语言切换器：toggle 菜单 ===
         (function () {
