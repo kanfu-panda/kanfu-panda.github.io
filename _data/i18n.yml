@@ -16,6 +16,7 @@ en:
     lang_switcher_aria: Switch language
   footer:
     built_with: Built with Jekyll.
+    last_updated: Last updated
   search:
     heading: Search Posts
     placeholder: Type keywords...
@@ -50,6 +51,7 @@ zh:
     lang_switcher_aria: 切换语言
   footer:
     built_with: Built with Jekyll.
+    last_updated: 最后更新
   search:
     heading: 搜索文章
     placeholder: 输入关键词搜索…
@@ -84,6 +86,7 @@ ja:
     lang_switcher_aria: 言語切替
   footer:
     built_with: Built with Jekyll.
+    last_updated: 最終更新
   search:
     heading: 記事を検索
     placeholder: キーワードを入力…
