@@ -149,6 +149,7 @@
     <footer class="site-footer">
         <div class="wrapper">
             <p>&copy; {{ site.time | date: '%Y' }} {{ localized_site_title }}. {{ t.footer.built_with }}</p>
+            <p class="site-footer-updated">{{ t.footer.last_updated | default: 'Last updated' }}: {{ site.time | date: '%Y-%m-%d' }}</p>
         </div>
     </footer>
 
@@ -188,6 +189,14 @@
                 'https://giscus.app'
             );
         }
+
+        // giscus 加载完成（收到 discussion 就绪消息）后，主动推送当前页面主题，
+        // 消除初始主题竞态导致评论框明暗与页面不一致的问题
+        window.addEventListener('message', function (e) {
+            if (e.origin !== 'https://giscus.app') return;
+            if (!(e.data && e.data.giscus && e.data.giscus.discussion)) return;
+            syncGiscusTheme(document.documentElement.getAttribute('data-theme') || 'light');
+        });
 
         // === 语言切换器：toggle 菜单 ===
         (function () {

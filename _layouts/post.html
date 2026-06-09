@@ -105,8 +105,11 @@ layout: default
 </section>
 <script>
 (function () {
-    // 用 JS 动态插入 giscus，以便读取当前明暗主题作为初始 data-theme（主题存在 localStorage，纯客户端）
-    var theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    // 用 JS 动态插入 giscus。初始主题直接读 localStorage：此脚本在 body 中段执行，
+    // 早于页脚设置 data-theme 的脚本，读 DOM 属性会得到 null（默认 light），故直接读存储的真实值。
+    // 加载完成后页脚的 message 监听还会再推送一次主题，双保险。
+    var pageTheme = (function () { try { return localStorage.getItem('theme'); } catch (e) { return null; } })() || 'light';
+    var theme = pageTheme === 'dark' ? 'dark' : 'light';
     var uiLang = {{ ui_lang | jsonify }};
     var giscusLang = uiLang === 'zh' ? 'zh-CN' : (uiLang === 'ja' ? 'ja' : 'en');
     var s = document.createElement('script');

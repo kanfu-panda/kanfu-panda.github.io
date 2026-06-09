@@ -381,6 +381,15 @@ a:hover {
     padding: 2rem 0;
     color: #6a737d;
     text-align: center;
+
+    p {
+        margin: 0.3rem 0;
+    }
+}
+
+.site-footer-updated {
+    font-size: 0.85rem;
+    opacity: 0.75;
 }
 
 /* Search */
