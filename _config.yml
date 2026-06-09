@@ -20,9 +20,20 @@ exclude_from_localization:
 # 并行构建加速
 parallel_localization: true
 
-# Gitalk 评论系统（暂时关闭：clientID/Secret 未配置会显示 Bad credentials）
-gitalk:
-  enable: false
+# Giscus 评论系统（基于 GitHub Discussions）
+# repo_id / category_id 是公开标识符，不是密钥，可安全入仓（区别于 Gitalk 的 clientSecret）。
+# 启用步骤见 docs/comments-giscus.md：在 giscus.app 生成 repo_id / category_id 填入即可。
+# repo_id 为空时评论框不渲染（安全默认，配好前不报错）。
+giscus:
+  enable: true
+  repo: "kanfu-panda/kanfu-panda.github.io"
+  repo_id: "R_kgDOOzsMhw"           # 公开标识符，非密钥
+  category: "Announcements"
+  category_id: "DIC_kwDOOzsMh84C-y_s"  # 公开标识符，非密钥
+  mapping: "pathname"         # 按 URL 建讨论串（三语各自独立）；改 "og:title" 可三语共享
+  reactions_enabled: "1"
+  input_position: "bottom"
+  loading: "lazy"             # 懒加载：滚动到评论区附近才加载 iframe
 
 # Analytics settings
 google_analytics: "" # Will be set by GitHub Actions in production
