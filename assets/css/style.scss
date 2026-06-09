@@ -655,6 +655,12 @@ a:hover {
     margin-bottom: 1.5rem;
 }
 
+/* giscus iframe 默认是 HTML <iframe> 的 300px 固定宽，需显式撑满容器 */
+.post-comments .giscus,
+.post-comments .giscus-frame {
+    width: 100%;
+}
+
 /* Hero Section */
 .hero-section {
     background: var(--secondary-bg);
