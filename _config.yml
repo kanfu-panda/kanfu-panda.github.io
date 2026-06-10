@@ -31,7 +31,7 @@ giscus:
   category: "Announcements"
   category_id: "DIC_kwDOOzsMh84C-y_s"  # 公开标识符，非密钥
   mapping: "pathname"         # 按 URL 建讨论串（三语各自独立）；改 "og:title" 可三语共享
-  reactions_enabled: "1"
+  reactions_enabled: "0"      # 关闭顶部反应区，评论框更紧凑（空白反应区占高度）
   input_position: "bottom"
   loading: "lazy"             # 懒加载：滚动到评论区附近才加载 iframe
 
