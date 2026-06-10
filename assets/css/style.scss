@@ -668,6 +668,8 @@ a:hover {
 .post-comments .giscus,
 .post-comments .giscus-frame {
     width: 100%;
+    /* 去掉 iframe 默认边框（那圈外框，暗色下尤其难看） */
+    border: none;
     /* 锁定 color-scheme：giscus 的 light 主题没固定 color-scheme，系统深色模式下
        反应区透明背景会跟随系统变黑（上暗下亮割裂）。这里按页面主题强制锁定，覆盖系统偏好。 */
     color-scheme: light;
