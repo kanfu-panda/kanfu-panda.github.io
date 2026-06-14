@@ -20,9 +20,11 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
 
-    <!-- og:image（社交分享缩略图） -->
-    <meta property="og:image" content="{{ site.url }}/assets/images/og-image.png">
-    <meta name="twitter:image" content="{{ site.url }}/assets/images/og-image.png">
+    <!-- og:image（社交分享缩略图）：文章可用 frontmatter `image:` 覆盖，未设则用全站默认 -->
+    {% if page.image %}{% assign og_image = page.image | absolute_url %}{% else %}{% assign og_image = site.url | append: '/assets/images/og-image.png' %}{% endif %}
+    <meta property="og:image" content="{{ og_image }}">
+    <meta name="twitter:image" content="{{ og_image }}">
+    <meta name="twitter:card" content="summary_large_image">
 
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     <link rel="stylesheet"
