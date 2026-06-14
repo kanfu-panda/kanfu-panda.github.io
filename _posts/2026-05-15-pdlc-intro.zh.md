@@ -6,6 +6,7 @@ lang: zh
 categories: [blog]
 tags: [PDLC, Claude Code, AI 工程, 工作流, 开源, MIT]
 excerpt: "AI 助手说'我把功能做完了'但 PRD 只活在对话里、测试'我等会儿补'、跨会话就忘了某功能进展到哪。这些痛点 PDLC 通过 31 个标准化阶段 + Iron Law 5 不变量解决。从动机、实现、应用到能达到的效果，一篇看完。"
+image: /assets/images/posts/pdlc-intro-cover.png
 ---
 
 ## 动机：AI 写代码的几个老毛病

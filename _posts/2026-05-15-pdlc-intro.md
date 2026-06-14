@@ -6,6 +6,7 @@ lang: en
 categories: [blog]
 tags: [PDLC, Claude Code, AI engineering, workflow, open source, MIT]
 excerpt: "AI says 'I built the feature' but the PRD only lives in the chat transcript. Tests get 'added later'. Across sessions, nobody remembers which stage anything is at. PDLC fixes these via 31 standardized stages + an Iron Law of 5 invariants. From motivation to implementation to applied use cases to outcomes — one read."
+image: /assets/images/posts/pdlc-intro-cover.png
 ---
 
 ## Motivation: AI's recurring engineering bad habits
