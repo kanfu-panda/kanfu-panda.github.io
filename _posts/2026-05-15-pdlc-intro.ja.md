@@ -6,6 +6,7 @@ lang: ja
 categories: [blog]
 tags: [PDLC, Claude Code, AI エンジニアリング, ワークフロー, オープンソース, MIT]
 excerpt: "AI が「機能を作りました」と言うが PRD はチャットの中だけ。テストは「あとで追加」。セッションをまたぐと誰もどの機能がどのステージかを覚えていない。PDLC は 31 個の標準化ステージと 5 つの不変条件（Iron Law）でこれを解決する。動機・実装・応用・効果を一気通読。"
+image: /assets/images/posts/pdlc-intro-cover.png
 ---
 
 ## 動機：AI コーディングの常習病
