@@ -5,6 +5,10 @@ baseurl: ""
 url: "https://kanfu-panda.github.io"
 github_username: kanfu-panda
 
+# 发布即生效：不按构建时刻过滤"未来"文章。构建在 UTC，否则本地(GMT+8)当天日期的文章在 UTC 还没到时会被当未来跳过 → 构建成功却 404。
+future: true
+timezone: Asia/Shanghai
+
 # 多语言（jekyll-polyglot）
 # default_lang 是英文：根路径 / 是英文版，/zh/ 是中文版，/ja/ 是日文版
 languages: ["en", "zh", "ja"]
