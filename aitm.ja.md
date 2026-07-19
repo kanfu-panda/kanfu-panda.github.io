@@ -118,41 +118,41 @@ description: aitm — AI を組み込んだデスクトップ向けターミナ�
 
 <h2 id="download">⬇️ ダウンロード</h2>
 
-**現在のバージョン：v1.0.0**
+**現在のバージョン：v1.1.1**
 
-> Windows インストーラーは、オープンソースのコード署名を支援する非営利団体 [SignPath Foundation](https://signpath.org) が提供する証明書で署名されています。macOS バイナリは Apple Developer ID で署名・公証済みです。詳細は [コード署名ポリシー](https://github.com/kanfu-panda/aitm/blob/main/docs/CODE_SIGNING.md) をご覧ください。
+> macOS バイナリは Apple Developer ID で署名・公証済みです。Windows インストーラーはまだコード署名されていません——オープンソースのコード署名を支援する非営利団体 [SignPath Foundation](https://signpath.org) による署名を今後のリリースで導入予定です。詳細は [コード署名ポリシー](https://github.com/kanfu-panda/aitm/blob/main/docs/CODE_SIGNING.md) をご覧ください。
 
 <div class="about-grid">
     <div class="about-card">
         <h3>🍎 macOS Apple Silicon</h3>
-        <p>dmg · 6.5 MB · aarch64（M1/M2/M3/M4）</p>
+        <p>dmg · 6.6 MB · aarch64（M1/M2/M3/M4）</p>
         <p style="margin-top: 1rem;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.0.0/aitm_1.0.0_aarch64.dmg" class="cta-button">.dmg をダウンロード →</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.1.1/aitm_1.1.1_aarch64.dmg" class="cta-button">.dmg をダウンロード →</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0">リリースページ</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.1.1">リリースページ</a>
         </p>
     </div>
     <div class="about-card">
         <h3>🪟 Windows x86_64</h3>
         <p>Intel / AMD 64ビット</p>
         <p style="margin-top: 1rem;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.0.0/aitm_1.0.0_x64_en-US.msi" class="cta-button">ダウンロード .msi · x64 →</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.1.1/aitm_1.1.1_x64_en-US.msi" class="cta-button">ダウンロード .msi · x64 →</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            または <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.0.0/aitm_1.0.0_x64-setup.exe">NSIS .exe</a> ·
-            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0">リリースページ</a>
+            または <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.1.1/aitm_1.1.1_x64-setup.exe">NSIS .exe</a> ·
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.1.1">リリースページ</a>
         </p>
     </div>
     <div class="about-card">
         <h3>🪟 Windows ARM64</h3>
         <p>Surface Pro X / Snapdragon ノート</p>
         <p style="margin-top: 1rem;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.0.0/aitm_1.0.0_arm64_en-US.msi" class="cta-button">ダウンロード .msi · ARM64 →</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.1.1/aitm_1.1.1_arm64_en-US.msi" class="cta-button">ダウンロード .msi · ARM64 →</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            または <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.0.0/aitm_1.0.0_arm64-setup.exe">NSIS .exe</a> ·
-            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0">リリースページ</a>
+            または <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.1.1/aitm_1.1.1_arm64-setup.exe">NSIS .exe</a> ·
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.1.1">リリースページ</a>
         </p>
     </div>
 </div>
@@ -185,16 +185,16 @@ aitm は Apple Developer ID で署名・公証済みです。Gatekeeper が自�
 
 ### 整合性の検証（全プラットフォーム共通）
 
-各インストーラーには対応する `.sha256` ファイルが付属しています。検証コマンド：
+ダウンロードが転送中に破損していないか確認したいですか？SHA-256 ハッシュを計算してください：
 
 ```bash
 # macOS / Linux / Windows 上の Git Bash
-shasum -a 256 path/to/aitm_1.0.0_<arch>.<ext>
+shasum -a 256 path/to/aitm_1.1.1_<arch>.<ext>
 ```
 
 ```powershell
 # Windows PowerShell
-(Get-FileHash path\to\aitm_1.0.0_<arch>.<ext> -Algorithm SHA256).Hash.ToLower()
+(Get-FileHash path\to\aitm_1.1.1_<arch>.<ext> -Algorithm SHA256).Hash.ToLower()
 ```
 
 <h2 id="first-use">🚀 初めて使うとき</h2>
@@ -222,10 +222,10 @@ shasum -a 256 path/to/aitm_1.0.0_<arch>.<ext>
 ## ❓ よくある質問
 
 **Q: macOS で `aitm.app` をダブルクリックすると「壊れているため開けません」と出ます。**
-aitm v1.0.0 は Apple Developer ID で署名・公証済みのため、通常のダウンロードとインストールではこの警告は表示されません。古いバージョンをお使いの場合は v1.0.0 にアップデートしてください。
+aitm v1.1.1 は Apple Developer ID で署名・公証済みのため、通常のダウンロードとインストールではこの警告は表示されません。古いバージョンをお使いの場合は v1.1.1 にアップデートしてください。
 
 **Q: Windows で「Windows によって PC が保護されました」SmartScreen 警告が出ます。**
-macOS と同根：aitm v1.0.0 の Windows インストーラーは現時点で未署名です。**詳細情報 → 実行** をクリックしてください。署名証明書は今後の対応予定です。
+macOS と同根：aitm v1.1.1 の Windows インストーラーは現時点で未署名です。**詳細情報 → 実行** をクリックしてください。署名証明書は今後の対応予定です。
 
 **Q: 対応プラットフォームは？**
 macOS Apple Silicon（M1/M2/M3/M4）と Windows の両アーキテクチャ（x86_64 と ARM64、Surface Pro X や Snapdragon ノートも対応）。Intel Mac と Linux はロードマップ上の課題です。

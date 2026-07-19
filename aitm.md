@@ -118,41 +118,41 @@ description: aitm — a desktop terminal app with AI built in, available for mac
 
 <h2 id="download">⬇️ Download</h2>
 
-**Current version: v1.0.0**
+**Current version: v1.1.1**
 
-> Windows binaries are signed using a certificate provided by the [SignPath Foundation](https://signpath.org), a non-profit supporting open-source code signing. macOS binaries are signed and notarized with an Apple Developer ID. See the [Code Signing Policy](https://github.com/kanfu-panda/aitm/blob/main/docs/CODE_SIGNING.md) for details.
+> macOS binaries are signed and notarized with an Apple Developer ID. Windows binaries aren't code-signed yet — [SignPath Foundation](https://signpath.org) signing (a non-profit supporting open-source code signing) is planned for a future release. See the [Code Signing Policy](https://github.com/kanfu-panda/aitm/blob/main/docs/CODE_SIGNING.md) for details.
 
 <div class="about-grid">
     <div class="about-card">
         <h3>🍎 macOS Apple Silicon</h3>
-        <p>dmg · 6.5 MB · aarch64 (M1/M2/M3/M4)</p>
+        <p>dmg · 6.6 MB · aarch64 (M1/M2/M3/M4)</p>
         <p style="margin-top: 1rem;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.0.0/aitm_1.0.0_aarch64.dmg" class="cta-button">Download .dmg →</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.1.1/aitm_1.1.1_aarch64.dmg" class="cta-button">Download .dmg →</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0">Release page</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.1.1">Release page</a>
         </p>
     </div>
     <div class="about-card">
         <h3>🪟 Windows x86_64</h3>
         <p>Intel / AMD 64-bit</p>
         <p style="margin-top: 1rem;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.0.0/aitm_1.0.0_x64_en-US.msi" class="cta-button">Download .msi · x64 →</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.1.1/aitm_1.1.1_x64_en-US.msi" class="cta-button">Download .msi · x64 →</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            or <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.0.0/aitm_1.0.0_x64-setup.exe">NSIS .exe</a> ·
-            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0">Release page</a>
+            or <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.1.1/aitm_1.1.1_x64-setup.exe">NSIS .exe</a> ·
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.1.1">Release page</a>
         </p>
     </div>
     <div class="about-card">
         <h3>🪟 Windows ARM64</h3>
         <p>Surface Pro X / Snapdragon</p>
         <p style="margin-top: 1rem;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.0.0/aitm_1.0.0_arm64_en-US.msi" class="cta-button">Download .msi · ARM64 →</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.1.1/aitm_1.1.1_arm64_en-US.msi" class="cta-button">Download .msi · ARM64 →</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            or <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.0.0/aitm_1.0.0_arm64-setup.exe">NSIS .exe</a> ·
-            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0">Release page</a>
+            or <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.1.1/aitm_1.1.1_arm64-setup.exe">NSIS .exe</a> ·
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.1.1">Release page</a>
         </p>
     </div>
 </div>
@@ -185,16 +185,16 @@ Pick MSI for org / IT deployment friendliness; pick NSIS if you want a leaner in
 
 ### Verify integrity (any platform)
 
-Each installer ships with a `.sha256` file. Compare yours against it:
+Want to make sure your download wasn't corrupted in transit? Compute its SHA-256 hash:
 
 ```bash
 # macOS / Linux / Git Bash on Windows
-shasum -a 256 path/to/aitm_1.0.0_<arch>.<ext>
+shasum -a 256 path/to/aitm_1.1.1_<arch>.<ext>
 ```
 
 ```powershell
 # Windows PowerShell
-(Get-FileHash path\to\aitm_1.0.0_<arch>.<ext> -Algorithm SHA256).Hash.ToLower()
+(Get-FileHash path\to\aitm_1.1.1_<arch>.<ext> -Algorithm SHA256).Hash.ToLower()
 ```
 
 <h2 id="first-use">🚀 First-time use</h2>
@@ -222,7 +222,7 @@ shasum -a 256 path/to/aitm_1.0.0_<arch>.<ext>
 ## ❓ FAQ
 
 **Q: Double-clicking `aitm.app` (macOS) says "damaged, can't open"?**
-aitm is signed and notarized with an Apple Developer ID — Gatekeeper should let it through automatically. If you see this error, make sure you downloaded the dmg from the [official release page](https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0) and that the file wasn't corrupted in transit (verify the SHA256 checksum).
+aitm is signed and notarized with an Apple Developer ID — Gatekeeper should let it through automatically. If you see this error, make sure you downloaded the dmg from the [official release page](https://github.com/kanfu-panda/aitm/releases/tag/v1.1.1) and that the file wasn't corrupted in transit (verify the SHA256 checksum).
 
 **Q: Windows shows a "Windows protected your PC" SmartScreen warning?**
 aitm for Windows isn't code-signed yet. Click **More info → Run anyway**. We're tracking signing certificates for a future release.
