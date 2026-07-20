@@ -3,14 +3,14 @@ layout: default
 title: PDLC
 permalink: /pdlc/
 lang: zh
-description: PDLC —— 给 Claude Code 加上"产品开发生命周期"工作流的开源插件。31 个标准化阶段、状态机、TDD 红灯强制门、阶段自检、自动修复仅一轮。把"软规范"升级为"硬契约"。MIT 开源。
+description: PDLC —— 给 Claude Code 加上"产品开发生命周期"工作流的开源插件。36 个标准化阶段、状态机、TDD 红灯强制门、阶段自检、自动修复仅一轮。把"软规范"升级为"硬契约"。MIT 开源。
 ---
 
 <div class="hero-section">
     <div class="hero-content">
         <h1>PDLC</h1>
         <p>给 <strong>Claude Code</strong> 加上"产品开发生命周期"工作流的开源插件。</p>
-        <p>31 个标准化阶段，全部以斜杠命令暴露。每份产物落到磁盘、每个阶段更新状态机、实现前必须有失败的测试。让"软规范"变成"硬契约"。</p>
+        <p>36 个标准化阶段，全部以斜杠命令暴露。每份产物落到磁盘、每个阶段更新状态机、实现前必须有失败的测试。让"软规范"变成"硬契约"。</p>
         <div class="hero-links">
             <a href="https://github.com/kanfu-panda/pdlc-skills" class="cta-button">在 GitHub 查看 →</a>
             <a href="#install" class="github-link">查看安装</a>
@@ -87,7 +87,7 @@ description: PDLC —— 给 Claude Code 加上"产品开发生命周期"工作�
 </div>
 
 <div class="about-section">
-    <h2>📦 31 条命令，分三层</h2>
+    <h2>📦 36 条命令，分三层</h2>
     <div class="about-grid">
         <div class="about-card">
             <h3>第一层 · 入口（3 条）</h3>
@@ -100,8 +100,8 @@ description: PDLC —— 给 Claude Code 加上"产品开发生命周期"工作�
             <p style="opacity: 0.75; font-size: 0.9em;">精细控制单一阶段。</p>
         </div>
         <div class="about-card">
-            <h3>第三层 · 工具（17 条）</h3>
-            <p>UI 设计 / 数据库设计 / 架构 / 安全 / 性能 / 代码脚手架 / 添加服务 / 添加应用 / i18n / 迁移 / changelog / bootstrap / adopt / onboard / 等等</p>
+            <h3>第三层 · 工具（22 条）</h3>
+            <p>UI 设计 / 数据库设计 / 架构 / 安全 / 性能 / 代码脚手架 / 添加服务 / 添加应用 / i18n / 迁移 / changelog / bootstrap / adopt / onboard / 自主收敛循环 / 状态栏配置 / 功能关系链 / 规范管理 / 等等</p>
             <p style="opacity: 0.75; font-size: 0.9em;">需要时显式调用的专项阶段。</p>
         </div>
         <div class="about-card">
@@ -142,10 +142,10 @@ claude plugin install pdlc@pdlc-skills
 
 ```bash
 claude plugin list | grep pdlc
-# 预期：pdlc@pdlc-skills  Version: 1.0.0  Status: ✔ enabled
+# 预期：pdlc@pdlc-skills  Version: 1.5.1  Status: ✔ enabled
 ```
 
-重启 Claude Code 会话后，在输入框敲 `/` 然后开始打 `pdlc-`，autocomplete 会列出全部 31 条子命令。
+重启 Claude Code 会话后，在输入框敲 `/` 然后开始打 `pdlc-`，autocomplete 会列出全部 36 条子命令。
 
 ## 🧪 三步快速上手
 
@@ -196,7 +196,7 @@ MIT。用、改、发都行。源码、issue、完整文档：**[github.com/kanf
 ## ❓ 常见问题
 
 **Q：不用 Claude Code 能用吗？**
-不能 —— PDLC 是 Claude Code 的 plugin，依赖 Claude Code 的 plugin / slash command 基础设施。目前仅支持 Claude Code。
+Claude Code 是一等公民 —— 完整插件，含状态栏与自主收敛循环。从 v1.5 起，同一份单一源 SKILL 正文经构建期适配器也投影到 **Codex**（原生 skill，按 description 触发）；另有平台中立的[方法论文档](https://github.com/kanfu-panda/pdlc-skills/blob/main/docs/pdlc-methodology.md)，让你用自然语言在任意 AI 编程工具里驱动 PDLC。每功能状态机（`docs/.pdlc-state/`）可跨工具延续。
 
 **Q：会不打招呼就改我代码吗？**
 产出产物的阶段确实会写文件（到 `docs/` 和你的代码库）。每个阶段都会跑自检并在交接前显式提示。Claude Code 自带的权限确认提示也照常生效。
