@@ -47,6 +47,14 @@ description: PDLC —— 给 Claude Code 加上"产品开发生命周期"工作�
             <h3>🧭 每阶段显式 next_step</h3>
             <p>每个阶段都声明下一步是什么。多阶段串联由命令驱动，不靠脑子记，也不靠 AI 记。</p>
         </div>
+        <div class="about-card">
+            <h3>🔁 自主收敛（Loop 工程）</h3>
+            <p><code>/pdlc-loop-run</code> 无人值守把 <code>tdd → implement → review</code> 推到 <code>review_done</code>——每轮读状态机决定下一跳，带硬护栏（上限停机 / fail-stop / stuck-stop）。发布永远是人工闸门。</p>
+        </div>
+        <div class="about-card">
+            <h3>🌐 不止 Claude Code 一个工具</h3>
+            <p>Claude Code 上支持最完整（插件 + 状态栏 + Loop 引擎）。同一份单一源 SKILL 正文投影到 <strong>Codex</strong> 成原生 skill；平台中立方法论让你在任意 AI 工具里用自然语言驱动 PDLC——每功能状态机可跨工具延续。</p>
+        </div>
     </div>
 </div>
 
@@ -196,7 +204,7 @@ MIT。用、改、发都行。源码、issue、完整文档：**[github.com/kanf
 ## ❓ 常见问题
 
 **Q：不用 Claude Code 能用吗？**
-Claude Code 是一等公民 —— 完整插件，含状态栏与自主收敛循环。从 v1.5 起，同一份单一源 SKILL 正文经构建期适配器也投影到 **Codex**（原生 skill，按 description 触发）；另有平台中立的[方法论文档](https://github.com/kanfu-panda/pdlc-skills/blob/main/docs/pdlc-methodology.md)，让你用自然语言在任意 AI 编程工具里驱动 PDLC。每功能状态机（`docs/.pdlc-state/`）可跨工具延续。v1.5.2 起，外部 Runbook 驱动（`adapters/codex-loop-run.sh`）甚至能在 Codex 上跑自主的 `tdd → implement → review` 收敛循环（发布仍是人工闸门），且已在真机过状态完整性准入闸。
+PDLC 在 Claude Code 上支持最完整 —— 完整插件，含状态栏与自主收敛循环。从 v1.5 起，同一份单一源 SKILL 正文经构建期适配器也投影到 **Codex**（原生 skill，按 description 触发）；另有平台中立的[方法论文档](https://github.com/kanfu-panda/pdlc-skills/blob/main/docs/pdlc-methodology.md)，让你用自然语言在任意 AI 编程工具里驱动 PDLC。每功能状态机（`docs/.pdlc-state/`）可跨工具延续。v1.5.2 起，外部 Runbook 驱动（`adapters/codex-loop-run.sh`）甚至能在 Codex 上跑自主的 `tdd → implement → review` 收敛循环（发布仍是人工闸门），且已在真机过状态完整性准入闸。
 
 **Q：会不打招呼就改我代码吗？**
 产出产物的阶段确实会写文件（到 `docs/` 和你的代码库）。每个阶段都会跑自检并在交接前显式提示。Claude Code 自带的权限确认提示也照常生效。

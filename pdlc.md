@@ -47,6 +47,14 @@ description: PDLC — a Claude Code plugin that turns the soft conventions of pr
             <h3>🧭 Explicit next_step</h3>
             <p>Every stage declares its successor. Multi-stage flows are command-driven, not memorized by you or the AI.</p>
         </div>
+        <div class="about-card">
+            <h3>🔁 Autonomous convergence (loop engineering)</h3>
+            <p><code>/pdlc-loop-run</code> drives <code>tdd → implement → review</code> to <code>review_done</code> unattended — reading the state machine each round, with hard guardrails (max-steps / fail-stop / stuck-stop). Release always stays a human gate.</p>
+        </div>
+        <div class="about-card">
+            <h3>🌐 More than one AI tool</h3>
+            <p>Deepest support on Claude Code (plugin + statusline + loop engine). The same single-source SKILL bodies project to <strong>Codex</strong> as native skills, and a platform-neutral methodology drives PDLC in natural language on any AI tool — the per-feature state machine carries over across them.</p>
+        </div>
     </div>
 </div>
 
@@ -196,7 +204,7 @@ MIT. Use it, fork it, ship it. Source code, issue tracker, and full documentatio
 ## ❓ FAQ
 
 **Q: Does it work without Claude Code?**
-Claude Code is the first-class target — the full plugin with statusline and the autonomous loop engine. As of v1.5, the same single-source SKILL bodies also project to **Codex** (native, description-triggered skills) via a build-time adapter, and the platform-neutral [methodology doc](https://github.com/kanfu-panda/pdlc-skills/blob/main/docs/pdlc-methodology.md) lets you drive PDLC in natural language on any AI coding tool. The per-feature state machine (`docs/.pdlc-state/`) carries over across tools. As of v1.5.2, an external Runbook driver (`adapters/codex-loop-run.sh`) even runs the autonomous `tdd → implement → review` convergence loop on Codex — release stays a human gate — after clearing a state-integrity admission gate on a real run.
+PDLC has the deepest, most complete support on Claude Code — the full plugin with statusline and the autonomous loop engine. As of v1.5, the same single-source SKILL bodies also project to **Codex** (native, description-triggered skills) via a build-time adapter, and the platform-neutral [methodology doc](https://github.com/kanfu-panda/pdlc-skills/blob/main/docs/pdlc-methodology.md) lets you drive PDLC in natural language on any AI coding tool. The per-feature state machine (`docs/.pdlc-state/`) carries over across tools. As of v1.5.2, an external Runbook driver (`adapters/codex-loop-run.sh`) even runs the autonomous `tdd → implement → review` convergence loop on Codex — release stays a human gate — after clearing a state-integrity admission gate on a real run.
 
 **Q: Will it modify my code without asking?**
 Stages that produce artifacts do write files (under `docs/` and your code base when implementing). Each stage runs a self-check and surfaces a handoff before continuing to the next. Your normal Claude Code permission prompts still apply.
