@@ -142,7 +142,7 @@ claude plugin install pdlc@pdlc-skills
 
 ```bash
 claude plugin list | grep pdlc
-# 预期：pdlc@pdlc-skills  Version: 1.5.1  Status: ✔ enabled
+# 预期：pdlc@pdlc-skills  Version: 1.5.2  Status: ✔ enabled
 ```
 
 重启 Claude Code 会话后，在输入框敲 `/` 然后开始打 `pdlc-`，autocomplete 会列出全部 36 条子命令。
@@ -196,7 +196,7 @@ MIT。用、改、发都行。源码、issue、完整文档：**[github.com/kanf
 ## ❓ 常见问题
 
 **Q：不用 Claude Code 能用吗？**
-Claude Code 是一等公民 —— 完整插件，含状态栏与自主收敛循环。从 v1.5 起，同一份单一源 SKILL 正文经构建期适配器也投影到 **Codex**（原生 skill，按 description 触发）；另有平台中立的[方法论文档](https://github.com/kanfu-panda/pdlc-skills/blob/main/docs/pdlc-methodology.md)，让你用自然语言在任意 AI 编程工具里驱动 PDLC。每功能状态机（`docs/.pdlc-state/`）可跨工具延续。
+Claude Code 是一等公民 —— 完整插件，含状态栏与自主收敛循环。从 v1.5 起，同一份单一源 SKILL 正文经构建期适配器也投影到 **Codex**（原生 skill，按 description 触发）；另有平台中立的[方法论文档](https://github.com/kanfu-panda/pdlc-skills/blob/main/docs/pdlc-methodology.md)，让你用自然语言在任意 AI 编程工具里驱动 PDLC。每功能状态机（`docs/.pdlc-state/`）可跨工具延续。v1.5.2 起，外部 Runbook 驱动（`adapters/codex-loop-run.sh`）甚至能在 Codex 上跑自主的 `tdd → implement → review` 收敛循环（发布仍是人工闸门），且已在真机过状态完整性准入闸。
 
 **Q：会不打招呼就改我代码吗？**
 产出产物的阶段确实会写文件（到 `docs/` 和你的代码库）。每个阶段都会跑自检并在交接前显式提示。Claude Code 自带的权限确认提示也照常生效。

@@ -142,7 +142,7 @@ claude plugin install pdlc@pdlc-skills
 
 ```bash
 claude plugin list | grep pdlc
-# 期待値: pdlc@pdlc-skills  Version: 1.5.1  Status: ✔ enabled
+# 期待値: pdlc@pdlc-skills  Version: 1.5.2  Status: ✔ enabled
 ```
 
 Claude Code セッションを再起動後、入力欄で `/` を入力し `pdlc-` と打ち始めれば、autocomplete に 36 個のサブコマンドすべてが表示されます。
@@ -196,7 +196,7 @@ MIT。使用、フォーク、リリース、すべて自由。ソースコー�
 ## ❓ よくある質問
 
 **Q: Claude Code 以外でも使えますか？**
-Claude Code が第一級のターゲットです — ステータスバーと自律収束ループを備えた完全なプラグイン。v1.5 以降、同じ単一ソースの SKILL 本文はビルド時アダプターで **Codex**（ネイティブ skill、description トリガー）にも投影され、プラットフォーム中立の[方法論ドキュメント](https://github.com/kanfu-panda/pdlc-skills/blob/main/docs/pdlc-methodology.md)で任意の AI コーディングツール上で自然言語から PDLC を駆動できます。機能ごとの状態マシン（`docs/.pdlc-state/`）はツール間で引き継がれます。
+Claude Code が第一級のターゲットです — ステータスバーと自律収束ループを備えた完全なプラグイン。v1.5 以降、同じ単一ソースの SKILL 本文はビルド時アダプターで **Codex**（ネイティブ skill、description トリガー）にも投影され、プラットフォーム中立の[方法論ドキュメント](https://github.com/kanfu-panda/pdlc-skills/blob/main/docs/pdlc-methodology.md)で任意の AI コーディングツール上で自然言語から PDLC を駆動できます。機能ごとの状態マシン（`docs/.pdlc-state/`）はツール間で引き継がれます。v1.5.2 以降、外部 Runbook ドライバー（`adapters/codex-loop-run.sh`）が Codex 上で自律的な `tdd → implement → review` 収束ループも実行できます（リリースは人間のゲート）。状態整合性の受け入れゲートを実機でクリア済みです。
 
 **Q: 確認なしにコードを変更しますか？**
 成果物を生成するステージは確かにファイルを書き込みます（`docs/` 配下と実装時はコードベース）。各ステージはセルフチェックを実行し、次に進む前に明示的にハンドオフを通知します。Claude Code 自体の権限確認プロンプトも通常通り機能します。

@@ -142,7 +142,7 @@ claude plugin install pdlc@pdlc-skills
 
 ```bash
 claude plugin list | grep pdlc
-# expected: pdlc@pdlc-skills  Version: 1.5.1  Status: ✔ enabled
+# expected: pdlc@pdlc-skills  Version: 1.5.2  Status: ✔ enabled
 ```
 
 After restarting your Claude Code session, type `/` and start typing `pdlc-` — autocomplete will show all 36 sub-commands.
@@ -196,7 +196,7 @@ MIT. Use it, fork it, ship it. Source code, issue tracker, and full documentatio
 ## ❓ FAQ
 
 **Q: Does it work without Claude Code?**
-Claude Code is the first-class target — the full plugin with statusline and the autonomous loop engine. As of v1.5, the same single-source SKILL bodies also project to **Codex** (native, description-triggered skills) via a build-time adapter, and the platform-neutral [methodology doc](https://github.com/kanfu-panda/pdlc-skills/blob/main/docs/pdlc-methodology.md) lets you drive PDLC in natural language on any AI coding tool. The per-feature state machine (`docs/.pdlc-state/`) carries over across tools.
+Claude Code is the first-class target — the full plugin with statusline and the autonomous loop engine. As of v1.5, the same single-source SKILL bodies also project to **Codex** (native, description-triggered skills) via a build-time adapter, and the platform-neutral [methodology doc](https://github.com/kanfu-panda/pdlc-skills/blob/main/docs/pdlc-methodology.md) lets you drive PDLC in natural language on any AI coding tool. The per-feature state machine (`docs/.pdlc-state/`) carries over across tools. As of v1.5.2, an external Runbook driver (`adapters/codex-loop-run.sh`) even runs the autonomous `tdd → implement → review` convergence loop on Codex — release stays a human gate — after clearing a state-integrity admission gate on a real run.
 
 **Q: Will it modify my code without asking?**
 Stages that produce artifacts do write files (under `docs/` and your code base when implementing). Each stage runs a self-check and surfaces a handoff before continuing to the next. Your normal Claude Code permission prompts still apply.
