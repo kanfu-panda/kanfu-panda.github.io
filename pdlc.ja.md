@@ -3,14 +3,14 @@ layout: default
 title: PDLC
 permalink: /pdlc/
 lang: ja
-description: PDLC — Claude Code に「製品開発ライフサイクル」ワークフローを追加するオープンソースプラグイン。31 個の標準化されたステージ、状態マシン、テストファースト強制、ステージ自己チェック、自動修復は1回まで。「ソフトな慣習」を「ハードな契約」へ。MIT ライセンス。
+description: PDLC — Claude Code に「製品開発ライフサイクル」ワークフローを追加するオープンソースプラグイン。36 個の標準化されたステージ、状態マシン、テストファースト強制、ステージ自己チェック、自動修復は1回まで。「ソフトな慣習」を「ハードな契約」へ。MIT ライセンス。
 ---
 
 <div class="hero-section">
     <div class="hero-content">
         <h1>PDLC</h1>
         <p><strong>Claude Code</strong> に「製品開発ライフサイクル」ワークフローを追加するオープンソースプラグイン。</p>
-        <p>31 個の標準化されたステージがすべてスラッシュコマンドとして公開。すべての成果物がディスクに保存され、すべてのステージが状態マシンを更新し、実装前に失敗するテストが必要。「ソフトな慣習」を「ハードな契約」へ。</p>
+        <p>36 個の標準化されたステージがすべてスラッシュコマンドとして公開。すべての成果物がディスクに保存され、すべてのステージが状態マシンを更新し、実装前に失敗するテストが必要。「ソフトな慣習」を「ハードな契約」へ。</p>
         <div class="hero-links">
             <a href="https://github.com/kanfu-panda/pdlc-skills" class="cta-button">GitHub で見る →</a>
             <a href="#install" class="github-link">インストール</a>
@@ -87,7 +87,7 @@ description: PDLC — Claude Code に「製品開発ライフサイクル」ワ�
 </div>
 
 <div class="about-section">
-    <h2>📦 31 個のコマンド、3 層構成</h2>
+    <h2>📦 36 個のコマンド、3 層構成</h2>
     <div class="about-grid">
         <div class="about-card">
             <h3>第 1 層 · エントリポイント（3）</h3>
@@ -100,8 +100,8 @@ description: PDLC — Claude Code に「製品開発ライフサイクル」ワ�
             <p style="opacity: 0.75; font-size: 0.9em;">個別ステージを細かく制御。</p>
         </div>
         <div class="about-card">
-            <h3>第 3 層 · ツール（17）</h3>
-            <p>UI 設計 / DB 設計 / アーキ / セキュリティ / 性能 / コード生成 / サービス追加 / アプリ追加 / i18n / マイグレーション / changelog / bootstrap / adopt / onboard / 等</p>
+            <h3>第 3 層 · ツール（22）</h3>
+            <p>UI 設計 / DB 設計 / アーキ / セキュリティ / 性能 / コード生成 / サービス追加 / アプリ追加 / i18n / マイグレーション / changelog / bootstrap / adopt / onboard / 自律収束ループ / ステータスバー設定 / 機能リレーション / 標準管理 / 等</p>
             <p style="opacity: 0.75; font-size: 0.9em;">必要に応じて明示的に呼び出す専門ステージ。</p>
         </div>
         <div class="about-card">
@@ -142,10 +142,10 @@ claude plugin install pdlc@pdlc-skills
 
 ```bash
 claude plugin list | grep pdlc
-# 期待値: pdlc@pdlc-skills  Version: 1.0.0  Status: ✔ enabled
+# 期待値: pdlc@pdlc-skills  Version: 1.5.1  Status: ✔ enabled
 ```
 
-Claude Code セッションを再起動後、入力欄で `/` を入力し `pdlc-` と打ち始めれば、autocomplete に 31 個のサブコマンドすべてが表示されます。
+Claude Code セッションを再起動後、入力欄で `/` を入力し `pdlc-` と打ち始めれば、autocomplete に 36 個のサブコマンドすべてが表示されます。
 
 ## 🧪 3 ステップで始める
 
@@ -196,7 +196,7 @@ MIT。使用、フォーク、リリース、すべて自由。ソースコー�
 ## ❓ よくある質問
 
 **Q: Claude Code 以外でも使えますか？**
-いいえ — PDLC は Claude Code のプラグインで、Claude Code のプラグイン / スラッシュコマンド基盤に依存します。現時点では Claude Code のみ対応。
+Claude Code が第一級のターゲットです — ステータスバーと自律収束ループを備えた完全なプラグイン。v1.5 以降、同じ単一ソースの SKILL 本文はビルド時アダプターで **Codex**（ネイティブ skill、description トリガー）にも投影され、プラットフォーム中立の[方法論ドキュメント](https://github.com/kanfu-panda/pdlc-skills/blob/main/docs/pdlc-methodology.md)で任意の AI コーディングツール上で自然言語から PDLC を駆動できます。機能ごとの状態マシン（`docs/.pdlc-state/`）はツール間で引き継がれます。
 
 **Q: 確認なしにコードを変更しますか？**
 成果物を生成するステージは確かにファイルを書き込みます（`docs/` 配下と実装時はコードベース）。各ステージはセルフチェックを実行し、次に進む前に明示的にハンドオフを通知します。Claude Code 自体の権限確認プロンプトも通常通り機能します。
