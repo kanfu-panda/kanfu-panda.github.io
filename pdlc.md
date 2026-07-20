@@ -3,14 +3,14 @@ layout: default
 title: PDLC
 permalink: /pdlc/
 lang: en
-description: PDLC — a Claude Code plugin that turns the soft conventions of product development into hard contracts. 31 slash commands, persisted artifacts, mandatory tests-first, state machine per feature. MIT-licensed and open source.
+description: PDLC — a Claude Code plugin that turns the soft conventions of product development into hard contracts. 36 slash commands, persisted artifacts, mandatory tests-first, state machine per feature. MIT-licensed and open source.
 ---
 
 <div class="hero-section">
     <div class="hero-content">
         <h1>PDLC</h1>
         <p>A <strong>Claude Code plugin</strong> that gives Claude a complete Product Development Life Cycle workflow.</p>
-        <p>31 standardized stages exposed as slash commands. Every artifact lands on disk, every stage updates a state machine, tests must exist before code. Soft conventions become hard contracts.</p>
+        <p>36 standardized stages exposed as slash commands. Every artifact lands on disk, every stage updates a state machine, tests must exist before code. Soft conventions become hard contracts.</p>
         <div class="hero-links">
             <a href="https://github.com/kanfu-panda/pdlc-skills" class="cta-button">View on GitHub →</a>
             <a href="#install" class="github-link">Install</a>
@@ -87,7 +87,7 @@ description: PDLC — a Claude Code plugin that turns the soft conventions of pr
 </div>
 
 <div class="about-section">
-    <h2>📦 The 31 commands, three layers</h2>
+    <h2>📦 The 36 commands, three layers</h2>
     <div class="about-grid">
         <div class="about-card">
             <h3>Layer 1 · Entry points (3)</h3>
@@ -100,8 +100,8 @@ description: PDLC — a Claude Code plugin that turns the soft conventions of pr
             <p style="opacity: 0.75; font-size: 0.9em;">Fine-grained control over individual stages.</p>
         </div>
         <div class="about-card">
-            <h3>Layer 3 · Tools (17)</h3>
-            <p>UI / DB / architecture / security / perf / code-gen / scaffolding / i18n / migration / changelog / bootstrap / adopt / onboard / etc.</p>
+            <h3>Layer 3 · Tools (22)</h3>
+            <p>UI / DB / architecture / security / perf / code-gen / scaffolding / i18n / migration / changelog / bootstrap / adopt / onboard / autonomous loop / statusline config / feature relations / standards / etc.</p>
             <p style="opacity: 0.75; font-size: 0.9em;">Specialized stages you can invoke explicitly.</p>
         </div>
         <div class="about-card">
@@ -142,10 +142,10 @@ claude plugin install pdlc@pdlc-skills
 
 ```bash
 claude plugin list | grep pdlc
-# expected: pdlc@pdlc-skills  Version: 1.0.0  Status: ✔ enabled
+# expected: pdlc@pdlc-skills  Version: 1.5.1  Status: ✔ enabled
 ```
 
-After restarting your Claude Code session, type `/` and start typing `pdlc-` — autocomplete will show all 31 sub-commands.
+After restarting your Claude Code session, type `/` and start typing `pdlc-` — autocomplete will show all 36 sub-commands.
 
 ## 🧪 Quick start (3 steps)
 
@@ -196,7 +196,7 @@ MIT. Use it, fork it, ship it. Source code, issue tracker, and full documentatio
 ## ❓ FAQ
 
 **Q: Does it work without Claude Code?**
-No — PDLC is a Claude Code plugin that uses Claude Code's plugin / slash-command infrastructure. Currently Claude Code is the only target.
+Claude Code is the first-class target — the full plugin with statusline and the autonomous loop engine. As of v1.5, the same single-source SKILL bodies also project to **Codex** (native, description-triggered skills) via a build-time adapter, and the platform-neutral [methodology doc](https://github.com/kanfu-panda/pdlc-skills/blob/main/docs/pdlc-methodology.md) lets you drive PDLC in natural language on any AI coding tool. The per-feature state machine (`docs/.pdlc-state/`) carries over across tools.
 
 **Q: Will it modify my code without asking?**
 Stages that produce artifacts do write files (under `docs/` and your code base when implementing). Each stage runs a self-check and surfaces a handoff before continuing to the next. Your normal Claude Code permission prompts still apply.
