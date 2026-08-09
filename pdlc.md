@@ -197,6 +197,16 @@ docs/07_reviews/{doc,code,design,retro}/           # review records
 docs/.pdlc-state/<feature-id>.json                 # per-feature state machine
 ```
 
+## 📚 Article series
+
+I'm writing a blog series on the thinking behind PDLC, from concepts through to practice:
+
+| # | Title |
+|---|---|
+| 01 | [Prompt Engineering, Loop Engineering, Graph Engineering: What Are They?](/blog/2026/08/09/prompt-loop-graph-engineering.html) |
+
+Coming up: why PDLC lands on these three layers, how they interlock, getting it running on a project, how quality is enforced, and unattended runs.
+
 ## 📄 License
 
 MIT. Use it, fork it, ship it. Source code, issue tracker, and full documentation: **[github.com/kanfu-panda/pdlc-skills](https://github.com/kanfu-panda/pdlc-skills)**.
