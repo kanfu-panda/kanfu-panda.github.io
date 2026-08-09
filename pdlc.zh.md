@@ -197,6 +197,16 @@ docs/07_reviews/{doc,code,design,retro}/           # 评审记录
 docs/.pdlc-state/<feature-id>.json                 # 每功能一份状态机
 ```
 
+## 📚 系列文章
+
+PDLC 背后的方法论，我在博客上开了一个系列，从概念讲到实战：
+
+| 期号 | 标题 |
+|---|---|
+| 01 | [什么是提示词工程、Loop 工程以及 Graph 工程？](/zh/blog/2026/08/09/prompt-loop-graph-engineering.zh.html) |
+
+后续会陆续补上：PDLC 为什么天然契合这三层、三者如何联动、如何在项目里跑起来、如何保障质量、无人值守怎么做。
+
 ## 📄 协议
 
 MIT。用、改、发都行。源码、issue、完整文档：**[github.com/kanfu-panda/pdlc-skills](https://github.com/kanfu-panda/pdlc-skills)**。

@@ -197,6 +197,16 @@ docs/07_reviews/{doc,code,design,retro}/           # レビュー記録
 docs/.pdlc-state/<feature-id>.json                 # 機能ごとの状態マシン
 ```
 
+## 📚 連載記事
+
+PDLC の背景にある考え方を、概念から実践までブログで連載しています。
+
+| 回 | タイトル |
+|---|---|
+| 01 | [プロンプトエンジニアリング・Loop エンジニアリング・Graph エンジニアリングとは何か](/ja/blog/2026/08/09/prompt-loop-graph-engineering.ja.html) |
+
+今後の予定：PDLC がなぜこの三層に収まるのか、三者はどう連動するのか、プロジェクトでの動かし方、品質の担保、無人運転の実際。
+
 ## 📄 ライセンス
 
 MIT。使用、フォーク、リリース、すべて自由。ソースコード、Issue、完全なドキュメント：**[github.com/kanfu-panda/pdlc-skills](https://github.com/kanfu-panda/pdlc-skills)**。
