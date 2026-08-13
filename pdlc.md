@@ -204,6 +204,7 @@ I'm writing a blog series on the thinking behind PDLC, from concepts through to 
 | # | Title |
 |---|---|
 | 01 | [Prompt Engineering, Loop Engineering, Graph Engineering: What Are They?](/blog/2026/08/09/prompt-loop-graph-engineering.html) |
+| 02 | [Why Does pdlc-skills Fit All Three Engineering Paradigms So Naturally?](/blog/2026/08/13/why-pdlc-fits-three-paradigms.html) |
 
 Coming up: why PDLC lands on these three layers, how they interlock, getting it running on a project, how quality is enforced, and unattended runs.
 
