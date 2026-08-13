@@ -204,6 +204,7 @@ PDLC の背景にある考え方を、概念から実践までブログで連載
 | 回 | タイトル |
 |---|---|
 | 01 | [プロンプトエンジニアリング・Loop エンジニアリング・Graph エンジニアリングとは何か](/ja/blog/2026/08/09/prompt-loop-graph-engineering.ja.html) |
+| 02 | [なぜ pdlc-skills は三大エンジニアリングに自然と噛み合うのか](/ja/blog/2026/08/13/why-pdlc-fits-three-paradigms.ja.html) |
 
 今後の予定：PDLC がなぜこの三層に収まるのか、三者はどう連動するのか、プロジェクトでの動かし方、品質の担保、無人運転の実際。
 
