@@ -3,14 +3,14 @@ layout: default
 title: PDLC
 permalink: /pdlc/
 lang: en
-description: PDLC — a Claude Code plugin that turns the soft conventions of product development into hard contracts. 36 slash commands, persisted artifacts, mandatory tests-first, state machine per feature. MIT-licensed and open source.
+description: PDLC — a Claude Code plugin that turns the soft conventions of product development into hard contracts. 38 slash commands, persisted artifacts, mandatory tests-first, state machine per feature. MIT-licensed and open source.
 ---
 
 <div class="hero-section">
     <div class="hero-content">
         <h1>PDLC</h1>
         <p>A <strong>Claude Code plugin</strong> that gives Claude a complete Product Development Life Cycle workflow.</p>
-        <p>36 standardized stages exposed as slash commands. Every artifact lands on disk, every stage updates a state machine, tests must exist before code. Soft conventions become hard contracts.</p>
+        <p>38 standardized stages exposed as slash commands. Every artifact lands on disk, every stage updates a state machine, tests must exist before code. Soft conventions become hard contracts.</p>
         <div class="hero-links">
             <a href="https://github.com/kanfu-panda/pdlc-skills" class="cta-button">View on GitHub →</a>
             <a href="#install" class="github-link">Install</a>
@@ -50,6 +50,10 @@ description: PDLC — a Claude Code plugin that turns the soft conventions of pr
         <div class="about-card">
             <h3>🔁 Autonomous convergence (loop engineering)</h3>
             <p><code>/pdlc-loop-run</code> drives <code>tdd → implement → review</code> to <code>review_done</code> unattended — reading the state machine each round, with hard guardrails (max-steps / fail-stop / stuck-stop). Release always stays a human gate.</p>
+        </div>
+        <div class="about-card">
+            <h3>✅ Standing quality gate</h3>
+            <p><code>/pdlc-test-setup</code> <strong>actually runs</strong> each test command before writing it to config — anything that fails is left blank with a note on how to fix it, never guessed at (one wrong command poisons every downstream stage's verdict). <code>/pdlc-quality</code> then produces the quality report, plus a zero-dependency HTML you can double-click, print and sign.</p>
         </div>
         <div class="about-card">
             <h3>🌐 More than one AI tool</h3>
@@ -95,7 +99,7 @@ description: PDLC — a Claude Code plugin that turns the soft conventions of pr
 </div>
 
 <div class="about-section">
-    <h2>📦 The 36 commands, three layers</h2>
+    <h2>📦 The 38 commands, three layers</h2>
     <div class="about-grid">
         <div class="about-card">
             <h3>Layer 1 · Entry points (3)</h3>
@@ -108,8 +112,8 @@ description: PDLC — a Claude Code plugin that turns the soft conventions of pr
             <p style="opacity: 0.75; font-size: 0.9em;">Fine-grained control over individual stages.</p>
         </div>
         <div class="about-card">
-            <h3>Layer 3 · Tools (22)</h3>
-            <p>UI / DB / architecture / security / perf / code-gen / scaffolding / i18n / migration / changelog / bootstrap / adopt / onboard / autonomous loop / statusline config / feature relations / standards / etc.</p>
+            <h3>Layer 3 · Tools (24)</h3>
+            <p>Test setup / quality gate / UI / DB / architecture / security / perf / code-gen / scaffolding / i18n / migration / changelog / bootstrap / adopt / onboard / autonomous loop / statusline config / feature relations / standards / etc.</p>
             <p style="opacity: 0.75; font-size: 0.9em;">Specialized stages you can invoke explicitly.</p>
         </div>
         <div class="about-card">
@@ -150,10 +154,10 @@ claude plugin install pdlc@pdlc-skills
 
 ```bash
 claude plugin list | grep pdlc
-# expected: pdlc@pdlc-skills  Version: 1.5.2  Status: ✔ enabled
+# expected: pdlc@pdlc-skills  Version: 1.6.1  Status: ✔ enabled
 ```
 
-After restarting your Claude Code session, type `/` and start typing `pdlc-` — autocomplete will show all 36 sub-commands.
+After restarting your Claude Code session, type `/` and start typing `pdlc-` — autocomplete will show all 38 sub-commands.
 
 ## 🧪 Quick start (3 steps)
 

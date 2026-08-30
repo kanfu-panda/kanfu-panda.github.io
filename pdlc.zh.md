@@ -3,14 +3,14 @@ layout: default
 title: PDLC
 permalink: /pdlc/
 lang: zh
-description: PDLC —— 给 Claude Code 加上"产品开发生命周期"工作流的开源插件。36 个标准化阶段、状态机、TDD 红灯强制门、阶段自检、自动修复仅一轮。把"软规范"升级为"硬契约"。MIT 开源。
+description: PDLC —— 给 Claude Code 加上"产品开发生命周期"工作流的开源插件。38 个标准化阶段、状态机、TDD 红灯强制门、阶段自检、自动修复仅一轮。把"软规范"升级为"硬契约"。MIT 开源。
 ---
 
 <div class="hero-section">
     <div class="hero-content">
         <h1>PDLC</h1>
         <p>给 <strong>Claude Code</strong> 加上"产品开发生命周期"工作流的开源插件。</p>
-        <p>36 个标准化阶段，全部以斜杠命令暴露。每份产物落到磁盘、每个阶段更新状态机、实现前必须有失败的测试。让"软规范"变成"硬契约"。</p>
+        <p>38 个标准化阶段，全部以斜杠命令暴露。每份产物落到磁盘、每个阶段更新状态机、实现前必须有失败的测试。让"软规范"变成"硬契约"。</p>
         <div class="hero-links">
             <a href="https://github.com/kanfu-panda/pdlc-skills" class="cta-button">在 GitHub 查看 →</a>
             <a href="#install" class="github-link">查看安装</a>
@@ -50,6 +50,10 @@ description: PDLC —— 给 Claude Code 加上"产品开发生命周期"工作�
         <div class="about-card">
             <h3>🔁 自主收敛（Loop 工程）</h3>
             <p><code>/pdlc-loop-run</code> 无人值守把 <code>tdd → implement → review</code> 推到 <code>review_done</code>——每轮读状态机决定下一跳，带硬护栏（上限停机 / fail-stop / stuck-stop）。发布永远是人工闸门。</p>
+        </div>
+        <div class="about-card">
+            <h3>✅ 常设质量闸门</h3>
+            <p><code>/pdlc-test-setup</code> 把每条测试命令**真跑一遍**再写进配置——跑不通的留空并说明怎么补，绝不写没验证过的命令（一条猜错的命令会污染下游每个阶段的判定）。<code>/pdlc-quality</code> 据此出质量报告，同时给一份零依赖、能双击打开、可打印签字的 HTML。</p>
         </div>
         <div class="about-card">
             <h3>🌐 不止 Claude Code 一个工具</h3>
@@ -95,7 +99,7 @@ description: PDLC —— 给 Claude Code 加上"产品开发生命周期"工作�
 </div>
 
 <div class="about-section">
-    <h2>📦 36 条命令，分三层</h2>
+    <h2>📦 38 条命令，分三层</h2>
     <div class="about-grid">
         <div class="about-card">
             <h3>第一层 · 入口（3 条）</h3>
@@ -108,8 +112,8 @@ description: PDLC —— 给 Claude Code 加上"产品开发生命周期"工作�
             <p style="opacity: 0.75; font-size: 0.9em;">精细控制单一阶段。</p>
         </div>
         <div class="about-card">
-            <h3>第三层 · 工具（22 条）</h3>
-            <p>UI 设计 / 数据库设计 / 架构 / 安全 / 性能 / 代码脚手架 / 添加服务 / 添加应用 / i18n / 迁移 / changelog / bootstrap / adopt / onboard / 自主收敛循环 / 状态栏配置 / 功能关系链 / 规范管理 / 等等</p>
+            <h3>第三层 · 工具（24 条）</h3>
+            <p>测试地基 / 质量闸门 / UI 设计 / 数据库设计 / 架构 / 安全 / 性能 / 代码脚手架 / 添加服务 / 添加应用 / i18n / 迁移 / changelog / bootstrap / adopt / onboard / 自主收敛循环 / 状态栏配置 / 功能关系链 / 规范管理 / 等等</p>
             <p style="opacity: 0.75; font-size: 0.9em;">需要时显式调用的专项阶段。</p>
         </div>
         <div class="about-card">
@@ -150,10 +154,10 @@ claude plugin install pdlc@pdlc-skills
 
 ```bash
 claude plugin list | grep pdlc
-# 预期：pdlc@pdlc-skills  Version: 1.5.2  Status: ✔ enabled
+# 预期：pdlc@pdlc-skills  Version: 1.6.1  Status: ✔ enabled
 ```
 
-重启 Claude Code 会话后，在输入框敲 `/` 然后开始打 `pdlc-`，autocomplete 会列出全部 36 条子命令。
+重启 Claude Code 会话后，在输入框敲 `/` 然后开始打 `pdlc-`，autocomplete 会列出全部 38 条子命令。
 
 ## 🧪 三步快速上手
 

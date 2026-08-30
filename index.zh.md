@@ -68,4 +68,25 @@ description: 一个热爱技术的开发者的个人博客 —— 记录写代�
             </div>
         </div>
     </div>
+
+    <div class="featured-projects">
+        <h2>🚀 项目</h2>
+        <div class="about-grid">
+            <div class="about-card">
+                <h3><a href="/zh/aitm/">aitm</a></h3>
+                <p>AI 原生桌面终端，支持 macOS 与 Windows —— 多 tab 终端、能读写文件的 AI 侧栏、内置浏览器。Tauri 2 + React 19 + Rust，Apache-2.0 开源。</p>
+                <p style="margin-top: 0.5rem; font-size: 0.85em;">
+                    <a href="/zh/aitm/">产品页</a> · <a href="https://github.com/kanfu-panda/aitm">GitHub</a> · <a href="https://github.com/kanfu-panda/aitm/releases/latest">最新版本 ↓</a>
+                </p>
+            </div>
+            <div class="about-card">
+                <h3><a href="/zh/pdlc/">PDLC</a></h3>
+                <p>Claude Code 插件 —— 38 个标准化开发生命周期阶段，全部以斜杠命令暴露。硬契约、状态机、测试先行。</p>
+                <p style="margin-top: 0.5rem; font-size: 0.85em;">
+                    <a href="/zh/pdlc/">产品页</a> · <a href="https://github.com/kanfu-panda/pdlc-skills">GitHub</a>
+                </p>
+            </div>
+        </div>
+        <p style="margin-top: 1rem;"><a href="/zh/projects/">全部项目 →</a></p>
+    </div>
 </div>

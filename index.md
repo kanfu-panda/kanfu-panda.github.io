@@ -76,14 +76,14 @@ description: A developer who loves technology — notes on coding, tools, and th
         <div class="about-grid">
             <div class="about-card">
                 <h3><a href="/aitm/">aitm</a></h3>
-                <p>AI-native desktop terminal — multi-tab PTY + AI sidebar + tool-calling. Tauri 2 + React 19 + Rust. 5.3 MB, 3-5ms cold start.</p>
+                <p>AI-native desktop terminal for macOS and Windows — multi-tab PTY, an AI sidebar that reads and edits files, and a built-in browser. Tauri 2 + React 19 + Rust, Apache-2.0.</p>
                 <p style="margin-top: 0.5rem; font-size: 0.85em;">
-                    <a href="/aitm/">Product page</a> · <a href="https://github.com/kanfu-panda/aitm">GitHub</a> · <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.0.0">v1.0.0 ↓</a>
+                    <a href="/aitm/">Product page</a> · <a href="https://github.com/kanfu-panda/aitm">GitHub</a> · <a href="https://github.com/kanfu-panda/aitm/releases/latest">Latest release ↓</a>
                 </p>
             </div>
             <div class="about-card">
                 <h3><a href="/pdlc/">PDLC</a></h3>
-                <p>Claude Code plugin — 33 standardized dev lifecycle stages as slash commands. Hard contracts, state machine, TDD-first.</p>
+                <p>Claude Code plugin — 38 standardized dev lifecycle stages as slash commands. Hard contracts, state machine, TDD-first.</p>
                 <p style="margin-top: 0.5rem; font-size: 0.85em;">
                     <a href="/pdlc/">Product page</a> · <a href="https://github.com/kanfu-panda/pdlc-skills">GitHub</a>
                 </p>

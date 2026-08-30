@@ -26,8 +26,6 @@ jobs:
     env:
       JEKYLL_ENV: production
       GA_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
-      GITALK_ID: ${{ secrets.GITALK_CLIENT_ID }}
-      GITALK_SECRET: ${{ secrets.GITALK_CLIENT_SECRET }}
 
     steps:
     - uses: actions/checkout@v4
@@ -54,21 +52,16 @@ jobs:
       id: secrets_check
       run: |
         # fork PR 拿不到 secrets，正常 push 才有。
-        # 缺失时跳过相关组件注入，让构建仍然成功。
-        SECRETS_OK=true
+        # 缺失时跳过统计脚本注入，让构建仍然成功。
+        # 注：评论组件是 Giscus，凭证由 GitHub App 侧持有，仓库不需要任何 secret，
+        #     故 GA 是这里唯一的判据（历史上混入 Gitalk 凭证判断，导致 GA 校验被连坐跳过）。
         if [ -z "$GA_ID" ]; then
           echo "::warning::GOOGLE_ANALYTICS_ID 未配置，将跳过统计脚本注入"
-          SECRETS_OK=false
+          echo "ga_ok=false" >> "$GITHUB_OUTPUT"
         else
           echo "✓ GOOGLE_ANALYTICS_ID 已配置 (长度: ${#GA_ID})"
+          echo "ga_ok=true" >> "$GITHUB_OUTPUT"
         fi
-        if [ -z "$GITALK_ID" ] || [ -z "$GITALK_SECRET" ]; then
-          echo "::warning::评论组件凭证未配置，将跳过其注入"
-          SECRETS_OK=false
-        else
-          echo "✓ 评论组件凭证已配置 (ID 长度: ${#GITALK_ID}, SECRET 长度: ${#GITALK_SECRET})"
-        fi
-        echo "secrets_ok=$SECRETS_OK" >> "$GITHUB_OUTPUT"
 
     - name: 创建密钥配置（只写已配置的字段，避免空值进 HTML）
       run: |
@@ -78,14 +71,9 @@ jobs:
           if [ -n "$GA_ID" ]; then
             echo "google_analytics: $GA_ID"
           fi
-          if [ -n "$GITALK_ID" ] && [ -n "$GITALK_SECRET" ]; then
-            echo "gitalk:"
-            echo "  clientID: $GITALK_ID"
-            echo "  clientSecret: $GITALK_SECRET"
-          fi
         } > _config_secrets.yml
         echo "_config_secrets.yml 结构（敏感值已隐去）:"
-        sed -E 's/(clientID|clientSecret|google_analytics):.*/\1: ***REDACTED***/' _config_secrets.yml
+        sed -E 's/(google_analytics):.*/\1: ***REDACTED***/' _config_secrets.yml
 
     - name: 构建站点
       run: |
@@ -114,16 +102,20 @@ jobs:
         else
           echo "✓ 未发现 @latest"
         fi
-        # 4. 条件注入：仅在 secrets 完备时验证组件已注入
-        if [ "${{ steps.secrets_check.outputs.secrets_ok }}" = "true" ]; then
+        # 4a. 统计脚本：仅在 GA_ID 配置时要求注入
+        if [ "${{ steps.secrets_check.outputs.ga_ok }}" = "true" ]; then
           grep -rq "gtag('config'" _site/ \
             && echo "✓ 统计脚本已注入" \
-            || { echo "::error::统计脚本未注入但 secrets 完备"; FAIL=1; }
-          grep -rq "gitalk.render" _site/ \
-            && echo "✓ 评论组件已注入" \
-            || { echo "::error::评论组件未注入但 secrets 完备"; FAIL=1; }
+            || { echo "::error::统计脚本未注入但 GOOGLE_ANALYTICS_ID 已配置"; FAIL=1; }
         else
-          echo "（secrets 不完整，跳过组件注入验证）"
+          echo "（GOOGLE_ANALYTICS_ID 未配置，跳过统计脚本验证）"
+        fi
+        # 4b. 评论组件（Giscus）：配置全在 _config.yml，无 secret 依赖，
+        #     故任何构建都必须注入——fork PR 也一样。
+        if grep -rq "giscus.app/client.js" _site/; then
+          echo "✓ 评论组件（Giscus）已注入"
+        else
+          echo "::error::评论组件未注入（检查 _config.yml 的 giscus.enable / repo_id）"; FAIL=1
         fi
         # 5. aitm 产品页与下载资源齐全
         if [ -f _site/aitm/index.html ] && grep -q "aitm" _site/aitm/index.html; then
@@ -157,102 +149,25 @@ jobs:
         else
           echo "✓ 邮箱明文未泄露"
         fi
-        # aitm 跨平台安装包（自 v0.8.2 起：macOS dmg + 4 个 Windows 安装器）
-        DMG=$(ls _site/assets/downloads/aitm_*_aarch64.dmg 2>/dev/null | head -1)
-        if [ -n "$DMG" ] && [ -s "$DMG" ]; then
-          echo "✓ aitm dmg 已部署: $(basename "$DMG") ($(stat -c%s "$DMG" 2>/dev/null || stat -f%z "$DMG") 字节)"
-        else
-          echo "::error::aitm dmg 缺失或为空"; FAIL=1
-        fi
-        # 4 个 Windows 安装器：x64_msi / x64_nsis / arm64_msi / arm64_nsis
-        for SUFFIX in "x64_en-US.msi" "x64-setup.exe" "arm64_en-US.msi" "arm64-setup.exe"; do
-          F=$(ls _site/assets/downloads/aitm_*_${SUFFIX} 2>/dev/null | head -1)
-          if [ -n "$F" ] && [ -s "$F" ]; then
-            echo "✓ Windows installer: $(basename "$F") ($(stat -c%s "$F" 2>/dev/null || stat -f%z "$F") 字节)"
-          else
-            echo "::error::Windows installer (${SUFFIX}) 缺失或为空"; FAIL=1
-          fi
-        done
-        # 所有 5 个安装包都必须有 SHA256 + 与本体一致
-        for ASSET in "$DMG" \
-          $(ls _site/assets/downloads/aitm_*_x64_en-US.msi 2>/dev/null | head -1) \
-          $(ls _site/assets/downloads/aitm_*_x64-setup.exe 2>/dev/null | head -1) \
-          $(ls _site/assets/downloads/aitm_*_arm64_en-US.msi 2>/dev/null | head -1) \
-          $(ls _site/assets/downloads/aitm_*_arm64-setup.exe 2>/dev/null | head -1); do
-          [ -z "$ASSET" ] && continue
-          SHA_FILE="${ASSET}.sha256"
-          if [ ! -f "$SHA_FILE" ]; then
-            echo "::error::SHA256 文件缺失: $(basename "$SHA_FILE")"; FAIL=1
-            continue
-          fi
-          EXPECTED=$(awk '{print $1}' "$SHA_FILE")
-          ACTUAL=$(sha256sum "$ASSET" 2>/dev/null | awk '{print $1}' || shasum -a 256 "$ASSET" | awk '{print $1}')
-          if [ "$EXPECTED" = "$ACTUAL" ]; then
-            echo "✓ $(basename "$ASSET") SHA256 一致"
-          else
-            echo "::error::$(basename "$ASSET") SHA256 不匹配（公开: $EXPECTED / 实际: $ACTUAL）"; FAIL=1
-          fi
-        done
-        if [ -f _site/assets/downloads/install-aitm.sh ]; then
-          echo "✓ install-aitm.sh 已部署"
-        else
-          echo "::error::install-aitm.sh 缺失"; FAIL=1
-        fi
-        # arcade 产品介绍页（Jekyll 渲染）
-        if [ -f _site/arcade/index.html ]; then
-          echo "✓ arcade 产品介绍页已渲染"
-        else
-          echo "::error::arcade 介绍页缺失（_site/arcade/index.html）"; FAIL=1
-        fi
-        # arcade 工具 SPA：/arcade/play/，必须存在、体积合理、绝对无 BIOS / ROM 残留
-        if [ -f _site/arcade/play/index.html ]; then
-          echo "✓ arcade 工具 SPA 已部署"
-          ARCADE_KB=$(du -sk _site/arcade/play | awk '{print $1}')
-          if [ "$ARCADE_KB" -gt 5120 ]; then
-            echo "::error::arcade/play/ 体积异常: ${ARCADE_KB} KB（应 < 5 MB；可能误带二进制核心）"; FAIL=1
-          else
-            echo "✓ arcade/play/ 体积合理: ${ARCADE_KB} KB"
-          fi
-          # 红线：禁止任何 BIOS / ROM 类二进制
-          ARCADE_BANNED=$(find _site/arcade/play -type f \( \
-            -name '*.zip' -o \
-            -name '*.bios' -o \
-            -name 'neogeo*' -o \
-            -name 'scph*.bin' -o \
-            -name 'gba_bios*' \
-          \) 2>/dev/null || true)
-          if [ -n "$ARCADE_BANNED" ]; then
-            echo "::error::arcade/play/ 检测到禁止的 BIOS / ROM 类文件："; echo "$ARCADE_BANNED"; FAIL=1
-          else
-            echo "✓ arcade/play/ 无 BIOS / ROM 残留"
-          fi
-          # arcade 工具自带独立 CSP
-          if grep -q "Content-Security-Policy" _site/arcade/play/index.html; then
-            echo "✓ arcade 工具独立 CSP 已注入"
-          else
-            echo "::error::arcade/play/index.html 缺独立 CSP"; FAIL=1
-          fi
-        else
-          echo "::error::arcade 工具 SPA 缺失（_site/arcade/play/index.html）"; FAIL=1
-        fi
-        # aitm 自动更新清单（latest.json）：version 字段必须与实际 dmg 版本号匹配
+        # aitm 兼容垫片（assets/aitm/latest.json）
+        # aitm 自 v1.0.0 起改从 GitHub Releases API 取更新（内部仓 c3f6439「废弃博客中转」），
+        # 安装包也全部由 GitHub Releases 分发，博客不再托管任何 aitm 二进制。
+        # 本文件只为 v0.10.6 及更早的遗留客户端保留：它们仍会来拉这个 URL，
+        # 拿到一个足够新的 version 才会提示用户升级（升级后客户端自带 updater 接管）。
         if [ -f _site/assets/aitm/latest.json ]; then
-          DMG_NAME=$(basename "$DMG")
-          DMG_VERSION=$(echo "$DMG_NAME" | sed -E 's/^aitm_([0-9]+\.[0-9]+\.[0-9]+).*/\1/')
           JSON_VERSION=$(grep -oE '"version"[[:space:]]*:[[:space:]]*"[^"]+"' _site/assets/aitm/latest.json | sed -E 's/.*"([^"]+)"$/\1/')
-          if [ "$DMG_VERSION" = "$JSON_VERSION" ]; then
-            echo "✓ latest.json 版本 ($JSON_VERSION) 与 dmg 一致"
+          JSON_URL=$(grep -oE '"download_url"[[:space:]]*:[[:space:]]*"[^"]+"' _site/assets/aitm/latest.json | sed -E 's/.*"([^"]+)"$/\1/')
+          if [ -z "$JSON_VERSION" ] || [ -z "$JSON_URL" ] || ! grep -q '"notes"' _site/assets/aitm/latest.json; then
+            echo "::error::latest.json 缺 version / download_url / notes 字段"; FAIL=1
+          elif ! echo "$JSON_URL" | grep -q '^https://github\.com/kanfu-panda/aitm/releases/'; then
+            echo "::error::latest.json download_url 必须指向 GitHub Releases，实为 $JSON_URL"; FAIL=1
+          elif ! echo "$JSON_URL" | grep -qF "$JSON_VERSION"; then
+            echo "::error::latest.json download_url 未包含 version $JSON_VERSION"; FAIL=1
           else
-            echo "::error::latest.json version=$JSON_VERSION 与 dmg version=$DMG_VERSION 不一致"; FAIL=1
-          fi
-          # download_url 字段也要包含正确的 dmg 文件名
-          if grep -q "$DMG_NAME" _site/assets/aitm/latest.json; then
-            echo "✓ latest.json download_url 指向 $DMG_NAME"
-          else
-            echo "::error::latest.json download_url 未指向当前 dmg ($DMG_NAME)"; FAIL=1
+            echo "✓ latest.json 垫片有效（version=$JSON_VERSION → GitHub Releases）"
           fi
         else
-          echo "::error::assets/aitm/latest.json 缺失（aitm 自动更新依赖）"; FAIL=1
+          echo "::error::assets/aitm/latest.json 缺失（v0.10.6 及更早的遗留客户端依赖）"; FAIL=1
         fi
         [ $FAIL -eq 0 ] || exit 1
 

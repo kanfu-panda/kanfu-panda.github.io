@@ -68,4 +68,25 @@ description: テクノロジー好き開発者の個人ブログ —— コー�
             </div>
         </div>
     </div>
+
+    <div class="featured-projects">
+        <h2>🚀 プロジェクト</h2>
+        <div class="about-grid">
+            <div class="about-card">
+                <h3><a href="/ja/aitm/">aitm</a></h3>
+                <p>macOS と Windows に対応した AI ネイティブなデスクトップターミナル —— 複数 tab の PTY、ファイルの読み書きができる AI サイドバー、内蔵ブラウザ。Tauri 2 + React 19 + Rust、Apache-2.0。</p>
+                <p style="margin-top: 0.5rem; font-size: 0.85em;">
+                    <a href="/ja/aitm/">製品ページ</a> · <a href="https://github.com/kanfu-panda/aitm">GitHub</a> · <a href="https://github.com/kanfu-panda/aitm/releases/latest">最新リリース ↓</a>
+                </p>
+            </div>
+            <div class="about-card">
+                <h3><a href="/ja/pdlc/">PDLC</a></h3>
+                <p>Claude Code プラグイン —— 38 個の標準化された開発ライフサイクルのステージをスラッシュコマンドとして公開。ハードな契約、状態マシン、テストファースト。</p>
+                <p style="margin-top: 0.5rem; font-size: 0.85em;">
+                    <a href="/ja/pdlc/">製品ページ</a> · <a href="https://github.com/kanfu-panda/pdlc-skills">GitHub</a>
+                </p>
+            </div>
+        </div>
+        <p style="margin-top: 1rem;"><a href="/ja/projects/">すべてのプロジェクト →</a></p>
+    </div>
 </div>
