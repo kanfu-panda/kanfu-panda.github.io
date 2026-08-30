@@ -10,14 +10,15 @@
 
 - **架构**：Jekyll 静态站点生成器 → GitHub Pages 托管
 - **主题**：自定义样式，基于 `minima` 主题继承
-- **评论**：Gitalk（基于 GitHub Issues）
-- **统计**：Google Analytics（仅生产环境）
-- **搜索**：`simple-jekyll-search`（客户端搜索）
+- **多语言**：jekyll-polyglot 三语站（en 默认 / zh / ja）
+- **评论**：Giscus（基于 GitHub Discussions）。仓库内只存公开标识符，**不需要任何 secret**
+- **统计**：Google Analytics（仅生产环境，唯一需要 secret 的组件）
+- **搜索**：`search.md` 内自写的 `fetch` + 客户端过滤，读 `search.json`，按当前语言筛选
 
 ## 技术栈
 
 - Ruby 3.2 + Bundler
-- Jekyll + `jekyll-feed` + `jekyll-seo-tag` + `kramdown`
+- Jekyll + `jekyll-feed` + `jekyll-seo-tag` + `jekyll-polyglot` + `jekyll-sitemap` + `kramdown`
 - 无 JS 构建链路（前端依赖直接走 CDN + SRI 校验）
 - CI/CD：GitHub Actions
 
@@ -26,23 +27,30 @@
 ```
 _config.yml             # 站点配置（公开值）
 _config_secrets.yml     # 由 CI 临时生成，永不提交（已在 .gitignore）
-_layouts/               # 布局模板（已设 CSP / Referrer-Policy）
-_posts/                 # 文章（YYYY-MM-DD-slug.md）
-_includes/              # 可复用片段（如有）
+_data/i18n.yml          # 三语 UI 文案总表（nav / footer / search / post / tags …）
+_layouts/               # 布局模板（已设 CSP / Referrer-Policy / hreflang / 语言切换）
+_posts/                 # 文章（YYYY-MM-DD-slug.md，非默认语言加 .zh.md / .ja.md）
 assets/css/style.scss   # 站点样式
+assets/images/posts/    # 文章配图（每篇三语各一套：无后缀 / -en / -ja）
+arcade/play/            # arcade 模拟器 SPA 构建产物（由 scripts/sync-arcade.sh 同步）
 scripts/                # 本地开发脚本 + 安全工具
 .github/workflows/      # CI/CD
 docs/decisions/         # ADR（架构决策记录）
+.private/               # 私有草稿与威胁模型，已 gitignore，绝不入仓
 SECURITY.md             # 安全策略与运维手册
 ```
 
 ## 常用命令
 
 ```bash
+# ⚠️ 先确保用的是 rbenv 的 Ruby 3.2（.ruby-version 指定）。
+#    macOS 自带 /usr/bin/ruby 是 2.6，会因 bundler 版本不匹配直接报错。
+export PATH="$HOME/.rbenv/shims:$PATH"
+
 # 安装依赖
 bundle install
 
-# 本地开发（不走 production，不注入 GA / Gitalk）
+# 本地开发（不走 production，不注入 GA；Giscus 不依赖环境，本地也会渲染）
 bundle exec jekyll serve --livereload
 
 # 生产构建（验证 CI 行为）
@@ -183,85 +191,55 @@ bash scripts/install-hooks.sh
 
 ---
 
-## aitm 安装包升级流程（重要）
+## 产品页版本同步流程（aitm / PDLC）
 
-aitm 桌面端会拉 `https://kanfu-panda.github.io/assets/aitm/latest.json` 做 update_check。
-**`latest.json` 的 version 必须与 `assets/downloads/` 下的 dmg 文件名版本号严格一致**，
-否则 CI 会失败。下面是发新版本时的标准流程。
+两个产品都是**公开仓 + GitHub Releases 分发**，博客只承担产品页展示，**不托管任何二进制**。
+所以"发版"对本仓库来说只有一件事：**把三语产品页上的版本号和下载链接对齐到最新 release**。
 
-### 文件涉及范围
+| 产品 | 公开仓 | 协议 | 博客页面 |
+|---|---|---|---|
+| aitm | [kanfu-panda/aitm](https://github.com/kanfu-panda/aitm) | Apache-2.0 | `aitm.md` / `aitm.zh.md` / `aitm.ja.md` |
+| PDLC | [kanfu-panda/pdlc-skills](https://github.com/kanfu-panda/pdlc-skills) | MIT | `pdlc.md` / `pdlc.zh.md` / `pdlc.ja.md` |
 
-自 v0.8.2 起 aitm 跨平台（macOS + Windows），每次发布要处理 **5 个安装包**：
-
-| 文件 | 改什么 |
-|---|---|
-| `assets/downloads/aitm_X.Y.Z_aarch64.dmg` + `.sha256` | macOS Apple Silicon 安装包 + 校验和 |
-| `assets/downloads/aitm_X.Y.Z_x64_en-US.msi` + `.sha256` | Windows x86_64 MSI 安装包 + 校验和 |
-| `assets/downloads/aitm_X.Y.Z_x64-setup.exe` + `.sha256` | Windows x86_64 NSIS 安装包 + 校验和 |
-| `assets/downloads/aitm_X.Y.Z_arm64_en-US.msi` + `.sha256` | Windows ARM64 MSI 安装包 + 校验和 |
-| `assets/downloads/aitm_X.Y.Z_arm64-setup.exe` + `.sha256` | Windows ARM64 NSIS 安装包 + 校验和 |
-| `assets/aitm/latest.json` | `version` + `download_url`（仍指向 dmg）+ `notes` |
-| `aitm.md` / `aitm.zh.md` / `aitm.ja.md` | 三语产品页：5 张下载卡的版本号 + 文件名 + 体积 |
-| `_posts/2026-05-14-aitm-introduction.md` | excerpt 里如果有版本号也同步 |
-
-### 命令模板（替换 `OLD` 与 `NEW`）
+### 同步步骤
 
 ```bash
-# 0. aitm 仓库会在 releases/v<NEW>/ 下产出 5 个安装包 + latest.json
-OLD="0.7.0"
-NEW="0.8.2"
-SRC="$HOME/projects/aitm/releases/v${NEW}"
+# 1. 查最新 release 版本号
+gh release list --repo kanfu-panda/aitm --limit 1
+gh release list --repo kanfu-panda/pdlc-skills --limit 1
 
-# 1. 删旧版（5 个安装包 + 各自 .sha256）
-for arch in aarch64.dmg x64_en-US.msi x64-setup.exe arm64_en-US.msi arm64-setup.exe; do
-  rm -f assets/downloads/aitm_${OLD}_${arch}{,.sha256}
-done
+# 2. 三语页面全文替换版本号（aitm 为例）
+OLD="1.4.3"; NEW="1.5.0"
+sed -i '' "s/${OLD}/${NEW}/g" aitm.md aitm.zh.md aitm.ja.md
 
-# 2. 拷新版 5 个安装包 + 各自生成 SHA256
-for f in aitm_${NEW}_aarch64.dmg aitm_${NEW}_x64_en-US.msi aitm_${NEW}_x64-setup.exe \
-         aitm_${NEW}_arm64_en-US.msi aitm_${NEW}_arm64-setup.exe; do
-  cp "$SRC/$f" assets/downloads/
-  H=$(shasum -a 256 "assets/downloads/$f" | awk '{print $1}')
-  echo "${H}  ${f}" > "assets/downloads/${f}.sha256"
-done
+# 3. 核对 sed 改不到的东西：
+#    - aitm：5 张下载卡的文件名必须与 release assets 实际名字一致
+#      （gh release view v${NEW} --repo kanfu-panda/aitm --json assets）
+#    - PDLC：命令总数（hero / description / "N 条命令，分三层" / 验证安装那段）
+#      实际数量 = ls ~/projects/pdlc-skills/skills/ | wc -l
+#    - 两者：新版本引入的重要能力是否该补进"核心能力"卡片
 
-# 3. latest.json 直接拷源 + 手动改 notes 去内部信息
-cp "$SRC/latest.json" assets/aitm/latest.json
-# 编辑器打开 latest.json，把 notes 字段重写为对外精简版（不含路线图 / 内部模块名）
+# 4. 本地生产构建自检
+export PATH="$HOME/.rbenv/shims:$PATH"
+JEKYLL_ENV=production bundle exec jekyll build --config _config.yml
 
-# 4. 三语产品页 + 博客文章 excerpt 全文替换版本号 + 各平台体积（按需）
-sed -i '' "s/${OLD}/${NEW}/g" aitm.md aitm.zh.md aitm.ja.md _posts/*.md
-# 然后手动核对 5 个平台体积说明（aitm.md 三语下载卡里的 MB 数字）
-
-# 5. 本地 build 自检
-JEKYLL_ENV=production bundle exec jekyll build
-
-# 6. PR + merge → 自动部署
+# 5. 走 PR（禁止直推 main）
 ```
 
-### 易踩的坑
+### `assets/aitm/latest.json` 是什么
 
-- **`latest.json` 的 `version` 字段必须与 dmg 文件名严格相等**。CI 会比对，不一致直接 fail
-- **`download_url` 必须包含正确的 dmg 文件名**（自动更新仍以 macOS 为锚点）
-- **5 个安装包都要换全**——少换一个，旧版会以"幽灵文件"形式残留在 site 里
-- **5 个 `.sha256` 都要生成**——CI 红线之一（缺一个就 fail）
-- **各平台体积**：sed 不会改下载卡里的 `· X.X MB` 数字。手动核对 5 个平台体积（macOS dmg / x64 msi / x64 exe / arm64 msi / arm64 exe）
-- **`notes` 字段不能含敏感内部信息**（路线图、未发布功能、内部模块名、CI workflow 细节等）。一句话写本次最主要的对外变化
-- **不要忘记删旧版安装包**。否则 git 历史里会越积越多大文件
-- **assets/aitm/ 与 assets/downloads/ 共享所有语言**。polyglot 配置里已 exclude，三语用户共用同一份资源
+一个**冻结的兼容垫片**，不是分发渠道。
 
-### 关于 `latest.json` 的格式约定
+aitm 自 **v1.0.0** 起改从 GitHub Releases API 取更新（内部仓 commit `c3f6439`「废弃博客中转」），
+此后博客与 aitm 的更新链路已完全解耦。这个文件只为 **v0.10.6 及更早**的遗留客户端保留——
+它们仍会来拉这个 URL，需要看到一个足够新的 `version` 才会提示用户升级；用户升上去之后，
+客户端自带的 updater 就接管了，不会再回来拉它。
 
-字段由 aitm 客户端约定，目前形式：
+因此：
 
-```json
-{
-  "version": "X.Y.Z",
-  "download_url": "https://kanfu-panda.github.io/assets/downloads/aitm_X.Y.Z_aarch64.dmg",
-  "notes": "本次发布的关键变化（一句话，对外措辞）"
-}
-```
-
-**如果 aitm 客户端约定字段变了**（例如要加 `signature`、`pub_date` 之类），
-按客户端的新约定改。**改完务必同步更新 CI 校验**（`.github/workflows/jekyll.yml`
-里"aitm 自动更新清单"那段），否则旧校验可能放过格式错误。
+- **不需要**随每次 aitm 发版更新它。它的作用是把遗留用户推走一次，不是持续广播最新版。
+- schema 必须保持 `{version, download_url, notes}`（老客户端的约定，改了会解析失败）。
+- `download_url` 必须指向 `github.com/kanfu-panda/aitm/releases/...` 且包含 `version` 的值——
+  CI 会校验这两点。
+- **不要**往 `assets/downloads/` 放安装包。2026-08-30 已清掉 32MB 的 0.10.6 遗留二进制，
+  当时它们已无任何页面引用。博客不再是 aitm 的分发端。

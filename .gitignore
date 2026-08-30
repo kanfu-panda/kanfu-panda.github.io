@@ -41,6 +41,9 @@ nbproject/
 # 私有设计稿、威胁模型、未公开方案、BIOS 备份等（绝不入仓）
 .private/
 
+# Codex 的本地项目指引。内容与 CLAUDE.md 平行维护，按约定不入仓。
+AGENTS.md
+
 # 安装文件
 rubyinstaller.exe
 *.exe

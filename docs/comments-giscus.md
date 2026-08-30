@@ -36,7 +36,7 @@ giscus:
   category: "Announcements"
   category_id: "DIC_xxxxxxxx"      # ← data-category-id
   mapping: "pathname"
-  reactions_enabled: "1"
+  reactions_enabled: "0"
   input_position: "bottom"
 ```
 
@@ -53,8 +53,9 @@ giscus:
 ## 维护说明
 
 - 删评论 / 封人：去仓库 Discussions 对应讨论串操作（你是 admin）。
-- 主题联动：访客切换博客明暗主题时，评论框通过 `postMessage` 同步明暗
-  （逻辑在 `default.html` 的 `syncGiscusTheme`）。
+- 主题联动：访客切换博客明暗主题时，评论组件被**整体重新渲染**为新主题
+  （`post.html` 里的 `window.renderGiscus`，由 `default.html` 的主题切换按钮调用）。
+  没有用 giscus 的 `setConfig`——实测它会让反应区不跟随、输入框跟随，出现半明半暗的割裂。
 - 语言：评论框 UI 语言跟随文章语言（`post.html` 里按 `ui_lang` 映射 en/zh-CN/ja）。
 - CSP：`default.html` 的 CSP 已放行 `https://giscus.app`（`script-src` + `frame-src`）。
   升级 giscus 或换域名时记得同步改。

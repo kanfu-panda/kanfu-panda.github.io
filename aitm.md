@@ -3,17 +3,18 @@ layout: default
 title: aitm
 permalink: /aitm/
 lang: en
-description: aitm — a desktop terminal app with AI built in, available for macOS and Windows. Let the AI read your files, search command history, and run commands on demand. Every high-risk action requires your explicit confirmation.
+description: aitm — a desktop terminal app with AI built in, for macOS and Windows. The AI reads and edits files, runs commands, and drives a built-in browser. Every high-risk action requires your explicit confirmation. Open source under Apache-2.0.
 ---
 
 <div class="hero-section">
     <div class="hero-content">
         <h1>aitm</h1>
         <p>A desktop terminal app with AI built in — for macOS and Windows.</p>
-        <p>Work with AI inside the terminal you already know — the AI can read files, search command history, and run commands when you ask. Every high-risk action waits for your explicit OK.</p>
+        <p>Work with AI inside the terminal you already know — the AI reads and edits files, runs commands, and drives a built-in browser. Every high-risk action waits for your explicit OK.</p>
+        <p style="opacity: 0.8; font-size: 0.92em;">Open source under Apache-2.0 — code and every installer live on GitHub.</p>
         <div class="hero-links">
             <a href="#download" class="cta-button">Download now →</a>
-            <a href="#first-use" class="github-link">Quick start</a>
+            <a href="https://github.com/kanfu-panda/aitm" class="github-link">View source on GitHub</a>
         </div>
     </div>
 </div>
@@ -33,7 +34,7 @@ description: aitm — a desktop terminal app with AI built in, available for mac
         </div>
         <div class="about-card">
             <h3>🔧 AI tool-calling loop</h3>
-            <p>The AI doesn't just suggest commands — it can read files, search command history, and run commands on demand. Every high-risk action shows a confirm dialog first.</p>
+            <p>The AI doesn't just suggest — it reads files, edits them, runs commands, and drives the browser. Edits show a real diff before they apply, and commands report their actual exit code rather than whatever arrived after a fixed wait. Every high-risk action shows a confirm dialog first.</p>
         </div>
         <div class="about-card">
             <h3>🔔 System notifications</h3>
@@ -54,6 +55,26 @@ description: aitm — a desktop terminal app with AI built in, available for mac
         <div class="about-card">
             <h3>📝 Built-in file editor</h3>
             <p>Open and edit project files inline with a CodeMirror-powered editor — syntax highlighting included, no need to flip to another window.</p>
+        </div>
+        <div class="about-card">
+            <h3>🌐 Built-in browser panel</h3>
+            <p>Read docs without leaving the terminal. Tabs — with their zoom level — survive a restart, and one toggle requests a site's mobile version. The AI can open and navigate it too, and only ever drives the tab you can see.</p>
+        </div>
+        <div class="about-card">
+            <h3>🧩 Claude Code skills support</h3>
+            <p>Skills under <code>~/.claude/skills/</code>, a project's <code>.claude/skills/</code>, and plugin marketplaces are all discovered automatically. The AI searches and loads them on demand, so hundreds of them cost almost no context.</p>
+        </div>
+        <div class="about-card">
+            <h3>💾 Your session comes back</h3>
+            <p>Terminal tabs, split layout, and open files reopen in the directories they were in — no "restore previous session?" dialog on every launch. Switch it off in Settings if you'd rather start clean.</p>
+        </div>
+        <div class="about-card">
+            <h3>⌨️ Command palette</h3>
+            <p><code>⌘⇧P</code> searches and runs any keyboard action, each entry showing its current binding — so it doubles as a way to learn the shortcuts. <code>⌘1</code>–<code>⌘9</code> switch tabs within the focused split.</p>
+        </div>
+        <div class="about-card">
+            <h3>🚩 Hallucination flagging</h3>
+            <p>If a reply claims it wrote a file or opened a page but no matching tool was actually called that turn, the message gets flagged. Some models assert success without acting; this makes it visible instead of silent.</p>
         </div>
     </div>
 </div>
@@ -118,41 +139,41 @@ description: aitm — a desktop terminal app with AI built in, available for mac
 
 <h2 id="download">⬇️ Download</h2>
 
-**Current version: v1.1.1**
+**Current version: v1.4.3**
 
 > macOS binaries are signed and notarized with an Apple Developer ID. Windows binaries aren't code-signed yet — [SignPath Foundation](https://signpath.org) signing (a non-profit supporting open-source code signing) is planned for a future release. See the [Code Signing Policy](https://github.com/kanfu-panda/aitm/blob/main/docs/CODE_SIGNING.md) for details.
 
 <div class="about-grid">
     <div class="about-card">
         <h3>🍎 macOS Apple Silicon</h3>
-        <p>dmg · 6.6 MB · aarch64 (M1/M2/M3/M4)</p>
+        <p>dmg · 7.2 MB · aarch64 (M1/M2/M3/M4)</p>
         <p style="margin-top: 1rem;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.1.1/aitm_1.1.1_aarch64.dmg" class="cta-button">Download .dmg →</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.4.3/aitm_1.4.3_aarch64.dmg" class="cta-button">Download .dmg →</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.1.1">Release page</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.4.3">Release page</a>
         </p>
     </div>
     <div class="about-card">
         <h3>🪟 Windows x86_64</h3>
         <p>Intel / AMD 64-bit</p>
         <p style="margin-top: 1rem;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.1.1/aitm_1.1.1_x64_en-US.msi" class="cta-button">Download .msi · x64 →</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.4.3/aitm_1.4.3_x64_en-US.msi" class="cta-button">Download .msi · x64 →</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            or <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.1.1/aitm_1.1.1_x64-setup.exe">NSIS .exe</a> ·
-            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.1.1">Release page</a>
+            or <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.4.3/aitm_1.4.3_x64-setup.exe">NSIS .exe</a> ·
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.4.3">Release page</a>
         </p>
     </div>
     <div class="about-card">
         <h3>🪟 Windows ARM64</h3>
         <p>Surface Pro X / Snapdragon</p>
         <p style="margin-top: 1rem;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.1.1/aitm_1.1.1_arm64_en-US.msi" class="cta-button">Download .msi · ARM64 →</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.4.3/aitm_1.4.3_arm64_en-US.msi" class="cta-button">Download .msi · ARM64 →</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            or <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.1.1/aitm_1.1.1_arm64-setup.exe">NSIS .exe</a> ·
-            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.1.1">Release page</a>
+            or <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.4.3/aitm_1.4.3_arm64-setup.exe">NSIS .exe</a> ·
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.4.3">Release page</a>
         </p>
     </div>
 </div>
@@ -189,12 +210,12 @@ Want to make sure your download wasn't corrupted in transit? Compute its SHA-256
 
 ```bash
 # macOS / Linux / Git Bash on Windows
-shasum -a 256 path/to/aitm_1.1.1_<arch>.<ext>
+shasum -a 256 path/to/aitm_1.4.3_<arch>.<ext>
 ```
 
 ```powershell
 # Windows PowerShell
-(Get-FileHash path\to\aitm_1.1.1_<arch>.<ext> -Algorithm SHA256).Hash.ToLower()
+(Get-FileHash path\to\aitm_1.4.3_<arch>.<ext> -Algorithm SHA256).Hash.ToLower()
 ```
 
 <h2 id="first-use">🚀 First-time use</h2>
@@ -222,7 +243,7 @@ shasum -a 256 path/to/aitm_1.1.1_<arch>.<ext>
 ## ❓ FAQ
 
 **Q: Double-clicking `aitm.app` (macOS) says "damaged, can't open"?**
-aitm is signed and notarized with an Apple Developer ID — Gatekeeper should let it through automatically. If you see this error, make sure you downloaded the dmg from the [official release page](https://github.com/kanfu-panda/aitm/releases/tag/v1.1.1) and that the file wasn't corrupted in transit (verify the SHA256 checksum).
+aitm is signed and notarized with an Apple Developer ID — Gatekeeper should let it through automatically. If you see this error, make sure you downloaded the dmg from the [official release page](https://github.com/kanfu-panda/aitm/releases/tag/v1.4.3) and that the file wasn't corrupted in transit (verify the SHA256 checksum).
 
 **Q: Windows shows a "Windows protected your PC" SmartScreen warning?**
 aitm for Windows isn't code-signed yet. Click **More info → Run anyway**. We're tracking signing certificates for a future release.
@@ -235,6 +256,12 @@ Either works. **MSI** is friendlier for org / IT deployment (Group Policy, auto-
 
 **Q: How is the API key managed?**
 The API key is stored in your local aitm config directory only — never uploaded anywhere. We recommend creating a dedicated, scope-restricted key with a usage cap for aitm, and rotating it per your usual security practice.
+
+**Q: Is aitm open source?**
+Yes — **Apache-2.0**. Source, issues, and installers for every platform live at [github.com/kanfu-panda/aitm](https://github.com/kanfu-panda/aitm).
+
+**Q: How do I get new versions?**
+On macOS the app updates itself: check on demand under Settings → About, and it checks in the background every six hours — then downloads, verifies the signature, installs and restarts, so there's no dragging a `.dmg` over the old app. Windows still gets a notice and a link to the installer for your platform. Note that v1.3.0 and earlier shipped without the updater, so those need one manual install first.
 
 **Q: Found a bug or want to chat?**
 Reach out via the contact link on the [About page](/about/).

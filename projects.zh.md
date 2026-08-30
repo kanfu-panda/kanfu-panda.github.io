@@ -11,13 +11,13 @@ description: 个人项目与开源贡献清单 —— aitm 桌面终端、PDLC C
 这里展示了我的一些个人项目和开源贡献。每个项目都代表了我在不同领域的探索和学习。
 
 ## aitm
-- **技术栈**：Tauri 2 + React 19 + Rust + TypeScript
-- **描述**：把 AI 能力做进 macOS 终端的桌面应用。多 tab 终端 + AI 侧栏 + 工具调用闭环，AI 能查文件、看命令历史、按需执行命令，所有高危操作都需用户确认。
-- **了解更多**：[aitm 产品页](/aitm/)
+- **技术栈**：Tauri 2 + React 19 + Rust + TypeScript，Apache-2.0 协议
+- **描述**：把 AI 能力做进终端的桌面应用，支持 macOS 与 Windows。多 tab 终端 + AI 侧栏 + 内置浏览器，AI 能读写文件、执行命令、操作浏览器——改文件前先给你看 diff，所有高危操作都需用户确认。
+- **了解更多**：[aitm 产品页](/aitm/) · [GitHub](https://github.com/kanfu-panda/aitm)
 
 ## PDLC
 - **技术栈**：Claude Code plugin（Bash + Markdown 模板），MIT 协议
-- **描述**：把 AI 辅助开发从"软规范"升级为"硬契约"的 Claude Code 插件。31 个标准化阶段作为斜杠命令暴露、产物落盘到 `docs/`、每功能一份状态机、测试先行（TDD 红灯门禁）、自动修复仅一轮。
+- **描述**：把 AI 辅助开发从"软规范"升级为"硬契约"的 Claude Code 插件。38 个标准化阶段作为斜杠命令暴露、产物落盘到 `docs/`、每功能一份状态机、测试先行（TDD 红灯门禁）、自动修复仅一轮。
 - **了解更多**：[PDLC 产品页](/pdlc/) · [GitHub](https://github.com/kanfu-panda/pdlc-skills)
 
 ## arcade
@@ -27,7 +27,7 @@ description: 个人项目与开源贡献清单 —— aitm 桌面终端、PDLC C
 
 ## 个人博客
 - **技术栈**：Jekyll, GitHub Pages
-- **描述**：这个就是当前的个人博客站点，使用 Jekyll 构建，托管在 GitHub Pages 上。
+- **描述**：这个就是当前的个人博客站点，使用 Jekyll 构建，托管在 GitHub Pages 上。英文 / 中文 / 日文三语并行，带 CSP + SRI 安全基线。
 - **源码**：[GitHub](https://github.com/kanfu-panda/kanfu-panda.github.io)
 
 ## 更多项目正在开发中...
