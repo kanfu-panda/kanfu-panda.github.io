@@ -14,11 +14,12 @@ timezone: Asia/Shanghai
 languages: ["en", "zh", "ja"]
 default_lang: "en"
 # 这些路径所有语言共用，不参与本地化复制
+# 注：feed.xml 与 search.json **不在**此列表——它们必须按语言各生成一份。
+# 曾经共用一份的后果：日文读者搜索永远 0 结果（search.json 里根本没有 ja 条目），
+# 中文 feed 里装的是英文文章。
 exclude_from_localization:
   - "assets/"
   - "arcade/"      # arcade 模拟器 SPA，自带独立 CSP，三语共用同一份
-  - "feed.xml"
-  - "search.json"
   - "robots.txt"
   - "404.html"
 # 并行构建加速
@@ -47,10 +48,11 @@ markdown: kramdown
 
 theme: minima
 plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
   - jekyll-polyglot
-  - jekyll-sitemap
+# 注：刻意不用 jekyll-seo-tag / jekyll-sitemap / jekyll-feed —— 三者都不认识 polyglot
+# 的多语言 URL，分别会产出指向默认语言的 canonical、只含默认语言的 sitemap、
+# 以及混语言的 feed。对应功能手写：SEO 头在 _layouts/default.html，
+# sitemap.xml / feed.xml / search.json 在仓库根（均参与本地化，三语各一份）。
 
 # 导航菜单
 header_pages:

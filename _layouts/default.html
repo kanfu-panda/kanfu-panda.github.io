@@ -12,37 +12,14 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://giscus.app; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; font-src 'self' data: https://cdnjs.cloudflare.com; img-src 'self' data: https://www.google-analytics.com https://*.githubusercontent.com https://*.gravatar.com; connect-src 'self' https://api.github.com https://www.google-analytics.com https://*.analytics.google.com; frame-src https://giscus.app; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://github.com">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
-    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ localized_site_title }}</title>
-
-    <!-- Favicons -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
-
-    <!-- og:image（社交分享缩略图）：文章可用 frontmatter `image:` 覆盖，未设则用全站默认 -->
-    {% if page.image %}{% assign og_image = page.image | absolute_url %}{% else %}{% assign og_image = site.url | append: '/assets/images/og-image.png' %}{% endif %}
-    <meta property="og:image" content="{{ og_image }}">
-    <meta name="twitter:image" content="{{ og_image }}">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-          integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
-          crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"
-            integrity="sha384-/TQbtLCAerC3jgaim+N78RZSDYV7ryeoBCVqTuzRrFec2akfBkHS7ACQ3PQhvMVi"
-            crossorigin="anonymous"></script>
-    {% seo %}
-
     {%- comment -%}
       naked_path：去掉 /<lang>/ 前缀 与 .<lang>.html 后缀后的"裸"路径。
-      用于生成各语言版本的 hreflang URL：
-        - default_lang：naked_path 本身
-        - 其他 lang：/<lang> + naked_path 改后缀为 .<lang>.html（若为 .html 结尾）
-      博客文章 URL 形如 /blog/.../slug.zh.html、/zh/blog/.../slug.zh.html，
-      产品页形如 /aitm/、/zh/aitm/。两种结构都正确处理。
+      canonical_path：当前页在**本语言**下的规范 URL 路径。
+      两者是 hreflang、canonical、og:url 的共同来源——一处算好，全部一致。
+
+      为什么不用 jekyll-seo-tag：它不认识 polyglot 的多语言 URL，会把
+      /zh/... 的 canonical 写成默认语言路径，等于让中文页宣告"我不是正版"。
+      本站三语，URL 必须精确可控，故 SEO 头在此手写。
     {%- endcomment -%}
     {%- assign naked_path = page.url -%}
     {%- if lang != site.default_lang -%}
@@ -58,6 +35,66 @@
         {%- assign naked_path = naked_path | replace: lang_suffix, ".html" -%}
       {%- endif -%}
     {%- endif -%}
+    {%- if lang == site.default_lang -%}
+      {%- assign canonical_path = naked_path -%}
+    {%- else -%}
+      {%- assign cano_suffix = "." | append: lang | append: ".html" -%}
+      {%- if naked_path contains ".html" -%}
+        {%- assign canonical_path = "/" | append: lang | append: naked_path | replace_first: ".html", cano_suffix -%}
+      {%- else -%}
+        {%- assign canonical_path = "/" | append: lang | append: naked_path -%}
+      {%- endif -%}
+    {%- endif -%}
+    {%- assign canonical_url = site.url | append: canonical_path -%}
+    {%- assign og_locale = lang | replace: "zh", "zh_CN" | replace: "ja", "ja_JP" | replace: "en", "en_US" -%}
+    {%- if page.description -%}
+      {%- assign meta_description = page.description -%}
+    {%- elsif page.excerpt -%}
+      {%- assign meta_description = page.excerpt | strip_html | strip_newlines | truncate: 200 -%}
+    {%- else -%}
+      {%- assign meta_description = localized_site_description -%}
+    {%- endif -%}
+
+    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ localized_site_title }}</title>
+    <meta name="description" content="{{ meta_description | escape }}">
+    <link rel="canonical" {% static_href %}href="{{ canonical_url }}"{% endstatic_href %}>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+
+    <!-- Open Graph / Twitter：文章可用 frontmatter `image:` 覆盖缩略图，未设则用全站默认 -->
+    {% if page.image %}{% assign og_image = page.image | absolute_url %}{% else %}{% assign og_image = site.url | append: '/assets/images/og-image.png' %}{% endif %}
+    <meta property="og:title" content="{{ page.title | default: localized_site_title | escape }}">
+    <meta property="og:description" content="{{ meta_description | escape }}">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:site_name" content="{{ localized_site_title | escape }}">
+    <meta property="og:locale" content="{{ og_locale }}">
+    <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+    <meta property="og:image" content="{{ og_image }}">
+    {% if page.layout == 'post' %}<meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+    {% endif %}<meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ page.title | default: localized_site_title | escape }}">
+    <meta name="twitter:description" content="{{ meta_description | escape }}">
+    <meta name="twitter:image" content="{{ og_image }}">
+
+    {%- if lang == site.default_lang -%}{%- assign feed_path = "/feed.xml" -%}{%- else -%}{%- assign feed_path = "/" | append: lang | append: "/feed.xml" -%}{%- endif -%}
+    <link rel="alternate" type="application/atom+xml" title="{{ localized_site_title | escape }}" {% static_href %}href="{{ feed_path }}"{% endstatic_href %}>
+
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+          integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+          crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"
+            integrity="sha384-/TQbtLCAerC3jgaim+N78RZSDYV7ryeoBCVqTuzRrFec2akfBkHS7ACQ3PQhvMVi"
+            crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":{% if page.layout == 'post' %}"BlogPosting"{% else %}"WebPage"{% endif %},"headline":{{ page.title | default: localized_site_title | jsonify }},"description":{{ meta_description | jsonify }},"image":{{ og_image | jsonify }},"url":{{ canonical_url | jsonify }},"inLanguage":{{ og_locale | replace: "_", "-" | jsonify }}{% if page.layout == 'post' %},"datePublished":"{{ page.date | date_to_xmlschema }}","dateModified":"{{ page.date | date_to_xmlschema }}","author":{"@type":"Person","name":"kanfu-panda"},"mainEntityOfPage":{"@type":"WebPage","@id":{{ canonical_url | jsonify }}}{% endif %}}
+    </script>
+
     <!-- hreflang：全部用 static_href 包裹，让 polyglot 的 URL relativize 跳过 -->
     {%- for l in site.languages -%}
       {%- if l == site.default_lang -%}
@@ -152,6 +189,11 @@
         <div class="wrapper">
             <p>&copy; {{ site.time | date: '%Y' }} {{ localized_site_title }}</p>
             <p class="site-footer-updated">{{ t.footer.last_updated | default: 'Last updated' }}: {{ site.time | date: '%Y-%m-%d' }}</p>
+            <p class="site-footer-subscribe">
+                <a {% static_href %}href="{{ feed_path }}"{% endstatic_href %} rel="alternate" type="application/atom+xml">
+                    <i class="fas fa-rss" aria-hidden="true"></i> {{ t.footer.subscribe | default: 'Subscribe via RSS' }}
+                </a>
+            </p>
         </div>
     </footer>
 

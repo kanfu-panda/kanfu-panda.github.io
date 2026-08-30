@@ -16,8 +16,11 @@ title_key: search.heading
 </div>
 
 <script>
-// 当前页面语言（Jekyll 注入）
+// 当前页面语言与对应的索引路径（Jekyll 注入）
+// search.json 已按语言各生成一份，这里直接取本语言那份
 var PAGE_LANG = {{ lang | jsonify }};
+{%- if lang == site.default_lang -%}{%- assign search_index = "/search.json" -%}{%- else -%}{%- assign search_index = "/" | append: lang | append: "/search.json" -%}{%- endif -%}
+var SEARCH_INDEX = {{ search_index | jsonify }};
 
 // 直接用 fetch 拿 search.json，按语言过滤后渲染
 (function() {
@@ -26,10 +29,11 @@ var PAGE_LANG = {{ lang | jsonify }};
     var allPosts = [];
     var noResults = {{ t.search.no_results | jsonify }};
 
-    fetch('/search.json')
+    fetch(SEARCH_INDEX)
         .then(function(r) { return r.json(); })
         .then(function(data) {
-            allPosts = data.filter(function(p) { return p.lang === PAGE_LANG; });
+            // 索引本身已按语言分离；这里再过滤一次是廉价的兜底
+            allPosts = data.filter(function(p) { return !p.lang || p.lang === PAGE_LANG; });
         });
 
     function escapeHtml(str) {

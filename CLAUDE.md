@@ -160,12 +160,23 @@ bash scripts/install-hooks.sh
 
 ## SEO 红线 ⭐
 
+> ⚠️ **本站不使用 `jekyll-seo-tag` / `jekyll-sitemap` / `jekyll-feed`**。三者都不认识 polyglot 的
+> 多语言 URL，会分别产出错误的 canonical、只含默认语言的 sitemap、以及混语言的 feed。
+> 对应功能全部手写：SEO 头在 `_layouts/default.html`，`sitemap.xml` / `feed.xml` / `search.json`
+> 在仓库根（均参与本地化，三语各一份）。**不要为了"少写点代码"把这些插件装回来。**
+
 ### 必守约束
 
-1. **`sitemap.xml`**：由 `jekyll-sitemap` 插件自动生成；**不要手动改**。已知问题：当前 sitemap 只列默认 lang URL，缺多语言副本——靠 hreflang 链让 Google 自己发现，目前可接受。完整覆盖待后续手写 sitemap.xml.liquid。
+1. **`sitemap.xml`**：**手写**（仓库根 `sitemap.xml`），参与 polyglot 本地化，三语各生成一份
+   （`/sitemap.xml` · `/zh/sitemap.xml` · `/ja/sitemap.xml`），三份都在 `robots.txt` 里声明。
+   只列**规范 URL**，与 layout 里的 canonical 完全一致。**不要装回 `jekyll-sitemap`**——
+   它不认识 polyglot，只会列默认语言且路径不带前缀。
 2. **`robots.txt`**：手维护文件（在仓库根）。当前禁止抓 `/arcade/play/`（SPA 空壳）。新加任何"低质量页面 / 工具页"也要在这里 Disallow。
 3. **arcade 工具 SPA**：必须保持 `<meta name="robots" content="noindex,follow">`（在 arcade_emulator 源码 `index.html`）。每次重 build + sync 不要丢这条。
-4. **canonical**：当前由 `jekyll-seo-tag` 自动生成。**已知问题**：非默认 lang 页面的 canonical 会错误指向 `/`（polyglot + seo-tag 兼容性）。临时容忍，因为 hreflang 提供了正确的语言关联。**未来修复**：在所有 `.zh.md` / `.ja.md` 加 frontmatter `canonical_url:` 字段显式声明。
+4. **canonical**：在 `_layouts/default.html` 手写，由 `canonical_path` 变量统一计算，
+   与 hreflang 同源。**不要装回 `jekyll-seo-tag`**——它把 `/zh/` 页的 canonical 写成 `/`，
+   等于让中文页对搜索引擎宣告"我不是正版"，2/3 的内容因此拿不到自然流量（2026-08-30 修复）。
+   polyglot 会把每篇文章额外复制到其他语言目录，那些副本靠 canonical 指回规范地址消歧义。
 5. **hreflang**：在 `_layouts/default.html` 自动生成，能正确处理 `.lang.html` 后缀（PR #16）。**新增页面 / 新文章不需要手动设 hreflang**，layout 自动加。
 6. **三语 description 严格分语言写**（见上节多语言约束）。
 7. **每个页面只有 1 个 `<h1>`**。多 `<h1>` 会拖累 SEO 评分。
@@ -183,11 +194,13 @@ bash scripts/install-hooks.sh
 
 | 项 | 优先级 | 说明 |
 |---|---|---|
-| polyglot + jekyll-seo-tag canonical 错误 | P1 | 非默认 lang 页 canonical 指 `/`。临时容忍 |
-| sitemap 缺多语言副本 | P2 | 靠 hreflang 链发现，但官方 sitemap 应完整 |
-| og:image 缺失 | P2 | 社交分享无缩略图 |
+| ~~canonical 错误~~ | ✅ 已修 | 2026-08-30 改为手写，见上方第 4 条 |
+| ~~sitemap 缺多语言副本~~ | ✅ 已修 | 2026-08-30 改为手写三语，见上方第 1 条 |
+| ~~og:image 缺失~~ | ✅ 已有 | 全站默认图 + 文章 `image:` 覆盖 |
+| ~~og:locale 用 `en`~~ | ✅ 已修 | 现为 `en_US` / `zh_CN` / `ja_JP` |
 | 自定义 404 页 | P3 | 当前 GitHub Pages 默认 |
-| og:locale 用 `en` 而非 `en_US` | P3 | 小问题 |
+| polyglot 生成重复副本 | P3 | 每篇文章在各语言目录下都有副本，已用 canonical 消歧义。
+彻底解决需改 URL 策略，收益不大 |
 
 ---
 
