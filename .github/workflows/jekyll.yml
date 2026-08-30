@@ -149,6 +149,70 @@ jobs:
         else
           echo "✓ 邮箱明文未泄露"
         fi
+        # ── 多语言 SEO 地基（2026-08-30 修复后加的防回归闸）────────────────
+        # 这些问题都是"静默劣化"型：页面照常渲染，只有搜索引擎看得见的部分坏掉。
+        # 没有闸门就会再次发生，故逐条钉死。
+        # 5.4 三份 sitemap 齐全，且各自只列本语言的规范 URL
+        for lang_path in "" "zh/" "ja/"; do
+          SM="_site/${lang_path}sitemap.xml"
+          if [ ! -f "$SM" ]; then
+            echo "::error::缺失 sitemap: /${lang_path}sitemap.xml"; FAIL=1; continue
+          fi
+          N=$(grep -c '<loc>' "$SM")
+          if [ "$N" -lt 20 ]; then
+            echo "::error::/${lang_path}sitemap.xml 只有 $N 条 URL（应 ≥20）"; FAIL=1
+          else
+            echo "✓ /${lang_path}sitemap.xml 含 $N 条 URL"
+          fi
+          # 非默认语言的 sitemap 里，每条 URL 都必须带该语言前缀
+          if [ -n "$lang_path" ]; then
+            BAD=$(grep -oE '<loc>[^<]+</loc>' "$SM" | sed 's/<[^>]*>//g' \
+                  | grep -v "^https://kanfu-panda.github.io/${lang_path%/}/" | head -3)
+            if [ -n "$BAD" ]; then
+              echo "::error::/${lang_path}sitemap.xml 含无语言前缀的 URL："; echo "$BAD"; FAIL=1
+            fi
+          fi
+        done
+        # 5.5 canonical：非默认语言页必须指向带语言前缀的自身，且全站每页仅 1 个
+        #     （历史故障：jekyll-seo-tag 不认识 polyglot，把 /zh/ 页的 canonical 写成 /，
+        #      等于让中文页对搜索引擎宣告"我不是正版"。）
+        for f in "zh/index.html" "zh/pdlc/index.html" "ja/aitm/index.html" \
+                 "zh/blog/2026/08/30/run-pdlc-in-your-project.zh.html"; do
+          LANG_DIR=$(echo "$f" | cut -d/ -f1)
+          CANON=$(grep -oE '<link rel="canonical" href="[^"]*"' "_site/$f" | sed 's/.*href="//;s/"//')
+          case "$CANON" in
+            https://kanfu-panda.github.io/$LANG_DIR/*) echo "✓ /$f canonical 正确" ;;
+            *) echo "::error::/$f canonical 未指向 /$LANG_DIR/ ：$CANON"; FAIL=1 ;;
+          esac
+        done
+        # 5.6 每页只允许 1 个 <title> 和 1 个 canonical（防手写 + 插件双写重复标签）
+        for f in "index.html" "zh/index.html" "ja/aitm/index.html" \
+                 "blog/2026/08/30/run-pdlc-in-your-project.html"; do
+          NT=$(grep -c '<title>' "_site/$f"); NC=$(grep -c 'rel="canonical"' "_site/$f")
+          if [ "$NT" -ne 1 ] || [ "$NC" -ne 1 ]; then
+            echo "::error::/$f 标签重复：title×$NT canonical×$NC（各应为 1）"; FAIL=1
+          else
+            echo "✓ /$f 无重复 SEO 标签"
+          fi
+        done
+        # 5.7 feed 与 search 索引必须按语言分离且非空
+        #     （历史故障：三语共用一份，日文搜索恒为 0 结果，中文 feed 里是英文文章。）
+        for lang_path in "" "zh/" "ja/"; do
+          L="${lang_path%/}"; [ -z "$L" ] && L="en"
+          NF=$(grep -oc '<entry' "_site/${lang_path}feed.xml" 2>/dev/null || echo 0)
+          NS=$(grep -oc '"title"' "_site/${lang_path}search.json" 2>/dev/null || echo 0)
+          if [ "$NF" -lt 1 ] || [ "$NS" -lt 1 ]; then
+            echo "::error::/${lang_path} feed 条目=$NF search 条目=$NS（均应 ≥1）"; FAIL=1
+          else
+            echo "✓ /${lang_path} feed=$NF 条 search=$NS 条"
+          fi
+          # search.json 里不允许混入其他语言
+          WRONG=$(grep -oE '"lang"[[:space:]]*:[[:space:]]*"[^"]*"' "_site/${lang_path}search.json" 2>/dev/null \
+                  | sed -E 's/.*"([^"]+)"$/\1/' | sort -u | grep -v "^${L}$" | head -3)
+          if [ -n "$WRONG" ]; then
+            echo "::error::/${lang_path}search.json 混入其他语言: $WRONG"; FAIL=1
+          fi
+        done
         # aitm 兼容垫片（assets/aitm/latest.json）
         # aitm 自 v1.0.0 起改从 GitHub Releases API 取更新（内部仓 c3f6439「废弃博客中转」），
         # 安装包也全部由 GitHub Releases 分发，博客不再托管任何 aitm 二进制。

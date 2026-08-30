@@ -2,13 +2,19 @@
 layout: null
 permalink: /search.json
 ---
-{%- assign all_posts = site.posts_all | default: site.posts -%}
+{%- comment -%}
+  本文件参与 polyglot 本地化，每种语言各生成一份，只含该语言的文章。
+  此前三语共用一份且用 posts_all，结果里只有 en+zh——日文搜索恒为 0 结果。
+{%- endcomment -%}
+{%- assign lang = site.active_lang | default: site.default_lang -%}
+{%- if lang == site.default_lang -%}{%- assign prefix = "" -%}{%- else -%}{%- assign prefix = "/" | append: lang -%}{%- endif -%}
+{%- assign posts = site.posts | where: "lang", lang -%}
 [
-  {% for post in all_posts %}
+  {% for post in posts %}
     {
       "title"    : "{{ post.title | escape }}",
-      "url"      : "{{ site.baseurl }}{{ post.url }}",
-      "lang"     : "{{ post.lang | default: '' }}",
+      "url"      : "{{ prefix }}{{ post.url }}",
+      "lang"     : "{{ post.lang }}",
       "category" : "{{ post.category }}",
       "tags"     : "{{ post.tags | join: ', ' }}",
       "date"     : "{{ post.date | date: '%Y-%m-%d' }}",

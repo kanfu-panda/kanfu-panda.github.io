@@ -1,0 +1,51 @@
+---
+layout: null
+permalink: /sitemap.xml
+---
+{%- comment -%}
+  手写 sitemap，替代 jekyll-sitemap。
+
+  为什么不用插件：jekyll-sitemap 不认识 polyglot，只列默认语言的 URL，
+  且用的是不带语言前缀的路径——三语站里等于 2/3 的内容对搜索引擎不存在。
+
+  本文件参与 polyglot 本地化，故每种语言各生成一份：
+    /sitemap.xml · /zh/sitemap.xml · /ja/sitemap.xml
+  三份都在 robots.txt 里声明。
+
+  只列**规范 URL**（与 _layouts/default.html 里的 canonical 完全一致）。
+  polyglot 会把每篇文章额外复制到其他语言目录下，那些副本靠 canonical
+  指回本文列出的规范地址，不在此重复登记。
+
+  hreflang 不写在这里——每个页面的 <head> 已经有了，Google 二选一即可。
+{%- endcomment -%}
+{%- assign lang = site.active_lang | default: site.default_lang -%}
+{%- if lang == site.default_lang -%}{%- assign prefix = "" -%}{%- else -%}{%- assign prefix = "/" | append: lang -%}{%- endif -%}
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for p in site.pages -%}
+{%- assign last_char = p.url | slice: -1, 1 -%}
+{%- if p.lang == lang -%}
+  <url>
+    <loc>{{ site.url }}{{ prefix }}{{ p.url }}</loc>
+    <changefreq>{% if p.url == "/" %}weekly{% else %}monthly{% endif %}</changefreq>
+    <priority>{% if p.url == "/" %}1.0{% else %}0.8{% endif %}</priority>
+  </url>
+{%- elsif p.lang == nil and last_char == "/" -%}
+  <url>
+    <loc>{{ site.url }}{{ prefix }}{{ p.url }}</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+{%- endif -%}
+{%- endfor -%}
+{%- for post in site.posts -%}
+{%- if post.lang == lang -%}
+  <url>
+    <loc>{{ site.url }}{{ prefix }}{{ post.url }}</loc>
+    <lastmod>{{ post.date | date_to_xmlschema }}</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+{%- endif -%}
+{%- endfor -%}
+</urlset>

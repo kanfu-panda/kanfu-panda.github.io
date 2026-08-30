@@ -17,6 +17,7 @@ en:
   footer:
     built_with: Built with Jekyll.
     last_updated: Last updated
+    subscribe: Subscribe via RSS
   search:
     heading: Search Posts
     placeholder: Type keywords...
@@ -52,6 +53,7 @@ zh:
   footer:
     built_with: Built with Jekyll.
     last_updated: 最后更新
+    subscribe: RSS 订阅
   search:
     heading: 搜索文章
     placeholder: 输入关键词搜索…
@@ -87,6 +89,7 @@ ja:
   footer:
     built_with: Built with Jekyll.
     last_updated: 最終更新
+    subscribe: RSS で購読
   search:
     heading: 記事を検索
     placeholder: キーワードを入力…
