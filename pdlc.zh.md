@@ -211,8 +211,9 @@ PDLC 背后的方法论，我在博客上开了一个系列，从概念讲到实
 | 02 | [为什么 pdlc-skills 天然契合三大工程？](/zh/blog/2026/08/13/why-pdlc-fits-three-paradigms.zh.html) |
 | 03 | [三大工程在 pdlc-skills 怎么联动？](/zh/blog/2026/08/23/how-three-paradigms-interlock.zh.html) |
 | 04 | [如何让 pdlc-skills 在项目里跑起来？](/zh/blog/2026/08/30/run-pdlc-in-your-project.zh.html) |
+| 05 | [pdlc-skills 如何实现无人值守（Loop 工程）？](/zh/blog/2026/08/31/run-pdlc-unattended.zh.html) |
 
-后续会陆续补上：无人值守怎么做、如何保障质量、关系图与复盘怎么用、真实项目上的实践。
+后续会陆续补上：如何保障质量、关系图与复盘怎么用、真实项目上的实践。
 
 ## 📄 协议
 

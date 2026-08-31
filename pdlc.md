@@ -209,8 +209,11 @@ I'm writing a blog series on the thinking behind PDLC, from concepts through to 
 |---|---|
 | 01 | [Prompt Engineering, Loop Engineering, Graph Engineering: What Are They?](/blog/2026/08/09/prompt-loop-graph-engineering.html) |
 | 02 | [Why Does pdlc-skills Fit All Three Engineering Paradigms So Naturally?](/blog/2026/08/13/why-pdlc-fits-three-paradigms.html) |
+| 03 | [How Do the Three Engineering Paradigms Interlock in pdlc-skills?](/blog/2026/08/23/how-three-paradigms-interlock.html) |
+| 04 | [Getting pdlc-skills Running in Your Own Project](/blog/2026/08/30/run-pdlc-in-your-project.html) |
+| 05 | [How pdlc-skills Runs Unattended](/blog/2026/08/31/run-pdlc-unattended.html) |
 
-Coming up: why PDLC lands on these three layers, how they interlock, getting it running on a project, how quality is enforced, and unattended runs.
+Coming up: how quality is enforced, how the relation graph and retros are used, and PDLC on a real project.
 
 ## 📄 License
 
