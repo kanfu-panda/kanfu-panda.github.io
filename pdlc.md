@@ -212,8 +212,9 @@ I'm writing a blog series on the thinking behind PDLC, from concepts through to 
 | 03 | [How Do the Three Engineering Paradigms Interlock in pdlc-skills?](/blog/2026/08/23/how-three-paradigms-interlock.html) |
 | 04 | [Getting pdlc-skills Running in Your Own Project](/blog/2026/08/30/run-pdlc-in-your-project.html) |
 | 05 | [How pdlc-skills Runs Unattended](/blog/2026/08/31/run-pdlc-unattended.html) |
+| 06 | [How pdlc-skills Keeps Quality Up When AI Writes the Code](/blog/2026/09/01/pdlc-quality-chain.html) |
 
-Coming up: how quality is enforced, how the relation graph and retros are used, and PDLC on a real project.
+Coming up: how the relation graph and retros are used, and PDLC on a real project.
 
 ## 📄 License
 

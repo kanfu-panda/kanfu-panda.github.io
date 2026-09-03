@@ -212,8 +212,9 @@ PDLC の背景にある考え方を、概念から実践までブログで連載
 | 03 | [三大エンジニアリングは pdlc-skills の中でどう噛み合うのか](/ja/blog/2026/08/23/how-three-paradigms-interlock.ja.html) |
 | 04 | [pdlc-skills を自分のプロジェクトで動かすには](/ja/blog/2026/08/30/run-pdlc-in-your-project.ja.html) |
 | 05 | [pdlc-skills はどうやって無人で回すのか](/ja/blog/2026/08/31/run-pdlc-unattended.ja.html) |
+| 06 | [pdlc-skills は AI に書かせたコードの品質をどう守るのか](/ja/blog/2026/09/01/pdlc-quality-chain.ja.html) |
 
-今後の予定：品質の担保、関係グラフと振り返りの使い方、実プロジェクトでの実践。
+今後の予定：関係グラフと振り返りの使い方、実プロジェクトでの実践。
 
 ## 📄 ライセンス
 
