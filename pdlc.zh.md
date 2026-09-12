@@ -213,8 +213,9 @@ PDLC 背后的方法论，我在博客上开了一个系列，从概念讲到实
 | 04 | [如何让 pdlc-skills 在项目里跑起来？](/zh/blog/2026/08/30/run-pdlc-in-your-project.zh.html) |
 | 05 | [pdlc-skills 如何实现无人值守（Loop 工程）？](/zh/blog/2026/08/31/run-pdlc-unattended.zh.html) |
 | 06 | [pdlc-skills 如何在 AI 辅助编程中保障项目质量？](/zh/blog/2026/09/01/pdlc-quality-chain.zh.html) |
+| 07 | [pdlc-skills 如何看清项目进度、变更影响与质量趋势？](/zh/blog/2026/09/05/pdlc-progress-impact-retro.zh.html) |
 
-后续会陆续补上：关系图与复盘怎么用、真实项目上的实践。
+后续会陆续补上：真实项目上的实践。
 
 ## 📄 协议
 
