@@ -213,8 +213,9 @@ PDLC の背景にある考え方を、概念から実践までブログで連載
 | 04 | [pdlc-skills を自分のプロジェクトで動かすには](/ja/blog/2026/08/30/run-pdlc-in-your-project.ja.html) |
 | 05 | [pdlc-skills はどうやって無人で回すのか](/ja/blog/2026/08/31/run-pdlc-unattended.ja.html) |
 | 06 | [pdlc-skills は AI に書かせたコードの品質をどう守るのか](/ja/blog/2026/09/01/pdlc-quality-chain.ja.html) |
+| 07 | [pdlc-skills は進捗・変更の影響・品質の傾向をどう見せるのか](/ja/blog/2026/09/05/pdlc-progress-impact-retro.ja.html) |
 
-今後の予定：関係グラフと振り返りの使い方、実プロジェクトでの実践。
+今後の予定：実プロジェクトでの実践。
 
 ## 📄 ライセンス
 
