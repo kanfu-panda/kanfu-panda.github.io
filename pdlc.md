@@ -214,8 +214,9 @@ I'm writing a blog series on the thinking behind PDLC, from concepts through to 
 | 05 | [How pdlc-skills Runs Unattended](/blog/2026/08/31/run-pdlc-unattended.html) |
 | 06 | [How pdlc-skills Keeps Quality Up When AI Writes the Code](/blog/2026/09/01/pdlc-quality-chain.html) |
 | 07 | [How pdlc-skills Makes Progress, Change Impact, and Quality Trends Visible](/blog/2026/09/05/pdlc-progress-impact-retro.html) |
+| 08 | [Running pdlc-skills on a Real Project: Three Features, Start to Release](/blog/2026/09/18/pdlc-on-a-real-project.html) |
 
-Coming up: PDLC on a real project.
+All eight posts are up, from the concepts through to one real project end to end.
 
 ## 📄 License
 
