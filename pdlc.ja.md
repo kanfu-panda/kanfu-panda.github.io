@@ -214,8 +214,9 @@ PDLC の背景にある考え方を、概念から実践までブログで連載
 | 05 | [pdlc-skills はどうやって無人で回すのか](/ja/blog/2026/08/31/run-pdlc-unattended.ja.html) |
 | 06 | [pdlc-skills は AI に書かせたコードの品質をどう守るのか](/ja/blog/2026/09/01/pdlc-quality-chain.ja.html) |
 | 07 | [pdlc-skills は進捗・変更の影響・品質の傾向をどう見せるのか](/ja/blog/2026/09/05/pdlc-progress-impact-retro.ja.html) |
+| 08 | [pdlc-skills を実際のプロジェクトで回してみる：三つの機能を並行させてリリースまで](/ja/blog/2026/09/18/pdlc-on-a-real-project.ja.html) |
 
-今後の予定：実プロジェクトでの実践。
+全八回が揃いました。概念から実プロジェクトでの通し実践までです。
 
 ## 📄 ライセンス
 
