@@ -4,6 +4,9 @@ title: PDLC
 permalink: /pdlc/
 lang: zh
 wide: true
+release:
+  repo: kanfu-panda/pdlc-skills
+  version: 1.7.0
 description: PDLC —— 给 Claude Code 加上"产品开发生命周期"工作流的开源插件。38 个标准化阶段、状态机、TDD 红灯强制门、阶段自检、自动修复仅一轮。把"软规范"升级为"硬契约"。MIT 开源。
 ---
 
@@ -155,7 +158,7 @@ claude plugin install pdlc@pdlc-skills
 
 ```bash
 claude plugin list | grep pdlc
-# 预期：pdlc@pdlc-skills  Version: 1.7.0  Status: ✔ enabled
+# 预期：pdlc@pdlc-skills  Version: {{ page.release.version }}  Status: ✔ enabled
 ```
 
 重启 Claude Code 会话后，在输入框敲 `/` 然后开始打 `pdlc-`，autocomplete 会列出全部 38 条子命令。
