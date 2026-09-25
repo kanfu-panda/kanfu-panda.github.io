@@ -840,6 +840,19 @@ a:hover {
     margin: 0 auto;
     padding: 2rem 1rem;
 
+    /* 产品页（wide: true）里的长段落：卡片网格用满 1200px，文字类块限 880px 阅读宽度。
+       左对齐不居中，让整页左边缘与卡片网格保持一条线。 */
+    > p,
+    > ul,
+    > ol,
+    > blockquote,
+    > table,
+    > pre,
+    > .highlighter-rouge,
+    > .project-posts {
+        max-width: 880px;
+    }
+
     h2 {
         font-size: 1.8rem;
         margin-bottom: 2rem;
@@ -1114,7 +1127,9 @@ a:hover {
 
 .about-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    /* auto-fit：卡片少于可容纳列数时（如「安装」只有 2 张）收掉空列，让卡片撑满一行；
+       用 auto-fill 时 1200px 下会留 2 列空位，卡片被挤到左边、里面的命令被截断 */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
 
     .about-card {
