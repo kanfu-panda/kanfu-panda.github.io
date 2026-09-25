@@ -147,6 +147,7 @@
                     <a href="{% if lang == site.default_lang %}/tags/{% else %}/{{ lang }}/tags/{% endif %}">{{ t.nav.tags }}</a>
                     <a href="{% if lang == site.default_lang %}/search/{% else %}/{{ lang }}/search/{% endif %}">{{ t.nav.search }}</a>
                     <a href="{% if lang == site.default_lang %}/about/{% else %}/{{ lang }}/about/{% endif %}">{{ t.nav.about }}</a>
+                    <a href="{% if lang == site.default_lang %}/follow/{% else %}/{{ lang }}/follow/{% endif %}">{{ t.nav.follow }}</a>
                 </div>
 
                 <!-- 语言切换器（全部用 static_href 包裹，防 polyglot 把跨语言链接 rewrite 到当前语言） -->

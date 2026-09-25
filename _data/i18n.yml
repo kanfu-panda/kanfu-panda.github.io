@@ -8,6 +8,7 @@ en:
   nav:
     blog: Blog
     about: About
+    follow: Follow
     projects: Projects
     tags: Tags
     search: Search
@@ -44,6 +45,7 @@ zh:
   nav:
     blog: 博客
     about: 关于
+    follow: 关注
     projects: 项目
     tags: 标签
     search: 搜索
@@ -80,6 +82,7 @@ ja:
   nav:
     blog: ブログ
     about: プロフィール
+    follow: フォロー
     projects: プロジェクト
     tags: タグ
     search: 検索
