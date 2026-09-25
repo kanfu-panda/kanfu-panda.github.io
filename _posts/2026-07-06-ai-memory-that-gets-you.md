@@ -4,6 +4,7 @@ title: "How to make your AI actually get you: give it a memory"
 date: 2026-07-06
 lang: en
 categories: [blog]
+series: ai-memory
 image: /assets/images/posts/ai-memory-that-gets-you-cover-en.png
 tags: [aimemory, claudecode, contextengineering, aicoding]
 excerpt: "I keep tripping over the same AI in the same spot—it writes deprecated syntax I've told it not to, forgets rules I've spelled out. It's not dumb; it simply has no memory. This one borrows from how the human brain works: why good memory is structure, not a pile; why fixing a mistake means overwriting, not appending; and the least feel-good part—even when it remembers, it may not obey, so what then. Get this right and even an ordinary model can be trained into something that really gets you."

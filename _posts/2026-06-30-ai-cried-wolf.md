@@ -4,6 +4,7 @@ title: "My AI cried 'prompt injection!' — and I believed it. Then it turned ou
 date: 2026-06-30
 lang: en
 categories: [blog]
+series: ai-security
 image: /assets/images/posts/ai-cried-wolf-cover-en.png
 tags: [aisecurity, promptinjection, claudecode, aicoding]
 excerpt: "Mid-task, my AI stopped and said: 'I need to flag a security warning first'—a command's output supposedly carried an injection that would exfiltrate my username. I believed it instantly and chased it for half an hour. On review, it was a false alarm: the AI had hallucinated the attack. But I don't regret believing it—a false alarm costs you half an hour; a miss costs you the real thing. So I used the scare to actually build the defenses that stop real prompt injection."

@@ -69,9 +69,13 @@ bash scripts/install-hooks.sh
 
 1. 文件命名：`_posts/YYYY-MM-DD-slug.md`
 2. Front matter 必须包含：`layout: post`、`title`、`date`、`categories`、`tags`、`excerpt`
-   - 与某个产品相关的文章，再加 `project: aitm | pdlc | arcade`；属于连载的再加 `series: <系列名>`（如 `series: pdlc-paradigms`）。
-     三语文件都要加。产品页的「相关文章」、项目总览页的文章数、文章底部的「所属项目」回链都据此**自动生成**
+   - 与某个产品相关的文章，再加 `project: aitm | pdlc | arcade`。三语文件都要加。产品页的「相关文章」、
+     项目总览页的文章数、文章底部的「所属项目」回链都据此**自动生成**
      （`_includes/project-posts.html` + `_layouts/post.html`），**不要**再往产品页手写文章链接。
+   - 属于某个专题（连载）的文章，再加 `series: <专题 id>`，三语都要加。专题 id 必须先在 `_data/topics.yml`
+     里定义（三语 title / desc），专题页 `/topics/` 和文末的「所属专题」回链据此自动生成。
+     现有专题：`pdlc-paradigms` · `ai-coding-efficiency` · `ai-memory` · `ai-security`。
+     新写的文章接着某个连载往下写时，**别忘了加 `series:`**，否则它不会出现在专题页上。
 3. **禁止**在文章 Markdown 中嵌入：
    - `<script>` 标签（违反 CSP，且引入 XSS 风险）
    - 外部 `<iframe>`（CSP 设了 `frame-ancestors 'none'`，反向也建议不引入）
@@ -127,6 +131,7 @@ bash scripts/install-hooks.sh
 | aitm 产品页 | `aitm.md` / `aitm.zh.md` / `aitm.ja.md` |
 | PDLC 产品页 | `pdlc.md` / `pdlc.zh.md` / `pdlc.ja.md` |
 | arcade 产品页 | `arcade.md` / `arcade.zh.md` / `arcade.ja.md` |
+| 专题页 | `topics.md` / `topics.zh.md` / `topics.ja.md`（专题定义在 `_data/topics.yml`） |
 | 博客文章 | `_posts/YYYY-MM-DD-slug.md` (en) / `.zh.md` / `.ja.md` |
 
 > ⚠️ `_posts/*.md` 默认语言（en）**无后缀**，其他语言用 `.zh.md` / `.ja.md`。早期违规（无后缀但 lang: zh）已在 PR #14 规整。**新建文章必须遵守该命名**。

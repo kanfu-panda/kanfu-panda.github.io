@@ -4,6 +4,7 @@ title: "AI 越聊越笨？不是模型菜，是需要上点手段了"
 date: 2026-06-18
 lang: zh
 categories: [blog]
+series: ai-coding-efficiency
 image: /assets/images/posts/tier-models-trim-context-cover.png
 tags: [token, ClaudeCode, 模型分层, 上下文管理, AI编程]
 excerpt: "前两篇都在讲怎么在'进上下文之前'省 token。这篇讲会话进行中的两件事——一个决定谁来干活（模型分层），一个决定带多少记忆干活（上下文管理）。AI 写着写着变笨，多半不是模型菜。"

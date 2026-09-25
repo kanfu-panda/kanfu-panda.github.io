@@ -4,6 +4,7 @@ title: "AI の記憶に「健康診断」ツールを作った——診断はす
 date: 2026-07-13
 lang: ja
 categories: [blog]
+series: ai-memory
 image: /assets/images/posts/ai-memory-health-check-cover-ja.png
 tags: [AI記憶, ClaudeCode, 記憶メンテナンス, ツール開発, AI]
 excerpt: "前回は AI の記憶ライブラリを手作業で「除草」し、最後にこう悟った——雑草が繰り返し生えるのは、記憶システム自体に「自己点検」の仕組みがないからだ。そこで今回は、その健康診断をツールにした。医者のように、スキャンして問題を並べ、そこで止まる——直すかどうかは、いつもあなた次第。外部の大規模モデルには一切つながず、記憶は一文字も端末の外に出ない。"

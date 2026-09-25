@@ -4,6 +4,7 @@ title: "真正烧 token 的不是文档，是你工具没用对"
 date: 2026-06-16
 lang: zh
 categories: [blog]
+series: ai-coding-efficiency
 image: /assets/images/posts/tokens-not-docs-cover.png
 tags: [PDLC, Claude Code, AI工程, token, 成本]
 excerpt: "有人说 PDLC 文档一堆，token 不烧爆吗？我想说文档多和 token 烧得凶不是一回事；真想省 token，办法是把工具用对，不是把文档砍掉。"

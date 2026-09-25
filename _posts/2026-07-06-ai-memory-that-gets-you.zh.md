@@ -4,6 +4,7 @@ title: "如何通过增强 AI 的记忆体系，让它变得更懂你！"
 date: 2026-07-06
 lang: zh
 categories: [blog]
+series: ai-memory
 image: /assets/images/posts/ai-memory-that-gets-you-cover.png
 tags: [AI记忆, ClaudeCode, 上下文工程, AI编程, 效率]
 excerpt: "我已经不止一次，在同一个地方被同一个 AI 绊倒——反复强调过的语法它还是写错，定好的规范它转头就忘。不是它笨，是它压根没记性。这篇借人脑聊 AI 的记忆：为什么好记忆是结构不是堆积、改错为什么要覆盖而不是往后堆、以及最反鸡汤的一条——就算记住了，它也未必照做，那该怎么办。用好这套东西，一个普通模型也能被你调教得很懂你。"

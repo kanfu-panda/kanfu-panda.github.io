@@ -4,6 +4,7 @@ title: "AI が作業を終えたのに、疲れているのは私だ——あな
 date: 2026-06-27
 lang: ja
 categories: [blog]
+series: ai-coding-efficiency
 image: /assets/images/posts/tired-controller-cover-ja.png
 tags: [AI, 生産性, ClaudeCode, マルチタスク]
 excerpt: "ここ数回はずっと、AI にもっと多く・もっと並列で働かせる話だった——トークン節約、モデル階層化、複数 agent のオーケストレーション、worktree。今回は毛色が違う：AI を満杯まで推し進めたら、疲れていたのは私自身だった。一人で別々の役割の AI チームを率いて効率を十数倍にできる——だがその代償として、あなたは永遠に切り替え・レビュー・意思決定をし続ける人になる。私の限界は同時に 5 個、バランス点は 3 個だ。"

@@ -838,8 +838,32 @@ a:hover {
     border-radius: 4px;
     font-size: 0.95rem;
 
+    p {
+        margin: 0.2rem 0;
+    }
+
     a {
         margin-left: 0.35rem;
+        font-weight: 600;
+    }
+}
+
+/* 专题页（_includes/topics-list.html）：每个专题一节，复用 .project-posts 的列表样式 */
+.topic {
+    margin-top: 2.5rem;
+
+    h2 {
+        margin-bottom: 0.4rem;
+    }
+
+    .topic-count {
+        margin-left: 0.4rem;
+        font-size: 0.6em;
+        font-weight: normal;
+        color: var(--text-color-secondary, #666);
+    }
+
+    .topic-project a {
         font-weight: 600;
     }
 }

@@ -4,6 +4,7 @@ title: "The AI did the work, but I'm the one who's wiped — you're the controll
 date: 2026-06-27
 lang: en
 categories: [blog]
+series: ai-coding-efficiency
 image: /assets/images/posts/tired-controller-cover-en.png
 tags: [aicoding, productivity, claudecode, multitasking]
 excerpt: "The last few posts were all about getting the AI to do more, in parallel—saving tokens, tiering models, orchestrating multiple agents, worktrees. This one's different: as I pushed the AI fuller and fuller, I found the one getting tired was me. One person can lead a team of AIs at more than tenfold efficiency—but the price is that you become the one forever switching, reviewing, and deciding. My limit is five projects at once; my balance point is three."

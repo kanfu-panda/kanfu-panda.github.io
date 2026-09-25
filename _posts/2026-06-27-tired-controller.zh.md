@@ -4,6 +4,7 @@ title: "AI 把活干完了，累的却是我——你是那个「主控人」"
 date: 2026-06-27
 lang: zh
 categories: [blog]
+series: ai-coding-efficiency
 image: /assets/images/posts/tired-controller-cover.png
 tags: [AI编程, 多项目并行, 认知负荷, 主控人, ClaudeCode]
 excerpt: "前面几篇一路在讲怎么让 AI 干得更多、更并行——省 token、模型分层、多 agent 编排、worktree。这篇说点不一样的：当我把 AI 越推越满，发现累的是我自己。一个人能带一支 AI 团队，效率十几倍，可代价是你成了那个永远在切换、复核、做决策的「主控人」。我的极限是同时 5 个项目，平衡点是 3 个。"

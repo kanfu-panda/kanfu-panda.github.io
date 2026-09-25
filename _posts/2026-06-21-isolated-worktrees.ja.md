@@ -4,6 +4,7 @@ title: "AI を並列で動かす前提は、独立した作業領域を切り分
 date: 2026-06-21
 lang: ja
 categories: [blog]
+series: ai-coding-efficiency
 image: /assets/images/posts/isolated-worktrees-cover-ja.png
 tags: [Git, ClaudeCode, AI, 並列化, 生産性]
 excerpt: "前回は並列の話だった——大きなタスクを分割し、複数の agent に同時にばらまく。だが尻尾を一つ残していた：複数の手が同じコードを同時に触るとき、何が衝突を防ぐのか？その答えがこれ。最初は素直にリポジトリを 2 つ clone してディスクで痛い目を見て、その後 git worktree に切り替えた。直感に反する点は——すべての並列が隔離を要るわけではない。読み取りだけなら作業領域を共有できる、書き込む側だけ分ければいい。"

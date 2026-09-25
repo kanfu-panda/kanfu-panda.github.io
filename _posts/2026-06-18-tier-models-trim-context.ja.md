@@ -4,6 +4,7 @@ title: "AI が会話を重ねるほど馬鹿になる？モデルのせいじゃ
 date: 2026-06-18
 lang: ja
 categories: [blog]
+series: ai-coding-efficiency
 image: /assets/images/posts/tier-models-trim-context-cover-ja.png
 tags: [token, ClaudeCode, モデル階層化, コンテキスト管理, AIエンジニアリング]
 excerpt: "前の二回は「コンテキストに入る前」にトークンを節約する話だった。今回は会話の最中にやる二つのこと——誰が作業するか（モデル階層化）と、どれだけ記憶を抱えて作業するか（コンテキスト管理）。AI が途中から鈍くなるのは、たいていモデルのせいではない。"

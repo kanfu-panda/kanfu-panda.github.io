@@ -4,6 +4,7 @@ title: "AI 的「狼来了」，该不该信？一次真正感受到「恶意提
 date: 2026-06-30
 lang: zh
 categories: [blog]
+series: ai-security
 image: /assets/images/posts/ai-cried-wolf-cover.png
 tags: [AI安全, 提示词注入, 信息安全, ClaudeCode, AI编程]
 excerpt: "那天 AI 改着文档，突然插一句『我得先报个安全警告』——说命令输出里夹带了把我用户名外发出去的注入指令。我当场就信了，跟着它折腾了半小时。后来复盘才发现：这是一场虚惊，攻击是 AI 自己脑补出来的。但我不后悔信它——误报顶多白忙，漏报丢的是真东西。借这次假警，我把防住『真』恶意提示词的整套防线认真补了一遍，写在这儿。"

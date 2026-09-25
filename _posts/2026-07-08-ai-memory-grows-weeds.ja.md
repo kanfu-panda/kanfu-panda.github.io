@@ -4,6 +4,7 @@ title: "AI の記憶にも雑草は生える——こまめな手入れが要る
 date: 2026-07-08
 lang: ja
 categories: [blog]
+series: ai-memory
 image: /assets/images/posts/ai-memory-grows-weeds-cover-ja.png
 tags: [AI記憶, ClaudeCode, 記憶メンテナンス, コンテキストエンジニアリング, AI]
 excerpt: "前回は AI に記憶の仕組みをどう構築するかを話した。だが構築は始まりにすぎない——プロジェクトが長引くほど記憶は積み上がり、手入れを怠ると、そこに静かに「雑草」が生えてくる。今回は自分の複数プロジェクトの AI 記憶を体系的に「除草」し、記憶が劣化する六つの典型パターンを整理した。最も危険なのは、AI が期限切れの情報を握って、堂々と間違ったことをしてしまうものだ。"

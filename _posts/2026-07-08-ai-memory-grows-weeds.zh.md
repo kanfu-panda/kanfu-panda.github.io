@@ -4,6 +4,7 @@ title: "AI 的记忆会长草，及时清理很重要"
 date: 2026-07-08
 lang: zh
 categories: [blog]
+series: ai-memory
 image: /assets/images/posts/ai-memory-grows-weeds-cover.png
 tags: [AI记忆, ClaudeCode, 记忆维护, 上下文工程, AI编程]
 excerpt: "上一篇聊了怎么给 AI 构建记忆体系，但构建只是开始——项目推进得越久，记忆越积越多，若不加清理，其中就会悄悄长出“杂草”。这一次，我给自己几个项目的 AI 记忆做了一次系统的“除草”，并归纳出记忆衰退的六种典型情形。最危险的一种，会让 AI 拿着过期信息、理直气壮地办错事。"

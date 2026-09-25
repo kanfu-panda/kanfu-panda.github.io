@@ -4,6 +4,7 @@ title: "Want AI to work in parallel? First give each one its own workspace"
 date: 2026-06-21
 lang: en
 categories: [blog]
+series: ai-coding-efficiency
 image: /assets/images/posts/isolated-worktrees-cover-en.png
 tags: [gitworktree, ai, parallelism, claudecode, productivity]
 excerpt: "Last post was about parallelism—one big task, split and fanned out to several agents at once. But I left a thread hanging: when several hands edit the same code, what keeps them from clobbering each other? This is the answer. I first cloned the repo twice and ate the disk for it, then switched to git worktree. The counterintuitive bit: not every kind of parallelism needs isolation—read-only work can share a workspace, only the writers must split."

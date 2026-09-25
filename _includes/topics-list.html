@@ -1,0 +1,24 @@
+{%- comment -%}
+  专题页正文：按 _data/topics.yml 的顺序列出每个专题，文章按 front matter `series:` 归入、按发布顺序编号。
+  当前语言没有文章的专题不显示（例如只有中文版的文章）。
+{%- endcomment -%}
+{%- assign tl_lang = page.lang | default: site.active_lang | default: site.default_lang -%}
+{%- assign tl_t = site.data.i18n[tl_lang].topics -%}
+{%- if tl_lang == site.default_lang -%}{%- assign tl_prefix = "" -%}{%- else -%}{%- assign tl_prefix = "/" | append: tl_lang -%}{%- endif -%}
+{%- for topic in site.data.topics -%}
+  {%- assign tl_posts = site.posts | where: "lang", tl_lang | where: "series", topic.id | sort: "date" -%}
+  {%- if tl_posts.size > 0 %}
+<section class="topic project-posts" id="{{ topic.id }}">
+  <h2>{{ topic[tl_lang].title }} <span class="topic-count">{% if tl_posts.size == 1 and tl_t.count_one %}{{ tl_t.count_one }}{% else %}{{ tl_t.count | replace: "__N__", tl_posts.size }}{% endif %}</span></h2>
+  <p>{{ topic[tl_lang].desc }}</p>
+  <ol class="project-posts-list">
+    {%- for post in tl_posts %}
+    <li><a href="{{ post.url }}">{{ post.title }}</a> <span class="project-posts-date">{{ post.date | date: "%Y-%m-%d" }}</span></li>
+    {%- endfor %}
+  </ol>
+  {%- if topic.project %}
+  <p class="topic-project"><a href="{{ tl_prefix }}/{{ topic.project }}/">{{ tl_t.project_link }}</a></p>
+  {%- endif %}
+</section>
+  {%- endif -%}
+{%- endfor -%}

@@ -4,6 +4,7 @@ title: "Your AI feels slow? Maybe it's not dumb—you're making it work one thin
 date: 2026-06-20
 lang: en
 categories: [blog]
+series: ai-coding-efficiency
 image: /assets/images/posts/parallel-agents-cover-en.png
 tags: [claudecode, ai, subagents, parallelism, productivity]
 excerpt: "Last post was about making the AI work cheaper. This one's about making it work faster—a big task, instead of letting the AI grind through one module at a time, split it and fan it out to several agents at once. The counterintuitive bit: running in parallel doesn't really save tokens. What it saves is time."
