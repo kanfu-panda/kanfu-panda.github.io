@@ -3,6 +3,7 @@ layout: default
 title: PDLC
 permalink: /pdlc/
 lang: en
+wide: true
 description: PDLC — a Claude Code plugin that turns the soft conventions of product development into hard contracts. 38 slash commands, persisted artifacts, mandatory tests-first, state machine per feature. MIT-licensed and open source.
 ---
 

@@ -2,6 +2,7 @@
 layout: default
 title: Home
 lang: en
+wide: true
 permalink: /
 description: A developer who loves technology — notes on coding, tools, and the projects I keep tinkering on.
 ---

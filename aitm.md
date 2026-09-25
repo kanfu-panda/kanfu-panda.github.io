@@ -3,6 +3,7 @@ layout: default
 title: aitm
 permalink: /aitm/
 lang: en
+wide: true
 description: aitm — a desktop terminal app with AI built in, for macOS and Windows. The AI reads and edits files, runs commands, and drives a built-in browser. Every high-risk action requires your explicit confirmation. Open source under Apache-2.0.
 ---
 

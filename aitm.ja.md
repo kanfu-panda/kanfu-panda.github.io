@@ -3,6 +3,7 @@ layout: default
 title: aitm
 permalink: /aitm/
 lang: ja
+wide: true
 description: aitm — AI を組み込んだデスクトップ向けターミナルアプリ。macOS と Windows に対応。AI はファイルの読み書き、コマンド実行、内蔵ブラウザの操作まで行えます。すべての高リスク操作には明示的な確認が必要です。Apache-2.0 のオープンソース。
 ---
 

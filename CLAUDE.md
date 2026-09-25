@@ -85,6 +85,8 @@ bash scripts/install-hooks.sh
 ### 新增页面 / 项目展示
 
 1. 顶级页面放仓库根（如 `projects.md`），permalink 显式声明
+   - 正文默认是 880px 的阅读宽度。以横幅 + 卡片网格为主的页面（目前是首页和三个产品页）在 front matter 写 `wide: true`，
+     正文用满 1200px。三语都要写。纯文字页**不要**加，行太长读起来累。
 2. 引入任何新的第三方 JS / CSS：
    - **必须锁版本**（禁止 `@latest`）
    - **必须加 SRI**（`integrity="sha384-..." crossorigin="anonymous"`）
