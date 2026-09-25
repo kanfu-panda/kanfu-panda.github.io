@@ -12,14 +12,14 @@ Code lives on GitHub. English write-ups go to dev.to and Japanese ones to Zenn. 
 
 ## Open source
 
-- [pdlc-skills](https://github.com/kanfu-panda/pdlc-skills) — a full development lifecycle for AI coding agents
-- [aitm](https://github.com/kanfu-panda/aitm) — an AI-native terminal for macOS
-- GitHub profile: [kanfu-panda](https://github.com/kanfu-panda)
+- **[pdlc-skills](https://github.com/kanfu-panda/pdlc-skills)** — a full development lifecycle for AI coding agents
+- **[aitm](https://github.com/kanfu-panda/aitm)** — an AI-native terminal for macOS
+- **[GitHub profile](https://github.com/kanfu-panda)** — all open-source projects
 
 ## Writing
 
-- dev.to (English): [kanfu-panda](https://dev.to/kanfu-panda)
-- Zenn (Japanese): [kanfupanda](https://zenn.dev/kanfupanda)
+- **[dev.to](https://dev.to/kanfu-panda)** — articles in English
+- **[Zenn](https://zenn.dev/kanfupanda)** — articles in Japanese
 
 ## WeChat (Chinese)
 
