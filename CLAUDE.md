@@ -132,6 +132,7 @@ bash scripts/install-hooks.sh
 | PDLC 产品页 | `pdlc.md` / `pdlc.zh.md` / `pdlc.ja.md` |
 | arcade 产品页 | `arcade.md` / `arcade.zh.md` / `arcade.ja.md` |
 | 专题页 | `topics.md` / `topics.zh.md` / `topics.ja.md`（专题定义在 `_data/topics.yml`） |
+| 关注页 | `follow.md` / `follow.zh.md` / `follow.ja.md` |
 | 博客文章 | `_posts/YYYY-MM-DD-slug.md` (en) / `.zh.md` / `.ja.md` |
 
 > ⚠️ `_posts/*.md` 默认语言（en）**无后缀**，其他语言用 `.zh.md` / `.ja.md`。早期违规（无后缀但 lang: zh）已在 PR #14 规整。**新建文章必须遵守该命名**。
