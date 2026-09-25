@@ -4,6 +4,9 @@ title: PDLC
 permalink: /pdlc/
 lang: en
 wide: true
+release:
+  repo: kanfu-panda/pdlc-skills
+  version: 1.7.0
 description: PDLC — a Claude Code plugin that turns the soft conventions of product development into hard contracts. 38 slash commands, persisted artifacts, mandatory tests-first, state machine per feature. MIT-licensed and open source.
 ---
 
@@ -155,7 +158,7 @@ claude plugin install pdlc@pdlc-skills
 
 ```bash
 claude plugin list | grep pdlc
-# expected: pdlc@pdlc-skills  Version: 1.7.0  Status: ✔ enabled
+# expected: pdlc@pdlc-skills  Version: {{ page.release.version }}  Status: ✔ enabled
 ```
 
 After restarting your Claude Code session, type `/` and start typing `pdlc-` — autocomplete will show all 38 sub-commands.

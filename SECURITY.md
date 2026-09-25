@@ -44,6 +44,14 @@
 | `https://giscus.app/client.js` | CSP `script-src` + `frame-src` 白名单 | 评论组件（在 `_layouts/post.html` 中动态注入） |
 | `https://www.googletagmanager.com/gtag/js` | CSP `script-src` 白名单；仅 `JEKYLL_ENV=production` 且 secret 已配置时注入 | 站点统计 |
 
+### 浏览器端访问的外部接口
+
+| 地址 | 约束方式 | 用途 |
+|---|---|---|
+| `https://api.github.com/repos/<产品仓>/releases/latest` | CSP `connect-src` 白名单；只读、未登录请求，不带任何凭证 | 产品页（aitm / PDLC）打开后取最新版本号与下载链接，见 `assets/js/release-sync.js`。结果在 sessionStorage 缓存 1 小时；接口不可用时保持页面上的兜底版本 |
+
+> `connect-src` 里的 `https://api.github.com` 最早是给 Gitalk 加的，迁到 Giscus 后曾一度无人使用，现在由上面的版本同步脚本使用。
+
 > 历史记录：`gitalk@1.8.0`（评论）与 `simple-jekyll-search@1.10.0`（搜索）曾在本清单中，现均已移除——
 > 评论迁至 Giscus，搜索改为 `search.md` 内的自写 `fetch` + 过滤实现，都不再引入第三方 CDN 资产。
 
