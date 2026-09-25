@@ -3,6 +3,7 @@ layout: default
 title: PDLC
 permalink: /pdlc/
 lang: ja
+wide: true
 description: PDLC — Claude Code に「製品開発ライフサイクル」ワークフローを追加するオープンソースプラグイン。38 個の標準化されたステージ、状態マシン、テストファースト強制、ステージ自己チェック、自動修復は1回まで。「ソフトな慣習」を「ハードな契約」へ。MIT ライセンス。
 ---
 

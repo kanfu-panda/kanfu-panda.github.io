@@ -3,6 +3,7 @@ layout: default
 title: aitm
 permalink: /aitm/
 lang: zh
+wide: true
 description: aitm — 一个把 AI 能力做进终端的桌面应用，支持 macOS 与 Windows。AI 能读写文件、执行命令、操作内置浏览器，所有高危操作都要你点头确认。Apache-2.0 开源。
 ---
 

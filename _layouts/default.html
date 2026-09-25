@@ -183,7 +183,8 @@
     </header>
 
     <main class="page-content">
-        <div class="wrapper">
+        {%- comment -%} 默认是 880px 的阅读宽度；首页与产品页这类横幅 + 卡片页在 front matter 写 `wide: true`，用满 1200px {%- endcomment %}
+        <div class="wrapper{% unless page.wide %} wrapper-narrow{% endunless %}">
             {{ content }}
         </div>
     </main>

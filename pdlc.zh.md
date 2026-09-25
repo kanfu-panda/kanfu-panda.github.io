@@ -3,6 +3,7 @@ layout: default
 title: PDLC
 permalink: /pdlc/
 lang: zh
+wide: true
 description: PDLC —— 给 Claude Code 加上"产品开发生命周期"工作流的开源插件。38 个标准化阶段、状态机、TDD 红灯强制门、阶段自检、自动修复仅一轮。把"软规范"升级为"硬契约"。MIT 开源。
 ---
 

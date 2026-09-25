@@ -39,6 +39,12 @@ pre {
     overflow-x: auto;
 }
 
+/* 阅读宽度：文章与纯文字页每行约 50 个汉字。1200px 时一行约 75 字，读长段落眼睛要左右扫太远。
+   页头 / 页脚仍是 1200px；只有 front matter 写了 `wide: true` 的页面（首页、产品页）正文用满 1200px。 */
+.wrapper-narrow {
+    max-width: 880px;
+}
+
 /* Header */
 .site-header {
     background: var(--secondary-bg);
