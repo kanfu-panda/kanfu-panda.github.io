@@ -22,13 +22,13 @@ AI 工程实践的长文都先发在这里，包括 pdlc 系列、省 token 系�
 
 ## 技术社区
 
-- 掘金：[kanfu-panda](https://juejin.cn/user/367705072079994)
-- 知乎：[kanfu-panda](https://www.zhihu.com/people/kanfu-panda)
-- dev.to（英文）：[kanfu-panda](https://dev.to/kanfu-panda)
-- Zenn（日文）：[kanfupanda](https://zenn.dev/kanfupanda)
+- **[掘金](https://juejin.cn/user/367705072079994)**：中文技术文章同步
+- **[知乎](https://www.zhihu.com/people/kanfu-panda)**：中文技术文章同步
+- **[dev.to](https://dev.to/kanfu-panda)**：英文版文章
+- **[Zenn](https://zenn.dev/kanfupanda)**：日文版文章
 
 ## 开源项目
 
-- [pdlc-skills](https://github.com/kanfu-panda/pdlc-skills)：给 AI 编程工具装上完整的开发流程
-- [aitm](https://github.com/kanfu-panda/aitm)：macOS 上的 AI 原生终端
-- GitHub 主页：[kanfu-panda](https://github.com/kanfu-panda)
+- **[pdlc-skills](https://github.com/kanfu-panda/pdlc-skills)**：给 AI 编程工具装上完整的开发流程
+- **[aitm](https://github.com/kanfu-panda/aitm)**：macOS 上的 AI 原生终端
+- **[GitHub 主页](https://github.com/kanfu-panda)**：全部开源项目

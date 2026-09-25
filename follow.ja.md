@@ -12,14 +12,14 @@ lang: ja
 
 ## 記事
 
-- Zenn（日本語）：[kanfupanda](https://zenn.dev/kanfupanda)
-- dev.to（英語）：[kanfu-panda](https://dev.to/kanfu-panda)
+- **[Zenn](https://zenn.dev/kanfupanda)**：日本語の記事
+- **[dev.to](https://dev.to/kanfu-panda)**：英語の記事
 
 ## オープンソース
 
-- [pdlc-skills](https://github.com/kanfu-panda/pdlc-skills)：AI コーディングエージェントに開発ライフサイクル一式を
-- [aitm](https://github.com/kanfu-panda/aitm)：macOS 向けの AI ネイティブターミナル
-- GitHub：[kanfu-panda](https://github.com/kanfu-panda)
+- **[pdlc-skills](https://github.com/kanfu-panda/pdlc-skills)**：AI コーディングエージェントに開発ライフサイクル一式を
+- **[aitm](https://github.com/kanfu-panda/aitm)**：macOS 向けの AI ネイティブターミナル
+- **[GitHub](https://github.com/kanfu-panda)**：すべてのオープンソースプロジェクト
 
 ## WeChat（中国語）
 
