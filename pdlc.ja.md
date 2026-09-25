@@ -49,7 +49,7 @@ description: PDLC — Claude Code に「製品開発ライフサイクル」ワ�
         </div>
         <div class="about-card">
             <h3>🔁 自律収束（Loop エンジニアリング）</h3>
-            <p><code>/pdlc-loop-run</code> が <code>tdd → implement → review</code> を <code>review_done</code> まで無人で駆動——毎ラウンド状態マシンを読んで次を決定、堅牢なガードレール（上限停止 / fail-stop / stuck-stop）付き。リリースは常に人間のゲート。</p>
+            <p><code>/pdlc-loop-run</code> が <code>tdd → implement → review</code> を、機能がレビューを通過してリリース待ちになるまで無人で駆動——毎ラウンド状態マシンを読んで次を決定、堅牢なガードレール（上限停止 / fail-stop / stuck-stop）付き。複数機能をまとめて進めるときは <code>bin/pdlc-loop.sh --parallel N</code> が機能ごとに独立した git worktree を用意し、依存順に並べます。リリースは常に人間のゲート。</p>
         </div>
         <div class="about-card">
             <h3>✅ 常設の品質ゲート</h3>
@@ -57,7 +57,7 @@ description: PDLC — Claude Code に「製品開発ライフサイクル」ワ�
         </div>
         <div class="about-card">
             <h3>🌐 Claude Code 以外のツールでも</h3>
-            <p>Claude Code で最も完全にサポート（プラグイン + ステータスバー + Loop エンジン）。同じ単一ソースの SKILL 本文は <strong>Codex</strong> にネイティブ skill として投影され、プラットフォーム中立の方法論で任意の AI ツール上で自然言語から PDLC を駆動——機能ごとの状態マシンはツール間で引き継がれます。</p>
+            <p>Claude Code で最も完全にサポート（プラグイン + ステータスバー + Loop エンジン）。同じ単一ソースの SKILL 本文は <strong>Codex</strong> にネイティブ skill として投影されるほか、<strong>Agent Skills オープン標準</strong>向けにも投影され、Copilot・Gemini CLI・OpenCode などから読み込めます——機能ごとの状態マシンはツール間で引き継がれます。</p>
         </div>
     </div>
 </div>
@@ -154,7 +154,7 @@ claude plugin install pdlc@pdlc-skills
 
 ```bash
 claude plugin list | grep pdlc
-# 期待値: pdlc@pdlc-skills  Version: 1.6.1  Status: ✔ enabled
+# 期待値: pdlc@pdlc-skills  Version: 1.7.0  Status: ✔ enabled
 ```
 
 Claude Code セッションを再起動後、入力欄で `/` を入力し `pdlc-` と打ち始めれば、autocomplete に 38 個のサブコマンドすべてが表示されます。
@@ -177,13 +177,14 @@ curl -fsSL https://raw.githubusercontent.com/kanfu-panda/pdlc-skills/main/instal
 
 ## 🛡️ Iron Law（鉄則）
 
-成果物を生成する第 1 層 / 第 2 層のすべてのステージは、5 つの不変条件を満たす必要があります。読み取り専用ステージ（`/pdlc-status` など）は例外。
+成果物を生成する第 1 層 / 第 2 層のすべてのステージは、6 つの不変条件を満たす必要があります。読み取り専用ステージ（`/pdlc-status` など）は例外。
 
 1. **ディスクに保存** — すべての成果物は実ファイル、チャット出力だけではない
 2. **状態マシンを更新** — 完了したステージは必ず `docs/.pdlc-state/<feature-id>.json` を書く
 3. **テストファースト** — 失敗するテストが存在しない限り実装できない（TDD レッドライト）
 4. **セルフチェック** — 各ステージはハンドオフ前に自己監査を実行
 5. **自動修復は 1 回のみ** — 自動修正ループは最大 1 回まで、解決しない問題は人間に委ねる
+6. **状態は必ず進める** — 成功したステージは `current_stage` を必ず進める。進まなかったステージは黙って戻らず明示的に失敗し、自律ループが古い状態で空回りしないようにする
 
 ## 📁 ターゲットプロジェクトの契約
 
@@ -201,22 +202,11 @@ docs/07_reviews/{doc,code,design,retro}/           # レビュー記録
 docs/.pdlc-state/<feature-id>.json                 # 機能ごとの状態マシン
 ```
 
-## 📚 連載記事
+<h2 id="posts">📚 関連記事</h2>
 
-PDLC の背景にある考え方を、概念から実践までブログで連載しています。
+PDLC の背景にある考え方を、概念から実プロジェクトでの通し実践まで。リリース記事もあわせてどうぞ：
 
-| 回 | タイトル |
-|---|---|
-| 01 | [プロンプトエンジニアリング・Loop エンジニアリング・Graph エンジニアリングとは何か](/ja/blog/2026/08/09/prompt-loop-graph-engineering.ja.html) |
-| 02 | [なぜ pdlc-skills は三大エンジニアリングに自然と噛み合うのか](/ja/blog/2026/08/13/why-pdlc-fits-three-paradigms.ja.html) |
-| 03 | [三大エンジニアリングは pdlc-skills の中でどう噛み合うのか](/ja/blog/2026/08/23/how-three-paradigms-interlock.ja.html) |
-| 04 | [pdlc-skills を自分のプロジェクトで動かすには](/ja/blog/2026/08/30/run-pdlc-in-your-project.ja.html) |
-| 05 | [pdlc-skills はどうやって無人で回すのか](/ja/blog/2026/08/31/run-pdlc-unattended.ja.html) |
-| 06 | [pdlc-skills は AI に書かせたコードの品質をどう守るのか](/ja/blog/2026/09/01/pdlc-quality-chain.ja.html) |
-| 07 | [pdlc-skills は進捗・変更の影響・品質の傾向をどう見せるのか](/ja/blog/2026/09/05/pdlc-progress-impact-retro.ja.html) |
-| 08 | [pdlc-skills を実際のプロジェクトで回してみる：三つの機能を並行させてリリースまで](/ja/blog/2026/09/18/pdlc-on-a-real-project.ja.html) |
-
-全八回が揃いました。概念から実プロジェクトでの通し実践までです。
+{% include project-posts.html project="pdlc" %}
 
 ## 📄 ライセンス
 
@@ -225,7 +215,7 @@ MIT。使用、フォーク、リリース、すべて自由。ソースコー�
 ## ❓ よくある質問
 
 **Q: Claude Code 以外でも使えますか？**
-PDLC は Claude Code で最も深く・完全にサポートされます — ステータスバーと自律収束ループを備えた完全なプラグイン。v1.5 以降、同じ単一ソースの SKILL 本文はビルド時アダプターで **Codex**（ネイティブ skill、description トリガー）にも投影され、プラットフォーム中立の[方法論ドキュメント](https://github.com/kanfu-panda/pdlc-skills/blob/main/docs/pdlc-methodology.md)で任意の AI コーディングツール上で自然言語から PDLC を駆動できます。機能ごとの状態マシン（`docs/.pdlc-state/`）はツール間で引き継がれます。v1.5.2 以降、外部 Runbook ドライバー（`adapters/codex-loop-run.sh`）が Codex 上で自律的な `tdd → implement → review` 収束ループも実行できます（リリースは人間のゲート）。状態整合性の受け入れゲートを実機でクリア済みです。
+PDLC は Claude Code で最も深く・完全にサポートされます — ステータスバーと自律収束ループを備えた完全なプラグイン。v1.5 以降、同じ単一ソースの SKILL 本文はビルド時アダプターで **Codex**（ネイティブ skill、description トリガー）にも投影され、プラットフォーム中立の[方法論ドキュメント](https://github.com/kanfu-panda/pdlc-skills/blob/main/docs/pdlc-methodology.md)で任意の AI コーディングツール上で自然言語から PDLC を駆動できます。機能ごとの状態マシン（`docs/.pdlc-state/`）はツール間で引き継がれます。v1.5.2 以降、外部 Runbook ドライバー（`adapters/codex-loop-run.sh`）が Codex 上で自律的な `tdd → implement → review` 収束ループも実行できます（リリースは人間のゲート）。状態整合性の受け入れゲートを実機でクリア済みです。v1.7 以降は `bash install.sh --target agents` で [Agent Skills オープン標準](https://agentskills.io/specification)準拠の投影をインストールでき、Copilot・Gemini CLI・OpenCode などが読み込めます。エンドツーエンドで検証済みなのは Claude Code と Codex です。Copilot は読み込みと単一ステージの実行はできますが、自律ループ向けの状態整合性ゲートは通過していません。
 
 **Q: 確認なしにコードを変更しますか？**
 成果物を生成するステージは確かにファイルを書き込みます（`docs/` 配下と実装時はコードベース）。各ステージはセルフチェックを実行し、次に進む前に明示的にハンドオフを通知します。Claude Code 自体の権限確認プロンプトも通常通り機能します。

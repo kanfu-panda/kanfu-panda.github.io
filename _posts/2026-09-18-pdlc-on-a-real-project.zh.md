@@ -4,6 +4,8 @@ title: "如何把 pdlc-skills 用到真实项目上？"
 date: 2026-09-18
 lang: zh
 categories: [blog]
+project: pdlc
+series: pdlc-paradigms
 image: /assets/images/posts/pdlc-on-a-real-project-cover.png
 tags: [AI工程, 提示词工程, Loop工程, Graph工程, PDLC, ClaudeCode]
 excerpt: "前七篇讲的是机制，这篇回到一个真实项目：三个功能交给 /pdlc-loop-run 并行收敛，88 分钟全部到评审终态，补完质量闸门后发布、部署到两台机器。功能怎么拆、人和 AI 怎么分工、循环怎么跑起来、花了多久、产出了多少、质量靠什么保住，六个问题用运行记录里的数字回答。"

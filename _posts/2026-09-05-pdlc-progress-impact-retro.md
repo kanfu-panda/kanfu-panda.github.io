@@ -4,6 +4,8 @@ title: "How pdlc-skills Makes Progress, Change Impact, and Quality Trends Visibl
 date: 2026-09-05
 lang: en
 categories: [blog]
+project: pdlc
+series: pdlc-paradigms
 image: /assets/images/posts/pdlc-progress-impact-retro-cover-en.png
 tags: [ai-engineering, prompt-engineering, loop-engineering, graph-engineering, pdlc, claude-code]
 excerpt: "An AI can push three features forward in an afternoon. If you can't see where the project stands, what a change will touch, or how the last month went, all that automation is running in a black box. pdlc has three tools for this, all reading the same state files: the statusline and /pdlc-status for where things are now, /pdlc-relate impact for what a change will affect, and /pdlc-retro for the monthly trend. This post covers how they work, what one real run produced, and the limit they share: they only show what was recorded."

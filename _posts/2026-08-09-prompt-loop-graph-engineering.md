@@ -4,6 +4,8 @@ title: "Prompt Engineering, Loop Engineering, Graph Engineering: What Are They?"
 date: 2026-08-09
 lang: en
 categories: [blog]
+project: pdlc
+series: pdlc-paradigms
 image: /assets/images/posts/prompt-loop-graph-engineering-cover-en.png
 tags: [ai-engineering, prompt-engineering, loop-engineering, graph-engineering, ai-agents, claude-code]
 excerpt: "These three terms keep showing up in the same comparison table, as if you had to pick one. You don't — they don't even operate at the same level. Prompts govern a single exchange, loops govern how iteration converges, graphs govern which paths exist at all. Sorting that out is worth more than mastering any one of them."

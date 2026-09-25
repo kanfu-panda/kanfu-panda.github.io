@@ -4,6 +4,8 @@ title: "How Do the Three Engineering Paradigms Interlock in pdlc-skills?"
 date: 2026-08-23
 lang: en
 categories: [blog]
+project: pdlc
+series: pdlc-paradigms
 image: /assets/images/posts/how-three-paradigms-interlock-cover-en.png
 tags: [ai-engineering, prompt-engineering, loop-engineering, graph-engineering, pdlc, claude-code]
 excerpt: "The three layers never call each other. Not once. They hand off through a single file on disk — one layer writes a name, another reads it. And because that file is split per feature, the pipeline doesn't only run one line downward; it fans out sideways and runs several at the same time."

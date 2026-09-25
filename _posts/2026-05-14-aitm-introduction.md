@@ -4,6 +4,7 @@ title: "aitm launch: AI inside the terminal"
 date: 2026-05-14
 lang: en
 categories: [blog]
+project: aitm
 tags: [aitm, terminal, AI, macOS, Windows, tool]
 excerpt: "A desktop terminal app with AI built in, for macOS and Windows. The AI can read files, search command history, and run commands on demand — every high-risk action waits for your explicit OK."
 ---

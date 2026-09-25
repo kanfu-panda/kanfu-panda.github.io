@@ -4,6 +4,8 @@ title: "Why Does pdlc-skills Fit All Three Engineering Paradigms So Naturally?"
 date: 2026-08-13
 lang: en
 categories: [blog]
+project: pdlc
+series: pdlc-paradigms
 image: /assets/images/posts/why-pdlc-fits-three-paradigms-cover-en.png
 tags: [ai-engineering, prompt-engineering, loop-engineering, graph-engineering, pdlc, claude-code]
 excerpt: "I didn't design these three layers in. I hadn't even heard the terms loop engineering or graph engineering when I built it. It just follows the product development lifecycle that software engineering has had for decades — requirements, design, tests, implementation, review. Only afterwards did I hold the three paradigms up against it and find they matched everywhere. That's a coincidence, but there's a reason behind it."

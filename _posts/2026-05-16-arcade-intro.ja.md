@@ -4,6 +4,7 @@ title: "arcade：ブログにブラウザ用アーケードエミュレータを
 date: 2026-05-16
 lang: ja
 categories: [blog]
+project: arcade
 tags: [arcade, エミュレータ, EmulatorJS, WebAssembly]
 excerpt: "ブログの /arcade/ にブラウザで動くアーケードエミュレータを設置しました。MAME や数十種類のコンソールに対応。ご自身のローカルゲームファイルをドラッグするだけで遊べ、すべてブラウザ内で完結、アップロードなし。"
 ---

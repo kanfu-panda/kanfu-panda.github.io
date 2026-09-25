@@ -41,4 +41,8 @@ description: 一个跑在浏览器里的街机模拟器。本地文件自传，�
 
 [▶ 启动 arcade](/arcade/play/){:target="_blank" rel="noopener"}
 
+<h2 id="posts">📚 相关文章</h2>
+
+{% include project-posts.html project="arcade" %}
+
 </div>

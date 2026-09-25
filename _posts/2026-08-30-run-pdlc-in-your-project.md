@@ -4,6 +4,8 @@ title: "Getting pdlc-skills Running in Your Own Project"
 date: 2026-08-30
 lang: en
 categories: [blog]
+project: pdlc
+series: pdlc-paradigms
 image: /assets/images/posts/run-pdlc-in-your-project-cover-en.png
 tags: [ai-engineering, prompt-engineering, loop-engineering, graph-engineering, pdlc, claude-code]
 excerpt: "Installing takes one line. What actually stalls people is the first move after that — whether you're starting from a new project, an existing codebase, or one that's already onboarded, the first command is different. And one step gets skipped constantly: skip it and the objective stop-check from the last post degrades into the model feeling good about itself."

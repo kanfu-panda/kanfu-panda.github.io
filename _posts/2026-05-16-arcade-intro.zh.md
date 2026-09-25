@@ -4,6 +4,7 @@ title: "arcade：博客里挂了个浏览器街机模拟器"
 date: 2026-05-16
 lang: zh
 categories: [blog]
+project: arcade
 tags: [arcade, 街机模拟器, EmulatorJS, WebAssembly]
 excerpt: "博客 /arcade/ 下挂了一个浏览器街机模拟器。支持 MAME 和数十种主机，你拖入自己本地的游戏文件就能玩，全程在浏览器里完成，零上传。"
 ---

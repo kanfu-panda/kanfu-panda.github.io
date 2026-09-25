@@ -4,6 +4,7 @@ title: "aitm 首发：把 AI 装进终端"
 date: 2026-05-14
 lang: zh
 categories: [blog]
+project: aitm
 tags: [aitm, 终端, AI, macOS, 工具]
 excerpt: "一个把 AI 能力做进终端的桌面应用，支持 macOS 与 Windows。AI 能读文件、看命令历史、按需帮你跑命令，所有高危操作都要你点头。"
 ---

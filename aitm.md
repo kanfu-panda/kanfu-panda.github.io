@@ -73,6 +73,10 @@ description: aitm — a desktop terminal app with AI built in, for macOS and Win
             <p><code>⌘⇧P</code> searches and runs any keyboard action, each entry showing its current binding — so it doubles as a way to learn the shortcuts. <code>⌘1</code>–<code>⌘9</code> switch tabs within the focused split.</p>
         </div>
         <div class="about-card">
+            <h3>🖥️ tmux session manager (macOS)</h3>
+            <p>Every tmux session on the machine in a sidebar panel — name, task, window count, directory, who's attached. Click to attach in a new tab, expand for a 30-line output preview without attaching, and see at a glance which background session printed something new. Create, rename, interrupt or end sessions from the same place.</p>
+        </div>
+        <div class="about-card">
             <h3>🚩 Hallucination flagging</h3>
             <p>If a reply claims it wrote a file or opened a page but no matching tool was actually called that turn, the message gets flagged. Some models assert success without acting; this makes it visible instead of silent.</p>
         </div>
@@ -139,7 +143,7 @@ description: aitm — a desktop terminal app with AI built in, for macOS and Win
 
 <h2 id="download">⬇️ Download</h2>
 
-**Current version: v1.4.3**
+**Current version: v1.6.1**
 
 > macOS binaries are signed and notarized with an Apple Developer ID. Windows binaries aren't code-signed yet — [SignPath Foundation](https://signpath.org) signing (a non-profit supporting open-source code signing) is planned for a future release. See the [Code Signing Policy](https://github.com/kanfu-panda/aitm/blob/main/docs/CODE_SIGNING.md) for details.
 
@@ -148,32 +152,32 @@ description: aitm — a desktop terminal app with AI built in, for macOS and Win
         <h3>🍎 macOS Apple Silicon</h3>
         <p>dmg · 7.2 MB · aarch64 (M1/M2/M3/M4)</p>
         <p style="margin-top: 1rem;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.4.3/aitm_1.4.3_aarch64.dmg" class="cta-button">Download .dmg →</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.6.1/aitm_1.6.1_aarch64.dmg" class="cta-button">Download .dmg →</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.4.3">Release page</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.6.1">Release page</a>
         </p>
     </div>
     <div class="about-card">
         <h3>🪟 Windows x86_64</h3>
         <p>Intel / AMD 64-bit</p>
         <p style="margin-top: 1rem;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.4.3/aitm_1.4.3_x64_en-US.msi" class="cta-button">Download .msi · x64 →</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.6.1/aitm_1.6.1_x64_en-US.msi" class="cta-button">Download .msi · x64 →</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            or <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.4.3/aitm_1.4.3_x64-setup.exe">NSIS .exe</a> ·
-            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.4.3">Release page</a>
+            or <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.6.1/aitm_1.6.1_x64-setup.exe">NSIS .exe</a> ·
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.6.1">Release page</a>
         </p>
     </div>
     <div class="about-card">
         <h3>🪟 Windows ARM64</h3>
         <p>Surface Pro X / Snapdragon</p>
         <p style="margin-top: 1rem;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.4.3/aitm_1.4.3_arm64_en-US.msi" class="cta-button">Download .msi · ARM64 →</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.6.1/aitm_1.6.1_arm64_en-US.msi" class="cta-button">Download .msi · ARM64 →</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            or <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.4.3/aitm_1.4.3_arm64-setup.exe">NSIS .exe</a> ·
-            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.4.3">Release page</a>
+            or <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.6.1/aitm_1.6.1_arm64-setup.exe">NSIS .exe</a> ·
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.6.1">Release page</a>
         </p>
     </div>
 </div>
@@ -210,12 +214,12 @@ Want to make sure your download wasn't corrupted in transit? Compute its SHA-256
 
 ```bash
 # macOS / Linux / Git Bash on Windows
-shasum -a 256 path/to/aitm_1.4.3_<arch>.<ext>
+shasum -a 256 path/to/aitm_1.6.1_<arch>.<ext>
 ```
 
 ```powershell
 # Windows PowerShell
-(Get-FileHash path\to\aitm_1.4.3_<arch>.<ext> -Algorithm SHA256).Hash.ToLower()
+(Get-FileHash path\to\aitm_1.6.1_<arch>.<ext> -Algorithm SHA256).Hash.ToLower()
 ```
 
 <h2 id="first-use">🚀 First-time use</h2>
@@ -239,11 +243,18 @@ shasum -a 256 path/to/aitm_1.4.3_<arch>.<ext>
 - **High-risk command blacklist**: Patterns like `rm -rf /` / `dd of=/dev/...` / fork bombs cannot be triggered by the AI.
 - **Execution requires confirmation**: Before running any command, the AI shows you the full command in a confirm dialog. Nothing runs without your approval.
 - **Tool-loop limit**: Within a single conversation, automatic tool calls are capped to prevent runaway loops.
+- **Config file locked to your account**: `~/.aitm/config.toml` holds your API keys, so it is created readable by your user only (`0600`, directories `0700`) — other local accounts can't read it.
+
+<h2 id="posts">📚 Articles</h2>
+
+Launch notes and the thinking behind aitm:
+
+{% include project-posts.html project="aitm" %}
 
 ## ❓ FAQ
 
 **Q: Double-clicking `aitm.app` (macOS) says "damaged, can't open"?**
-aitm is signed and notarized with an Apple Developer ID — Gatekeeper should let it through automatically. If you see this error, make sure you downloaded the dmg from the [official release page](https://github.com/kanfu-panda/aitm/releases/tag/v1.4.3) and that the file wasn't corrupted in transit (verify the SHA256 checksum).
+aitm is signed and notarized with an Apple Developer ID — Gatekeeper should let it through automatically. If you see this error, make sure you downloaded the dmg from the [official release page](https://github.com/kanfu-panda/aitm/releases/tag/v1.6.1) and that the file wasn't corrupted in transit (verify the SHA256 checksum).
 
 **Q: Windows shows a "Windows protected your PC" SmartScreen warning?**
 aitm for Windows isn't code-signed yet. Click **More info → Run anyway**. We're tracking signing certificates for a future release.

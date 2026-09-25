@@ -4,6 +4,8 @@ title: "为什么 pdlc-skills 天然契合三大工程？"
 date: 2026-08-13
 lang: zh
 categories: [blog]
+project: pdlc
+series: pdlc-paradigms
 image: /assets/images/posts/why-pdlc-fits-three-paradigms-cover.png
 tags: [AI工程, 提示词工程, Loop工程, Graph工程, PDLC, ClaudeCode]
 excerpt: "这三层不是我照着理论设计的，我做它的时候压根没听过 Loop 工程和 Graph 工程。它就是照软件工程里那套现成的产品开发生命周期做的——需求、设计、测试、实现、评审。做完之后拿三大工程范式来对，发现处处对得上。这是个巧合，但巧合背后有原因。"

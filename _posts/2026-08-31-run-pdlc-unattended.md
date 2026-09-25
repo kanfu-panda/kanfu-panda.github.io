@@ -4,6 +4,8 @@ title: "How pdlc-skills Runs Unattended"
 date: 2026-08-31
 lang: en
 categories: [blog]
+project: pdlc
+series: pdlc-paradigms
 image: /assets/images/posts/run-pdlc-unattended-cover-en.png
 tags: [ai-engineering, prompt-engineering, loop-engineering, graph-engineering, pdlc, claude-code]
 excerpt: "One feature needs a single command to take TDD, implementation and review to done on its own — no script required. The script belongs one layer out: a dozen feature points batched by dependency, one batch checked by a human before the next starts. Four guardrails hold it together, and I've watched every one of them fire."

@@ -41,4 +41,8 @@ Files you drag in stay in **your own browser's storage** the whole time, never u
 
 [▶ launch arcade](/arcade/play/){:target="_blank" rel="noopener"}
 
+<h2 id="posts">📚 Articles</h2>
+
+{% include project-posts.html project="arcade" %}
+
 </div>

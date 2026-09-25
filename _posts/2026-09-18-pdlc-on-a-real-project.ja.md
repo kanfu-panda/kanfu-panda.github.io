@@ -4,6 +4,8 @@ title: "pdlc-skills を実際のプロジェクトで回してみる：三つの
 date: 2026-09-18
 lang: ja
 categories: [blog]
+project: pdlc
+series: pdlc-paradigms
 image: /assets/images/posts/pdlc-on-a-real-project-cover-ja.png
 tags: [AIエンジニアリング, プロンプトエンジニアリング, Loop工学, Graph工学, PDLC, ClaudeCode]
 excerpt: "前七回は仕組みの話でした。今回は実際に一度回した記録です。三つの機能を pdlc 付属のループエンジンに並行で渡し、88 分で全部がレビューの終端状態に到達、品質ゲートを一度落としてから埋め直し、リリースして二台のマシンに配備しました。機能の分け方、人と AI の分担、ループの回り方、かかった時間、出てきた量、品質の担保。この六つに、イベントログと git から取った数字で答えます。"

@@ -4,6 +4,8 @@ title: "pdlc-skills は AI に書かせたコードの品質をどう守るの�
 date: 2026-09-01
 lang: ja
 categories: [blog]
+project: pdlc
+series: pdlc-paradigms
 image: /assets/images/posts/pdlc-quality-chain-cover-ja.png
 tags: [AIエンジニアリング, プロンプトエンジニアリング, Loop工学, Graph工学, PDLC, ClaudeCode]
 excerpt: "AI でコードを書く速度は上がりました。しかし「そのコードが正しいか」を判断する速度は上がっていません。この差そのものがリスクです。だから AI 支援開発では、品質保証は速度の足を引っ張る負担ではなく、速度を使い物にするための前提になります。この記事では、私が pdlc で使っている七つの環をつないだ一本の鎖を、一つずつ説明します。鎖をそろえても防げないものについても書きます。"
