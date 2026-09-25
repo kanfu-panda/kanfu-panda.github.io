@@ -27,9 +27,16 @@ body {
 }
 
 .wrapper {
-    max-width: 800px;
+    /* 原 800px，大屏两侧空白过多；与产品页 .content-section 的 1200px 对齐 */
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
+}
+
+/* 代码块：长命令在框内横向滚动，不把整页撑宽（原先正文里的 pre 是 overflow: visible） */
+pre {
+    max-width: 100%;
+    overflow-x: auto;
 }
 
 /* Header */
@@ -175,7 +182,7 @@ body {
     font-weight: 600;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 640px) {
     .lang-switcher-menu {
         right: auto;
         left: 0;
@@ -301,32 +308,12 @@ html[lang^="zh"] body {
     background: rgba(88, 166, 255, 0.12);
 }
 
-@media screen and (max-width: 600px) {
+/* 导航折叠断点 960px：宽度不够让完整导航排成一行时，收进汉堡按钮，不再折成两三行。
+   页头排成一行实测需要：中文 727px、英文 858px、日文 890px；取 960px，给以后的导航项留余量。
+   新增导航项或改长导航文案后，要重新量一次。 */
+@media screen and (max-width: 960px) {
     .menu-icon {
         display: block;
-    }
-
-    /* 窄屏下让站点标题可以收缩：英文 / 日文标题比中文长，原来 nowrap + 不收缩
-       会把右侧按钮顶出屏幕，整页可以横向滑动。缩小字号，实在放不下时显示省略号。 */
-    .site-title {
-        font-size: 1rem;
-        flex-shrink: 1;
-        min-width: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .menu-icon,
-    .lang-switcher {
-        margin-left: 0.5rem;
-    }
-
-    .theme-toggle {
-        padding: 0.35rem;
-    }
-
-    .lang-switcher-toggle {
-        padding: 0.2rem 0.45rem;
     }
 
     .nav-links {
@@ -354,17 +341,21 @@ html[lang^="zh"] body {
     }
 
     /* 暗色模式下显式覆盖，更稳 */
+
     [data-theme="dark"] .nav-links {
         background-color: var(--bg-color, #0d1117);
     }
 
     /* 移动端：下拉项展平为缩进列表，去掉 hover 弹层 */
+
     .nav-dropdown {
         display: block;
     }
+
     .nav-dropdown .caret {
         display: none;
     }
+
     .nav-dropdown-menu {
         display: block;
         position: static;
@@ -374,9 +365,36 @@ html[lang^="zh"] body {
         padding: 0;
         min-width: 0;
     }
+
     .nav-dropdown-menu a {
         font-size: 0.95rem;
         opacity: 0.85;
+    }
+}
+
+/* 手机端（640px 以下）：标题与右侧按钮再收紧，英文 / 日文长标题不把按钮顶出屏幕 */
+@media screen and (max-width: 640px) {
+    /* 窄屏下让站点标题可以收缩：英文 / 日文标题比中文长，原来 nowrap + 不收缩
+       会把右侧按钮顶出屏幕，整页可以横向滑动。缩小字号，实在放不下时显示省略号。 */
+    .site-title {
+        font-size: 1rem;
+        flex-shrink: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .menu-icon,
+    .lang-switcher {
+        margin-left: 0.5rem;
+    }
+
+    .theme-toggle {
+        padding: 0.35rem;
+    }
+
+    .lang-switcher-toggle {
+        padding: 0.2rem 0.45rem;
     }
 }
 
@@ -447,6 +465,8 @@ a:hover {
 
 #search-input {
     width: 100%;
+    /* 同 .post-toc：width: 100% 加内边距和边框会超出容器，手机上整页能横向滑动 */
+    box-sizing: border-box;
     padding: 0.8rem;
     font-size: 1.1rem;
     border: 2px solid var(--secondary-bg);
@@ -583,7 +603,8 @@ a:hover {
 
 .post-content {
     position: relative;
-    max-width: 800px;
+    /* 文章正文只适度放宽（原 800px）：行太长读起来累，不跟着容器铺满 */
+    max-width: 880px;
     margin: 0 auto;
 }
 
@@ -664,6 +685,12 @@ a:hover {
 
     strong {
         color: var(--main-color);
+    }
+
+    /* 行内代码：长命令 / URL 中间没有断点，手机上会把整页撑出横向滚动条；
+       允许在任意位置折行。代码块（pre）不受影响，仍然横向滚动。 */
+    :not(pre) > code {
+        overflow-wrap: anywhere;
     }
 
     /* 表格：minima 默认无边框，列糊在一起；这里补边框/表头底/内边距 */
@@ -1085,6 +1112,8 @@ a:hover {
     gap: 1.5rem;
 
     .about-card {
+        /* 网格项默认不收缩到比内容更窄，卡片里的长命令会把卡片连同整页撑宽 */
+        min-width: 0;
         background: var(--bg-color);
         border: 1px solid var(--border-color);
         border-radius: 1rem;
@@ -1213,6 +1242,8 @@ a:hover {
         position: relative;
         top: 0;
         width: 100%;
+        /* width: 100% 加上内边距和边框会多出 18px，手机上出现横向滚动条 */
+        box-sizing: border-box;
         margin-bottom: 2rem;
     }
 }
