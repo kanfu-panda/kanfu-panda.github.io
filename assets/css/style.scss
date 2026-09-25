@@ -306,6 +306,29 @@ html[lang^="zh"] body {
         display: block;
     }
 
+    /* 窄屏下让站点标题可以收缩：英文 / 日文标题比中文长，原来 nowrap + 不收缩
+       会把右侧按钮顶出屏幕，整页可以横向滑动。缩小字号，实在放不下时显示省略号。 */
+    .site-title {
+        font-size: 1rem;
+        flex-shrink: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .menu-icon,
+    .lang-switcher {
+        margin-left: 0.5rem;
+    }
+
+    .theme-toggle {
+        padding: 0.35rem;
+    }
+
+    .lang-switcher-toggle {
+        padding: 0.2rem 0.45rem;
+    }
+
     .nav-links {
         display: none;
         position: absolute;
