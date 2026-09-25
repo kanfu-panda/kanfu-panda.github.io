@@ -4,6 +4,7 @@ title: "AI getting dumber the longer you chat? It's not the model—time to take
 date: 2026-06-18
 lang: en
 categories: [blog]
+series: ai-coding-efficiency
 image: /assets/images/posts/tier-models-trim-context-cover-en.png
 tags: [claudecode, ai, tokens, context, productivity]
 excerpt: "The last two posts were about saving tokens before things hit the context. This one's about two things you do mid-session—one decides who does the work (model tiering), the other decides how much memory it carries (context management). When the AI gets dumber as you go, it's usually not the model."

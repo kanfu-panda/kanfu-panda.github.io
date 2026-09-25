@@ -4,6 +4,7 @@ title: "Your docs aren't burning your tokens — your tooling is"
 date: 2026-06-16
 lang: en
 categories: [blog]
+series: ai-coding-efficiency
 image: /assets/images/posts/tokens-not-docs-cover.png
 tags: [claudecode, ai, tokens, workflow]
 excerpt: "People keep asking: with all those PDLC docs, aren't you burning tokens? Having lots of docs and burning tokens are two different things — and if you want to save tokens, the answer is using your tools right, not cutting docs."

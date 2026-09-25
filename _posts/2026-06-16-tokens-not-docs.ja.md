@@ -4,6 +4,7 @@ title: "トークンを食っているのはドキュメントではない、ツ
 date: 2026-06-16
 lang: ja
 categories: [blog]
+series: ai-coding-efficiency
 image: /assets/images/posts/tokens-not-docs-cover.png
 tags: [PDLC, ClaudeCode, AIエンジニアリング, ワークフロー, トークン]
 excerpt: "PDLC はドキュメントだらけでトークンを食う？——ドキュメントが多いこととトークンを食うことは別の話。本当に節約したいなら、ツールを正しく使うことであって、ドキュメントを削ることではない。"

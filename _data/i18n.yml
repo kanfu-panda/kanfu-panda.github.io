@@ -7,6 +7,7 @@ en:
   site_description: A developer who loves technology — notes, tools, and the occasional rabbit hole.
   nav:
     blog: Blog
+    topics: Topics
     about: About
     follow: Follow
     projects: Projects
@@ -44,12 +45,20 @@ en:
     post_count: "All __N__ →"
     in_post: "This post belongs to the __NAME__ project."
     in_post_link: See the project page →
+  topics:
+    count: "__N__ posts"
+    count_one: "1 post"
+    project_link: Go to the project page →
+    in_post: "This post is part of the topic “__NAME__”."
+    in_post_link: "All __N__ in this topic →"
+    all_topics: Browse all topics →
 
 zh:
   site_title: 功夫熊猫的博客
   site_description: 一个热爱技术的开发者的个人博客。
   nav:
     blog: 博客
+    topics: 专题
     about: 关于
     follow: 关注
     projects: 项目
@@ -87,12 +96,19 @@ zh:
     post_count: "共 __N__ 篇 →"
     in_post: "本文属于 __NAME__ 项目。"
     in_post_link: 查看项目页 →
+  topics:
+    count: "共 __N__ 篇"
+    project_link: 查看项目页 →
+    in_post: "本文属于专题「__NAME__」。"
+    in_post_link: "查看专题全部 __N__ 篇 →"
+    all_topics: 浏览全部专题 →
 
 ja:
   site_title: カンフーパンダ
   site_description: テクノロジー好き開発者の個人ブログ。
   nav:
     blog: ブログ
+    topics: 特集
     about: プロフィール
     follow: フォロー
     projects: プロジェクト
@@ -130,3 +146,9 @@ ja:
     post_count: "全 __N__ 本 →"
     in_post: "この記事は __NAME__ プロジェクトに関するものです。"
     in_post_link: プロジェクトページへ →
+  topics:
+    count: "全 __N__ 本"
+    project_link: プロジェクトページへ →
+    in_post: "この記事は特集「__NAME__」の一部です。"
+    in_post_link: "特集の全 __N__ 本を見る →"
+    all_topics: 特集一覧へ →

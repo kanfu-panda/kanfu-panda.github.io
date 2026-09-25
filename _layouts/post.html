@@ -89,11 +89,21 @@ layout: default
         </div>
     </div>
 
-    {%- if page.project %}
-    {%- case page.project -%}{%- when "pdlc" -%}{%- assign project_name = "PDLC" -%}{%- else -%}{%- assign project_name = page.project -%}{%- endcase %}
+    {%- comment -%} 文末回链：所属项目（front matter `project:`）与所属专题（`series:`，定义见 _data/topics.yml） {%- endcomment -%}
+    {%- if ui_lang != site.default_lang -%}{%- assign lang_prefix = "/" | append: ui_lang -%}{%- else -%}{%- assign lang_prefix = "" -%}{%- endif -%}
+    {%- assign post_topic = site.data.topics | where: "id", page.series | first -%}
+    {%- if page.project or post_topic %}
     <aside class="post-project">
-        {{ t.project.in_post | replace: "__NAME__", project_name }}
-        <a href="{% if ui_lang != site.default_lang %}/{{ ui_lang }}{% endif %}/{{ page.project }}/">{{ t.project.in_post_link }}</a>
+        {%- if page.project %}
+        {%- case page.project -%}{%- when "pdlc" -%}{%- assign project_name = "PDLC" -%}{%- else -%}{%- assign project_name = page.project -%}{%- endcase %}
+        <p>{{ t.project.in_post | replace: "__NAME__", project_name }}
+        <a href="{{ lang_prefix }}/{{ page.project }}/">{{ t.project.in_post_link }}</a></p>
+        {%- endif %}
+        {%- if post_topic %}
+        {%- assign topic_posts = site.posts | where: "lang", ui_lang | where: "series", page.series -%}
+        <p>{{ t.topics.in_post | replace: "__NAME__", post_topic[ui_lang].title }}
+        <a href="{{ lang_prefix }}/topics/#{{ post_topic.id }}">{% if topic_posts.size > 1 %}{{ t.topics.in_post_link | replace: "__N__", topic_posts.size }}{% else %}{{ t.topics.all_topics }}{% endif %}</a></p>
+        {%- endif %}
     </aside>
     {%- endif %}
 

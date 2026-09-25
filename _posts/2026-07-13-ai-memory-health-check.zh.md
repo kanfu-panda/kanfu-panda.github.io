@@ -4,6 +4,7 @@ title: "我把 AI 记忆体检做成了工具：只诊断，绝不替你动手"
 date: 2026-07-13
 lang: zh
 categories: [blog]
+series: ai-memory
 image: /assets/images/posts/ai-memory-health-check-cover.png
 tags: [AI记忆, ClaudeCode, 记忆维护, 工具开发, AI编程]
 excerpt: "上一篇手动给 AI 记忆库除草，除到最后我想明白：草反复长，是因为记忆系统缺了自我体检的机制。所以这一次，我把那个“记忆体检”真做成了一个工具。它像个医生，扫一遍、把毛病列给你看，然后停下——改不改，永远由你决定。它不外接任何大模型，你的记忆一个字都不出本机。"

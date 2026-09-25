@@ -4,6 +4,7 @@ title: "AI の作業が遅い？モデルが鈍いんじゃない、一つずつ
 date: 2026-06-20
 lang: ja
 categories: [blog]
+series: ai-coding-efficiency
 image: /assets/images/posts/parallel-agents-cover-ja.png
 tags: [ClaudeCode, AI, subagent, 並列化, 生産性]
 excerpt: "前回は AI に「より安く」作業させる話だった。今回は「より速く」——大きなタスクを、AI に一モジュールずつ順番に片づけさせるのではなく、分割して複数の agent に同時にばらまく。直感に反するポイントは、並列にしてもトークンはほとんど節約できないということ。節約できるのは時間だ。"

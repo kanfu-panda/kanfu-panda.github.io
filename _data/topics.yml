@@ -1,0 +1,48 @@
+# 专题（连载）定义：专题页按此顺序展示，文章靠 front matter 的 `series: <id>` 归入。
+# 新增专题：在这里加一项（三语 title / desc 都写），再给文章加 `series:`。
+# `project` 可选：专题属于某个产品时填，专题页会附上产品页链接。
+
+- id: pdlc-paradigms
+  project: pdlc
+  en:
+    title: PDLC and the three engineering paradigms
+    desc: The thinking behind PDLC — prompt, loop and graph engineering, from the concepts to a real project end to end.
+  zh:
+    title: PDLC 与三大工程
+    desc: PDLC 背后的方法论：提示词工程、Loop 工程、Graph 工程，从概念一路讲到真实项目上的完整实践。
+  ja:
+    title: PDLC と三大エンジニアリング
+    desc: PDLC の背景にある考え方——プロンプト・Loop・Graph エンジニアリングを、概念から実プロジェクトでの通し実践まで。
+
+- id: ai-coding-efficiency
+  en:
+    title: Getting more out of AI coding
+    desc: Making AI coding cheaper, faster and less draining — saving tokens, tiering models, parallel agents, worktrees, and where you fit in as the controller.
+  zh:
+    title: AI 编程提效
+    desc: 让 AI 编程更省、更快，人也不那么累：省 token、模型分层、并行 agent、worktree，以及人作为「主控」的位置。
+  ja:
+    title: AI コーディングの効率化
+    desc: AI コーディングをより安く、より速く、そして人が疲れないように——トークン節約、モデルの使い分け、並列エージェント、worktree、そして「司令塔」としての人の立ち位置。
+
+- id: ai-memory
+  en:
+    title: AI memory
+    desc: Giving your AI a memory, pruning it as it grows weeds, and turning the check-up into a tool.
+  zh:
+    title: AI 记忆
+    desc: 给 AI 建一套记忆体系，记忆长草了怎么清理，再把体检做成一个工具。
+  ja:
+    title: AI の記憶
+    desc: AI に記憶の仕組みを持たせ、雑草が生えたら手入れをし、その健康診断をツールにするまで。
+
+- id: ai-security
+  en:
+    title: AI security
+    desc: Real and false alarms in AI security — a prompt-injection alert that turned out to be wrong, and more.
+  zh:
+    title: AI 安全
+    desc: AI 安全里的真警报与假警报：一次误报的注入告警，以及藏在 system prompt 里的隐写手法。
+  ja:
+    title: AI セキュリティ
+    desc: AI セキュリティにおける本物の警報と誤報——誤りだったプロンプトインジェクション警告など。

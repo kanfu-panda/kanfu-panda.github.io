@@ -4,6 +4,7 @@ title: "AI 并行工作的前提是切分好独立的工作区"
 date: 2026-06-21
 lang: zh
 categories: [blog]
+series: ai-coding-efficiency
 image: /assets/images/posts/isolated-worktrees-cover.png
 tags: [gitworktree, 并行, subagent, ClaudeCode, AI编程]
 excerpt: "上一篇讲并行——一个大任务拆开撒给几个 agent 同时上，但留了个尾巴：几只手同时改一份代码，凭什么互不打架？这篇接着说。我先傻乎乎 clone 了两份占爆磁盘，后来才换上 git worktree。一个反直觉的点是：不是所有并行都要隔离，只读的活共用一个工作区就行，会动手改文件的才必须分开。"

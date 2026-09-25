@@ -4,6 +4,7 @@ title: "I Built a Health-Check for My AI's Memory: It Diagnoses, It Never Operat
 date: 2026-07-13
 lang: en
 categories: [blog]
+series: ai-memory
 image: /assets/images/posts/ai-memory-health-check-cover-en.png
 tags: [ai, claudecode, memory, tools]
 excerpt: "Last time I weeded my AI's memory libraries by hand and realized the weeds keep coming back because the memory system has no self-checkup mechanism. So this time I built that checkup into a tool. It works like a doctor: it scans, lists what's wrong, then stops — whether to fix anything is always your call. It never touches your files, and it needs no external LLM."

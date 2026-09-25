@@ -4,6 +4,7 @@ title: "AI 干活太慢？可能不是它笨，是你让它一个一个来"
 date: 2026-06-20
 lang: zh
 categories: [blog]
+series: ai-coding-efficiency
 image: /assets/images/posts/parallel-agents-cover.png
 tags: [并行, subagent, ClaudeCode, 多Agent编排, AI编程]
 excerpt: "上一篇讲怎么让 AI 干活更省。这篇讲怎么让它干得更快——一个大任务，与其让 AI 一个模块一个模块串着做，不如拆开撒给好几个 agent 同时上。关键的反直觉点是：并行并不比串行省多少 token，省下来的是时间。"

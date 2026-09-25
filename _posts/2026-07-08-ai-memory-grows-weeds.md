@@ -4,6 +4,7 @@ title: "AI Memory Grows Weeds: Why Timely Pruning Matters"
 date: 2026-07-08
 lang: en
 categories: [blog]
+series: ai-memory
 image: /assets/images/posts/ai-memory-grows-weeds-cover-en.png
 tags: [aimemory, claudecode, memorymaintenance, contextengineering, aicoding]
 excerpt: "Last time I covered how to build a memory system for AI. But building is only the start—the longer a project runs, the more memory piles up, and without pruning, weeds quietly take root. This time I gave the AI memory across several of my projects a systematic weeding, and distilled six typical patterns of memory decay. The most dangerous one makes the AI act on stale information with total confidence."

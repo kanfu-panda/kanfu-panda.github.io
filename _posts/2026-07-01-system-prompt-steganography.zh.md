@@ -4,6 +4,7 @@ title: "一个撇号里，藏得下 3 个 bit——system prompt 隐写手法拆
 date: 2026-07-01
 lang: zh
 categories: [blog]
+series: ai-security
 image: /assets/images/posts/system-prompt-steganography-cover.png
 tags: [AI安全, 隐写, Unicode, ClaudeCode, systemprompt]
 excerpt: "你每次开会话，system prompt 里都有一句『Today's date is …』。最近有人在一个 CLI 工具里逆向出一段逻辑：它把一个隐形标记，就藏在这句话的日期格式和那个撇号里——肉眼看不出、可能连模型都读不到，服务器一解就懂。这篇不聊是非，只拆开看它是怎么做到的：怎么把 3 个 bit 塞进几个『看起来一模一样』的字符里。"

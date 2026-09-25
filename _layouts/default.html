@@ -136,6 +136,7 @@
                 </button>
                 <div class="nav-links">
                     <a href="{% if lang == site.default_lang %}/blog/{% else %}/{{ lang }}/blog/{% endif %}">{{ t.nav.blog }}</a>
+                    <a href="{% if lang == site.default_lang %}/topics/{% else %}/{{ lang }}/topics/{% endif %}">{{ t.nav.topics }}</a>
                     <div class="nav-dropdown">
                         <a href="{% if lang == site.default_lang %}/projects/{% else %}/{{ lang }}/projects/{% endif %}" class="nav-dropdown-toggle" aria-haspopup="true">{{ t.nav.projects }}<span class="caret" aria-hidden="true">▾</span></a>
                         <div class="nav-dropdown-menu" role="menu">
