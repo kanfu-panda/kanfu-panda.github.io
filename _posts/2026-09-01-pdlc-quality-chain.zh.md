@@ -4,6 +4,8 @@ title: "pdlc-skills 如何在 AI 辅助编程中保障项目质量？"
 date: 2026-09-01
 lang: zh
 categories: [blog]
+project: pdlc
+series: pdlc-paradigms
 image: /assets/images/posts/pdlc-quality-chain-cover.png
 tags: [AI工程, 提示词工程, Loop工程, Graph工程, PDLC, ClaudeCode]
 excerpt: "AI 让写代码的速度上去了，但判断代码对不对的速度没有跟上，这个差距本身就是风险。所以在 AI 辅助编程里，质量保障不是拖慢速度的负担，而是让速度真正可用的前提。这篇讲我在 pdlc 里用的一套做法：七个环节串成一条链，逐个讲清楚，也讲它们合起来还防不住什么。"

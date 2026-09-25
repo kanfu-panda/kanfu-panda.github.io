@@ -69,6 +69,9 @@ bash scripts/install-hooks.sh
 
 1. 文件命名：`_posts/YYYY-MM-DD-slug.md`
 2. Front matter 必须包含：`layout: post`、`title`、`date`、`categories`、`tags`、`excerpt`
+   - 与某个产品相关的文章，再加 `project: aitm | pdlc | arcade`；属于连载的再加 `series: <系列名>`（如 `series: pdlc-paradigms`）。
+     三语文件都要加。产品页的「相关文章」、项目总览页的文章数、文章底部的「所属项目」回链都据此**自动生成**
+     （`_includes/project-posts.html` + `_layouts/post.html`），**不要**再往产品页手写文章链接。
 3. **禁止**在文章 Markdown 中嵌入：
    - `<script>` 标签（违反 CSP，且引入 XSS 风险）
    - 外部 `<iframe>`（CSP 设了 `frame-ancestors 'none'`，反向也建议不引入）
@@ -136,6 +139,7 @@ bash scripts/install-hooks.sh
 | `title` | ✅ 各语言写各语言的标题 | EN: "PDLC: turn..." / ZH: "PDLC：把..." |
 | `description` | ✅ 各语言写各语言版本（不许跨语言重用！） | 中文文件不写英文 description |
 | `excerpt`（_posts） | ✅ 各语言对等翻译 | — |
+| `project` / `series`（_posts，可选） | ✅ 三语一致 | `project: pdlc` |
 | `permalink` | ✅ 三语共用同一个（polyglot 自动加前缀） | `/aitm/` 在三个文件里都写 |
 
 ### 共用资源清单（**不**分语言，三语共用一份）

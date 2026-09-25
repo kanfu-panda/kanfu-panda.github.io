@@ -4,6 +4,8 @@ title: "pdlc-skills を自分のプロジェクトで動かすには"
 date: 2026-08-30
 lang: ja
 categories: [blog]
+project: pdlc
+series: pdlc-paradigms
 image: /assets/images/posts/run-pdlc-in-your-project-cover-ja.png
 tags: [AIエンジニアリング, プロンプトエンジニアリング, Loop工学, Graph工学, PDLC, ClaudeCode]
 excerpt: "入れるのは一行で済みます。本当に詰まるのはその次の一歩——新規プロジェクトか、既存のコードベースか、すでに導入済みかで、最初のコマンドがまったく違います。そして飛ばされがちな一手があります。それを飛ばすと、前回の「客観的な停止判定」はモデルの自己満足に丸ごと退化します。"

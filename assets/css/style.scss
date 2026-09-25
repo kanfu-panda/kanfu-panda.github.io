@@ -806,6 +806,40 @@ a:hover {
     }
 }
 
+/* 文章底部「所属项目」回链：读者从文章直达产品页 */
+.post-project {
+    margin-top: 2.5rem;
+    padding: 0.9rem 1.1rem;
+    border-left: 3px solid var(--main-color);
+    background: var(--secondary-bg);
+    border-radius: 4px;
+    font-size: 0.95rem;
+
+    a {
+        margin-left: 0.35rem;
+        font-weight: 600;
+    }
+}
+
+/* 产品页「相关文章」列表（_includes/project-posts.html） */
+.project-posts {
+    h3 {
+        margin: 1.5rem 0 0.5rem;
+        font-size: 1.05rem;
+    }
+
+    .project-posts-list li {
+        margin: 0.4rem 0;
+    }
+
+    .project-posts-date {
+        margin-left: 0.4rem;
+        font-size: 0.85em;
+        color: var(--text-color-secondary, #666);
+        white-space: nowrap;
+    }
+}
+
 /* 文章底部署名 */
 .post-author {
     margin-top: 3rem;

@@ -49,7 +49,7 @@ description: PDLC —— 给 Claude Code 加上"产品开发生命周期"工作�
         </div>
         <div class="about-card">
             <h3>🔁 自主收敛（Loop 工程）</h3>
-            <p><code>/pdlc-loop-run</code> 无人值守把 <code>tdd → implement → review</code> 推到 <code>review_done</code>——每轮读状态机决定下一跳，带硬护栏（上限停机 / fail-stop / stuck-stop）。发布永远是人工闸门。</p>
+            <p><code>/pdlc-loop-run</code> 无人值守推进 <code>tdd → implement → review</code>，直到功能评审通过、等待发布——每轮读状态机决定下一跳，带硬护栏（上限停机 / fail-stop / stuck-stop）。多个功能一起推时，<code>bin/pdlc-loop.sh --parallel N</code> 给每个功能一个独立 git worktree，按依赖排序。发布永远是人工闸门。</p>
         </div>
         <div class="about-card">
             <h3>✅ 常设质量闸门</h3>
@@ -57,7 +57,7 @@ description: PDLC —— 给 Claude Code 加上"产品开发生命周期"工作�
         </div>
         <div class="about-card">
             <h3>🌐 不止 Claude Code 一个工具</h3>
-            <p>Claude Code 上支持最完整（插件 + 状态栏 + Loop 引擎）。同一份单一源 SKILL 正文投影到 <strong>Codex</strong> 成原生 skill；平台中立方法论让你在任意 AI 工具里用自然语言驱动 PDLC——每功能状态机可跨工具延续。</p>
+            <p>Claude Code 上支持最完整（插件 + 状态栏 + Loop 引擎）。同一份单一源 SKILL 正文投影到 <strong>Codex</strong> 成原生 skill，也按 <strong>Agent Skills 开放标准</strong>投影一份，Copilot、Gemini CLI、OpenCode 等都读得到——每功能状态机可跨工具延续。</p>
         </div>
     </div>
 </div>
@@ -154,7 +154,7 @@ claude plugin install pdlc@pdlc-skills
 
 ```bash
 claude plugin list | grep pdlc
-# 预期：pdlc@pdlc-skills  Version: 1.6.1  Status: ✔ enabled
+# 预期：pdlc@pdlc-skills  Version: 1.7.0  Status: ✔ enabled
 ```
 
 重启 Claude Code 会话后，在输入框敲 `/` 然后开始打 `pdlc-`，autocomplete 会列出全部 38 条子命令。
@@ -177,13 +177,14 @@ curl -fsSL https://raw.githubusercontent.com/kanfu-panda/pdlc-skills/main/instal
 
 ## 🛡️ Iron Law（铁律）
 
-每一条**产出产物的**第一层 / 第二层阶段都必须满足五条不变量。只读阶段（如 `/pdlc-status`）豁免。
+每一条**产出产物的**第一层 / 第二层阶段都必须满足六条不变量。只读阶段（如 `/pdlc-status`）豁免。
 
 1. **产物落盘** —— 每份产物都是磁盘上的真实文件，而不仅是对话输出
 2. **更新状态机** —— 每个完成的阶段都把 `docs/.pdlc-state/<feature-id>.json` 写一遍
 3. **测试先行** —— 实现阶段被失败的测试挡住（TDD 红灯）
 4. **自检** —— 每个阶段在交接前跑一次自检
 5. **自动修复仅一轮** —— 自动修复至多跑一次，卡壳的失败提交给人处理
+6. **状态必须推进** —— 阶段成功就必须推进 `current_stage`；没推进的阶段要明确报错，不能悄悄返回，免得自主循环在旧状态上空转
 
 ## 📁 目标项目契约
 
@@ -201,22 +202,11 @@ docs/07_reviews/{doc,code,design,retro}/           # 评审记录
 docs/.pdlc-state/<feature-id>.json                 # 每功能一份状态机
 ```
 
-## 📚 系列文章
+<h2 id="posts">📚 相关文章</h2>
 
-PDLC 背后的方法论，我在博客上开了一个系列，从概念讲到实战：
+PDLC 背后的方法论，从概念一路讲到真实项目上的完整实践；另有发布与版本说明：
 
-| 期号 | 标题 |
-|---|---|
-| 01 | [什么是提示词工程、Loop 工程以及 Graph 工程？](/zh/blog/2026/08/09/prompt-loop-graph-engineering.zh.html) |
-| 02 | [为什么 pdlc-skills 天然契合三大工程？](/zh/blog/2026/08/13/why-pdlc-fits-three-paradigms.zh.html) |
-| 03 | [三大工程在 pdlc-skills 怎么联动？](/zh/blog/2026/08/23/how-three-paradigms-interlock.zh.html) |
-| 04 | [如何让 pdlc-skills 在项目里跑起来？](/zh/blog/2026/08/30/run-pdlc-in-your-project.zh.html) |
-| 05 | [pdlc-skills 如何实现无人值守（Loop 工程）？](/zh/blog/2026/08/31/run-pdlc-unattended.zh.html) |
-| 06 | [pdlc-skills 如何在 AI 辅助编程中保障项目质量？](/zh/blog/2026/09/01/pdlc-quality-chain.zh.html) |
-| 07 | [pdlc-skills 如何看清项目进度、变更影响与质量趋势？](/zh/blog/2026/09/05/pdlc-progress-impact-retro.zh.html) |
-| 08 | [如何把 pdlc-skills 用到真实项目上？](/zh/blog/2026/09/18/pdlc-on-a-real-project.zh.html) |
-
-八篇已经写完，从概念一路讲到真实项目上的完整实践。
+{% include project-posts.html project="pdlc" %}
 
 ## 📄 协议
 
@@ -225,7 +215,7 @@ MIT。用、改、发都行。源码、issue、完整文档：**[github.com/kanf
 ## ❓ 常见问题
 
 **Q：不用 Claude Code 能用吗？**
-PDLC 在 Claude Code 上支持最完整 —— 完整插件，含状态栏与自主收敛循环。从 v1.5 起，同一份单一源 SKILL 正文经构建期适配器也投影到 **Codex**（原生 skill，按 description 触发）；另有平台中立的[方法论文档](https://github.com/kanfu-panda/pdlc-skills/blob/main/docs/pdlc-methodology.md)，让你用自然语言在任意 AI 编程工具里驱动 PDLC。每功能状态机（`docs/.pdlc-state/`）可跨工具延续。v1.5.2 起，外部 Runbook 驱动（`adapters/codex-loop-run.sh`）甚至能在 Codex 上跑自主的 `tdd → implement → review` 收敛循环（发布仍是人工闸门），且已在真机过状态完整性准入闸。
+PDLC 在 Claude Code 上支持最完整 —— 完整插件，含状态栏与自主收敛循环。从 v1.5 起，同一份单一源 SKILL 正文经构建期适配器也投影到 **Codex**（原生 skill，按 description 触发）；另有平台中立的[方法论文档](https://github.com/kanfu-panda/pdlc-skills/blob/main/docs/pdlc-methodology.md)，让你用自然语言在任意 AI 编程工具里驱动 PDLC。每功能状态机（`docs/.pdlc-state/`）可跨工具延续。v1.5.2 起，外部 Runbook 驱动（`adapters/codex-loop-run.sh`）甚至能在 Codex 上跑自主的 `tdd → implement → review` 收敛循环（发布仍是人工闸门），且已在真机过状态完整性准入闸。v1.7 起，`bash install.sh --target agents` 会装一份符合 [Agent Skills 开放标准](https://agentskills.io/specification)的投影，Copilot、Gemini CLI、OpenCode 等都能加载。端到端验证过的是 Claude Code 与 Codex；Copilot 能加载、能跑单个阶段，但没通过自主循环的状态完整性准入闸。
 
 **Q：会不打招呼就改我代码吗？**
 产出产物的阶段确实会写文件（到 `docs/` 和你的代码库）。每个阶段都会跑自检并在交接前显式提示。Claude Code 自带的权限确认提示也照常生效。

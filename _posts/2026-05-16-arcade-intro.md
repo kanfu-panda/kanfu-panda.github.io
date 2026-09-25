@@ -4,6 +4,7 @@ title: "arcade: a browser-based arcade emulator on this blog"
 date: 2026-05-16
 lang: en
 categories: [blog]
+project: arcade
 tags: [arcade, emulator, EmulatorJS, WebAssembly]
 excerpt: "There's a browser-based arcade emulator at /arcade/. Supports MAME and dozens of consoles. Drag in your own local game files and play — everything runs inside the browser, nothing uploaded."
 ---

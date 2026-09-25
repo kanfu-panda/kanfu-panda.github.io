@@ -4,6 +4,8 @@ title: "如何让 pdlc-skills 在项目里跑起来？"
 date: 2026-08-30
 lang: zh
 categories: [blog]
+project: pdlc
+series: pdlc-paradigms
 image: /assets/images/posts/run-pdlc-in-your-project-cover.png
 tags: [AI工程, 提示词工程, Loop工程, Graph工程, PDLC, ClaudeCode]
 excerpt: "装上只要一行命令。真正卡住人的是起手第一步——你的起点是新项目、老项目还是已经接入，第一条命令完全不同。还有一步最容易被跳过：不做它，前一篇讲的那套「客观判停」会整个退化成模型自我感觉良好。"

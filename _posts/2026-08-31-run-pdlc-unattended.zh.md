@@ -4,6 +4,8 @@ title: "pdlc-skills 如何实现无人值守（Loop 工程）？"
 date: 2026-08-31
 lang: zh
 categories: [blog]
+project: pdlc
+series: pdlc-paradigms
 image: /assets/images/posts/run-pdlc-unattended-cover.png
 tags: [AI工程, 提示词工程, Loop工程, Graph工程, PDLC, ClaudeCode]
 excerpt: "一个功能其实一条命令就能自己跑完 TDD、实现、评审，用不着你写脚本。外部脚本的位置在外面一层——十来个功能点按依赖分批，一批跑完人验一道再启下一批。中间靠四条护栏兜着，这四条我每条都见它真的响过。"

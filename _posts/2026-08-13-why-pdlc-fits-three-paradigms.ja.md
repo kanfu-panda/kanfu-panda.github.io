@@ -4,6 +4,8 @@ title: "なぜ pdlc-skills は三大エンジニアリングに自然と噛み�
 date: 2026-08-13
 lang: ja
 categories: [blog]
+project: pdlc
+series: pdlc-paradigms
 image: /assets/images/posts/why-pdlc-fits-three-paradigms-cover-ja.png
 tags: [AIエンジニアリング, プロンプトエンジニアリング, Loop工学, Graph工学, PDLC, ClaudeCode]
 excerpt: "この三層は私が設計して入れたものではありません。作っていた当時、Loop エンジニアリングも Graph エンジニアリングという言葉も聞いたことがありませんでした。ソフトウェア工学に何十年も前からある製品開発ライフサイクル——要件、設計、テスト、実装、レビュー——をそのままなぞっただけです。作り終えてから三大エンジニアリングを当ててみたら、どこも噛み合っていた。偶然です。ただし偶然には理由があります。"

@@ -4,6 +4,8 @@ title: "プロンプトエンジニアリング・Loop エンジニアリング�
 date: 2026-08-09
 lang: ja
 categories: [blog]
+project: pdlc
+series: pdlc-paradigms
 image: /assets/images/posts/prompt-loop-graph-engineering-cover-ja.png
 tags: [AIエンジニアリング, プロンプトエンジニアリング, Loop工学, Graph工学, AIエージェント, ClaudeCode]
 excerpt: "この三つの言葉は最近いつも同じ比較表に並べられ、まるで三択のように扱われています。しかし三者はそもそも同じ階層にいません。プロンプトは一回のやり取りを、Loop は反復の収束を、Graph は経路そのものを決めます。この違いを理解することは、どれか一つを習得することより価値があります。"

@@ -4,6 +4,8 @@ title: "Running pdlc-skills on a Real Project: Three Features, Start to Release"
 date: 2026-09-18
 lang: en
 categories: [blog]
+project: pdlc
+series: pdlc-paradigms
 image: /assets/images/posts/pdlc-on-a-real-project-cover-en.png
 tags: [ai-engineering, prompt-engineering, loop-engineering, graph-engineering, pdlc, claude-code]
 excerpt: "The first seven posts were about mechanics. This one is a single real run: three features handed to pdlc's own loop engine, all three at the review terminal state in 88 minutes, one failed quality gate, then a release and a deploy to two machines. How to split the work, who does what, how the loop runs, how long it took, how much it produced, and what holds quality up, answered with numbers from the event log and from git."

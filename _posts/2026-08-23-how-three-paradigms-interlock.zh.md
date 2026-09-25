@@ -4,6 +4,8 @@ title: "三大工程在 pdlc-skills 怎么联动？"
 date: 2026-08-23
 lang: zh
 categories: [blog]
+project: pdlc
+series: pdlc-paradigms
 image: /assets/images/posts/how-three-paradigms-interlock-cover.png
 tags: [AI工程, 提示词工程, Loop工程, Graph工程, PDLC, ClaudeCode]
 excerpt: "三层从头到尾没有互相调用过一次。它们靠磁盘上一份文件交接——一层写，另一层读。而正因为这份文件是按功能切开的，这条流水线不止能往下走一条，还能横着铺开同时跑好几条。"

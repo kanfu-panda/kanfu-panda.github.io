@@ -38,6 +38,12 @@ en:
     title: Page Not Found
     body: The page you're looking for doesn't exist.
     home: Back to home
+  project:
+    series: Series
+    more: More posts
+    post_count: "All __N__ →"
+    in_post: "This post belongs to the __NAME__ project."
+    in_post_link: See the project page →
 
 zh:
   site_title: 功夫熊猫的博客
@@ -75,6 +81,12 @@ zh:
     title: 页面不存在
     body: 你访问的页面不在。
     home: 回到首页
+  project:
+    series: 系列文章
+    more: 其他文章
+    post_count: "共 __N__ 篇 →"
+    in_post: "本文属于 __NAME__ 项目。"
+    in_post_link: 查看项目页 →
 
 ja:
   site_title: カンフーパンダのブログ
@@ -112,3 +124,9 @@ ja:
     title: ページが見つかりません
     body: お探しのページは存在しません。
     home: ホームへ戻る
+  project:
+    series: シリーズ
+    more: その他の記事
+    post_count: "全 __N__ 本 →"
+    in_post: "この記事は __NAME__ プロジェクトに関するものです。"
+    in_post_link: プロジェクトページへ →

@@ -4,6 +4,8 @@ title: "pdlc-skills は進捗・変更の影響・品質の傾向をどう見せ
 date: 2026-09-05
 lang: ja
 categories: [blog]
+project: pdlc
+series: pdlc-paradigms
 image: /assets/images/posts/pdlc-progress-impact-retro-cover-ja.png
 tags: [AIエンジニアリング, プロンプトエンジニアリング, Loop工学, Graph工学, PDLC, ClaudeCode]
 excerpt: "AI は午後のあいだに三つの機能を進めます。いまどこまで進んだのか、ここを直すと何に波及するのか、この一か月はどうだったのか。それが見えなければ、自動化はブラックボックスの中で回っているのと同じです。pdlc には同じ状態ファイルを読む三つの道具があります。ステータスラインと /pdlc-status で「いま」を、/pdlc-relate impact で変更前の影響範囲を、/pdlc-retro で月ごとの傾向を見ます。この記事では三つの使い方と、実際に一度回して出てきた数字、そして三つに共通する限界を書きます。記録されたものしか見せない、という限界です。"

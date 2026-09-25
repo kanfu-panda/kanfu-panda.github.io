@@ -15,16 +15,19 @@ A selection of personal projects and open-source contributions. Each one is part
 - **Summary**: A desktop terminal app that puts AI capabilities directly into the terminal, for macOS and Windows — multi-tab PTY + AI sidebar + built-in browser. The AI reads and edits files, runs commands, and drives the browser; edits show a diff first, and every high-risk action needs explicit confirmation.
 - **Learn more**: [aitm product page](/aitm/)
 - **GitHub**: [kanfu-panda/aitm](https://github.com/kanfu-panda/aitm) · [latest release](https://github.com/kanfu-panda/aitm/releases/latest)
+- **Articles**: {% include project-posts.html project="aitm" mode="count" %}
 
 ## PDLC
 - **Stack**: Claude Code plugin (Bash + Markdown templates), MIT license
 - **Summary**: A Claude Code plugin that turns AI-assisted development from soft conventions into hard contracts — 38 standardized stages exposed as slash commands, persisted artifacts under `docs/`, per-feature state machine, mandatory tests-before-code, one-shot auto-repair.
 - **Learn more**: [PDLC product page](/pdlc/) · [GitHub](https://github.com/kanfu-panda/pdlc-skills)
+- **Articles**: {% include project-posts.html project="pdlc" mode="count" %}
 
 ## arcade
 - **Stack**: React + Vite + EmulatorJS (WASM)
 - **Summary**: A browser-based arcade emulator. Bring your own local files; everything runs inside the browser's WASM sandbox — nothing is uploaded to the server. ⚠️ For personal entertainment, lawful use only.
 - **Learn more**: [arcade page](/arcade/)
+- **Articles**: {% include project-posts.html project="arcade" mode="count" %}
 
 ## This blog
 - **Stack**: Jekyll, GitHub Pages

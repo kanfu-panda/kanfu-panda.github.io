@@ -4,6 +4,8 @@ title: "How pdlc-skills Keeps Quality Up When AI Writes the Code"
 date: 2026-09-01
 lang: en
 categories: [blog]
+project: pdlc
+series: pdlc-paradigms
 image: /assets/images/posts/pdlc-quality-chain-cover-en.png
 tags: [ai-engineering, prompt-engineering, loop-engineering, graph-engineering, pdlc, claude-code]
 excerpt: "AI made writing code faster. It didn't make judging that code any faster, and that gap is the risk. So in AI-assisted development, quality assurance isn't a drag on speed; it's what makes the speed usable. This post walks through the seven-link chain I use in pdlc, one link at a time, and what the chain still can't catch."

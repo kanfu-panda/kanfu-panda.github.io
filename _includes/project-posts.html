@@ -1,0 +1,41 @@
+{%- comment -%}
+  按文章 front matter 的 `project:` 自动列出某个项目的相关文章（当前语言）。
+  用法：
+    {% include project-posts.html project="pdlc" %}               完整列表（产品页用）
+    {% include project-posts.html project="pdlc" mode="count" %}  一行「N 篇相关文章 →」（项目总览页用）
+  带 `series:` 的文章按发布顺序编号成系列，其余按时间倒序列在后面。
+  新文章只要写对 `project:`（系列文章再加 `series:`），这里就自动出现，不用手改页面。
+{%- endcomment -%}
+{%- assign pp_lang = page.lang | default: site.active_lang | default: site.default_lang -%}
+{%- assign pp_t = site.data.i18n[pp_lang].project -%}
+{%- comment -%} 显式加语言前缀：arcade/ 在 exclude_from_localization 里，polyglot 不会替它补前缀 {%- endcomment -%}
+{%- if pp_lang == site.default_lang -%}{%- assign pp_prefix = "" -%}{%- else -%}{%- assign pp_prefix = "/" | append: pp_lang -%}{%- endif -%}
+{%- assign pp_posts = site.posts | where: "lang", pp_lang | where: "project", include.project | sort: "date" -%}
+{%- if include.mode == "count" -%}
+  {%- if pp_posts.size > 0 -%}
+<a href="{{ pp_prefix }}/{{ include.project }}/#posts">{{ pp_t.post_count | replace: "__N__", pp_posts.size }}</a>
+  {%- endif -%}
+{%- else -%}
+  {%- assign pp_series = pp_posts | where_exp: "p", "p.series" -%}
+  {%- assign pp_others = pp_posts | where_exp: "p", "p.series == nil" | reverse -%}
+<div class="project-posts">
+  {%- if pp_series.size > 0 %}
+  <h3>{{ pp_t.series }}</h3>
+  <ol class="project-posts-list">
+    {%- for post in pp_series %}
+    <li><a href="{{ post.url }}">{{ post.title }}</a> <span class="project-posts-date">{{ post.date | date: "%Y-%m-%d" }}</span></li>
+    {%- endfor %}
+  </ol>
+  {%- endif %}
+  {%- if pp_others.size > 0 %}
+  {%- if pp_series.size > 0 %}
+  <h3>{{ pp_t.more }}</h3>
+  {%- endif %}
+  <ul class="project-posts-list">
+    {%- for post in pp_others %}
+    <li><a href="{{ post.url }}">{{ post.title }}</a> <span class="project-posts-date">{{ post.date | date: "%Y-%m-%d" }}</span></li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+</div>
+{%- endif -%}

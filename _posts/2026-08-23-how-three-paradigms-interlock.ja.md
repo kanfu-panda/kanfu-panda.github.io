@@ -4,6 +4,8 @@ title: "三大エンジニアリングは pdlc-skills の中でどう噛み合�
 date: 2026-08-23
 lang: ja
 categories: [blog]
+project: pdlc
+series: pdlc-paradigms
 image: /assets/images/posts/how-three-paradigms-interlock-cover-ja.png
 tags: [AIエンジニアリング, プロンプトエンジニアリング, Loop工学, Graph工学, PDLC, ClaudeCode]
 excerpt: "三層は最初から最後まで一度も互いを呼び出しません。ディスク上の一つのファイルを介して引き継ぐだけです。そしてそのファイルが機能ごとに分かれているおかげで、このパイプラインは縦に一本走るだけでなく、横に広げて何本も同時に走らせられます。"

@@ -41,4 +41,8 @@ description: ブラウザで動くアーケードエミュレータ。ローカ�
 
 [▶ arcade を起動](/arcade/play/){:target="_blank" rel="noopener"}
 
+<h2 id="posts">📚 関連記事</h2>
+
+{% include project-posts.html project="arcade" %}
+
 </div>

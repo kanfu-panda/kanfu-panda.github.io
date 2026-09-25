@@ -49,7 +49,7 @@ description: PDLC — a Claude Code plugin that turns the soft conventions of pr
         </div>
         <div class="about-card">
             <h3>🔁 Autonomous convergence (loop engineering)</h3>
-            <p><code>/pdlc-loop-run</code> drives <code>tdd → implement → review</code> to <code>review_done</code> unattended — reading the state machine each round, with hard guardrails (max-steps / fail-stop / stuck-stop). Release always stays a human gate.</p>
+            <p><code>/pdlc-loop-run</code> drives <code>tdd → implement → review</code> unattended until the feature is reviewed and waiting to ship — reading the state machine each round, with hard guardrails (max-steps / fail-stop / stuck-stop). For several features at once, <code>bin/pdlc-loop.sh --parallel N</code> gives each its own git worktree and orders them by dependency. Release always stays a human gate.</p>
         </div>
         <div class="about-card">
             <h3>✅ Standing quality gate</h3>
@@ -57,7 +57,7 @@ description: PDLC — a Claude Code plugin that turns the soft conventions of pr
         </div>
         <div class="about-card">
             <h3>🌐 More than one AI tool</h3>
-            <p>Deepest support on Claude Code (plugin + statusline + loop engine). The same single-source SKILL bodies project to <strong>Codex</strong> as native skills, and a platform-neutral methodology drives PDLC in natural language on any AI tool — the per-feature state machine carries over across them.</p>
+            <p>Deepest support on Claude Code (plugin + statusline + loop engine). The same single-source SKILL bodies project to <strong>Codex</strong> as native skills, and to the <strong>Agent Skills open standard</strong> — read by Copilot, Gemini CLI, OpenCode and more. The per-feature state machine carries over across tools.</p>
         </div>
     </div>
 </div>
@@ -154,7 +154,7 @@ claude plugin install pdlc@pdlc-skills
 
 ```bash
 claude plugin list | grep pdlc
-# expected: pdlc@pdlc-skills  Version: 1.6.1  Status: ✔ enabled
+# expected: pdlc@pdlc-skills  Version: 1.7.0  Status: ✔ enabled
 ```
 
 After restarting your Claude Code session, type `/` and start typing `pdlc-` — autocomplete will show all 38 sub-commands.
@@ -177,13 +177,14 @@ Check progress any time with `/pdlc-status`.
 
 ## 🛡️ The Iron Law
 
-Every Layer 1 / Layer 2 stage that **produces artifacts** enforces five invariants. Read-only stages (such as `/pdlc-status`) are exempt.
+Every Layer 1 / Layer 2 stage that **produces artifacts** enforces six invariants. Read-only stages (such as `/pdlc-status`) are exempt.
 
 1. **Persist to disk** — every artifact is a real file, not just chat output
 2. **Update the state machine** — every completed stage writes `docs/.pdlc-state/<feature-id>.json`
 3. **Tests first** — code cannot be implemented until a failing test exists (TDD red light)
 4. **Self-check** — every stage runs a self-audit before handing off
 5. **One-shot repair** — auto-fix loops run at most once; stubborn failures get flagged for humans
+6. **State must advance** — a successful stage must move `current_stage` forward; a stage that didn't advance fails loudly, so autonomous loops can't spin on stale state
 
 ## 📁 Target-project contract
 
@@ -201,22 +202,11 @@ docs/07_reviews/{doc,code,design,retro}/           # review records
 docs/.pdlc-state/<feature-id>.json                 # per-feature state machine
 ```
 
-## 📚 Article series
+<h2 id="posts">📚 Articles</h2>
 
-I'm writing a blog series on the thinking behind PDLC, from concepts through to practice:
+The thinking behind PDLC, from concepts to a real project end to end — plus the launch and release notes:
 
-| # | Title |
-|---|---|
-| 01 | [Prompt Engineering, Loop Engineering, Graph Engineering: What Are They?](/blog/2026/08/09/prompt-loop-graph-engineering.html) |
-| 02 | [Why Does pdlc-skills Fit All Three Engineering Paradigms So Naturally?](/blog/2026/08/13/why-pdlc-fits-three-paradigms.html) |
-| 03 | [How Do the Three Engineering Paradigms Interlock in pdlc-skills?](/blog/2026/08/23/how-three-paradigms-interlock.html) |
-| 04 | [Getting pdlc-skills Running in Your Own Project](/blog/2026/08/30/run-pdlc-in-your-project.html) |
-| 05 | [How pdlc-skills Runs Unattended](/blog/2026/08/31/run-pdlc-unattended.html) |
-| 06 | [How pdlc-skills Keeps Quality Up When AI Writes the Code](/blog/2026/09/01/pdlc-quality-chain.html) |
-| 07 | [How pdlc-skills Makes Progress, Change Impact, and Quality Trends Visible](/blog/2026/09/05/pdlc-progress-impact-retro.html) |
-| 08 | [Running pdlc-skills on a Real Project: Three Features, Start to Release](/blog/2026/09/18/pdlc-on-a-real-project.html) |
-
-All eight posts are up, from the concepts through to one real project end to end.
+{% include project-posts.html project="pdlc" %}
 
 ## 📄 License
 
@@ -225,7 +215,7 @@ MIT. Use it, fork it, ship it. Source code, issue tracker, and full documentatio
 ## ❓ FAQ
 
 **Q: Does it work without Claude Code?**
-PDLC has the deepest, most complete support on Claude Code — the full plugin with statusline and the autonomous loop engine. As of v1.5, the same single-source SKILL bodies also project to **Codex** (native, description-triggered skills) via a build-time adapter, and the platform-neutral [methodology doc](https://github.com/kanfu-panda/pdlc-skills/blob/main/docs/pdlc-methodology.md) lets you drive PDLC in natural language on any AI coding tool. The per-feature state machine (`docs/.pdlc-state/`) carries over across tools. As of v1.5.2, an external Runbook driver (`adapters/codex-loop-run.sh`) even runs the autonomous `tdd → implement → review` convergence loop on Codex — release stays a human gate — after clearing a state-integrity admission gate on a real run.
+PDLC has the deepest, most complete support on Claude Code — the full plugin with statusline and the autonomous loop engine. As of v1.5, the same single-source SKILL bodies also project to **Codex** (native, description-triggered skills) via a build-time adapter, and the platform-neutral [methodology doc](https://github.com/kanfu-panda/pdlc-skills/blob/main/docs/pdlc-methodology.md) lets you drive PDLC in natural language on any AI coding tool. The per-feature state machine (`docs/.pdlc-state/`) carries over across tools. As of v1.5.2, an external Runbook driver (`adapters/codex-loop-run.sh`) even runs the autonomous `tdd → implement → review` convergence loop on Codex — release stays a human gate — after clearing a state-integrity admission gate on a real run. Since v1.7, `bash install.sh --target agents` installs a projection conforming to the [Agent Skills open standard](https://agentskills.io/specification), which Copilot, Gemini CLI, OpenCode and others load. Claude Code and Codex are the platforms verified end to end; Copilot loads and runs single stages but has not passed the state-integrity gate for autonomous loops.
 
 **Q: Will it modify my code without asking?**
 Stages that produce artifacts do write files (under `docs/` and your code base when implementing). Each stage runs a self-check and surfaces a handoff before continuing to the next. Your normal Claude Code permission prompts still apply.

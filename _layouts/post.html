@@ -89,6 +89,14 @@ layout: default
         </div>
     </div>
 
+    {%- if page.project %}
+    {%- case page.project -%}{%- when "pdlc" -%}{%- assign project_name = "PDLC" -%}{%- else -%}{%- assign project_name = page.project -%}{%- endcase %}
+    <aside class="post-project">
+        {{ t.project.in_post | replace: "__NAME__", project_name }}
+        <a href="{% if ui_lang != site.default_lang %}/{{ ui_lang }}{% endif %}/{{ page.project }}/">{{ t.project.in_post_link }}</a>
+    </aside>
+    {%- endif %}
+
     <footer class="post-author">
         <a href="/" class="post-author-link">
             <span class="post-author-label">{{ t.post.written_by }}</span>

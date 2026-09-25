@@ -4,6 +4,8 @@ title: "pdlc-skills 如何看清项目进度、变更影响与质量趋势？"
 date: 2026-09-05
 lang: zh
 categories: [blog]
+project: pdlc
+series: pdlc-paradigms
 image: /assets/images/posts/pdlc-progress-impact-retro-cover.png
 tags: [AI工程, 提示词工程, Loop工程, Graph工程, PDLC, ClaudeCode]
 excerpt: "AI 一个下午能推进三个功能，人要是看不清项目走到哪、改一处牵动谁、这一段做得怎么样，自动化就全在黑箱里跑。pdlc 里管这件事的是三个只读状态文件的工具：状态栏和 /pdlc-status 看现在在哪，/pdlc-relate impact 在改动前查波及范围，/pdlc-retro 按月看质量趋势。这篇讲它们怎么用、一次真实运行跑出了什么数字，以及记录是 AI 写的会带来什么边界。"

@@ -4,6 +4,8 @@ title: "什么是提示词工程、Loop 工程以及 Graph 工程？"
 date: 2026-08-09
 lang: zh
 categories: [blog]
+project: pdlc
+series: pdlc-paradigms
 image: /assets/images/posts/prompt-loop-graph-engineering-cover.png
 tags: [AI工程, 提示词工程, Loop工程, Graph工程, AIAgent, ClaudeCode]
 excerpt: "这三个词最近总被摆在一起比较，好像在让人三选一。但它们根本不在同一层——提示词管这一次怎么说话，Loop 管迭代怎么收敛，Graph 管路径怎么组织。搞清楚这件事，比学会其中任何一个都值钱。这篇把三层各自的本事和天花板讲清楚，最后给三个问题，帮你判断手上这件事该归哪一层管。"

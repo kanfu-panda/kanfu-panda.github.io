@@ -4,6 +4,7 @@ title: "aitm 初公開：AI をターミナルに組み込む"
 date: 2026-05-14
 lang: ja
 categories: [blog]
+project: aitm
 tags: [aitm, ターミナル, AI, macOS, Windows, ツール]
 excerpt: "AI を組み込んだデスクトップ向けターミナルアプリ。macOS と Windows に対応。AI がファイル読み込み、コマンド履歴検索、コマンド実行を行えます。すべての高リスク操作には明示的な確認が必要。"
 ---

@@ -4,6 +4,8 @@ title: "pdlc-skills はどうやって無人で回すのか"
 date: 2026-08-31
 lang: ja
 categories: [blog]
+project: pdlc
+series: pdlc-paradigms
 image: /assets/images/posts/run-pdlc-unattended-cover-ja.png
 tags: [AIエンジニアリング, プロンプトエンジニアリング, Loop工学, Graph工学, PDLC, ClaudeCode]
 excerpt: "一つの機能なら、コマンド一本で TDD・実装・レビューまで自分で走り切ります。スクリプトが要るのはその外側——十数個の機能点を依存関係でバッチに分け、一バッチ終わるごとに人が確認してから次を起動する。支えているのは四つのガードレールで、どれも実際に作動する場面を見ています。"
