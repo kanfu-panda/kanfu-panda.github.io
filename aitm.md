@@ -4,6 +4,9 @@ title: aitm
 permalink: /aitm/
 lang: en
 wide: true
+release:
+  repo: kanfu-panda/aitm
+  version: 1.6.2
 description: aitm — a desktop terminal app with AI built in, for macOS and Windows. The AI reads and edits files, runs commands, and drives a built-in browser. Every high-risk action requires your explicit confirmation. Open source under Apache-2.0.
 ---
 
@@ -144,41 +147,41 @@ description: aitm — a desktop terminal app with AI built in, for macOS and Win
 
 <h2 id="download">⬇️ Download</h2>
 
-**Current version: v1.6.1**
+**Current version: v{{ page.release.version }}**
 
 > macOS binaries are signed and notarized with an Apple Developer ID. Windows binaries aren't code-signed yet — [SignPath Foundation](https://signpath.org) signing (a non-profit supporting open-source code signing) is planned for a future release. See the [Code Signing Policy](https://github.com/kanfu-panda/aitm/blob/main/docs/CODE_SIGNING.md) for details.
 
 <div class="about-grid">
     <div class="about-card">
         <h3>🍎 macOS Apple Silicon</h3>
-        <p>dmg · 7.2 MB · aarch64 (M1/M2/M3/M4)</p>
+        <p>dmg · <span data-release-size="_aarch64.dmg">7.2 MB</span> · aarch64 (M1/M2/M3/M4)</p>
         <p style="margin-top: 1rem;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.6.1/aitm_1.6.1_aarch64.dmg" class="cta-button">Download .dmg →</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/download/v{{ page.release.version }}/aitm_{{ page.release.version }}_aarch64.dmg" class="cta-button">Download .dmg →</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.6.1">Release page</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v{{ page.release.version }}">Release page</a>
         </p>
     </div>
     <div class="about-card">
         <h3>🪟 Windows x86_64</h3>
         <p>Intel / AMD 64-bit</p>
         <p style="margin-top: 1rem;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.6.1/aitm_1.6.1_x64_en-US.msi" class="cta-button">Download .msi · x64 →</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/download/v{{ page.release.version }}/aitm_{{ page.release.version }}_x64_en-US.msi" class="cta-button">Download .msi · x64 →</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            or <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.6.1/aitm_1.6.1_x64-setup.exe">NSIS .exe</a> ·
-            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.6.1">Release page</a>
+            or <a href="https://github.com/kanfu-panda/aitm/releases/download/v{{ page.release.version }}/aitm_{{ page.release.version }}_x64-setup.exe">NSIS .exe</a> ·
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v{{ page.release.version }}">Release page</a>
         </p>
     </div>
     <div class="about-card">
         <h3>🪟 Windows ARM64</h3>
         <p>Surface Pro X / Snapdragon</p>
         <p style="margin-top: 1rem;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.6.1/aitm_1.6.1_arm64_en-US.msi" class="cta-button">Download .msi · ARM64 →</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/download/v{{ page.release.version }}/aitm_{{ page.release.version }}_arm64_en-US.msi" class="cta-button">Download .msi · ARM64 →</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            or <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.6.1/aitm_1.6.1_arm64-setup.exe">NSIS .exe</a> ·
-            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.6.1">Release page</a>
+            or <a href="https://github.com/kanfu-panda/aitm/releases/download/v{{ page.release.version }}/aitm_{{ page.release.version }}_arm64-setup.exe">NSIS .exe</a> ·
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v{{ page.release.version }}">Release page</a>
         </p>
     </div>
 </div>
@@ -215,12 +218,12 @@ Want to make sure your download wasn't corrupted in transit? Compute its SHA-256
 
 ```bash
 # macOS / Linux / Git Bash on Windows
-shasum -a 256 path/to/aitm_1.6.1_<arch>.<ext>
+shasum -a 256 path/to/aitm_{{ page.release.version }}_<arch>.<ext>
 ```
 
 ```powershell
 # Windows PowerShell
-(Get-FileHash path\to\aitm_1.6.1_<arch>.<ext> -Algorithm SHA256).Hash.ToLower()
+(Get-FileHash path\to\aitm_{{ page.release.version }}_<arch>.<ext> -Algorithm SHA256).Hash.ToLower()
 ```
 
 <h2 id="first-use">🚀 First-time use</h2>
@@ -255,7 +258,7 @@ Launch notes and the thinking behind aitm:
 ## ❓ FAQ
 
 **Q: Double-clicking `aitm.app` (macOS) says "damaged, can't open"?**
-aitm is signed and notarized with an Apple Developer ID — Gatekeeper should let it through automatically. If you see this error, make sure you downloaded the dmg from the [official release page](https://github.com/kanfu-panda/aitm/releases/tag/v1.6.1) and that the file wasn't corrupted in transit (verify the SHA256 checksum).
+aitm is signed and notarized with an Apple Developer ID — Gatekeeper should let it through automatically. If you see this error, make sure you downloaded the dmg from the [official release page](https://github.com/kanfu-panda/aitm/releases/tag/v{{ page.release.version }}) and that the file wasn't corrupted in transit (verify the SHA256 checksum).
 
 **Q: Windows shows a "Windows protected your PC" SmartScreen warning?**
 aitm for Windows isn't code-signed yet. Click **More info → Run anyway**. We're tracking signing certificates for a future release.

@@ -219,36 +219,53 @@ bash scripts/install-hooks.sh
 ## 产品页版本同步流程（aitm / PDLC）
 
 两个产品都是**公开仓 + GitHub Releases 分发**，博客只承担产品页展示，**不托管任何二进制**。
-所以"发版"对本仓库来说只有一件事：**把三语产品页上的版本号和下载链接对齐到最新 release**。
 
 | 产品 | 公开仓 | 协议 | 博客页面 |
 |---|---|---|---|
 | aitm | [kanfu-panda/aitm](https://github.com/kanfu-panda/aitm) | Apache-2.0 | `aitm.md` / `aitm.zh.md` / `aitm.ja.md` |
 | PDLC | [kanfu-panda/pdlc-skills](https://github.com/kanfu-panda/pdlc-skills) | MIT | `pdlc.md` / `pdlc.zh.md` / `pdlc.ja.md` |
 
-### 同步步骤
+发版后产品页要同步两类东西，处理方式不同：
+
+### 1. 版本号与下载链接：自动
+
+- 版本号只写在 front matter 的 `release.version` 一处，正文一律用 `{{ page.release.version }}` 引用
+  （含下载链接、代码块里的命令）。**不要在正文里写死版本号**，否则自动同步和手动更新都会漏掉它。
+- `assets/js/release-sync.js`：页面打开后向 GitHub API 查最新 release，比 `release.version` 新就替换
+  正文里的版本号、下载链接（只换成 release 里真实存在的文件，找不到就退回 release 页面）和
+  `data-release-size` 标记的安装包大小。只升不降；结果在 sessionStorage 缓存 1 小时。
+- HTML 里的 `release.version` 是**兜底**：搜索引擎、禁用 JS、API 不可用时显示它。
+  所以产品发版后页面立刻显示新版本，但兜底值仍应在下次同步时顺手更新（三语各改一行）。
+- 该脚本依赖 CSP `connect-src` 里的 `https://api.github.com`，**不要删**。这一项最早是给 Gitalk 加的；
+  换成 Giscus 后评论在它自己的 iframe 里运行、不再用它，现在唯一的使用者就是本脚本。
+- aitm 安装包文件名规则是 `aitm_<版本>_<平台后缀>`。如果某次发版改了命名规则，
+  自动同步会把下载按钮退回 release 页面（不会给出 404），这时要手动更新页面上的链接写法。
+
+### 2. 新功能介绍：半自动（发版后说一句「同步产品页」）
+
+新能力卡片、FAQ、铁律条数这类内容需要判断和三语写作，不能自动。流程：
 
 ```bash
-# 1. 查最新 release 版本号
+# 1. 查最新 release，与 front matter 的 release.version 对比
 gh release list --repo kanfu-panda/aitm --limit 1
 gh release list --repo kanfu-panda/pdlc-skills --limit 1
 
-# 2. 三语页面全文替换版本号（aitm 为例）
-OLD="1.4.3"; NEW="1.5.0"
-sed -i '' "s/${OLD}/${NEW}/g" aitm.md aitm.zh.md aitm.ja.md
+# 2. 读两版之间的变更：aitm 看 CHANGELOG.md，PDLC 看 release notes
+gh release view v<版本> --repo kanfu-panda/pdlc-skills
+git -C ~/projects/aitm show origin/main:CHANGELOG.md
 
-# 3. 核对 sed 改不到的东西：
-#    - aitm：5 张下载卡的文件名必须与 release assets 实际名字一致
-#      （gh release view v${NEW} --repo kanfu-panda/aitm --json assets）
-#    - PDLC：命令总数（hero / description / "N 条命令，分三层" / 验证安装那段）
+# 3. 判断并起草三语改动：
+#    - 新增的重要能力 → 补「核心能力」卡片；纯修复版通常不用改文案
+#    - PDLC：命令总数（hero / description / 「N 条命令，分三层」/ 验证安装）
 #      实际数量 = ls ~/projects/pdlc-skills/skills/ | wc -l
-#    - 两者：新版本引入的重要能力是否该补进"核心能力"卡片
+#    - 页面上已有的描述是否被新版本推翻（如铁律条数、循环终点、支持的工具）
+#    - 更新三语 front matter 的 release.version（兜底版本）
 
 # 4. 本地生产构建自检
 export PATH="$HOME/.rbenv/shims:$PATH"
 JEKYLL_ENV=production bundle exec jekyll build --config _config.yml
 
-# 5. 走 PR（禁止直推 main）
+# 5. 走 PR（禁止直推 main），PR 描述里写明读了哪几版的变更、哪些改了文案、哪些判断为不用改
 ```
 
 ### `assets/aitm/latest.json` 是什么

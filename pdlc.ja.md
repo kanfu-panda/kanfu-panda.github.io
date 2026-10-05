@@ -4,6 +4,9 @@ title: PDLC
 permalink: /pdlc/
 lang: ja
 wide: true
+release:
+  repo: kanfu-panda/pdlc-skills
+  version: 1.7.0
 description: PDLC — Claude Code に「製品開発ライフサイクル」ワークフローを追加するオープンソースプラグイン。38 個の標準化されたステージ、状態マシン、テストファースト強制、ステージ自己チェック、自動修復は1回まで。「ソフトな慣習」を「ハードな契約」へ。MIT ライセンス。
 ---
 
@@ -155,7 +158,7 @@ claude plugin install pdlc@pdlc-skills
 
 ```bash
 claude plugin list | grep pdlc
-# 期待値: pdlc@pdlc-skills  Version: 1.7.0  Status: ✔ enabled
+# 期待値: pdlc@pdlc-skills  Version: {{ page.release.version }}  Status: ✔ enabled
 ```
 
 Claude Code セッションを再起動後、入力欄で `/` を入力し `pdlc-` と打ち始めれば、autocomplete に 38 個のサブコマンドすべてが表示されます。

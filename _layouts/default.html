@@ -287,5 +287,9 @@
             } catch (e) { /* 静默失败，不影响访问 */ }
         })();
     </script>
+    {%- comment -%} 产品页（front matter 带 release:）打开后向 GitHub 取最新版本，替换版本号与下载链接；HTML 里的版本是兜底 {%- endcomment %}
+    {%- if page.release %}
+    <script src="/assets/js/release-sync.js" data-repo="{{ page.release.repo }}" data-version="{{ page.release.version }}" defer></script>
+    {%- endif %}
 </body>
 </html>

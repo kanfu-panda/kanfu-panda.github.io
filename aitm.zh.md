@@ -4,6 +4,9 @@ title: aitm
 permalink: /aitm/
 lang: zh
 wide: true
+release:
+  repo: kanfu-panda/aitm
+  version: 1.6.2
 description: aitm — 一个把 AI 能力做进终端的桌面应用，支持 macOS 与 Windows。AI 能读写文件、执行命令、操作内置浏览器，所有高危操作都要你点头确认。Apache-2.0 开源。
 ---
 
@@ -144,41 +147,41 @@ description: aitm — 一个把 AI 能力做进终端的桌面应用，支持 ma
 
 <h2 id="download">⬇️ 下载</h2>
 
-**当前版本：v1.6.1**
+**当前版本：v{{ page.release.version }}**
 
 > macOS 安装包经 Apple Developer ID 签名和公证。Windows 安装包暂未代码签名——计划在后续版本接入 [SignPath Foundation](https://signpath.org)（一家支持开源项目代码签名的非营利组织）签名。详见 [代码签名政策](https://github.com/kanfu-panda/aitm/blob/main/docs/CODE_SIGNING.md)。
 
 <div class="about-grid">
     <div class="about-card">
         <h3>🍎 macOS Apple Silicon</h3>
-        <p>dmg · 7.2 MB · aarch64（M1/M2/M3/M4）</p>
+        <p>dmg · <span data-release-size="_aarch64.dmg">7.2 MB</span> · aarch64（M1/M2/M3/M4）</p>
         <p style="margin-top: 1rem;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.6.1/aitm_1.6.1_aarch64.dmg" class="cta-button">下载 .dmg →</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/download/v{{ page.release.version }}/aitm_{{ page.release.version }}_aarch64.dmg" class="cta-button">下载 .dmg →</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.6.1">Release 页面</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v{{ page.release.version }}">Release 页面</a>
         </p>
     </div>
     <div class="about-card">
         <h3>🪟 Windows x86_64</h3>
         <p>Intel / AMD 64 位</p>
         <p style="margin-top: 1rem;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.6.1/aitm_1.6.1_x64_en-US.msi" class="cta-button">下载 .msi · x64 →</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/download/v{{ page.release.version }}/aitm_{{ page.release.version }}_x64_en-US.msi" class="cta-button">下载 .msi · x64 →</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            或 <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.6.1/aitm_1.6.1_x64-setup.exe">NSIS .exe</a> ·
-            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.6.1">Release 页面</a>
+            或 <a href="https://github.com/kanfu-panda/aitm/releases/download/v{{ page.release.version }}/aitm_{{ page.release.version }}_x64-setup.exe">NSIS .exe</a> ·
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v{{ page.release.version }}">Release 页面</a>
         </p>
     </div>
     <div class="about-card">
         <h3>🪟 Windows ARM64</h3>
         <p>Surface Pro X / 骁龙笔记本</p>
         <p style="margin-top: 1rem;">
-            <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.6.1/aitm_1.6.1_arm64_en-US.msi" class="cta-button">下载 .msi · ARM64 →</a>
+            <a href="https://github.com/kanfu-panda/aitm/releases/download/v{{ page.release.version }}/aitm_{{ page.release.version }}_arm64_en-US.msi" class="cta-button">下载 .msi · ARM64 →</a>
         </p>
         <p style="margin-top: 0.5rem; font-size: 0.85em;">
-            或 <a href="https://github.com/kanfu-panda/aitm/releases/download/v1.6.1/aitm_1.6.1_arm64-setup.exe">NSIS .exe</a> ·
-            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v1.6.1">Release 页面</a>
+            或 <a href="https://github.com/kanfu-panda/aitm/releases/download/v{{ page.release.version }}/aitm_{{ page.release.version }}_arm64-setup.exe">NSIS .exe</a> ·
+            <a href="https://github.com/kanfu-panda/aitm/releases/tag/v{{ page.release.version }}">Release 页面</a>
         </p>
     </div>
 </div>
@@ -215,12 +218,12 @@ aitm 已经过 Apple Developer ID 签名和公证，Gatekeeper 会自动放行�
 
 ```bash
 # macOS / Linux / Windows 上的 Git Bash
-shasum -a 256 path/to/aitm_1.6.1_<arch>.<ext>
+shasum -a 256 path/to/aitm_{{ page.release.version }}_<arch>.<ext>
 ```
 
 ```powershell
 # Windows PowerShell
-(Get-FileHash path\to\aitm_1.6.1_<arch>.<ext> -Algorithm SHA256).Hash.ToLower()
+(Get-FileHash path\to\aitm_{{ page.release.version }}_<arch>.<ext> -Algorithm SHA256).Hash.ToLower()
 ```
 
 <h2 id="first-use">🚀 第一次使用</h2>
@@ -255,10 +258,10 @@ aitm 的发布说明与设计思路：
 ## ❓ 常见问题
 
 **Q：macOS 双击 `aitm.app` 提示 "已损坏，无法打开"？**
-aitm v1.6.1 已通过 Apple Developer ID 签名和公证，正常下载安装不会出现此提示。如果你在使用旧版本，请升级到 v1.6.1。
+aitm v{{ page.release.version }} 已通过 Apple Developer ID 签名和公证，正常下载安装不会出现此提示。如果你在使用旧版本，请升级到 v{{ page.release.version }}。
 
 **Q：Windows 弹 "Windows 已保护你的电脑" SmartScreen 提示？**
-和 macOS 那条同根：aitm v1.6.1 的 Windows 安装包暂时还未做代码签名。点 **更多信息 → 仍要运行** 即可。后续会跟进签名证书。
+和 macOS 那条同根：aitm v{{ page.release.version }} 的 Windows 安装包暂时还未做代码签名。点 **更多信息 → 仍要运行** 即可。后续会跟进签名证书。
 
 **Q：现在支持哪些平台？**
 macOS Apple Silicon（M1/M2/M3/M4）+ Windows 双架构（x86_64 与 ARM64，覆盖 Surface Pro X 与骁龙笔记本）。Intel Mac 与 Linux 仍在路线图上。
