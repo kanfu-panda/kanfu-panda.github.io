@@ -29,6 +29,9 @@ description: 一个热爱技术的开发者的个人博客 —— 记录写代�
             {% assign filtered_posts = all_posts | where_exp: "p", "p.lang == current_lang" %}
             {% for post in filtered_posts limit:6 %}
             <div class="post-card">
+                {% if post.image %}
+                <a class="post-thumb" href="{{ post.url }}" tabindex="-1" aria-hidden="true"><img src="{{ post.image | relative_url }}" alt="" loading="lazy"></a>
+                {% endif %}
                 <div class="post-content">
                     <h3><a href="{{ post.url }}">{{ post.title }}</a>{% if post.lang and post.lang != page.lang %}<span class="post-lang-badge">{{ post.lang | upcase }}</span>{% endif %}</h3>
                     <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 100 }}</p>
