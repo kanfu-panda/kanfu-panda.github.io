@@ -46,3 +46,14 @@
   ja:
     title: AI セキュリティ
     desc: AI セキュリティにおける本物の警報と誤報——誤りだったプロンプトインジェクション警告など。
+
+- id: ai-coding-principles
+  en:
+    title: How AI Coding Works
+    desc: What's actually going on behind AI coding tools — what a large language model is, how it's trained, and what tools like Claude Code add around it. Plain explanations, no math.
+  zh:
+    title: AI 编程原理
+    desc: AI 编程工具背后是怎么回事：大模型是什么、怎么训练出来的、Claude Code 这类工具在模型外面做了什么。讲人话，不讲公式。
+  ja:
+    title: AI コーディングのしくみ
+    desc: AI コーディングツールの裏側で何が起きているのか——大規模言語モデルとは何か、どう訓練されるのか、Claude Code のようなツールがモデルの外側で何をしているのか。数式なしでやさしく解説します。
