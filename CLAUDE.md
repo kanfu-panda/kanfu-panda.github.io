@@ -74,7 +74,7 @@ bash scripts/install-hooks.sh
      （`_includes/project-posts.html` + `_layouts/post.html`），**不要**再往产品页手写文章链接。
    - 属于某个专题（连载）的文章，再加 `series: <专题 id>`，三语都要加。专题 id 必须先在 `_data/topics.yml`
      里定义（三语 title / desc），专题页 `/topics/` 和文末的「所属专题」回链据此自动生成。
-     现有专题：`pdlc-paradigms` · `ai-coding-efficiency` · `ai-memory` · `ai-security`。
+     现有专题：`pdlc-paradigms` · `ai-coding-efficiency` · `ai-memory` · `ai-security` · `ai-coding-principles`。
      新写的文章接着某个连载往下写时，**别忘了加 `series:`**，否则它不会出现在专题页上。
 3. **禁止**在文章 Markdown 中嵌入：
    - `<script>` 标签（违反 CSP，且引入 XSS 风险）
