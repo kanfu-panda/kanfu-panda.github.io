@@ -18,6 +18,9 @@ description: 关于编程、AI 工具、开源项目的文章记录。
         {% endif %}
         {% for post in filtered_posts %}
         <div class="post-card">
+            {% if post.image %}
+            <a class="post-thumb" href="{{ post.url }}" tabindex="-1" aria-hidden="true"><img src="{{ post.image | relative_url }}" alt="" loading="lazy"></a>
+            {% endif %}
             <div class="post-content">
                 <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
                 {% if post.excerpt %}

@@ -23,6 +23,13 @@ layout: default
         </p>
     </header>
 
+    {%- comment -%} 封面：front matter 的 `image:` 同时用作 og:image 和文章页头图 {%- endcomment -%}
+    {% if page.image %}
+    <figure class="post-cover">
+        <img src="{{ page.image | relative_url }}" alt="{{ page.title | escape }}">
+    </figure>
+    {% endif %}
+
     <!-- 语言不匹配横幅：默认 hidden，JS 检测后视情况显示 -->
     {% if page.lang %}
     <div id="lang-mismatch-banner" class="lang-banner" hidden>

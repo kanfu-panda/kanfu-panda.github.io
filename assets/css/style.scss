@@ -607,6 +607,71 @@ a:hover {
     margin-bottom: 0.5rem;
 }
 
+/* 文章页头图（front matter `image:`），宽度与正文一致 */
+.post-cover {
+    max-width: 880px;
+    margin: 0 auto 2rem;
+
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 0.75rem;
+        border: 1px solid var(--border-color);
+    }
+}
+
+/* 列表缩略图：首页卡片放顶部，博客列表放右侧，窄屏改到上方 */
+.post-thumb {
+    display: block;
+
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}
+
+.post-grid .post-card .post-thumb img {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.post-list .post-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+
+    .post-content {
+        flex: 1;
+        min-width: 0;
+        margin: 0;
+    }
+
+    .post-thumb {
+        order: 2;
+        flex: 0 0 220px;
+        margin-top: 1.2rem;
+
+        img {
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+        }
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .post-list .post-card {
+        flex-direction: column;
+        gap: 0;
+
+        .post-thumb {
+            order: 0;
+            flex: none;
+            width: 100%;
+        }
+    }
+}
+
 .post-content {
     position: relative;
     /* 文章正文只适度放宽（原 800px）：行太长读起来累，不跟着容器铺满 */
