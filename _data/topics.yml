@@ -1,6 +1,7 @@
 # 专题（连载）定义：专题页按此顺序展示，文章靠 front matter 的 `series: <id>` 归入。
 # 新增专题：在这里加一项（三语 title / desc 都写），再给文章加 `series:`。
 # `project` 可选：专题属于某个产品时填，专题页会附上产品页链接。
+# `cover: true` 可选：专题页显示合集封面，图放 assets/images/topics/<id>-cover.png（中文）/ -en / -ja。
 
 - id: pdlc-paradigms
   project: pdlc
@@ -15,6 +16,7 @@
     desc: PDLC の背景にある考え方——プロンプト・Loop・Graph エンジニアリングを、概念から実プロジェクトでの通し実践まで。
 
 - id: ai-coding-efficiency
+  cover: true
   en:
     title: Getting more out of AI coding
     desc: Making AI coding cheaper, faster and less draining — saving tokens, tiering models, parallel agents, worktrees, and where you fit in as the controller.
@@ -48,6 +50,7 @@
     desc: AI セキュリティにおける本物の警報と誤報——誤りだったプロンプトインジェクション警告など。
 
 - id: ai-coding-principles
+  cover: true
   en:
     title: How AI Coding Works
     desc: What's actually going on behind AI coding tools — what a large language model is, how it's trained, and what tools like Claude Code add around it. Plain explanations, no math.

@@ -977,6 +977,17 @@ a:hover {
     .topic-project a {
         font-weight: 600;
     }
+
+    /* 合集封面（topics.yml 里 `cover: true` 的专题） */
+    .topic-cover {
+        display: block;
+        width: 100%;
+        max-width: 720px;
+        height: auto;
+        margin: 1rem 0;
+        border-radius: 0.75rem;
+        border: 1px solid var(--border-color);
+    }
 }
 
 /* 产品页「相关文章」列表（_includes/project-posts.html） */
