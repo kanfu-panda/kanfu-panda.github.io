@@ -13,7 +13,7 @@
   <p>{{ topic[tl_lang].desc }}</p>
   {%- if topic.cover %}
   {%- if tl_lang == "zh" %}{% assign tl_suffix = "" %}{% else %}{% assign tl_suffix = "-" | append: tl_lang %}{% endif %}
-  <img class="topic-cover" src="/assets/images/topics/{{ topic.id }}-cover{{ tl_suffix }}.png" alt="{{ topic[tl_lang].title | escape }}" loading="lazy">
+  <img class="topic-cover" src="/assets/images/topics/{{ topic.id }}-cover{{ tl_suffix }}.png" width="1280" height="640" alt="{{ topic[tl_lang].title | escape }}" loading="lazy">
   {%- endif %}
   <ol class="project-posts-list">
     {%- for post in tl_posts %}

@@ -1,7 +1,7 @@
 # 专题（连载）定义：专题页按此顺序展示，文章靠 front matter 的 `series: <id>` 归入。
 # 新增专题：在这里加一项（三语 title / desc 都写），再给文章加 `series:`。
 # `project` 可选：专题属于某个产品时填，专题页会附上产品页链接。
-# `cover: true` 可选：专题页显示合集封面，图放 assets/images/topics/<id>-cover.png（中文）/ -en / -ja。
+# `cover: true` 可选：专题页显示合集封面，图放 assets/images/topics/<id>-cover.png（中文）/ -en / -ja，尺寸固定 1280×640（模板里写死了宽高，用来预留位置）。
 
 - id: pdlc-paradigms
   project: pdlc
