@@ -51,27 +51,6 @@ description: 一个热爱技术的开发者的个人博客 —— 记录写代�
         </div>
     </div>
 
-    <div class="about-section">
-        <h2>👨‍💻 关于我</h2>
-        <div class="about-grid">
-            <div class="about-card">
-                <h3>🔭 研究方向</h3>
-                <p>Web 开发、AI 工程、云原生工具链。</p>
-            </div>
-            <div class="about-card">
-                <h3>🌱 正在学习</h3>
-                <p>Rust + Tauri 内部机制、终端协议、可靠的 AI 工具调用。</p>
-            </div>
-            <div class="about-card">
-                <h3>👯 期待合作</h3>
-                <p>开源项目、终端 / AI 工具、技术写作。</p>
-            </div>
-            <div class="about-card">
-                <h3>💬 技术栈</h3>
-                <p>Python、TypeScript / JavaScript、Rust、React、Tauri 2。</p>
-            </div>
-        </div>
-    </div>
 
     <div class="featured-projects">
         <h2>🚀 项目</h2>
@@ -92,5 +71,49 @@ description: 一个热爱技术的开发者的个人博客 —— 记录写代�
             </div>
         </div>
         <p style="margin-top: 1rem;"><a href="/zh/projects/">全部项目 →</a></p>
+    </div>
+
+    <div class="about-section">
+        <h2>👨‍💻 关于我</h2>
+        <p class="about-intro">我是功夫熊猫，一个写了很多年代码的开发者。最近主要在折腾 AI 编程：用 AI 写代码，给自己做顺手的工具（就是上面的 aitm 和 PDLC），再把做法和踩过的坑写成文章。</p>
+        <div class="about-grid">
+            <div class="about-card">
+                <h3>✍️ 在写的专题</h3>
+                <ul>
+                    {%- for topic in site.data.topics %}
+                    <li><a href="/zh/topics/#{{ topic.id }}">{{ topic.zh.title }}</a></li>
+                    {%- endfor %}
+                </ul>
+                <p class="about-card-more"><a href="/zh/topics/">按专题从第一篇读起更顺 →</a></p>
+            </div>
+            <div class="about-card">
+                <h3>🌱 最近在琢磨</h3>
+                <ul>
+                    <li>让 AI 的工具调用更可靠，从“看起来能用”到“真的好用”</li>
+                    <li>AI 编程怎么更省 token、跑得更快、人也不那么累</li>
+                    <li>Rust 异步生态和 Tauri 的内部机制</li>
+                    <li>终端协议：ANSI、OSC、PTY</li>
+                </ul>
+            </div>
+            <div class="about-card">
+                <h3>💬 技术栈</h3>
+                <ul>
+                    <li><strong>语言</strong>：Python、TypeScript / JavaScript、Rust</li>
+                    <li><strong>前端</strong>：React、Tailwind、xterm.js</li>
+                    <li><strong>桌面</strong>：Tauri 2、PTY、IPC 设计</li>
+                    <li><strong>AI</strong>：多家大模型 API、工具调用与 Agent 流程</li>
+                </ul>
+            </div>
+            <div class="about-card">
+                <h3>📮 在哪儿找到我</h3>
+                <ul>
+                    <li>长文首发在公众号「码上驰骋」，短视频在同名视频号</li>
+                    <li>掘金、知乎同步中文版，dev.to 和 Zenn 有英文版、日文版</li>
+                    <li>代码都在 <a href="https://github.com/kanfu-panda">GitHub</a></li>
+                </ul>
+                <p class="about-card-more"><a href="/zh/follow/">全部关注方式 →</a></p>
+            </div>
+        </div>
+        <p class="about-outro">如果你也在做桌面 / 终端工具、AI 工程落地，或者 Rust + Tauri 项目，欢迎找我聊。 <a href="/zh/about/">更多关于我 →</a></p>
     </div>
 </div>

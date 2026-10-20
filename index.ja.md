@@ -51,27 +51,6 @@ description: テクノロジー好き開発者の個人ブログ —— コー�
         </div>
     </div>
 
-    <div class="about-section">
-        <h2>👨‍💻 自己紹介</h2>
-        <div class="about-grid">
-            <div class="about-card">
-                <h3>🔭 興味分野</h3>
-                <p>Web 開発、AI エンジニアリング、クラウドネイティブツール。</p>
-            </div>
-            <div class="about-card">
-                <h3>🌱 学習中</h3>
-                <p>Rust と Tauri の内部、ターミナルプロトコル、信頼性の高い AI ツール呼び出し。</p>
-            </div>
-            <div class="about-card">
-                <h3>👯 一緒にやりたいこと</h3>
-                <p>オープンソースプロジェクト、ターミナル / AI ツール、技術文書執筆。</p>
-            </div>
-            <div class="about-card">
-                <h3>💬 技術スタック</h3>
-                <p>Python、TypeScript / JavaScript、Rust、React、Tauri 2。</p>
-            </div>
-        </div>
-    </div>
 
     <div class="featured-projects">
         <h2>🚀 プロジェクト</h2>
@@ -92,5 +71,49 @@ description: テクノロジー好き開発者の個人ブログ —— コー�
             </div>
         </div>
         <p style="margin-top: 1rem;"><a href="/ja/projects/">すべてのプロジェクト →</a></p>
+    </div>
+
+    <div class="about-section">
+        <h2>👨‍💻 自己紹介</h2>
+        <p class="about-intro">カンフー・パンダです。長年コードを書いてきた開発者で、最近はもっぱら AI コーディングに取り組んでいます。AI にコードを書かせ、自分が使いやすいツールを作り（上の aitm と PDLC）、そのやり方やつまずいた点を記事にしています。</p>
+        <div class="about-grid">
+            <div class="about-card">
+                <h3>✍️ 連載中の特集</h3>
+                <ul>
+                    {%- for topic in site.data.topics %}
+                    <li><a href="/ja/topics/#{{ topic.id }}">{{ topic.ja.title }}</a></li>
+                    {%- endfor %}
+                </ul>
+                <p class="about-card-more"><a href="/ja/topics/">特集は第 1 回から読むのがおすすめです →</a></p>
+            </div>
+            <div class="about-card">
+                <h3>🌱 最近考えていること</h3>
+                <ul>
+                    <li>AI のツール呼び出しを、「動いているように見える」から「本当に使える」へ</li>
+                    <li>AI コーディングをより安く、より速く、人が疲れないように</li>
+                    <li>Rust の非同期エコシステムと Tauri の内部</li>
+                    <li>ターミナルプロトコル：ANSI、OSC、PTY</li>
+                </ul>
+            </div>
+            <div class="about-card">
+                <h3>💬 技術スタック</h3>
+                <ul>
+                    <li><strong>言語</strong>：Python、TypeScript / JavaScript、Rust</li>
+                    <li><strong>フロントエンド</strong>：React、Tailwind、xterm.js</li>
+                    <li><strong>デスクトップ</strong>：Tauri 2、PTY、IPC 設計</li>
+                    <li><strong>AI</strong>：各社の LLM API、ツール呼び出しとエージェントの設計</li>
+                </ul>
+            </div>
+            <div class="about-card">
+                <h3>📮 どこで読めるか</h3>
+                <ul>
+                    <li>日本語の記事は <a href="https://zenn.dev/kanfupanda">Zenn</a>、英語は <a href="https://dev.to/kanfu-panda">dev.to</a></li>
+                    <li>中国語の原文は WeChat 公式アカウント「码上驰骋」で先に公開</li>
+                    <li>コードは <a href="https://github.com/kanfu-panda">GitHub</a> に</li>
+                </ul>
+                <p class="about-card-more"><a href="/ja/follow/">フォローできる場所の一覧 →</a></p>
+            </div>
+        </div>
+        <p class="about-outro">デスクトップやターミナルのツール、AI の実務への組み込み、Rust + Tauri のプロジェクトに取り組んでいる方、ぜひ気軽に声をかけてください。 <a href="/ja/about/">もっと詳しく →</a></p>
     </div>
 </div>
