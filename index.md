@@ -51,27 +51,6 @@ description: A developer who loves technology — notes on coding, tools, and th
         </div>
     </div>
 
-    <div class="about-section">
-        <h2>👨‍💻 About me</h2>
-        <div class="about-grid">
-            <div class="about-card">
-                <h3>🔭 Focus</h3>
-                <p>Web development, AI engineering, cloud-native tooling.</p>
-            </div>
-            <div class="about-card">
-                <h3>🌱 Currently learning</h3>
-                <p>Rust + Tauri internals, terminal protocols, reliable AI tool-calling.</p>
-            </div>
-            <div class="about-card">
-                <h3>👯 Open to collaborate on</h3>
-                <p>Open-source projects, terminal/AI tooling, technical writing.</p>
-            </div>
-            <div class="about-card">
-                <h3>💬 Tech stack</h3>
-                <p>Python, TypeScript / JavaScript, Rust, React, Tauri 2.</p>
-            </div>
-        </div>
-    </div>
 </div>
 
 <div class="content-section">
@@ -94,5 +73,49 @@ description: A developer who loves technology — notes on coding, tools, and th
             </div>
         </div>
         <p style="margin-top: 1rem;"><a href="/projects/">All projects →</a></p>
+    </div>
+
+    <div class="about-section">
+        <h2>👨‍💻 About me</h2>
+        <p class="about-intro">I'm Kungfu Panda, a developer who has been writing code for a long time. These days most of my tinkering is around AI-assisted coding: using AI to write code, building the tools I wish I had (aitm and PDLC above), and writing up what worked and what bit me.</p>
+        <div class="about-grid">
+            <div class="about-card">
+                <h3>✍️ Series I'm writing</h3>
+                <ul>
+                    {%- for topic in site.data.topics %}
+                    <li><a href="/topics/#{{ topic.id }}">{{ topic.en.title }}</a></li>
+                    {%- endfor %}
+                </ul>
+                <p class="about-card-more"><a href="/topics/">Each series reads best from part one →</a></p>
+            </div>
+            <div class="about-card">
+                <h3>🌱 On my mind lately</h3>
+                <ul>
+                    <li>Making AI tool calls reliable — from "looks like it works" to "actually works"</li>
+                    <li>Making AI coding cheaper, faster and less draining</li>
+                    <li>Rust's async ecosystem and Tauri internals</li>
+                    <li>Terminal protocols: ANSI, OSC, PTY</li>
+                </ul>
+            </div>
+            <div class="about-card">
+                <h3>💬 Tech stack</h3>
+                <ul>
+                    <li><strong>Languages</strong>: Python, TypeScript / JavaScript, Rust</li>
+                    <li><strong>Frontend</strong>: React, Tailwind, xterm.js</li>
+                    <li><strong>Desktop</strong>: Tauri 2, PTY, IPC design</li>
+                    <li><strong>AI</strong>: LLM APIs from several vendors, tool calling and agent flows</li>
+                </ul>
+            </div>
+            <div class="about-card">
+                <h3>📮 Where to find me</h3>
+                <ul>
+                    <li>English write-ups on <a href="https://dev.to/kanfu-panda">dev.to</a>, Japanese on <a href="https://zenn.dev/kanfupanda">Zenn</a></li>
+                    <li>The Chinese originals go out first on WeChat (码上驰骋)</li>
+                    <li>Code lives on <a href="https://github.com/kanfu-panda">GitHub</a></li>
+                </ul>
+                <p class="about-card-more"><a href="/follow/">All the places to follow →</a></p>
+            </div>
+        </div>
+        <p class="about-outro">If you're working on desktop or terminal tools, shipping AI in real products, or building with Rust + Tauri, I'd love to compare notes. <a href="/about/">More about me →</a></p>
     </div>
 </div>

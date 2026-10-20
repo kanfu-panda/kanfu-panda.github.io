@@ -1194,11 +1194,23 @@ a:hover {
     }
 }
 
-/* About Section */
-.about-section {
+/* About Section：首页的「项目」「关于我」两块用同样的分隔线隔开 */
+.about-section,
+.featured-projects {
     margin-top: 4rem;
     padding-top: 2rem;
     border-top: 1px solid var(--border-color);
+}
+
+.about-intro,
+.about-outro {
+    max-width: 48rem;
+    line-height: 1.8;
+    margin: 0 0 1.5rem;
+}
+
+.about-outro {
+    margin: 1.5rem 0 0;
 }
 
 .about-grid {
@@ -1238,6 +1250,24 @@ a:hover {
             opacity: 0.8;
             font-size: 0.9rem;
             line-height: 1.6;
+        }
+
+        ul {
+            margin: 0;
+            padding-left: 1.1rem;
+            color: var(--text-color);
+            opacity: 0.8;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        li + li {
+            margin-top: 0.4rem;
+        }
+
+        .about-card-more {
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
         }
 
         /* 卡片内代码块：长命令允许横向滚动，不撑破相邻卡片 */
